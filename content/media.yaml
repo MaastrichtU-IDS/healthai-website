@@ -1,0 +1,190 @@
+blog:
+  - date: "14 Apr 2026"
+    tag: Federated AI
+    title: Why sending algorithms to data is the future of clinical research
+    excerpt: >
+      Moving computation to distributed data sources rather than centralising sensitive
+      patient records is fast becoming the standard for responsible AI in healthcare.
+      Here's why and how we're building this infrastructure.
+    author: Visara Urovi
+    initials: VU
+    img: "[ lab / server room photo ]"
+
+  - date: "02 Mar 2026"
+    tag: FAIR Data
+    title: "FAIR data five years on: progress, pitfalls and what comes next"
+    excerpt: >
+      The FAIR principles turned ten in 2026. We reflect on what the health data
+      community has achieved — and where significant challenges remain for truly
+      machine-actionable data.
+    author: Michel Dumontier
+    initials: MD
+    img: "[ data infrastructure graphic ]"
+
+  - date: "19 Feb 2026"
+    tag: Signal Processing
+    title: Can a smartwatch detect your next heart attack? What the science actually says
+    excerpt: >
+      Consumer wearables can now capture single-lead ECG. We unpack the evidence for
+      AI-powered arrhythmia detection, the clinical validation gaps, and the regulatory
+      path forward.
+    author: Pietro Bonizzi
+    initials: PB
+    img: "[ ECG / wearable photo ]"
+
+  - date: "08 Jan 2026"
+    tag: Clinical NLP
+    title: "The Dutch EHR challenge: adapting LLMs to a low-resource clinical language"
+    excerpt: >
+      English dominates NLP benchmarks, but most European hospitals document in their
+      national language. Our work adapting transformer models to Dutch clinical text
+      reveals lessons for multilingual health AI.
+    author: Chang Sun
+    initials: CS
+    img: "[ clinical text / NLP illustration ]"
+
+  - date: "11 Dec 2025"
+    tag: Bioinformatics
+    title: "Integrating the -omes: why multi-omics is harder than it looks"
+    excerpt: >
+      Combining genomics, proteomics and metabolomics data is scientifically compelling
+      but computationally brutal. A practical account of the challenges and our solutions.
+    author: Rachel Cavill
+    initials: RC
+    img: "[ genomics / lab photo ]"
+
+  - date: "24 Nov 2025"
+    tag: Precision Medicine
+    title: "Closed-loop AI for diabetes: from idea to clinical pilot"
+    excerpt: >
+      From the first prototype to the first patient: the two-year journey of deploying
+      an AI-powered continuous glucose management system in a real hospital setting.
+    author: Konstantia Zarkogianni
+    initials: KZ
+    img: "[ diabetes / CGM device photo ]"
+
+talks:
+  - event: "NeurIPS 2025 · New Orleans"
+    date: Dec 2025
+    title: "Privacy-Utility Trade-offs in Federated Learning for Rare Diseases"
+    speaker: Visara Urovi
+    type: Conference talk
+
+  - event: "AMIA Annual Symposium 2025 · San Francisco"
+    date: Nov 2025
+    title: "FedRare: Federated Knowledge Graph Completion Across Rare Disease Registries"
+    speaker: Remzi Celebi
+    type: Oral presentation
+
+  - event: "EMNLP 2025 · Singapore"
+    date: Nov 2025
+    title: Best Paper — Large Language Models for Dutch Clinical EHR
+    speaker: Chang Sun
+    type: Best Paper Award
+
+  - event: "ISMB/ECCB 2025 · Lyon"
+    date: Jul 2025
+    title: Graph Neural Networks for Multi-Omics Biomarker Discovery in IBD
+    speaker: Rachel Cavill
+    type: Invited talk
+
+  - event: "HL7 FHIR DevDays 2025 · Amsterdam"
+    date: Jun 2025
+    title: "FAIR on FHIR: Implementing FAIR Principles in Clinical Data APIs"
+    speaker: Michel Dumontier
+    type: Keynote
+
+  - event: "IEEE EMBC 2025 · Copenhagen"
+    date: Jul 2025
+    title: "Foundation Models for 12-Lead ECG Interpretation: Benchmarking and Caveats"
+    speaker: Pietro Bonizzi
+    type: Conference talk
+
+podcasts:
+  - show: The Digital Health Podcast
+    episode: "Ep. 142"
+    title: "AI that respects privacy: building the Personal Health Train"
+    guest: Visara Urovi
+    duration: "48 min"
+    date: Mar 2026
+    icon: "🤖"
+
+  - show: Bioinformatics Chat
+    episode: "Ep. 89"
+    title: "Making biomedical data FAIR: a decade of lessons"
+    guest: Michel Dumontier
+    duration: "62 min"
+    date: Jan 2026
+    icon: "🧬"
+
+  - show: Future of Medicine
+    episode: "Ep. 217"
+    title: "Closing the loop: AI for personalised diabetes care"
+    guest: Konstantia Zarkogianni
+    duration: "41 min"
+    date: Nov 2025
+    icon: "💊"
+
+  - show: NLP Highlights
+    episode: "Ep. 304"
+    title: Why clinical NLP is different — and harder
+    guest: Chang Sun
+    duration: "37 min"
+    date: Oct 2025
+    icon: "📝"
+
+press:
+  - outlet: NRC Handelsblad
+    date: "18 Apr 2026"
+    title: "Maastricht researchers win €3.4M EU grant to connect Europe's health data"
+    url: "#"
+
+  - outlet: Nature News
+    date: "03 Mar 2026"
+    title: ELLIS Fellow Urovi on why federated learning is healthcare's privacy solution
+    url: "#"
+
+  - outlet: De Telegraaf
+    date: "12 Feb 2026"
+    title: UMC+ en AI-onderzoekers testen slimme radiologie
+    url: "#"
+
+  - outlet: Science Business
+    date: "15 Jan 2026"
+    title: "FAIR data principles: five years in, progress is real but uneven"
+    url: "#"
+
+  - outlet: MIT Technology Review
+    date: "02 Dec 2025"
+    title: The algorithm that travels to your medical data
+    url: "#"
+
+  - outlet: Financieel Dagblad
+    date: "19 Nov 2025"
+    title: Hoe Maastrichtse onderzoekers de zorg slimmer maken met AI
+    url: "#"
+
+news:
+  - day: "18"
+    month: Apr
+    year: 2026
+    title: "€3.4M Horizon Europe grant awarded for FAIR Health Knowledge Base extension"
+    body: The European Commission has confirmed continued funding for our knowledge graph infrastructure project through 2028.
+
+  - day: "03"
+    month: Mar
+    year: 2026
+    title: PI Visara Urovi named ELLIS Fellow for contributions to privacy-preserving AI
+    body: The European Laboratory for Learning and Intelligent Systems has recognised Visara's foundational work in federated learning for healthcare.
+
+  - day: "12"
+    month: Feb
+    year: 2026
+    title: New partnership with Maastricht UMC+ for AI-assisted radiology pilot
+    body: A clinical collaboration to deploy our diagnostic AI models in the radiology workflow of Maastricht's academic hospital.
+
+  - day: "28"
+    month: Jan
+    year: 2026
+    title: Chang Sun's clinical NLP paper receives Best Paper Award at EMNLP 2025
+    body: Recognising outstanding research on privacy-preserving NLP for Dutch clinical records at the premier NLP conference.

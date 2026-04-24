@@ -1,0 +1,298 @@
+- name: Michel Dumontier
+  role: Distinguished Professor
+  group: Faculty
+  themes: [FAIR Data, Knowledge Graphs]
+  bio: >
+    Michel is Distinguished Professor of Data Science for Health. His research focuses
+    on the development of FAIR data ecosystems for biomedical research and the application
+    of knowledge graphs in drug discovery and clinical decision support. He leads the FAIR
+    Data initiative at Maastricht University and chairs the FAIR Metrics group.
+  keywords: [FAIR Data, Knowledge Graphs, Semantic Web, Drug Discovery, Open Science]
+  orcid: "0000-0003-4727-9435"
+  url: https://dumontierlab.com
+  email: michel.dumontier@maastrichtuniversity.nl
+
+- name: Christopher Brewster
+  role: Full Professor
+  group: Faculty
+  themes: [Computational Biology]
+  bio: >
+    Christopher's research spans knowledge management, supply chain AI and digital health.
+    He applies graph-based and machine learning methods to link complex heterogeneous data
+    sources in agri-food and healthcare contexts.
+  keywords: [Knowledge Management, AI, Supply Chain, Digital Agriculture, Graph AI]
+  orcid: ""
+  url: ""
+  email: c.brewster@maastrichtuniversity.nl
+
+- name: Visara Urovi
+  role: Associate Professor
+  group: Faculty
+  themes: [Federated AI]
+  bio: >
+    Visara leads research on federated learning and privacy-preserving AI, enabling
+    collaborative analysis across distributed clinical datasets without sharing raw data.
+    She is the UM lead on the Personal Health Train project and was named an ELLIS Fellow in 2026.
+  keywords: [Federated Learning, Privacy-Preserving AI, GDPR, Distributed ML, Health Data]
+  orcid: ""
+  url: ""
+  email: v.urovi@maastrichtuniversity.nl
+
+- name: Chang Sun
+  role: Assistant Professor
+  group: Faculty
+  themes: [Clinical NLP, Federated AI]
+  bio: >
+    Chang develops natural language processing and text mining methods tailored to clinical
+    documents. His work on adapting LLMs to low-resource clinical languages (Dutch, German)
+    bridges NLP research and real-world hospital deployment.
+  keywords: [Clinical NLP, Large Language Models, Text Mining, ICD Coding, Dutch EHR]
+  orcid: ""
+  url: ""
+  email: chang.sun@maastrichtuniversity.nl
+
+- name: Remzi Celebi
+  role: Assistant Professor
+  group: Faculty
+  themes: [FAIR Data, Clinical NLP]
+  bio: >
+    Remzi works at the intersection of FAIR data, rare disease informatics and clinical
+    knowledge graphs. He coordinates multiple European rare disease data infrastructure
+    projects and is an active contributor to FAIR metrics development.
+  keywords: [Rare Diseases, FAIR Principles, Linked Data, Ontologies, Knowledge Graphs]
+  orcid: ""
+  url: ""
+  email: r.celebi@maastrichtuniversity.nl
+
+- name: Rohan Nanda
+  role: Assistant Professor
+  group: Faculty
+  themes: [Precision Medicine]
+  bio: >
+    Rohan focuses on AI-based clinical decision support systems, with a particular interest
+    in risk stratification models, hospital readmission prediction and the integration of
+    structured and unstructured data in electronic health records.
+  keywords: [Clinical Decision Support, Risk Stratification, EHR, Predictive Modelling, Hospital AI]
+  orcid: ""
+  url: ""
+  email: r.nanda@maastrichtuniversity.nl
+
+- name: Aikaterina Kasimati
+  role: Assistant Professor
+  group: Faculty
+  themes: [Precision Medicine]
+  bio: >
+    Katerina's research combines IoT, wearable sensing and AI to create smart personalised
+    health systems. She focuses on precision nutrition and digital interventions for chronic
+    disease management, integrating physiological and lifestyle data streams.
+  keywords: [IoT, Wearables, Precision Nutrition, Digital Health, Chronic Disease]
+  orcid: ""
+  url: ""
+  email: a.kasimati@maastrichtuniversity.nl
+
+- name: Pietro Bonizzi
+  role: Associate Professor
+  group: Faculty
+  themes: [Signal Processing]
+  bio: >
+    Pietro specialises in biomedical signal processing and machine learning for cardiac
+    monitoring. His work on non-invasive ECG analysis and atrial fibrillation detection
+    from consumer wearables is applied in clinical and home settings.
+  keywords: [ECG, Arrhythmia, Atrial Fibrillation, Signal Processing, Wearable AI]
+  orcid: ""
+  url: ""
+  email: p.bonizzi@maastrichtuniversity.nl
+
+- name: Rachel Cavill
+  role: Assistant Professor
+  group: Faculty
+  themes: [Computational Biology]
+  bio: >
+    Rachel develops statistical and machine learning methods for integrating multi-omics
+    datasets. Her research addresses the computational challenges of high-dimensional
+    biological data to identify disease biomarkers and drug targets.
+  keywords: [Bioinformatics, Multi-Omics, Biomarker Discovery, Statistical ML, Genomics]
+  orcid: ""
+  url: ""
+  email: r.cavill@maastrichtuniversity.nl
+
+- name: Konstantia Zarkogianni
+  role: Associate Professor
+  group: Faculty
+  themes: [Precision Medicine, Signal Processing]
+  bio: >
+    Konstantia works on AI-powered diabetes management, combining continuous glucose
+    monitoring data, dietary logs and wearable biosignals with knowledge graph reasoning
+    to personalise insulin dosing and lifestyle recommendations.
+  keywords: [Diabetes AI, CGM, Personalised Interventions, Knowledge Graphs, Wearables]
+  orcid: ""
+  url: ""
+  email: k.zarkogianni@maastrichtuniversity.nl
+
+- name: Shervin Mehryar
+  role: PhD Researcher
+  group: Researchers
+  themes: [Knowledge Graphs]
+  bio: >
+    Shervin's PhD research focuses on semantic annotation of tabular data for
+    machine-to-machine interoperability, applying knowledge graph embeddings and
+    neuro-symbolic approaches to ontology refinement and annotation prediction.
+  keywords: [Knowledge Graph Embeddings, Semantic Annotation, Ontology Development, Neuro-Symbolic AI]
+  orcid: ""
+  url: "https://cris.maastrichtuniversity.nl/en/persons/shervin-mehryar"
+  email: ""
+
+- name: Mahmoud Ibrahim
+  role: PhD Researcher
+  group: Researchers
+  themes: [Precision Medicine]
+  bio: >
+    Mahmoud's PhD research focuses on generative AI for synthetic data generation
+    across multiple medical modalities, enabling privacy-preserving use of clinical
+    data for machine learning and biomedical research.
+  keywords: [Generative AI, Synthetic Data, Medical Data, Generative Models]
+  orcid: "0000-0002-5099-7609"
+  url: "https://cris.maastrichtuniversity.nl/en/persons/mahmoud-ibrahim/"
+  email: ""
+
+- name: Seun Adekunle
+  role: PhD Researcher
+  group: Researchers
+  themes: [Precision Medicine]
+  bio: >
+    Seun's PhD research applies machine learning methods to improve pension savings
+    outcomes in the Netherlands, combining financial data analysis with AI-driven
+    decision support.
+  keywords: [Machine Learning, Financial AI, Decision Support]
+  orcid: ""
+  url: "https://www.maastrichtuniversity.nl/oh-adekunle"
+  email: ""
+
+- name: Özge Erten
+  role: PhD Researcher
+  group: Researchers
+  themes: [Knowledge Graphs]
+  bio: >
+    Özge applies knowledge graph embeddings and constraint-based learning to
+    biomedical ontology refinement and semantic error detection, with applications
+    to gene ontology and medical databases such as MIMIC-III.
+  keywords: [Knowledge Graph Embeddings, Ontology Refinement, Constraint Learning, Semantic Error Detection]
+  orcid: "0000-0001-9493-3167"
+  url: "https://cris.maastrichtuniversity.nl/en/persons/%C3%B6zge-erten"
+  email: ""
+
+- name: Maryam Mohammadi
+  role: PhD Researcher
+  group: Researchers
+  themes: [Knowledge Graphs]
+  bio: >
+    Maryam's PhD research focuses on the automatic construction of knowledge graph
+    metadata, investigating schema coverage, SPARQL query log analysis, and
+    semi-automatic methods for ontology enrichment and knowledge construction.
+  keywords: [Knowledge Graphs, Ontology Enrichment, SPARQL, Query Log Analysis, Semantic Web]
+  orcid: "0000-0003-4850-8068"
+  url: "https://cris.maastrichtuniversity.nl/en/persons/maryam-mohammadi/"
+  email: ""
+
+- name: Gijs Wijngaard
+  role: PhD Researcher
+  group: Researchers
+  themes: [Signal Processing]
+  bio: >
+    Gijs researches automated audio captioning and audio-language datasets,
+    developing evaluation methods and benchmarks for audio scene and event
+    understanding using machine learning.
+  keywords: [Audio Captioning, Audio Processing, Machine Learning, Evaluation Metrics, Audio-Language Datasets]
+  orcid: "0009-0002-3875-1232"
+  url: "https://cris.maastrichtuniversity.nl/en/persons/gijs-wijngaard/"
+  email: ""
+
+- name: Kun Li
+  role: PhD Researcher
+  group: Researchers
+  themes: [Federated AI]
+  bio: >
+    Kun's PhD research investigates privacy preservation in healthcare data sharing
+    using blockchain technology, developing decentralised approaches to secure
+    clinical data exchange across institutions.
+  keywords: [Blockchain, Privacy Preservation, Healthcare Data, Federated Learning, Decentralised Systems]
+  orcid: ""
+  url: "https://www.maastrichtuniversity.nl/k-li"
+  email: ""
+
+- name: Yuyang Yan
+  role: PhD Researcher
+  group: Researchers
+  themes: [Signal Processing]
+  bio: >
+    Yuyang's PhD focuses on acoustic biomarkers for respiratory disease monitoring,
+    applying Mel-spectrogram analysis and machine learning to non-invasive COPD
+    recognition from audio signals.
+  keywords: [Acoustic Biomarkers, COPD, Signal Processing, Machine Learning, Respiratory Monitoring]
+  orcid: ""
+  url: "https://www.maastrichtuniversity.nl/yuyang-yan"
+  email: ""
+
+- name: Dong Yang
+  role: PhD Researcher
+  group: Researchers
+  themes: [Clinical NLP]
+  bio: >
+    Dong's PhD research leverages large language models and reinforcement learning
+    to address key challenges in medical reasoning, including clinical data
+    management, text processing, and reliable complex reasoning in healthcare.
+  keywords: [Large Language Models, Reinforcement Learning, Medical Reasoning, Clinical NLP]
+  orcid: ""
+  url: "https://www.maastrichtuniversity.nl/d-yang"
+  email: ""
+
+- name: Rishabh Jakhar
+  role: PhD Researcher
+  group: Researchers
+  themes: [FAIR Data]
+  bio: >
+    Rishabh is a PhD candidate at the Institute of Data Science working on
+    data science methods within the DACS Emergent Technologies group.
+  keywords: [Data Science, Emergent Technologies]
+  orcid: ""
+  url: "https://cris.maastrichtuniversity.nl/en/persons/rishabh-jakhar"
+  email: ""
+
+- name: Yaru Zhang
+  role: PhD Researcher
+  group: Researchers
+  themes: [FAIR Data]
+  bio: >
+    Yaru is a PhD candidate at the Institute of Data Science contributing to the
+    EU-FarmBook project, working on FAIR data infrastructure and knowledge
+    representation for agricultural and food systems.
+  keywords: [FAIR Data, Knowledge Representation, Agricultural Data, Linked Data]
+  orcid: ""
+  url: "https://cris.maastrichtuniversity.nl/en/persons/yaru-zhang"
+  email: ""
+
+- name: Komal Gilani
+  role: PhD Researcher
+  group: Researchers
+  themes: [Federated AI, Knowledge Graphs]
+  bio: >
+    Komal's PhD research, conducted within the iCARE4CVD project, explores
+    federated health data sharing using knowledge graphs and blockchain technology,
+    supervised by Visara Urovi and Michel Dumontier.
+  keywords: [Ontology, Knowledge Graphs, Blockchain, Cardiovascular Data, Ontology Alignment]
+  orcid: ""
+  url: ""
+  email: ""
+
+- name: Mikołaj Najda
+  role: PhD Researcher
+  group: Researchers
+  themes: [Signal Processing]
+  bio: >
+    Mikołaj develops explainable AI systems for cardiac diagnosis, using voice and
+    speech analysis with CNN architectures to detect heart failure and monitor the
+    autonomic nervous system non-invasively.
+  keywords: [Explainable AI, Heart Failure, Voice Analysis, Acoustic Features, Medical Signal Processing]
+  orcid: "0009-0004-2548-3309"
+  url: "https://cris.maastrichtuniversity.nl/en/persons/miko%C5%82aj-najda"
+  email: ""

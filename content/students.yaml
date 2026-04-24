@@ -1,0 +1,326 @@
+philosophy:
+  - icon: "🔬"
+    title: Research from day one
+    text: >
+      From their first week, students work on live research problems alongside PhD
+      researchers and faculty. There are no toy datasets here — you handle real
+      clinical data, real ambiguity, and real stakes.
+
+  - icon: "🤝"
+    title: Close mentorship
+    text: >
+      Every student project has a named supervisor and a junior researcher mentor.
+      We have weekly check-ins, structured mid-point reviews and an open-door culture.
+      Your progress is our priority.
+
+  - icon: "🌍"
+    title: International, collaborative environment
+    text: >
+      Our group includes researchers from more than 15 countries. Students participate
+      in group meetings, journal clubs and project meetings with clinical and industry
+      partners across Europe.
+
+  - icon: "🚀"
+    title: A clear path forward
+    text: >
+      Alumni of our student programme regularly go on to PhD positions, industry
+      research roles and clinical informatics careers. We actively support next steps —
+      writing references, making introductions, advising on career paths.
+
+  - icon: "🧭"
+    title: Problem-first, method-second
+    text: >
+      We do not push students toward particular tools or methods. We start from a
+      clinical or scientific question and choose the best approach together — often
+      a combination of classic ML, deep learning and domain knowledge.
+
+showcases:
+  - level: MSc
+    title: Predicting ICU Readmission with Transformer-based EHR Models
+    student: Yuki Tanaka
+    year: "2025"
+    supervisor: R. Nanda
+    desc: >
+      Developed a clinical BERT variant fine-tuned on Dutch ICU notes to predict
+      48-hour readmission with AUROC 0.84 — subsequently extended into a journal publication.
+
+  - level: BSc
+    title: Visualising FAIR Data Compliance Across European Rare Disease Registries
+    student: Emma van Dijk
+    year: "2025"
+    supervisor: R. Celebi
+    desc: >
+      Built an interactive dashboard for measuring and displaying FAIR compliance
+      metrics across 22 patient registries — now used in the rare disease FAIR portal.
+
+  - level: MSc
+    title: Federated Training of Arrhythmia Classifiers Across Four Hospitals
+    student: Lucas Ferreira
+    year: "2024"
+    supervisor: V. Urovi / P. Bonizzi
+    desc: >
+      Designed and evaluated a federated learning protocol for ECG classifiers,
+      demonstrating that federated models match centralised accuracy while removing
+      the need for data sharing.
+
+  - level: MSc
+    title: "Dutch Clinical BERT: Pre-training on 500K Discharge Summaries"
+    student: Anouk Smits
+    year: "2024"
+    supervisor: C. Sun
+    desc: >
+      Pre-trained a Dutch clinical language model from scratch on de-identified
+      hospital records, achieving state-of-the-art on four downstream clinical NLP tasks.
+
+  - level: BSc
+    title: Diet Logging with Computer Vision for Diabetes Self-Management
+    student: Amara Diallo
+    year: "2024"
+    supervisor: K. Zarkogianni
+    desc: >
+      Developed a mobile app prototype using YOLOv8 to estimate carbohydrate content
+      from meal photos, integrated with the DiabAI platform.
+
+  - level: PhD intern
+    title: Ontology-guided Data Harmonisation for Multi-Centre Clinical Trials
+    student: Jin Park
+    year: "2023"
+    supervisor: M. Dumontier
+    desc: >
+      Developed a semi-automated pipeline using biomedical ontologies to harmonise
+      heterogeneous variable names across clinical trial datasets — reducing
+      harmonisation time by 60%.
+
+open_projects:
+  - level: MSc
+    title: Privacy-Preserving Synthetic EHR Generation with Diffusion Models
+    supervisor: Visara Urovi
+    theme: Federated AI
+    desc: >
+      Develop and evaluate diffusion-based generative models for creating high-fidelity
+      synthetic clinical records that satisfy differential privacy guarantees.
+
+  - level: MSc
+    title: "Multilingual Clinical NLP: Zero-Shot Transfer Between European Languages"
+    supervisor: Chang Sun
+    theme: Clinical NLP
+    desc: >
+      Investigate cross-lingual transfer of clinical NLP models (Dutch, French, German)
+      using multilingual LLMs with minimal labelled data.
+
+  - level: BSc
+    title: Interactive FAIR Data Maturity Dashboard
+    supervisor: Remzi Celebi
+    theme: FAIR Data
+    desc: >
+      Build a web-based dashboard that ingests metadata from health data catalogues
+      and visualises FAIR maturity scores for non-technical stakeholders.
+
+  - level: MSc
+    title: Continual Learning for Wearable ECG Arrhythmia Detection
+    supervisor: Pietro Bonizzi
+    theme: Signal Processing
+    desc: >
+      Design a continual learning strategy that adapts an arrhythmia classifier to
+      new patient populations over time without catastrophic forgetting.
+
+  - level: BSc
+    title: Explainable AI for Hospital Readmission Prediction
+    supervisor: Rohan Nanda
+    theme: Precision Medicine
+    desc: >
+      Apply SHAP and concept-based explanation methods to a clinical readmission model
+      and evaluate their usefulness with clinicians in a user study.
+
+  - level: MSc
+    title: Graph Neural Networks for Drug-Target Interaction Prediction
+    supervisor: Rachel Cavill
+    theme: Computational Biology
+    desc: >
+      Extend a biomedical knowledge graph with drug-target interaction data and train
+      GNN models for novel drug target discovery in cardiovascular disease.
+
+  - level: PhD
+    title: "FAIR AI Models: Towards Machine-Actionable ML Artifacts"
+    supervisor: Michel Dumontier
+    theme: FAIR Data
+    desc: >
+      Research and develop FAIR principles and metadata schemas specifically for AI/ML
+      models in health, enabling automated discovery, evaluation and reuse.
+
+  - level: MSc
+    title: Personalised Nutrition AI with Multi-Modal Sensor Fusion
+    supervisor: Aikaterina Kasimati
+    theme: Precision Medicine
+    desc: >
+      Combine dietary image logs, CGM readings and wearable activity data to build
+      a personalised macronutrient recommendation engine.
+
+  - level: BSc
+    title: Ontology Matching Benchmark for Rare Disease Databases
+    supervisor: Remzi Celebi
+    theme: Knowledge Graphs
+    desc: >
+      Construct and evaluate a benchmark dataset for semi-automated ontology matching
+      between ORDO, OMIM and HPO rare disease knowledge bases.
+
+phd_steps:
+  - number: "1"
+    title: Find an open position
+    text: >
+      Monitor the UM Vacancies portal and academictransfer.nl. Positions are typically
+      advertised with a detailed project description and specific requirements. You can
+      also contact PIs directly if you have a compelling research proposal.
+
+  - number: "2"
+    title: Submit your application
+    text: >
+      Applications include a CV, motivation letter, MSc transcripts and the contact
+      details of two academic referees. For competitive positions, a short research
+      proposal is beneficial.
+
+  - number: "3"
+    title: Interview & selection
+    text: >
+      Shortlisted candidates are invited for a 45-minute video interview with the
+      prospective supervisor and a second panel member. Interviews focus on research
+      ability, motivation and fit.
+
+  - number: "4"
+    title: Offer & start
+    text: >
+      Successful candidates receive an employment offer. Typical start dates are
+      flexible. Relocation support, housing assistance and visa guidance are available
+      through Maastricht University's International Welcome Centre.
+
+phd_requirements:
+  - MSc in computer science, data science, bioinformatics or a closely related field
+  - Strong programming skills (Python, ideally PyTorch or JAX)
+  - Genuine curiosity about health and medicine — no medical background required
+  - Evidence of research ability (thesis, publication, or open-source contribution)
+  - Strong written and spoken English; Dutch not required
+
+phd_salary: >
+  PhD candidates in the Netherlands are employed (not stipend-based). You receive a
+  salary on the Dutch university scale (€2,770–€3,539/month), full social security
+  and a travel budget for conferences.
+
+programmes:
+  - level: MSc
+    name: Data Science for Decision Making
+    dept: DACS
+    duration: 2 years
+    language: English
+    url: https://www.maastrichtuniversity.nl
+    desc: >
+      A research-intensive master's combining machine learning, statistics and
+      decision-making — the most common entry point for HAIR Group thesis projects.
+
+  - level: MSc
+    name: Artificial Intelligence
+    dept: DACS
+    duration: 2 years
+    language: English
+    url: https://www.maastrichtuniversity.nl
+    desc: >
+      Covers the full breadth of AI from foundational theory to applied systems,
+      including a specialisation track in knowledge engineering and health AI.
+
+  - level: MSc
+    name: Bioinformatics & Systems Biology
+    dept: DACS / FHML
+    duration: 2 years
+    language: English
+    url: https://www.maastrichtuniversity.nl
+    desc: >
+      Joint programme with the Faculty of Health, Medicine and Life Sciences, ideal
+      for students combining computational and biological expertise.
+
+  - level: BSc
+    name: Data Science & Artificial Intelligence
+    dept: DACS
+    duration: 3 years
+    language: English
+    url: https://www.maastrichtuniversity.nl
+    desc: >
+      Maastricht's undergraduate data science degree with strong emphasis on
+      problem-based learning — many HAIR Group BSc projects come from this programme.
+
+  - level: BSc
+    name: Knowledge Engineering
+    dept: DACS
+    duration: 3 years
+    language: English
+    url: https://www.maastrichtuniversity.nl
+    desc: >
+      Europe's only undergraduate programme dedicated to knowledge representation,
+      ontologies and intelligent systems — directly aligned with our FAIR Data
+      and Knowledge Graph themes.
+
+  - level: PhD
+    name: Graduate School of Advanced Studies
+    dept: UM GSAS
+    duration: 4 years
+    language: English
+    url: https://www.maastrichtuniversity.nl
+    desc: >
+      PhD candidates in the group are enrolled in the UM Graduate School. Training
+      includes research skills, transferable skills, and access to the broader
+      Dutch research network.
+
+courses:
+  - code: DKE3001
+    title: Introduction to Machine Learning
+    level: BSc
+    period: Period 1
+    staff: R. Cavill, R. Nanda
+    desc: Foundations of supervised and unsupervised learning, probabilistic modelling and model evaluation.
+
+  - code: DKE4012
+    title: Knowledge Graphs & Semantic Web
+    level: BSc
+    period: Period 2
+    staff: M. Dumontier, R. Celebi
+    desc: RDF, OWL, SPARQL and the principles of linked data, with applications to biomedical ontologies.
+
+  - code: DKE6001
+    title: Advanced Deep Learning
+    level: MSc
+    period: Period 1
+    staff: P. Bonizzi, C. Sun
+    desc: "Convolutional, recurrent and transformer architectures; self-supervised learning; responsible AI."
+
+  - code: DKE6022
+    title: Federated & Privacy-Preserving Machine Learning
+    level: MSc
+    period: Period 3
+    staff: V. Urovi, C. Sun
+    desc: "Federated learning frameworks, differential privacy, secure aggregation and regulatory context (GDPR)."
+
+  - code: DKE6034
+    title: Health Data Science
+    level: MSc
+    period: Period 2
+    staff: R. Nanda, A. Kasimati, K. Zarkogianni
+    desc: "Clinical data types, EHR mining, survival analysis, clinical decision support and translational AI."
+
+  - code: DKE7005
+    title: Biomedical Informatics
+    level: MSc
+    period: Period 4
+    staff: M. Dumontier, R. Celebi, C. Brewster
+    desc: "FAIR data, knowledge representation, clinical terminologies (SNOMED, ICD), and health data interoperability."
+
+  - code: DKE7018
+    title: Computational Biology
+    level: MSc
+    period: Period 3
+    staff: R. Cavill, C. Brewster
+    desc: "Bioinformatics algorithms, multi-omics integration, pathway analysis and biomarker discovery."
+
+  - code: PhD-ACS01
+    title: Research Methods for Health AI (Doctoral)
+    level: PhD
+    period: Year 1
+    staff: All HAIR faculty
+    desc: Doctoral-level seminar covering experimental design, evaluation methodology, ethics, and responsible innovation in health AI research.

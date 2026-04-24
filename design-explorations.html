@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Explorations · HAIR Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="design-canvas.jsx"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #111; font-family: Inter, sans-serif; }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+/* ════════════════════════════════════════════════
+   SHARED CONTENT
+════════════════════════════════════════════════ */
+const THEMES_DATA = [
+  { icon: '◈', label: 'FAIR Data & Knowledge Graphs',      leads: 'Dumontier · Celebi' },
+  { icon: '⊞', label: 'Federated & Privacy-Preserving AI', leads: 'Urovi · Sun' },
+  { icon: '❋', label: 'Clinical NLP & Text Mining',        leads: 'Sun · Celebi' },
+  { icon: '⌇', label: 'Biomedical Signal Processing',      leads: 'Bonizzi · Zarkogianni' },
+  { icon: '◎', label: 'Precision Medicine',                leads: 'Kasimati · Nanda' },
+  { icon: '⌬', label: 'Computational Biology',             leads: 'Cavill · Brewster' },
+];
+
+const STATS = [
+  { v: '10',   l: 'Faculty' },
+  { v: '30+',  l: 'Researchers' },
+  { v: '€12M', l: 'Active funding' },
+  { v: '200+', l: 'Publications' },
+];
+
+/* ════════════════════════════════════════════════
+   OPTION A — Warm & Human (refined)
+   Cream bg · deep teal · warm gold · Lora serif
+════════════════════════════════════════════════ */
+function DesignA() {
+  const c = {
+    bg: '#faf8f4', bgAlt: '#f1ede6', teal: '#0b3d52',
+    tealMid: '#1a6e80', tealLight: '#e3f2f5',
+    gold: '#c8862a', white: '#fff',
+    text: '#1a1a1a', muted: '#5a6870', border: '#dde5e8',
+  };
+  return (
+    <div style={{ fontFamily: 'Inter, sans-serif', background: c.bg, color: c.text, width: '100%' }}>
+
+      {/* NAV */}
+      <div style={{ background: 'rgba(250,248,244,0.95)', borderBottom: `1px solid ${c.border}`, padding: '0 48px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ width: 34, height: 34, background: c.teal, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg viewBox="0 0 22 22" width={20} height={20} fill="none"><circle cx="11" cy="11" r="3.5" fill="white"/><circle cx="4" cy="5" r="1.8" fill="white" opacity=".55"/><circle cx="18" cy="5" r="1.8" fill="white" opacity=".55"/><circle cx="4" cy="17" r="1.8" fill="white" opacity=".55"/><circle cx="18" cy="17" r="1.8" fill="white" opacity=".55"/><line x1="11" y1="7.5" x2="4" y2="5" stroke="white" strokeWidth="1" opacity=".4"/><line x1="11" y1="7.5" x2="18" y2="5" stroke="white" strokeWidth="1" opacity=".4"/><line x1="11" y1="14.5" x2="4" y2="17" stroke="white" strokeWidth="1" opacity=".4"/><line x1="11" y1="14.5" x2="18" y2="17" stroke="white" strokeWidth="1" opacity=".4"/></svg>
+          </div>
+          <div>
+            <div style={{ fontFamily: 'Lora, serif', fontSize: 13, fontWeight: 600, color: c.teal, lineHeight: 1.1 }}>HAIR Group</div>
+            <div style={{ fontSize: 10, color: c.muted, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Maastricht University</div>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 4 }}>
+          {['Research','People','Publications','Media'].map(l => (
+            <span key={l} style={{ padding: '5px 13px', fontSize: 13, color: c.muted, borderRadius: 6 }}>{l}</span>
+          ))}
+          <span style={{ padding: '6px 14px', fontSize: 13, background: c.teal, color: c.white, borderRadius: 7, fontWeight: 600 }}>Students</span>
+        </div>
+      </div>
+
+      {/* HERO */}
+      <div style={{ background: `linear-gradient(135deg, #072e3e 0%, #0b3d52 55%, #154a5e 100%)`, padding: '80px 48px 72px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', minHeight: 480 }}>
+        <div>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 20, padding: '5px 14px 5px 8px', marginBottom: 28 }}>
+            <div style={{ width: 8, height: 8, borderRadius: '50%', background: c.gold }} />
+            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.8)', letterSpacing: '0.06em' }}>Dept. of Advanced Computing Sciences · Maastricht University</span>
+          </div>
+          <h1 style={{ fontFamily: 'Lora, serif', fontSize: 52, fontWeight: 700, color: 'white', lineHeight: 1.15, marginBottom: 20 }}>
+            AI for a <em style={{ color: c.gold, fontStyle: 'italic' }}>healthier</em><br />world
+          </h1>
+          <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.7)', lineHeight: 1.75, maxWidth: 440, marginBottom: 32 }}>
+            We develop artificial intelligence and data science methods that transform how healthcare knowledge is created, shared, and applied.
+          </p>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <span style={{ padding: '11px 24px', background: c.gold, color: 'white', borderRadius: 8, fontSize: 14, fontWeight: 600 }}>Explore research</span>
+            <span style={{ padding: '11px 24px', border: '1.5px solid rgba(255,255,255,0.3)', color: 'rgba(255,255,255,0.8)', borderRadius: 8, fontSize: 14 }}>Meet the team</span>
+          </div>
+          <div style={{ display: 'flex', gap: 36, marginTop: 48, paddingTop: 36, borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+            {STATS.map(s => (
+              <div key={s.l}>
+                <div style={{ fontFamily: 'Lora, serif', fontSize: 28, fontWeight: 700, color: 'white', lineHeight: 1 }}>{s.v}</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginTop: 4 }}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Photo placeholder */}
+        <div style={{ borderRadius: 16, overflow: 'hidden', aspectRatio: '4/3', background: 'repeating-linear-gradient(45deg,rgba(255,255,255,0.03) 0px,rgba(255,255,255,0.03) 10px,rgba(255,255,255,0.06) 10px,rgba(255,255,255,0.06) 11px)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.2)', fontSize: 12, fontFamily: 'monospace', textAlign: 'center', border: '1px solid rgba(255,255,255,0.1)' }}>
+          [ research team / lab photo ]
+        </div>
+      </div>
+
+      {/* THEMES */}
+      <div style={{ padding: '60px 48px', background: c.bg }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: c.gold, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10 }}>What we do</div>
+        <h2 style={{ fontFamily: 'Lora, serif', fontSize: 32, color: c.teal, marginBottom: 36 }}>Six research themes</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 18 }}>
+          {THEMES_DATA.map(t => (
+            <div key={t.label} style={{ background: c.white, border: `1px solid ${c.border}`, borderRadius: 12, padding: '22px 20px', boxShadow: '0 2px 12px rgba(11,61,82,0.07)' }}>
+              <div style={{ width: 42, height: 42, background: c.tealLight, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, marginBottom: 14, color: c.teal }}>{t.icon}</div>
+              <div style={{ fontFamily: 'Lora, serif', fontSize: 14, fontWeight: 600, color: c.teal, marginBottom: 8, lineHeight: 1.3 }}>{t.label}</div>
+              <div style={{ fontSize: 11, color: c.muted }}>{t.leads}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════
+   OPTION B — Dark Editorial
+   Near-black · white · electric teal · bold type
+   Font: Space Grotesk (headings) + Inter (body)
+════════════════════════════════════════════════ */
+function DesignB() {
+  const c = {
+    bg: '#0c0f0e', bgCard: '#141918', bgHover: '#1a211f',
+    teal: '#00c2a8', tealDim: 'rgba(0,194,168,0.12)',
+    white: '#f0f4f3', muted: '#7a8f8b', border: 'rgba(255,255,255,0.08)',
+    accent: '#00c2a8',
+  };
+  return (
+    <div style={{ fontFamily: 'Inter, sans-serif', background: c.bg, color: c.white, width: '100%' }}>
+
+      {/* NAV */}
+      <div style={{ borderBottom: `1px solid ${c.border}`, padding: '0 48px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 28, height: 28, borderRadius: '50%', border: `1.5px solid ${c.teal}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 8, height: 8, borderRadius: '50%', background: c.teal }} />
+          </div>
+          <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 14, fontWeight: 600, letterSpacing: '0.02em' }}>HAIR Group</span>
+          <span style={{ fontSize: 11, color: c.muted, marginLeft: 4 }}>— Maastricht University</span>
+        </div>
+        <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
+          {['Research','People','Publications','Media'].map(l => (
+            <span key={l} style={{ fontSize: 13, color: c.muted, letterSpacing: '0.02em' }}>{l}</span>
+          ))}
+          <span style={{ padding: '6px 16px', border: `1px solid ${c.teal}`, color: c.teal, borderRadius: 5, fontSize: 13, fontWeight: 500 }}>Students →</span>
+        </div>
+      </div>
+
+      {/* HERO */}
+      <div style={{ padding: '96px 48px 80px', borderBottom: `1px solid ${c.border}` }}>
+        <div style={{ fontSize: 11, color: c.teal, letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 600, marginBottom: 24 }}>Health Artificial Intelligence Research Group</div>
+        <h1 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 76, fontWeight: 700, lineHeight: 1.0, letterSpacing: '-0.03em', color: c.white, maxWidth: 820, marginBottom: 32 }}>
+          We build AI<br />
+          <span style={{ color: c.teal }}>for medicine.</span><br />
+          <span style={{ fontWeight: 300, color: c.muted }}>Responsibly.</span>
+        </h1>
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap' }}>
+          <p style={{ fontSize: 16, color: c.muted, lineHeight: 1.8, maxWidth: 480 }}>
+            Artificial intelligence and data science methods that transform how healthcare knowledge is created, shared and applied — from the clinic to the genome.
+          </p>
+          <div style={{ display: 'flex', gap: 32 }}>
+            {STATS.map(s => (
+              <div key={s.l} style={{ borderLeft: `2px solid ${c.teal}`, paddingLeft: 16 }}>
+                <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 26, fontWeight: 700, color: c.white, lineHeight: 1 }}>{s.v}</div>
+                <div style={{ fontSize: 11, color: c.muted, marginTop: 5, letterSpacing: '0.05em' }}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 12, marginTop: 44 }}>
+          <span style={{ padding: '12px 28px', background: c.teal, color: '#0c0f0e', borderRadius: 6, fontSize: 14, fontWeight: 700, letterSpacing: '0.01em' }}>Explore research</span>
+          <span style={{ padding: '12px 28px', border: `1px solid ${c.border}`, color: c.muted, borderRadius: 6, fontSize: 14 }}>Meet the team</span>
+        </div>
+      </div>
+
+      {/* THEMES */}
+      <div style={{ padding: '60px 48px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32 }}>
+          <div style={{ fontSize: 11, color: c.teal, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600 }}>Research themes — 06</div>
+          <span style={{ fontSize: 13, color: c.muted }}>View all →</span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1, border: `1px solid ${c.border}`, borderRadius: 10, overflow: 'hidden' }}>
+          {THEMES_DATA.map((t, i) => (
+            <div key={t.label} style={{ background: c.bgCard, padding: '24px 22px', borderRight: i%3!==2?`1px solid ${c.border}`:'none', borderBottom: i<3?`1px solid ${c.border}`:'none' }}>
+              <div style={{ fontSize: 22, color: c.teal, marginBottom: 12, fontFamily: 'monospace' }}>{String(i+1).padStart(2,'0')}</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: c.white, marginBottom: 6, lineHeight: 1.35 }}>{t.label}</div>
+              <div style={{ fontSize: 11, color: c.muted }}>{t.leads}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════
+   OPTION C — Clinical White
+   Pure white · slate · blue-green · spacious grid
+   Font: Fraunces (display) + Inter (body)
+════════════════════════════════════════════════ */
+function DesignC() {
+  const c = {
+    bg: '#ffffff', bgAlt: '#f7f9fb',
+    slate: '#1e2d3d', slateMid: '#3a5068',
+    blue: '#2e8fa0', blueLight: '#e8f5f8',
+    text: '#2a2a2a', muted: '#6b7f8e', border: '#e4eaee',
+    gold: '#d4902a',
+  };
+  return (
+    <div style={{ fontFamily: 'Inter, sans-serif', background: c.bg, color: c.text, width: '100%' }}>
+
+      {/* NAV — very minimal */}
+      <div style={{ borderBottom: `1px solid ${c.border}`, padding: '0 56px', height: 62, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{ width: 32, height: 32, border: `1.5px solid ${c.slate}`, borderRadius: 6, display: 'grid', placeItems: 'center', fontSize: 14 }}>✦</div>
+          <div>
+            <span style={{ fontFamily: 'Fraunces, serif', fontSize: 14, fontWeight: 700, color: c.slate }}>Health AI Research Group</span>
+            <span style={{ fontSize: 11, color: c.muted, marginLeft: 10 }}>Maastricht University</span>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 8 }}>
+          {['Research','People','Publications','Media','Students'].map(l => (
+            <span key={l} style={{ padding: '5px 12px', fontSize: 12, color: c.muted, borderRadius: 5, letterSpacing: '0.01em' }}>{l}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* HERO — two-column, very spacious */}
+      <div style={{ padding: '72px 56px', display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 56, alignItems: 'center', borderBottom: `1px solid ${c.border}` }}>
+        <div>
+          <div style={{ display: 'inline-block', fontSize: 11, fontWeight: 600, color: c.blue, letterSpacing: '0.14em', textTransform: 'uppercase', borderBottom: `1.5px solid ${c.blue}`, paddingBottom: 4, marginBottom: 28 }}>Dept. of Advanced Computing Sciences</div>
+          <h1 style={{ fontFamily: 'Fraunces, serif', fontSize: 58, fontWeight: 700, lineHeight: 1.1, color: c.slate, letterSpacing: '-0.02em', marginBottom: 24 }}>
+            Artificial<br />intelligence<br /><em style={{ fontStyle: 'italic', fontWeight: 300 }}>for health.</em>
+          </h1>
+          <p style={{ fontSize: 15, color: c.muted, lineHeight: 1.85, maxWidth: 420, marginBottom: 36 }}>
+            We develop AI and data science methods that transform how healthcare knowledge is created, shared and applied — from the clinic to the genome.
+          </p>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <span style={{ padding: '10px 24px', background: c.slate, color: 'white', borderRadius: 6, fontSize: 13, fontWeight: 600 }}>Our research</span>
+            <span style={{ padding: '10px 24px', border: `1.5px solid ${c.border}`, color: c.muted, borderRadius: 6, fontSize: 13 }}>Meet the team</span>
+          </div>
+        </div>
+        {/* Stats grid */}
+        <div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: c.border, borderRadius: 12, overflow: 'hidden', marginBottom: 20 }}>
+            {STATS.map((s,i) => (
+              <div key={s.l} style={{ background: i===0?c.slate:c.bg, padding: '28px 24px' }}>
+                <div style={{ fontFamily: 'Fraunces, serif', fontSize: 36, fontWeight: 700, color: i===0?'white':c.slate, lineHeight: 1 }}>{s.v}</div>
+                <div style={{ fontSize: 11, color: i===0?'rgba(255,255,255,0.6)':c.muted, marginTop: 6, letterSpacing: '0.04em' }}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ background: c.blueLight, borderRadius: 10, padding: '16px 20px', fontSize: 12, color: c.blue, display: 'flex', gap: 10, alignItems: 'center' }}>
+            <span style={{ fontSize: 16 }}>📍</span>
+            <span>Universiteitssingel 40, Maastricht, NL</span>
+          </div>
+        </div>
+      </div>
+
+      {/* THEMES — horizontal list, very clean */}
+      <div style={{ padding: '52px 56px', background: c.bgAlt }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
+          <div style={{ fontFamily: 'Fraunces, serif', fontSize: 22, color: c.slate }}>Research themes</div>
+          <span style={{ fontSize: 12, color: c.blue, fontWeight: 600 }}>All six →</span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12 }}>
+          {THEMES_DATA.map((t,i) => (
+            <div key={t.label} style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 8, padding: '18px 18px', display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+              <div style={{ width: 36, height: 36, background: c.blueLight, borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0, color: c.blue }}>{t.icon}</div>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: c.slate, marginBottom: 4, lineHeight: 1.3 }}>{t.label}</div>
+                <div style={{ fontSize: 11, color: c.muted }}>{t.leads}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════
+   OPTION D — Bold & Warm
+   Sand bg · deep navy + terracotta · Lora display
+   Strong typographic contrast, editorial warmth
+════════════════════════════════════════════════ */
+function DesignD() {
+  const c = {
+    bg: '#f5f0e8', navy: '#18253a', navyLight: '#243550',
+    terra: '#c95f3a', terraLight: 'rgba(201,95,58,0.1)',
+    cream: '#fdf9f3', border: '#e0d8cc', muted: '#7a6e62',
+    white: '#fff',
+  };
+  return (
+    <div style={{ fontFamily: 'Inter, sans-serif', background: c.bg, color: c.navy, width: '100%' }}>
+
+      {/* NAV */}
+      <div style={{ background: c.navy, padding: '0 48px', height: 62, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ fontFamily: 'Lora, serif', fontSize: 15, fontWeight: 700, color: 'white', letterSpacing: '-0.01em' }}>HAIR</div>
+          <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.2)' }} />
+          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.05em' }}>Health AI · Maastricht</div>
+        </div>
+        <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+          {['Research','People','Publications','Media'].map(l => (
+            <span key={l} style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)' }}>{l}</span>
+          ))}
+          <span style={{ padding: '6px 16px', background: c.terra, color: 'white', borderRadius: 5, fontSize: 13, fontWeight: 600 }}>Students</span>
+        </div>
+      </div>
+
+      {/* HERO — full-bleed split */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 460 }}>
+        {/* Left: text */}
+        <div style={{ padding: '72px 48px', background: c.navy, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div>
+            <div style={{ fontSize: 11, color: c.terra, letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 600, marginBottom: 24 }}>Department of Advanced Computing Sciences</div>
+            <h1 style={{ fontFamily: 'Lora, serif', fontSize: 56, fontWeight: 700, lineHeight: 1.1, color: 'white', letterSpacing: '-0.02em', marginBottom: 28 }}>
+              Building AI<br />
+              that cares<br />
+              <em style={{ color: c.terra, fontStyle: 'italic' }}>for people.</em>
+            </h1>
+            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, maxWidth: 380 }}>
+              We develop artificial intelligence and data science methods that transform how healthcare knowledge is created, shared and applied.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: 12, marginTop: 40 }}>
+            <span style={{ padding: '12px 28px', background: c.terra, color: 'white', borderRadius: 6, fontSize: 14, fontWeight: 600 }}>Explore our work</span>
+            <span style={{ padding: '12px 28px', border: '1px solid rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.7)', borderRadius: 6, fontSize: 14 }}>Meet the team</span>
+          </div>
+        </div>
+        {/* Right: stats over photo */}
+        <div style={{ background: c.cream, padding: '48px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', position: 'relative', overflow: 'hidden' }}>
+          {/* bg pattern */}
+          <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(45deg,#e8e0d0 0px,#e8e0d0 10px,#f5f0e8 10px,#f5f0e8 11px)', opacity: 0.5 }} />
+          <div style={{ position: 'absolute', top: 20, right: 20, fontSize: 11, fontFamily: 'monospace', color: c.muted, textAlign: 'center', lineHeight: 2 }}>[ team / lab<br/>photograph ]</div>
+          <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+            {STATS.map((s,i) => (
+              <div key={s.l} style={{ background: i===0?c.navy:c.white, borderRadius: 10, padding: '20px 18px', border: i!==0?`1px solid ${c.border}`:'' }}>
+                <div style={{ fontFamily: 'Lora, serif', fontSize: 30, fontWeight: 700, color: i===0?'white':c.navy, lineHeight: 1 }}>{s.v}</div>
+                <div style={{ fontSize: 11, color: i===0?'rgba(255,255,255,0.55)':c.muted, marginTop: 5 }}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* THEMES */}
+      <div style={{ padding: '60px 48px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32 }}>
+          <h2 style={{ fontFamily: 'Lora, serif', fontSize: 30, color: c.navy }}>Six research themes</h2>
+          <span style={{ fontSize: 13, color: c.muted }}>View all →</span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+          {THEMES_DATA.map((t,i) => (
+            <div key={t.label} style={{ background: i%2===0?c.navy:c.cream, border: i%2!==0?`1px solid ${c.border}`:'none', borderRadius: 12, padding: '24px 22px' }}>
+              <div style={{ fontSize: 22, color: i%2===0?c.terra:'rgba(0,0,0,0.2)', marginBottom: 14, fontFamily: 'monospace' }}>{String(i+1).padStart(2,'0')}</div>
+              <div style={{ fontFamily: 'Lora, serif', fontSize: 14, fontWeight: 600, color: i%2===0?'white':c.navy, marginBottom: 6, lineHeight: 1.35 }}>{t.label}</div>
+              <div style={{ fontSize: 11, color: i%2===0?'rgba(255,255,255,0.5)':c.muted }}>{t.leads}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════
+   ROOT
+════════════════════════════════════════════════ */
+function App() {
+  return (
+    <DesignCanvas>
+      <DCSection id="s1" title="Design Explorations — HAIR Group Website">
+        <DCArtboard id="a" label="A — Warm &amp; Human" width={1440} height={1060}>
+          <DesignA />
+        </DCArtboard>
+        <DCArtboard id="b" label="B — Dark Editorial" width={1440} height={1040}>
+          <DesignB />
+        </DCArtboard>
+        <DCArtboard id="c" label="C — Clinical White" width={1440} height={1020}>
+          <DesignC />
+        </DCArtboard>
+        <DCArtboard id="d" label="D — Bold &amp; Warm" width={1440} height={1040}>
+          <DesignD />
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

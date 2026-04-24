@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media · HAIR Group · Maastricht University</title>
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .blog-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--card-shadow); transition: all var(--transition);
+      display: flex; flex-direction: column;
+    }
+    .blog-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+    .blog-img { aspect-ratio: 16/9; }
+    .blog-body { padding: 20px; flex:1; display:flex; flex-direction:column; }
+    .blog-meta { font-size: 0.77rem; color: var(--text-muted); margin-bottom: 9px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    .blog-title { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; color:var(--slate); margin-bottom:9px; line-height:1.32; }
+    .blog-excerpt { font-size:0.84rem; flex:1; margin-bottom:14px; }
+    .blog-author { font-size:0.79rem; color:var(--text-muted); display:flex; align-items:center; gap:8px; margin-top:auto; }
+    .author-init { width:24px; height:24px; border-radius:50%; background:var(--slate); color:white; font-size:0.58rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+    .talk-row {
+      display: grid; grid-template-columns: 80px 1fr; gap: 18px;
+      padding: 20px 0; border-bottom: 1px solid var(--border); align-items: start;
+    }
+    .talk-thumb {
+      aspect-ratio: 16/9; border-radius: 7px; overflow: hidden;
+      background: var(--bg-alt); display:flex; align-items:center; justify-content:center;
+      font-size: 1.2rem; position:relative; border:1px solid var(--border);
+    }
+    .talk-play { position:absolute; width:24px; height:24px; border-radius:50%; background:rgba(30,45,61,0.65); display:flex; align-items:center; justify-content:center; font-size:0.55rem; color:white; }
+    .talk-title { font-family:'Fraunces',serif; font-size:0.96rem; font-weight:700; color:var(--slate); margin-bottom:5px; line-height:1.3; }
+    .talk-meta  { font-size:0.79rem; color:var(--text-muted); line-height:1.7; }
+    .talk-btns  { display:flex; gap:7px; margin-top:10px; }
+
+    .podcast-card {
+      background: var(--white); border:1px solid var(--border);
+      border-radius: var(--radius-lg); padding:20px;
+      box-shadow: var(--card-shadow); transition: all var(--transition);
+    }
+    .podcast-card:hover { box-shadow:var(--card-shadow-hover); }
+    .pod-header { display:flex; gap:14px; align-items:flex-start; margin-bottom:14px; }
+    .pod-art { width:52px; height:52px; border-radius:10px; flex-shrink:0; background:var(--slate); display:flex; align-items:center; justify-content:center; font-size:1.4rem; }
+    .pod-title { font-family:'Fraunces',serif; font-size:0.95rem; font-weight:700; color:var(--slate); margin-bottom:3px; }
+    .pod-show  { font-size:0.76rem; color:var(--text-muted); }
+    .pod-player { background:var(--bg-alt); border-radius:7px; padding:9px 13px; display:flex; align-items:center; gap:10px; font-size:0.76rem; color:var(--text-muted); }
+    .pod-play { width:30px; height:30px; border-radius:50%; background:var(--slate); color:white; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; cursor:pointer; transition:background var(--transition); }
+    .pod-play:hover { background:var(--slate-mid); }
+    .pod-bar { flex:1; height:3px; background:var(--border); border-radius:2px; overflow:hidden; }
+    .pod-fill { height:100%; background:var(--blue); width:0%; }
+
+    .press-row { display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--border); }
+    .press-outlet { width:140px; flex-shrink:0; font-family:'Fraunces',serif; font-weight:700; font-size:0.84rem; color:var(--slate); padding-top:2px; }
+    .press-title { font-size:0.93rem; color:var(--slate); font-weight:500; line-height:1.4; display:block; margin-bottom:3px; transition:color var(--transition); }
+    .press-title:hover { color:var(--blue); }
+    .press-date { font-size:0.76rem; color:var(--text-light); }
+  </style>
+</head>
+<body class="page-body">
+<script src="nav.js"></script>
+<script src="cms.js"></script>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="section-label">News & content</span>
+    <h1>Media</h1>
+    <p class="lead">Blog posts, talks, podcasts and press coverage from the HAIR Group.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
+    <div id="mediaPage" class="hidden">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="showTab('blog',this)">Blog posts</button>
+        <button class="tab-btn" onclick="showTab('talks',this)">Talks & presentations</button>
+        <button class="tab-btn" onclick="showTab('podcasts',this)">Podcasts</button>
+        <button class="tab-btn" onclick="showTab('press',this)">Press</button>
+      </div>
+      <div id="tab-blog"><div class="grid-3" id="blogGrid"></div></div>
+      <div id="tab-talks" class="hidden" style="max-width:780px"><div id="talksList"></div></div>
+      <div id="tab-podcasts" class="hidden"><div class="grid-2" id="podGrid"></div></div>
+      <div id="tab-press" class="hidden" style="max-width:740px"><div id="pressList"></div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(async () => {
+  const data = await CMS.load('content/media.yaml');
+  document.getElementById('loading').remove();
+  document.getElementById('mediaPage').classList.remove('hidden');
+
+  /* Blog */
+  document.getElementById('blogGrid').innerHTML = data.blog.map((b,i)=>`
+    <div class="blog-card reveal" data-delay="${i*60}">
+      <div class="blog-img img-placeholder">${b.img}</div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="tag">${b.tag}</span><span>${b.date}</span></div>
+        <div class="blog-title">${b.title}</div>
+        <p class="blog-excerpt">${b.excerpt.trim()}</p>
+        <div class="blog-author"><div class="author-init">${b.initials}</div>${b.author}</div>
+      </div>
+    </div>`).join('');
+
+  /* Talks */
+  document.getElementById('talksList').innerHTML = data.talks.map((t,i)=>`
+    <div class="talk-row reveal" data-delay="${i*50}">
+      <div class="talk-thumb">
+        <span>🎤</span>
+        <div class="talk-play">▶</div>
+      </div>
+      <div>
+        <div class="talk-title">${t.title}</div>
+        <div class="talk-meta"><strong>${t.type}</strong> · ${t.event}<br>${t.speaker} · ${t.date}</div>
+        <div class="talk-btns">
+          <a href="#" class="btn btn-secondary btn-sm">Slides</a>
+          <a href="#" class="btn btn-secondary btn-sm">Video</a>
+        </div>
+      </div>
+    </div>`).join('');
+
+  /* Podcasts */
+  document.getElementById('podGrid').innerHTML = data.podcasts.map((p,i)=>`
+    <div class="podcast-card reveal" data-delay="${i*60}">
+      <div class="pod-header">
+        <div class="pod-art">${p.icon}</div>
+        <div>
+          <div class="pod-title">${p.title}</div>
+          <div class="pod-show">${p.show} · ${p.episode} · ${p.duration}</div>
+          <div style="font-size:0.73rem;color:var(--text-light);margin-top:2px">Guest: ${p.guest} · ${p.date}</div>
+        </div>
+      </div>
+      <div class="pod-player">
+        <div class="pod-play" onclick="this.textContent=this.textContent==='▶'?'⏸':'▶'">▶</div>
+        <div class="pod-bar"><div class="pod-fill"></div></div>
+        <span>${p.duration}</span>
+      </div>
+    </div>`).join('');
+
+  /* Press */
+  document.getElementById('pressList').innerHTML = data.press.map((p,i)=>`
+    <div class="press-row reveal" data-delay="${i*40}">
+      <div class="press-outlet">${p.outlet}</div>
+      <div>
+        <a class="press-title" href="${p.url}">${p.title}</a>
+        <span class="press-date">${p.date}</span>
+      </div>
+    </div>`).join('');
+
+  CMS.revealNew(document.getElementById('mediaPage'));
+})();
+
+function showTab(id, btn) {
+  ['blog','talks','podcasts','press'].forEach(t=>{
+    document.getElementById('tab-'+t).classList.toggle('hidden', t!==id);
+  });
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  CMS.revealNew(document.getElementById('tab-'+id));
+}
+</script>
+</body>
+</html>

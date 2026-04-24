@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>People · HAIR Group · Maastricht University</title>
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 18px;
+    }
+    .group-header {
+      grid-column: 1 / -1;
+      padding-bottom: 10px; margin: 8px 0 4px;
+      border-bottom: 1.5px solid var(--slate-light);
+      display: flex; align-items: baseline; gap: 12px;
+    }
+    .group-header h3 { font-size: 1.05rem; }
+    .group-header .count { font-size: 0.78rem; color: var(--text-muted); }
+
+    .person-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      border: 1px solid var(--border); overflow: hidden;
+      box-shadow: var(--card-shadow); cursor: pointer;
+      transition: all var(--transition);
+    }
+    .person-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-3px); border-color: var(--blue); }
+    .person-photo {
+      aspect-ratio: 1/1; position: relative;
+      background: var(--bg-alt);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .person-photo::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg, var(--bg-alt) 0px, var(--bg-alt) 9px, var(--border) 9px, var(--border) 10px);
+    }
+    .person-initials {
+      position: relative; z-index: 1;
+      font-family: 'Fraunces', serif; font-size: 2rem;
+      font-weight: 700; color: rgba(30,45,61,0.2);
+    }
+    .person-info { padding: 14px 16px 18px; }
+    .person-name { font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 700; color: var(--slate); margin-bottom: 3px; }
+    .person-role { font-size: 0.75rem; color: var(--blue); font-weight: 500; margin-bottom: 10px; }
+    .person-kws  { display: flex; flex-wrap: wrap; gap: 4px; }
+
+    /* Modal */
+    .modal-header {
+      background: var(--slate); padding: 32px 32px 24px;
+      display: flex; gap: 20px; align-items: flex-start; position: relative;
+    }
+    .modal-avatar {
+      width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700;
+      color: rgba(255,255,255,0.5);
+    }
+    .modal-hdr-text h3 { color: white; font-size: 1.3rem; margin-bottom: 4px; }
+    .modal-hdr-text .role { color: rgba(46,143,160,0.9); font-size: 0.87rem; font-weight: 500; margin-bottom: 8px; }
+    .modal-hdr-text .dept { color: rgba(255,255,255,0.5); font-size: 0.78rem; }
+    .modal-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; cursor: pointer; transition: background var(--transition);
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.25); }
+    .modal-body { padding: 26px 32px 32px; }
+    .modal-section-label {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 8px; margin-top: 18px;
+    }
+    .modal-bio { font-size: 0.88rem; line-height: 1.75; color: var(--text-muted); }
+    .modal-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .modal-link {
+      padding: 6px 13px; border-radius: 6px; font-size: 0.78rem;
+      border: 1px solid var(--border); color: var(--slate-mid);
+      display: flex; align-items: center; gap: 5px;
+      transition: all var(--transition);
+    }
+    .modal-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+  </style>
+</head>
+<body class="page-body">
+<script src="nav.js"></script>
+<script src="cms.js"></script>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="section-label">Our team</span>
+    <h1>People</h1>
+    <p class="lead">Faculty, researchers, engineers and students working at the intersection of AI and health.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="filter-bar">
+      <input class="search-input" id="searchInput" type="text" placeholder="Search by name, role or keyword…" oninput="renderPeople()" />
+      <div class="filter-chips" id="themeChips"></div>
+    </div>
+    <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
+    <div class="people-grid" id="peopleGrid"></div>
+    <p class="hidden text-center" id="noResults" style="padding:48px 0;color:var(--text-muted)">No matching people found.</p>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="maybeClose(event)">
+  <div class="modal" id="modal">
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+const THEMES_ALL = ['All','FAIR Data','Knowledge Graphs','Federated AI','Clinical NLP','Signal Processing','Precision Medicine','Computational Biology'];
+const GROUP_LABELS = { Faculty:'Faculty', Researchers:'Junior Researchers & Postdocs', Staff:'Research Staff' };
+let people = [], activeTheme = 'All';
+
+(async () => {
+  people = await CMS.load('content/people.yaml');
+  document.getElementById('loading').remove();
+
+  document.getElementById('themeChips').innerHTML = THEMES_ALL.map(t =>
+    `<button class="chip${t==='All'?' active':''}" onclick="setTheme('${t}')">${t}</button>`
+  ).join('');
+
+  renderPeople();
+})();
+
+function setTheme(t) {
+  activeTheme = t;
+  document.querySelectorAll('#themeChips .chip').forEach(c => c.classList.toggle('active', c.textContent===t));
+  renderPeople();
+}
+
+function renderPeople() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const grid = document.getElementById('peopleGrid');
+  grid.innerHTML = '';
+  let total = 0;
+
+  ['Faculty','Researchers','Staff'].forEach(group => {
+    const members = people.filter(p => {
+      if (p.group !== group) return false;
+      const themeOk = activeTheme==='All' || (p.themes||[]).includes(activeTheme);
+      if (!themeOk) return false;
+      return !q || (p.name+p.role+(p.keywords||[]).join(' ')+p.bio).toLowerCase().includes(q);
+    });
+    if (!members.length) return;
+    total += members.length;
+
+    const hdr = document.createElement('div');
+    hdr.className = 'group-header';
+    hdr.innerHTML = `<h3>${GROUP_LABELS[group]}</h3><span class="count">${members.length}</span>`;
+    grid.appendChild(hdr);
+
+    members.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'person-card reveal';
+      card.dataset.delay = i * 45;
+      card.innerHTML = `
+        <div class="person-photo"><span class="person-initials">${CMS.initials(p.name)}</span></div>
+        <div class="person-info">
+          <div class="person-name">${p.name}</div>
+          <div class="person-role">${p.role}</div>
+          <div class="person-kws">${(p.keywords||[]).slice(0,3).map(k=>`<span class="tag tag-muted">${k}</span>`).join('')}</div>
+        </div>`;
+      card.onclick = () => openModal(p);
+      grid.appendChild(card);
+    });
+  });
+
+  document.getElementById('noResults').classList.toggle('hidden', total > 0);
+  CMS.revealNew(grid);
+}
+
+function openModal(p) {
+  const themes = (p.themes||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+  const kws = (p.keywords||[]).map(k=>`<span class="tag tag-muted">${k}</span>`).join('');
+  const links = [];
+  if (p.email) links.push(`<a class="modal-link" href="mailto:${p.email}">✉ Email</a>`);
+  if (p.orcid) links.push(`<a class="modal-link" href="https://orcid.org/${p.orcid}" target="_blank">🔗 ORCID</a>`);
+  if (p.url)   links.push(`<a class="modal-link" href="${p.url}" target="_blank">🌐 Website</a>`);
+  links.push(`<a class="modal-link" href="publications.html">📄 Publications</a>`);
+
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-header">
+      <div class="modal-avatar">${CMS.initials(p.name)}</div>
+      <div class="modal-hdr-text">
+        <h3>${p.name}</h3>
+        <div class="role">${p.role}</div>
+        <div class="dept">Dept. of Advanced Computing Sciences · Maastricht University</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">About</div>
+      <p class="modal-bio">${p.bio}</p>
+      ${themes ? `<div class="modal-section-label">Research themes</div><div style="display:flex;gap:6px;flex-wrap:wrap">${themes}</div>` : ''}
+      <div class="modal-section-label">Keywords</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${kws}</div>
+      <div class="modal-section-label">Links</div>
+      <div class="modal-links">${links.join('')}</div>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+function maybeClose(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>

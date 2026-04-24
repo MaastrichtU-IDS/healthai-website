@@ -1,0 +1,39 @@
+name: Health AI Research Group
+short: HAIR Group
+dept: Department of Advanced Computing Sciences
+university: Maastricht University
+email: hair@maastrichtuniversity.nl
+address: Universiteitssingel 40, 6229 ER Maastricht, the Netherlands
+pure_url: https://cris.maastrichtuniversity.nl
+um_url: https://www.maastrichtuniversity.nl
+dacs_url: https://www.dacs.unimaas.nl
+
+tagline: AI for a healthier world
+tagline_italic: healthier
+hero_body: >
+  We develop artificial intelligence and data science methods that transform
+  how healthcare knowledge is created, shared, and applied —
+  from the clinic to the genome.
+
+stats:
+  - value: "10"
+    label: Faculty members
+  - value: "30+"
+    label: Researchers & staff
+  - value: "€12M+"
+    label: Active funding
+  - value: "200+"
+    label: Publications
+
+nav_links:
+  - label: Research
+    href: research.html
+  - label: People
+    href: people.html
+  - label: Publications
+    href: publications.html
+  - label: Media
+    href: media.html
+  - label: Students
+    href: students.html
+    cta: true

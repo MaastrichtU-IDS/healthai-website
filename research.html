@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research · HAIR Group · Maastricht University</title>
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .theme-subnav {
+      position: sticky; top: var(--nav-h); z-index: 10;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+    }
+    .theme-subnav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
+      display: flex; gap: 0;
+    }
+    .theme-subnav a {
+      padding: 13px 18px; font-size: 0.84rem; font-weight: 500;
+      color: var(--text-muted); border-bottom: 2px solid transparent;
+      margin-bottom: -1px; white-space: nowrap; transition: all var(--transition);
+    }
+    .theme-subnav a:hover { color: var(--slate); }
+    .theme-subnav a.active { color: var(--slate); border-bottom-color: var(--slate); font-weight: 600; }
+
+    .theme-block { padding: 72px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 120px; }
+    .theme-block.alt { background: var(--bg-alt); }
+    .theme-inner { display: grid; grid-template-columns: 300px 1fr; gap: 64px; align-items: start; }
+    .theme-sidebar { position: sticky; top: calc(var(--nav-h) + 54px); }
+    .theme-num { font-family: 'Fraunces', serif; font-size: 5rem; font-weight: 700; color: var(--slate-light); line-height: 1; margin-bottom: 10px; }
+    .theme-sidebar h2 { font-size: 1.4rem; margin-bottom: 12px; }
+    .theme-sidebar p { font-size: 0.88rem; line-height: 1.75; margin-bottom: 18px; }
+    .lead-chips { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .lead-chip {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px; border-radius: 7px; background: var(--white);
+      border: 1px solid var(--border); font-size: 0.83rem;
+    }
+    .lead-dot {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: var(--slate); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.62rem; font-weight: 700;
+    }
+
+    .proj-mini { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--card-shadow); transition: all var(--transition); }
+    .proj-mini:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+    .proj-mini h4 { font-size: 0.92rem; margin-bottom: 7px; }
+    .proj-mini p  { font-size: 0.81rem; margin-bottom: 12px; }
+    .proj-mini-meta { font-size: 0.74rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 3px; padding-top: 10px; border-top: 1px solid var(--border); }
+
+    .all-proj-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--card-shadow); transition: all var(--transition); }
+    .all-proj-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+    .all-proj-card h4 { font-size: 0.95rem; margin-bottom: 8px; }
+    .all-proj-card p  { font-size: 0.84rem; margin-bottom: 14px; }
+    .proj-detail { font-size: 0.76rem; color: var(--text-muted); padding-top: 12px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 3px; }
+
+    @media (max-width: 860px) {
+      .theme-inner { grid-template-columns: 1fr; gap: 28px; }
+      .theme-sidebar { position: static; }
+    }
+  </style>
+</head>
+<body class="page-body">
+<script src="nav.js"></script>
+<script src="cms.js"></script>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="section-label">What we investigate</span>
+    <h1>Research</h1>
+    <p class="lead">Six interconnected themes advancing health AI — from data infrastructure to clinical translation.</p>
+  </div>
+</div>
+
+<nav class="theme-subnav" id="themeSubnav">
+  <div class="theme-subnav-inner" id="themeNavLinks"></div>
+</nav>
+
+<div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
+<div id="themesContainer"></div>
+
+<section id="projects" style="scroll-margin-top:110px">
+  <div class="container">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+      <div>
+        <span class="section-label">Full list</span>
+        <h2>All projects</h2>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <input class="search-input" id="projSearch" type="text" placeholder="Search projects…" oninput="filterProjects()" />
+      <div class="filter-chips" id="projChips"></div>
+    </div>
+    <div class="grid-3" id="allProjects"></div>
+  </div>
+</section>
+
+<script>
+(async () => {
+  const data = await CMS.load('content/research.yaml');
+  document.getElementById('loading').remove();
+
+  /* Theme subnav */
+  document.getElementById('themeNavLinks').innerHTML = data.themes.map(t =>
+    `<a href="#theme-${t.id}">${t.number} ${t.title}</a>`
+  ).join('');
+
+  /* Theme sections */
+  document.getElementById('themesContainer').innerHTML = data.themes.map((t,i) => {
+    const themeProjs = data.projects.filter(p =>
+      t.projects.some(tp => p.title.toLowerCase().startsWith(tp.split(' ')[0].toLowerCase()))
+    ).slice(0,3);
+
+    return `
+    <div class="theme-block${i%2===1?' alt':''}" id="theme-${t.id}">
+      <div class="container">
+        <div class="theme-inner">
+          <div class="theme-sidebar reveal">
+            <div class="theme-num">${t.number}</div>
+            <h2>${t.title}</h2>
+            <p>${t.desc.trim()}</p>
+            <div class="lead-chips">
+              ${t.leads.map(l=>`<div class="lead-chip"><div class="lead-dot">${CMS.initials(l)}</div><span>${l}</span></div>`).join('')}
+            </div>
+          </div>
+          <div class="reveal" data-delay="100">
+            <p style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-muted);margin-bottom:16px;font-weight:600">Projects</p>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              ${themeProjs.length ? themeProjs.map(p=>`
+                <div class="proj-mini">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+                    <span class="tag">${p.theme}</span>
+                    <span class="tag ${p.status==='Active'?'tag-active':'tag-muted'}" style="font-size:0.7rem">${p.status}</span>
+                  </div>
+                  <h4>${p.title}</h4>
+                  <p>${p.desc.trim()}</p>
+                  <div class="proj-mini-meta">
+                    <span>${p.funder} · ${p.amount}</span>
+                    <span>${p.period} · ${p.team.join(', ')}</span>
+                  </div>
+                </div>`).join('')
+              : `<p style="color:var(--text-muted);font-size:0.86rem">Projects coming soon.</p>`}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  CMS.revealNew(document.getElementById('themesContainer'));
+
+  /* All projects */
+  const tags = ['All', ...new Set(data.projects.map(p=>p.theme))];
+  document.getElementById('projChips').innerHTML = tags.map(t=>
+    `<button class="chip${t==='All'?' active':''}" onclick="setTag('${t}')">${t}</button>`
+  ).join('');
+
+  window._projects = data.projects;
+  filterProjects();
+
+  /* Sticky active subnav */
+  const themeEls = data.themes.map(t => document.getElementById('theme-'+t.id));
+  const navLinks = document.querySelectorAll('.theme-subnav a');
+  window.addEventListener('scroll', () => {
+    const top = 64 + 45 + 80;
+    let cur = 0;
+    themeEls.forEach((el,i) => { if (el && el.getBoundingClientRect().top < top + 60) cur = i; });
+    navLinks.forEach((a,i) => a.classList.toggle('active', i===cur));
+  });
+})();
+
+let activeTag = 'All';
+function setTag(t) {
+  activeTag = t;
+  document.querySelectorAll('#projChips .chip').forEach(c=>c.classList.toggle('active',c.textContent===t));
+  filterProjects();
+}
+function filterProjects() {
+  const q = document.getElementById('projSearch').value.toLowerCase();
+  const filtered = (window._projects||[]).filter(p => {
+    const tagOk = activeTag==='All' || p.theme===activeTag;
+    const qOk = !q || (p.title+p.desc+p.team.join(' ')).toLowerCase().includes(q);
+    return tagOk && qOk;
+  });
+  document.getElementById('allProjects').innerHTML = filtered.map(p=>`
+    <div class="all-proj-card reveal">
+      <div style="display:flex;justify-content:space-between;margin-bottom:14px">
+        <span class="tag">${p.theme}</span>
+        <span class="tag ${p.status==='Active'?'tag-active':'tag-muted'}">${p.status}</span>
+      </div>
+      <h4>${p.title}</h4>
+      <p>${p.desc.trim()}</p>
+      <div class="proj-detail">
+        <span>${p.funder} · ${p.amount}</span>
+        <span>${p.period}</span>
+        <span>${p.team.join(', ')}</span>
+      </div>
+    </div>`).join('');
+  CMS.revealNew(document.getElementById('allProjects'));
+}
+</script>
+</body>
+</html>

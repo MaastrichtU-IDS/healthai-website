@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Students · HAIR Group · Maastricht University</title>
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .sticky-subnav {
+      position: sticky; top: var(--nav-h); z-index: 10;
+      background: var(--white); border-bottom: 1px solid var(--border); overflow-x: auto;
+    }
+    .sticky-subnav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; display: flex; }
+    .sticky-subnav a {
+      padding: 13px 16px; font-size: 0.84rem; font-weight: 500;
+      color: var(--text-muted); border-bottom: 2px solid transparent;
+      margin-bottom: -1px; white-space: nowrap; transition: all var(--transition);
+    }
+    .sticky-subnav a:hover { color: var(--slate); }
+    .sticky-subnav a.active { color: var(--slate); border-bottom-color: var(--slate); font-weight: 600; }
+
+    /* Philosophy */
+    .phil-row { display:flex; gap:24px; align-items:flex-start; padding:22px 0; border-bottom:1px solid var(--border); }
+    .phil-icon { width:46px; height:46px; border-radius:10px; flex-shrink:0; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+    .phil-row h4 { font-size:0.97rem; margin-bottom:6px; }
+    .phil-row p  { font-size:0.88rem; }
+
+    /* Showcase cards */
+    .showcase-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px; box-shadow:var(--card-shadow); transition:all var(--transition); }
+    .showcase-card:hover { box-shadow:var(--card-shadow-hover); transform:translateY(-2px); }
+    .showcase-card h4 { font-size:0.93rem; margin-bottom:7px; }
+    .showcase-card p  { font-size:0.83rem; margin-bottom:12px; }
+    .showcase-meta { font-size:0.75rem; color:var(--text-muted); }
+
+    /* Open project cards */
+    .open-proj { background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--card-shadow); transition:all var(--transition); }
+    .open-proj:hover { border-color:var(--blue); box-shadow:var(--card-shadow-hover); }
+    .open-proj-head { padding:18px 20px 0; display:flex; justify-content:space-between; align-items:flex-start; }
+    .open-proj-body { padding:12px 20px 20px; }
+    .open-proj-body h4 { font-size:0.92rem; margin-bottom:7px; }
+    .open-proj-body p  { font-size:0.82rem; margin-bottom:13px; }
+    .proj-supervisor { font-size:0.76rem; color:var(--text-muted); display:flex; align-items:center; gap:7px; }
+    .sup-dot { width:22px; height:22px; border-radius:50%; background:var(--slate); color:white; font-size:0.55rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+    /* Programme cards */
+    .prog-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--card-shadow); transition:all var(--transition); }
+    .prog-card:hover { box-shadow:var(--card-shadow-hover); transform:translateY(-2px); }
+    .prog-card h4 { font-size:0.97rem; margin-bottom:8px; }
+    .prog-card p  { font-size:0.84rem; margin-bottom:14px; }
+    .prog-meta { font-size:0.76rem; color:var(--text-muted); display:flex; flex-direction:column; gap:4px; }
+
+    /* PhD timeline */
+    .phd-steps { display:flex; flex-direction:column; gap:0; }
+    .phd-step { display:grid; grid-template-columns:44px 1fr; gap:18px; padding-bottom:28px; position:relative; }
+    .phd-step:not(:last-child)::before { content:''; position:absolute; left:20px; top:42px; bottom:0; width:1.5px; background:var(--border); }
+    .step-num { width:42px; height:42px; border-radius:50%; background:var(--slate); color:white; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; font-size:1rem; flex-shrink:0; }
+    .phd-step h4 { font-size:0.95rem; margin-bottom:6px; padding-top:8px; }
+    .phd-step p  { font-size:0.86rem; }
+
+    /* Courses */
+    .course-row { display:grid; grid-template-columns:1fr auto; gap:16px; padding:17px 0; border-bottom:1px solid var(--border); align-items:center; }
+    .course-code { font-size:0.72rem; font-weight:600; color:var(--blue); font-family:monospace; margin-bottom:2px; }
+    .course-title { font-family:'Fraunces',serif; font-size:0.95rem; font-weight:700; color:var(--slate); margin-bottom:3px; }
+    .course-meta { font-size:0.78rem; color:var(--text-muted); }
+
+    .req-item { display:flex; gap:10px; padding:9px 0; border-bottom:1px solid var(--border); font-size:0.87rem; }
+    .req-item::before { content:'✦'; color:var(--blue); flex-shrink:0; font-size:0.75rem; padding-top:2px; }
+  </style>
+</head>
+<body class="page-body">
+<script src="nav.js"></script>
+<script src="cms.js"></script>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="section-label">For students</span>
+    <h1>Study with us</h1>
+    <p class="lead">Hands-on research experience, inspiring supervision and a direct path from classroom to cutting-edge health AI.</p>
+  </div>
+</div>
+
+<nav class="sticky-subnav">
+  <div class="sticky-subnav-inner">
+    <a href="#philosophy" class="active">Our philosophy</a>
+    <a href="#showcases">Student showcases</a>
+    <a href="#open-projects">Open projects</a>
+    <a href="#programmes">Programmes</a>
+    <a href="#phd">PhD positions</a>
+    <a href="#courses">Courses</a>
+  </div>
+</nav>
+
+<div class="loading" id="loading" style="padding:80px 0"><div class="spinner"></div> Loading…</div>
+<div id="studentPage" class="hidden">
+
+<!-- Philosophy -->
+<section id="philosophy" style="scroll-margin-top:120px">
+  <div class="container" style="max-width:820px">
+    <div class="section-header">
+      <span class="section-label">How we work with students</span>
+      <h2>Our teaching philosophy</h2>
+      <p>We believe the best way to learn AI is to build it — on real problems, with real data, alongside researchers who care.</p>
+    </div>
+    <div id="philList"></div>
+  </div>
+</section>
+
+<!-- Showcases -->
+<section id="showcases" class="alt" style="scroll-margin-top:120px">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Alumni work</span>
+      <h2>Student research highlights</h2>
+      <p>Outstanding thesis and project work by past and current students of the group.</p>
+    </div>
+    <div class="grid-3" id="showcaseGrid"></div>
+  </div>
+</section>
+
+<!-- Open projects -->
+<section id="open-projects" style="scroll-margin-top:120px">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:24px">
+      <div>
+        <span class="section-label">Get involved</span>
+        <h2>Open student projects</h2>
+      </div>
+      <div class="filter-chips" id="levelChips"></div>
+    </div>
+    <div class="grid-3" id="openProjGrid"></div>
+    <div style="margin-top:36px;text-align:center;padding:32px;background:var(--bg-alt);border-radius:var(--radius-lg);border:1px solid var(--border)">
+      <p style="margin-bottom:16px;font-size:0.94rem">Don't see a perfect fit? We welcome self-proposed projects aligned with our research themes.</p>
+      <a href="mailto:hair@maastrichtuniversity.nl" class="btn btn-primary">Propose your own project</a>
+    </div>
+  </div>
+</section>
+
+<!-- Programmes -->
+<section id="programmes" class="alt" style="scroll-margin-top:120px">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Study at Maastricht</span>
+      <h2>Relevant programmes</h2>
+      <p>These UM programmes provide the strongest foundation for research with the HAIR Group.</p>
+    </div>
+    <div class="grid-3" id="progGrid"></div>
+  </div>
+</section>
+
+<!-- PhD -->
+<section id="phd" style="scroll-margin-top:120px">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Doctoral research</span>
+      <h2>Applying for a PhD position</h2>
+      <p>PhD positions are advertised on the UM Vacancies portal and on academictransfer.nl. Here is what the process looks like.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start">
+      <div class="phd-steps" id="phdSteps"></div>
+      <div>
+        <div class="card">
+          <div class="card-body">
+            <h4 style="margin-bottom:14px">What we look for</h4>
+            <div id="reqList"></div>
+            <div class="divider"></div>
+            <h4 style="margin-bottom:10px">Compensation</h4>
+            <p id="salaryText" style="font-size:0.86rem"></p>
+            <div class="divider"></div>
+            <a href="https://jobs.maastrichtuniversity.nl" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">View open PhD vacancies →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Courses -->
+<section id="courses" class="alt" style="scroll-margin-top:120px">
+  <div class="container" style="max-width:820px">
+    <div class="section-header">
+      <span class="section-label">Teaching</span>
+      <h2>Courses we teach</h2>
+      <p>HAIR Group members are involved in the following courses at Maastricht University.</p>
+    </div>
+    <div id="courseList"></div>
+  </div>
+</section>
+
+</div><!-- #studentPage -->
+
+<script>
+let openProjects = [], activeLevel = 'All';
+
+(async () => {
+  const data = await CMS.load('content/students.yaml');
+  document.getElementById('loading').remove();
+  document.getElementById('studentPage').classList.remove('hidden');
+
+  /* Philosophy */
+  document.getElementById('philList').innerHTML = data.philosophy.map((p,i)=>`
+    <div class="phil-row reveal" data-delay="${i*60}">
+      <div class="phil-icon">${p.icon}</div>
+      <div><h4>${p.title}</h4><p>${p.text.trim()}</p></div>
+    </div>`).join('');
+
+  /* Showcases */
+  document.getElementById('showcaseGrid').innerHTML = data.showcases.map((s,i)=>`
+    <div class="showcase-card reveal" data-delay="${i*55}">
+      <div style="display:flex;gap:6px;margin-bottom:12px">
+        <span class="level-badge ${CMS.levelClass(s.level)}">${s.level}</span>
+        <span class="tag tag-muted">${s.year}</span>
+      </div>
+      <h4>${s.title}</h4>
+      <p>${s.desc.trim()}</p>
+      <div class="showcase-meta">👤 ${s.student} · Supervisor: ${s.supervisor}</div>
+    </div>`).join('');
+
+  /* Open projects */
+  openProjects = data.open_projects;
+  const levels = ['All', ...new Set(openProjects.map(p=>p.level))];
+  document.getElementById('levelChips').innerHTML = levels.map(l=>
+    `<button class="chip${l==='All'?' active':''}" onclick="setLevel('${l}')">${l}</button>`
+  ).join('');
+  renderOpenProjects();
+
+  /* Programmes */
+  document.getElementById('progGrid').innerHTML = data.programmes.map((p,i)=>`
+    <div class="prog-card reveal" data-delay="${i*55}">
+      <div style="margin-bottom:12px"><span class="level-badge ${CMS.levelClass(p.level)}">${p.level}</span></div>
+      <h4>${p.name}</h4>
+      <p>${p.desc.trim()}</p>
+      <div class="prog-meta">
+        <span>🏛 ${p.dept}</span>
+        <span>📅 ${p.duration} · ${p.language}</span>
+      </div>
+      <a href="${p.url}" target="_blank" class="btn btn-secondary btn-sm" style="margin-top:16px">Programme details →</a>
+    </div>`).join('');
+
+  /* PhD steps */
+  document.getElementById('phdSteps').innerHTML = data.phd_steps.map(s=>`
+    <div class="phd-step reveal">
+      <div class="step-num">${s.number}</div>
+      <div><h4>${s.title}</h4><p>${s.text.trim()}</p></div>
+    </div>`).join('');
+
+  /* Requirements */
+  document.getElementById('reqList').innerHTML = data.phd_requirements.map(r=>`
+    <div class="req-item">${r}</div>`).join('');
+
+  /* Salary */
+  document.getElementById('salaryText').textContent = data.phd_salary.trim();
+
+  /* Courses */
+  document.getElementById('courseList').innerHTML = data.courses.map((c,i)=>`
+    <div class="course-row reveal" data-delay="${i*35}">
+      <div>
+        <div class="course-code">${c.code}</div>
+        <div class="course-title">${c.title}</div>
+        <div class="course-meta">${c.staff} · ${c.period}</div>
+        <div class="course-meta">${c.desc}</div>
+      </div>
+      <span class="level-badge ${CMS.levelClass(c.level)}">${c.level}</span>
+    </div>`).join('');
+
+  CMS.revealNew(document.getElementById('studentPage'));
+
+  /* Subnav active state */
+  const sects = ['philosophy','showcases','open-projects','programmes','phd','courses'];
+  const navAs = document.querySelectorAll('.sticky-subnav a');
+  window.addEventListener('scroll', () => {
+    let cur = sects[0];
+    sects.forEach(id => { const el=document.getElementById(id); if(el&&el.getBoundingClientRect().top<128) cur=id; });
+    navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href')==='#'+cur));
+  });
+})();
+
+function setLevel(l) {
+  activeLevel = l;
+  document.querySelectorAll('#levelChips .chip').forEach(c=>c.classList.toggle('active',c.textContent===l));
+  renderOpenProjects();
+}
+
+function renderOpenProjects() {
+  const filtered = openProjects.filter(p => activeLevel==='All' || p.level===activeLevel);
+  document.getElementById('openProjGrid').innerHTML = filtered.map((p,i)=>`
+    <div class="open-proj reveal" data-delay="${i*50}">
+      <div class="open-proj-head">
+        <span class="level-badge ${CMS.levelClass(p.level)}">${p.level}</span>
+        <span class="tag">${p.theme}</span>
+      </div>
+      <div class="open-proj-body">
+        <h4>${p.title}</h4>
+        <p>${p.desc.trim()}</p>
+        <div class="proj-supervisor">
+          <div class="sup-dot">${CMS.initials(p.supervisor)}</div>
+          <span>Supervisor: ${p.supervisor}</span>
+        </div>
+        <div style="margin-top:12px">
+          <a href="mailto:hair@maastrichtuniversity.nl" class="btn btn-primary btn-sm">Express interest →</a>
+        </div>
+      </div>
+    </div>`).join('');
+  CMS.revealNew(document.getElementById('openProjGrid'));
+}
+</script>
+</body>
+</html>

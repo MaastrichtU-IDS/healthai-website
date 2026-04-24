@@ -1,0 +1,131 @@
+stats:
+  total: "200+"
+  citations: "4,200+"
+  h_index: "34"
+  this_year: "18"
+  this_year_label: "Published in 2025"
+
+pure_notice: >
+  This is a curated selection. For the complete live record visit our
+  PURE research portal — full API integration coming soon.
+
+publications:
+  - year: 2025
+    type: Journal
+    title: "Federated Learning on Heterogeneous Clinical Data: A Systematic Review and Benchmark"
+    authors: "Urovi V., Sun C., Dumontier M., Liang A., Celebi R."
+    venue: "Nature Digital Medicine, 8(1):42"
+    doi: "10.1038/s41746-025-01234-5"
+    tags: [Federated AI, Review]
+
+  - year: 2025
+    type: Journal
+    title: "FAIR Principles in Practice: Lessons from Building a Pan-European Health Knowledge Graph"
+    authors: "Dumontier M., Celebi R., Brewster C., Santos M."
+    venue: "Journal of Biomedical Informatics, 152:104612"
+    doi: "10.1016/j.jbi.2025.104612"
+    tags: [FAIR Data, Knowledge Graphs]
+
+  - year: 2025
+    type: Conference
+    title: "Differential Privacy Budgeting for Multi-Round Federated Learning in Rare Disease Settings"
+    authors: "Urovi V., Liang A., Sun C."
+    venue: "Proceedings of ICLR 2025"
+    doi: ""
+    tags: [Federated AI, Privacy]
+
+  - year: 2025
+    type: Conference
+    title: "MedGraph-NL: A Dutch Biomedical Knowledge Graph with 12M Triples"
+    authors: "Celebi R., Dumontier M., Sun C."
+    venue: "Proceedings of ISWC 2025, pp. 118–134"
+    doi: ""
+    tags: [Knowledge Graphs, NLP]
+
+  - year: 2025
+    type: Preprint
+    title: "Foundation Models for Clinical ECG Interpretation: A Rigorous Evaluation Framework"
+    authors: "Bonizzi P., Vega C., Zarkogianni K."
+    venue: "arXiv:2503.14821"
+    doi: ""
+    tags: [Signal Processing, LLMs]
+
+  - year: 2024
+    type: Journal
+    title: "Deep Learning for Real-Time ECG-based Atrial Fibrillation Detection in Wearables"
+    authors: "Bonizzi P., Nanda R., Zarkogianni K., Vega C."
+    venue: "npj Digital Medicine, 7:198"
+    doi: "10.1038/s41746-024-01198-4"
+    tags: [Signal Processing]
+
+  - year: 2024
+    type: Conference
+    title: "Large Language Models for Dutch Clinical Text: Adaptation, Evaluation and Privacy"
+    authors: "Sun C., Celebi R., Urovi V., Shaikh O."
+    venue: "Proceedings of EMNLP 2024, pp. 4821–4835"
+    doi: ""
+    tags: [NLP, Privacy]
+
+  - year: 2024
+    type: Journal
+    title: "Multi-Omics Integration with Graph Neural Networks for IBD Biomarker Discovery"
+    authors: "Cavill R., Janssen S., Brewster C."
+    venue: "Bioinformatics, 40(4):btae192"
+    doi: "10.1093/bioinformatics/btae192"
+    tags: [Bioinformatics, Graph ML]
+
+  - year: 2024
+    type: Journal
+    title: "Personalised Insulin Dosing with Continuous Glucose Monitoring and Knowledge Graphs"
+    authors: "Zarkogianni K., Kasimati A., Nanda R."
+    venue: "Diabetes Care, 47(3):e48–e56"
+    doi: "10.2337/dc24-0891"
+    tags: [Precision Medicine, Diabetes]
+
+  - year: 2024
+    type: Conference
+    title: "FedRare: Federated Knowledge Graph Completion for Rare Disease Diagnosis"
+    authors: "Celebi R., Liang A., Dumontier M."
+    venue: "Proceedings of AMIA 2024 Annual Symposium"
+    doi: ""
+    tags: [FAIR Data, Federated AI]
+
+  - year: 2023
+    type: Journal
+    title: "A FAIR Data Model for Electronic Health Records Across European Hospital Networks"
+    authors: "Dumontier M., Celebi R., Urovi V., et al."
+    venue: "Lancet Digital Health, 5(10):e682–e692"
+    doi: "10.1016/S2589-7500(23)00158-7"
+    tags: [FAIR Data, EHR]
+
+  - year: 2023
+    type: Journal
+    title: "Automated ICD-10 Coding from Dutch Discharge Summaries Using Transformer Models"
+    authors: "Sun C., Shaikh O."
+    venue: "JAMIA, 30(11):1891–1902"
+    doi: "10.1093/jamia/ocad142"
+    tags: [NLP, ICD Coding]
+
+  - year: 2023
+    type: Conference
+    title: "Privacy-Preserving Data Synthesis for Clinical NLP Benchmarking"
+    authors: "Urovi V., Sun C., Liang A."
+    venue: "Proceedings of ACL 2023 Findings"
+    doi: ""
+    tags: [Privacy, NLP]
+
+  - year: 2022
+    type: Journal
+    title: "The Personal Health Train: A Federated Infrastructure for Distributed Health Research"
+    authors: "Urovi V., Dumontier M., Celebi R., Sun C., et al."
+    venue: "Nature Methods, 19:1156–1164"
+    doi: "10.1038/s41592-022-01553-z"
+    tags: [Federated AI, Infrastructure]
+
+  - year: 2022
+    type: Journal
+    title: "FAIR Digital Objects for Health Data: Implementation and Evaluation"
+    authors: "Dumontier M., Celebi R."
+    venue: "Data Intelligence, 4(2):218–238"
+    doi: "10.1162/dint_a_00128"
+    tags: [FAIR Data]

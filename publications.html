@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publications · HAIR Group · Maastricht University</title>
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .pub-stats {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 1px; background: var(--border);
+      border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 40px;
+    }
+    .pub-stat { background: var(--white); padding: 26px 22px; }
+    .pub-stat:first-child { background: var(--slate); }
+    .pub-stat-val { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 700; color: var(--slate); line-height: 1; }
+    .pub-stat:first-child .pub-stat-val { color: var(--white); }
+    .pub-stat-lbl { font-size: 0.76rem; color: var(--text-muted); margin-top: 6px; }
+    .pub-stat:first-child .pub-stat-lbl { color: rgba(255,255,255,0.5); }
+
+    .pure-notice {
+      background: var(--blue-lighter); border: 1px solid rgba(46,143,160,0.2);
+      border-radius: var(--radius); padding: 13px 18px;
+      font-size: 0.84rem; color: var(--blue-mid);
+      display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
+    }
+
+    .year-heading {
+      font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700;
+      color: var(--slate); margin: 36px 0 4px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .year-heading::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    .pub-row {
+      display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+      padding: 22px 0; border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+    .pub-row:hover { background: var(--bg-alt); margin: 0 -18px; padding-left: 18px; padding-right: 18px; border-radius: 8px; }
+    .pub-year-lbl { font-family: 'Fraunces', serif; font-size: 0.9rem; font-weight: 700; color: var(--blue-mid); text-align: right; padding-top: 2px; }
+    .pub-title-link { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: var(--slate); line-height: 1.35; display: block; margin-bottom: 5px; transition: color var(--transition); }
+    .pub-title-link:hover { color: var(--blue); }
+    .pub-authors { font-size: 0.81rem; color: var(--text-muted); margin-bottom: 4px; }
+    .pub-venue   { font-size: 0.79rem; font-style: italic; color: var(--text-light); margin-bottom: 8px; }
+    .pub-actions { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
+    .pub-action {
+      padding: 4px 11px; border-radius: 5px; font-size: 0.74rem; font-weight: 500;
+      border: 1px solid var(--border); color: var(--text-muted);
+      transition: all var(--transition); display: inline-flex; align-items: center; gap: 4px;
+    }
+    .pub-action:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+
+    @media (max-width: 580px) { .pub-stats { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body class="page-body">
+<script src="nav.js"></script>
+<script src="cms.js"></script>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="section-label">Research output</span>
+    <h1>Publications</h1>
+    <p class="lead">Peer-reviewed articles, conference papers and preprints from the HAIR Group.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
+    <div id="pubPage" class="hidden">
+      <div class="pub-stats" id="pubStats"></div>
+      <div class="pure-notice">
+        🔗 This is a curated selection.
+        For the complete live record see our <a href="https://cris.maastrichtuniversity.nl" target="_blank" style="font-weight:600;color:var(--blue)">PURE research portal</a> — API integration coming soon.
+      </div>
+      <div class="filter-bar">
+        <input class="search-input" id="pubSearch" type="text" placeholder="Search title, author or keyword…" oninput="renderPubs()" />
+        <div class="filter-chips" id="typeChips"></div>
+      </div>
+      <div id="pubList"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+let allPubs = [], activeType = 'All';
+
+(async () => {
+  const data = await CMS.load('content/publications.yaml');
+  allPubs = data.publications;
+
+  /* Stats */
+  const s = data.stats;
+  document.getElementById('pubStats').innerHTML = `
+    <div class="pub-stat"><div class="pub-stat-val">${s.total}</div><div class="pub-stat-lbl">Total publications</div></div>
+    <div class="pub-stat"><div class="pub-stat-val">${s.citations}</div><div class="pub-stat-lbl">Total citations</div></div>
+    <div class="pub-stat"><div class="pub-stat-val">${s.h_index}</div><div class="pub-stat-lbl">h-index (group)</div></div>
+    <div class="pub-stat"><div class="pub-stat-val">${s.this_year}</div><div class="pub-stat-lbl">${s.this_year_label}</div></div>`;
+
+  const types = ['All', ...new Set(allPubs.map(p=>p.type))];
+  document.getElementById('typeChips').innerHTML = types.map(t=>
+    `<button class="chip${t==='All'?' active':''}" onclick="setType('${t}')">${t}</button>`
+  ).join('');
+
+  document.getElementById('loading').remove();
+  document.getElementById('pubPage').classList.remove('hidden');
+  renderPubs();
+})();
+
+function setType(t) {
+  activeType = t;
+  document.querySelectorAll('#typeChips .chip').forEach(c=>c.classList.toggle('active',c.textContent===t));
+  renderPubs();
+}
+
+function renderPubs() {
+  const q = document.getElementById('pubSearch').value.toLowerCase();
+  const filtered = allPubs.filter(p => {
+    const typeOk = activeType==='All' || p.type===activeType;
+    const qOk = !q || (p.title+p.authors+(p.tags||[]).join(' ')).toLowerCase().includes(q);
+    return typeOk && qOk;
+  });
+
+  const byYear = {};
+  filtered.forEach(p => { if (!byYear[p.year]) byYear[p.year]=[]; byYear[p.year].push(p); });
+  const years = Object.keys(byYear).sort((a,b)=>b-a);
+
+  document.getElementById('pubList').innerHTML = years.length ? years.map(y=>`
+    <div>
+      <div class="year-heading">${y}</div>
+      ${byYear[y].map(p=>`
+        <div class="pub-row reveal">
+          <div class="pub-year-lbl">${p.type==='Preprint'?'<span style="font-size:0.64rem;font-family:monospace;color:var(--text-light)">pre</span>':''}</div>
+          <div>
+            <a class="pub-title-link" href="${p.doi?'https://doi.org/'+p.doi:'#'}" target="_blank">${p.title}</a>
+            <div class="pub-authors">${p.authors}</div>
+            <div class="pub-venue">${p.venue}</div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">
+              ${(p.tags||[]).map(t=>`<span class="tag tag-muted">${t}</span>`).join('')}
+            </div>
+            <div class="pub-actions">
+              ${p.doi?`<a class="pub-action" href="https://doi.org/${p.doi}" target="_blank">🔗 DOI</a>`:''}
+              <a class="pub-action" href="#">📄 PDF</a>
+              <a class="pub-action" href="#">📋 Cite</a>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>`).join('')
+  : '<p style="text-align:center;padding:48px;color:var(--text-muted)">No publications match your search.</p>';
+
+  CMS.revealNew(document.getElementById('pubList'));
+}
+</script>
+</body>
+</html>

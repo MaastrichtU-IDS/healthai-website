@@ -1,0 +1,172 @@
+themes:
+  - id: fair
+    number: "01"
+    title: FAIR Data & Knowledge Graphs
+    icon: "◈"
+    leads: [Michel Dumontier, Remzi Celebi]
+    desc: >
+      We build interoperable, FAIR-compliant biomedical data ecosystems that enable
+      machines to find, access, interoperate and reuse health data at scale. Our
+      knowledge graph infrastructure links diseases, drugs, genes and clinical
+      guidelines into actionable reasoning networks.
+    projects: [FAIR Health Knowledge Base, Rare Disease FAIR Portal, FAIR Metrics Toolchain]
+
+  - id: federated
+    number: "02"
+    title: Federated & Privacy-Preserving AI
+    icon: "⊞"
+    leads: [Visara Urovi, Chang Sun]
+    desc: >
+      Sensitive health data cannot simply be pooled. We develop federated learning
+      architectures that allow AI models to learn from distributed patient data across
+      hospitals and countries — without the data ever leaving its source. Our work
+      covers algorithm design, privacy guarantees and real-world deployment.
+    projects: [Personal Health Train (PHT), Federated Rare Disease AI, Cross-border Privacy Auditing]
+
+  - id: nlp
+    number: "03"
+    title: Clinical NLP & Text Mining
+    icon: "❋"
+    leads: [Chang Sun, Remzi Celebi]
+    desc: >
+      The majority of clinical knowledge lives in free text — discharge letters,
+      radiology reports, clinical notes. We develop NLP and LLM methods to extract
+      structured knowledge from these narratives, automate ICD coding, detect adverse
+      events and build clinical phenotype libraries.
+    projects: [MIMIC-NL Dutch Clinical NLP, Automated ICD-10 Coding, Clinical Phenotype Extraction]
+
+  - id: signals
+    number: "04"
+    title: Biomedical Signal Processing
+    icon: "⌇"
+    leads: [Pietro Bonizzi, Konstantia Zarkogianni]
+    desc: >
+      From the heartbeat to the brainwave, physiological signals contain rich
+      diagnostic information. We design deep learning pipelines for real-time
+      analysis of ECG, EEG and wearable sensor data, targeting clinical-grade
+      accuracy in consumer device settings.
+    projects: [AI-ECG Arrhythmia Detection, Wearable EEG Seizure Monitor, PPG for Hypertension]
+
+  - id: precision
+    number: "05"
+    title: Precision Medicine & Digital Health
+    icon: "◎"
+    leads: [Aikaterina Kasimati, Rohan Nanda, Konstantia Zarkogianni]
+    desc: >
+      One-size-fits-all medicine is giving way to personalised interventions driven
+      by data. We integrate IoT sensor streams, EHR data and knowledge graphs to
+      deliver closed-loop AI systems that adapt recommendations to individual
+      patients in real time.
+    projects: [DiabAI, AI Clinical Decision Support Suite, Smart Readmission Reduction]
+
+  - id: bioinfo
+    number: "06"
+    title: Computational Biology & Bioinformatics
+    icon: "⌬"
+    leads: [Rachel Cavill, Christopher Brewster]
+    desc: >
+      Understanding complex disease requires integrating information across molecular
+      scales. We develop scalable computational workflows for multi-omics integration —
+      linking genomics, proteomics and metabolomics data — to identify biomarkers and
+      advance drug target discovery.
+    projects: [Multi-Omics Integration Platform, IBD Biomarker Discovery, Systems Pharmacology AI]
+
+projects:
+  - title: FAIR Health Knowledge Base
+    theme: FAIR Data
+    desc: >
+      FAIR-compliant biomedical knowledge graph linking diseases, drugs, genes and
+      clinical guidelines to power downstream AI reasoning.
+    team: [Michel Dumontier, Remzi Celebi]
+    funder: European Commission (H2020)
+    amount: "€3.4M"
+    period: "2021–2025"
+    status: Active
+
+  - title: Personal Health Train (PHT)
+    theme: Federated AI
+    desc: >
+      Federated infrastructure allowing AI algorithms to travel to distributed patient
+      data across Europe, preserving privacy while enabling large-scale health research.
+    team: [Visara Urovi, Chang Sun, Michel Dumontier]
+    funder: Dutch Research Council (NWO)
+    amount: "€2.1M"
+    period: "2022–2026"
+    status: Active
+
+  - title: AI-ECG Arrhythmia Detection
+    theme: Signal Processing
+    desc: >
+      Deep learning models trained on 500,000+ ECG recordings to detect life-threatening
+      arrhythmias in real time via consumer wearable devices.
+    team: [Pietro Bonizzi, Rohan Nanda]
+    funder: ZonMw
+    amount: "€890K"
+    period: "2023–2026"
+    status: Active
+
+  - title: MIMIC-NL Dutch Clinical NLP
+    theme: Clinical NLP
+    desc: >
+      Adapting large language models to Dutch clinical text to automate ICD coding,
+      adverse event detection and phenotyping at scale.
+    team: [Chang Sun, Remzi Celebi]
+    funder: Maastricht UMC+
+    amount: "€450K"
+    period: "2022–2025"
+    status: Active
+
+  - title: DiabAI
+    theme: Precision Medicine
+    desc: >
+      A closed-loop AI system integrating CGM sensor data, lifestyle signals and
+      knowledge graphs to personalise insulin and dietary recommendations.
+    team: [Konstantia Zarkogianni, Aikaterina Kasimati]
+    funder: European Commission (Horizon Europe)
+    amount: "€1.8M"
+    period: "2023–2027"
+    status: Active
+
+  - title: Multi-Omics Integration Platform
+    theme: Computational Biology
+    desc: >
+      Scalable computational workflows integrating genomics, proteomics and
+      metabolomics data to identify biomarkers for complex diseases.
+    team: [Rachel Cavill, Christopher Brewster]
+    funder: NWO
+    amount: "€650K"
+    period: "2021–2024"
+    status: Completed
+
+  - title: Rare Disease FAIR Portal
+    theme: FAIR Data
+    desc: >
+      FAIR data infrastructure for rare disease patient registries across 14 European
+      countries, supporting federated queries and metadata harmonisation.
+    team: [Remzi Celebi, Michel Dumontier]
+    funder: EC Rare Disease Programme
+    amount: "€1.2M"
+    period: "2020–2024"
+    status: Completed
+
+  - title: Smart Readmission Reduction
+    theme: Precision Medicine
+    desc: >
+      AI models predicting 30-day readmission risk, integrated in Maastricht UMC+
+      clinical workflow to support discharge planning decisions.
+    team: [Rohan Nanda]
+    funder: ZonMw
+    amount: "€320K"
+    period: "2022–2024"
+    status: Active
+
+  - title: Wearable EEG Seizure Monitor
+    theme: Signal Processing
+    desc: >
+      Lightweight deep learning pipeline for epileptic seizure detection on
+      low-power wearable EEG devices for home monitoring.
+    team: [Pietro Bonizzi]
+    funder: Epilepsy Fund NL
+    amount: "€280K"
+    period: "2023–2025"
+    status: Active
