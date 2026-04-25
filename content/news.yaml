@@ -97,6 +97,16 @@ talks:
     impactful AI. It argues that AI should function as a public good—reliable, accountable,
     and beneficial to society—while advancing European science.
 podcasts:
+- show: NotebookLM Audio Overview
+  episode: ''
+  title: 'A Minimalist Blueprint for Medical Data: The SULO FOUST Paper'
+  guest: Michel Dumontier
+  duration: 49 min
+  date: 25 Apr 2026
+  icon: 🎙️
+  audio_url: https://zenodo.org/records/19766194/files/SULO_Minimalist_Blueprint_For_Medical_Data.m4a
+  url: https://zenodo.org/records/19766194
+
 - show: The Digital Health Podcast
   episode: Ep. 142
   title: 'AI that respects privacy: building the Personal Health Train'

@@ -113,7 +113,8 @@ let _activeFilter = 'all';
     })),
     ...(data.podcasts||[]).map(p => ({
       type: 'podcast', label: 'Podcast',
-      title: p.title, url: null,
+      title: p.title, url: p.url || null,
+      audio_url: p.audio_url || null,
       meta: [p.show, p.guest, p.date, p.duration].filter(Boolean).join(' · '),
       excerpt: '',
       search: [p.title, p.show, p.guest].join(' '),
@@ -147,6 +148,7 @@ function renderItems() {
         <div class="item-title">${h.url ? `<a href="${h.url}" target="_blank" rel="noopener">${h.title}</a>` : h.title}</div>
         <div class="item-meta">${h.meta}</div>
         ${h.excerpt ? `<div class="item-excerpt">${h.excerpt.trim()}</div>` : ''}
+        ${h.audio_url ? `<audio controls preload="none" style="margin-top:8px;width:100%;max-width:480px"><source src="${h.audio_url}" type="audio/mp4"></audio>` : ''}
       </div>
     </div>`).join('');
 }
