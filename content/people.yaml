@@ -715,3 +715,72 @@
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/hercules-panoutsopoulos/"
   work_url: "https://www.maastrichtuniversity.nl/i-panoutsopoulos"
   email: ""
+
+- name: Ankur Lohachab
+  role: Postdoctoral Researcher
+  group: Researchers
+  image_url: "assets/people/ankur-lohachab.jpg"
+  themes: []
+  bio: >
+    Ankur Lohachab is a Postdoctoral Researcher at the Institute of Data Science,
+    Maastricht University, within the Faculty of Science and Engineering. His research
+    focuses on blockchain, distributed computing, formal methods, and applied
+    cryptography, particularly in the development of secure and transparent data-sharing
+    infrastructures for healthcare applications. He is currently working on multiple
+    EU-funded projects, including REALM, where he develops a blockchain-based framework
+    for AI model transparency, and iCARE4CVD, where he is designing a smart consent
+    mechanism for secure and GDPR-compliant medical data sharing.
+  keywords: []
+  orcid: "0000-0002-5291-7860"
+  github: ""
+  google_scholar: "YE0ewKUAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/ankur-lohachab/"
+  work_url: "https://www.maastrichtuniversity.nl/lohachab"
+  email: "ankur.lohachab@maastrichtuniversity.nl"
+
+- name: Vageesh Saxena
+  role: PhD Researcher
+  group: Researchers
+  image_url: "assets/people/vageesh-saxena.jpg"
+  themes: []
+  bio: >
+    I'm a machine learning enthusiast, in the final year of my Ph.D. at Maastricht
+    University's Law & Tech lab, Netherlands, focusing on research in Natural Language
+    Processing and Computer Vision. My work concentrates on exploring multimodal
+    representational learning techniques for authorship identification tasks, to link and
+    connect illegal vendors by analyzing patterns in writing and photmetric styles on
+    online market advertisements.
+  keywords: []
+  orcid: "0009-0001-3282-7737"
+  github: ""
+  google_scholar: "fVLj_hsAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/vageesh-saxena/"
+  work_url: "https://www.maastrichtuniversity.nl/vk-saxena"
+  email: "v.saxena@maastrichtuniversity.nl"
+
+- name: Siham Eddamiri
+  role: Postdoctoral Researcher
+  group: Researchers
+  image_url: "assets/people/siham-eddamiri.jpg"
+  themes: []
+  bio: >
+    I am a postdoctoral researcher at the Department of Advanced Computing Sciences,
+    Maastricht University. My academic background is in computer science (PhD), with a
+    specialization in semantic technologies and knowledge graphs, and their applications.
+    Previously, during my postdoctoral research at Mohammed VI Polytechnic University
+    (UM6P), I focused on closing yield and precipitation gaps in Africa using AI, machine
+    learning, and computer vision to develop predictive models for agriculture, water
+    management, and climate resilience.
+  keywords: []
+  orcid: "0000-0001-8257-1664"
+  github: ""
+  google_scholar: "8mgE-BYAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/siham-eddamiri/"
+  work_url: "https://www.maastrichtuniversity.nl/s-eddamiri"
+  email: "siham.eddamiri@maastrichtuniversity.nl"
