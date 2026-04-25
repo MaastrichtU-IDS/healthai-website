@@ -784,3 +784,28 @@
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/siham-eddamiri/"
   work_url: "https://www.maastrichtuniversity.nl/s-eddamiri"
   email: "siham.eddamiri@maastrichtuniversity.nl"
+
+- name: Enrique Hortal Quesada
+  role: Assistant Professor
+  group: Researchers
+  image_url: "assets/people/enrique-hortal-quesada.jpg"
+  themes: ["Precision Medicine & Digital Health", "Computational Biology & Bioinformatics"]
+  bio: >
+    Dr. Enrique Hortal has a proven record in brain signal processing and classification,
+    having worked as a member of the Brain-Machine Interface Systems Lab at Miguel
+    Hernández University of Elche, Spain. During this period, he gained valuable
+    experience as a researcher, culminating in the successful completion of his PhD in
+    Industrial and Telecommunications Technologies in February 2016. In April 2016,
+    Enrique Hortal joined the Department of Advanced Computing Sciences (DACS) at
+    Maastricht University as a post-doctoral researcher. Subsequently, he was promoted to
+    the position of assistant professor in the same department in August 2019. As of the
+    academic year 2019/2020, Dr.
+  keywords: [Brain-Computer Interfaces, Brain Signal Processing, EEG, Machine Learning, Human-Robot Interaction]
+  orcid: "0000-0003-2119-4169"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/enrique-hortal-quesada/"
+  work_url: "https://www.maastrichtuniversity.nl/e-hortal-quesada"
+  email: enrique.hortal@maastrichtuniversity.nl
