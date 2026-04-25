@@ -1,1 +1,5 @@
 .claude/
+cache/
+logs/
+*.log
+scripts/__pycache__/

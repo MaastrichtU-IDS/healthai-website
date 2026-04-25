@@ -1,298 +1,717 @@
 - name: Michel Dumontier
   role: Distinguished Professor
   group: Faculty
-  themes: [FAIR Data, Knowledge Graphs]
+  image_url: "assets/people/michel-dumontier.jpg"
+  themes: [Neurosymbolic AI, "Precision Medicine & Digital Health"]
   bio: >
-    Michel is Distinguished Professor of Data Science for Health. His research focuses
-    on the development of FAIR data ecosystems for biomedical research and the application
-    of knowledge graphs in drug discovery and clinical decision support. He leads the FAIR
-    Data initiative at Maastricht University and chairs the FAIR Metrics group.
-  keywords: [FAIR Data, Knowledge Graphs, Semantic Web, Drug Discovery, Open Science]
+    Dr. Michel Dumontier is the Distinguished Professor of Data Science at Maastricht
+    University, is the founder and Director of the Institute of Data Science at Maastricht
+    University, and is a co-founder of the FAIR (Findable, Accessible, Interoperable and
+    Reusable) data principles. His research aims to unlock the potential of data for
+    scientific research. He is an expert in building and mining knowledge graphs for drug
+    discovery and personalised medicine.
+  keywords: [FAIR Data, Knowledge Graphs, Semantic Web, Drug Discovery, Personalized Medicine,Open Science]
   orcid: "0000-0003-4727-9435"
-  url: https://dumontierlab.com
+  github: "micheldumontier"
+  google_scholar: "vyofzOcAAAAJ"
+  linkedin: "dumontier"
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/michel-dumontier/"
+  work_url: "https://www.maastrichtuniversity.nl/mj-dumontier"
   email: michel.dumontier@maastrichtuniversity.nl
 
 - name: Christopher Brewster
   role: Full Professor
   group: Faculty
-  themes: [Computational Biology]
+  image_url: "assets/people/christopher-brewster.jpg"
+  themes: ["Precision Agriculture, Food & Health"]
   bio: >
-    Christopher's research spans knowledge management, supply chain AI and digital health.
-    He applies graph-based and machine learning methods to link complex heterogeneous data
-    sources in agri-food and healthcare contexts.
+    Dr. Christopher Brewster is Professor of the Application of Emerging Technologies at
+    Maastricht University, as well as being a Senior Scientist in the Data Science group
+    of TNO. At Maastricht, he is the PI of the Horizon Europe EU Farmbook project
+    (2022-2029), and the Horizon Europe BioFIN project (2024-2026). He is also the
+    coordinator of the Horizon Europe OpenAgri project (2024-2026) and the Horizon Europe
+    Ambrosia project (2024-2027). At TNO, he is currently lead scientist on the Quantifarm
+    projects. He is co-PI on the NWO funded GENIUS AI Lab. He has a PhD in Computer
+    Science from the University of Sheffield on the topic of automated ontology learning
+    from texts.
   keywords: [Knowledge Management, AI, Supply Chain, Digital Agriculture, Graph AI]
-  orcid: ""
-  url: ""
+  orcid: "0000-0001-6594-9178"
+  github: ""
+  google_scholar: "0MvzoD8AAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/christopher-brewster/"
+  work_url: "https://www.maastrichtuniversity.nl/caw-brewster"
   email: c.brewster@maastrichtuniversity.nl
 
 - name: Visara Urovi
   role: Associate Professor
   group: Faculty
-  themes: [Federated AI]
+  image_url: "assets/people/visara-urovi.jpg"
+  themes: [Federated & Privacy-Preserving AI]
   bio: >
-    Visara leads research on federated learning and privacy-preserving AI, enabling
-    collaborative analysis across distributed clinical datasets without sharing raw data.
-    She is the UM lead on the Personal Health Train project and was named an ELLIS Fellow in 2026.
+    Visara Urovi is an Associate Professor at the Institute of Data Science in Maastricht
+    University. Visara has a PhD in Computer Science from the Royal Holloway University of
+    London on distributed system interaction protocols. She also has an MSc and a BSc
+    Degree in Computer Engineering from the University of Bologna in Italy. She was a
+    Research Assistant at the Royal Holloway University of London from 2007 until 2010.
+    Her research focussed on multi-agent systems and time-based interaction protocols.
+    From 2011 until 2016 she worked as a Post-doc Researcher at the University of Applied
+    Sciences of western Switzerland.
   keywords: [Federated Learning, Privacy-Preserving AI, GDPR, Distributed ML, Health Data]
-  orcid: ""
-  url: ""
+  orcid: "0000-0003-2817-3950"
+  github: ""
+  google_scholar: "3H19g2AAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/visara-urovi/"
+  work_url: "https://www.maastrichtuniversity.nl/nl/v-urovi"
   email: v.urovi@maastrichtuniversity.nl
 
 - name: Chang Sun
   role: Assistant Professor
   group: Faculty
-  themes: [Clinical NLP, Federated AI]
+  image_url: "assets/people/chang-sun.jpg"
+  themes: [Regulatory AI, Federated & Privacy-Preserving AI]
   bio: >
-    Chang develops natural language processing and text mining methods tailored to clinical
-    documents. His work on adapting LLMs to low-resource clinical languages (Dutch, German)
-    bridges NLP research and real-world hospital deployment.
+    Chang Sun is an Assistant Professor at the Institute of Data Science at Maastricht
+    University. Her research interests cover privacy-preserving distributed data mining,
+    federated/distributed machine learning, synthetic data generation, decentralized
+    personal health data management, health data sharing, management and analysis,
+    personal knowledge graphs, and linked data. She used data science technologies (e.g.,
+    deep learning models, federated machine learning models, GANS) to solve research
+    challenges in health domains such as diabetes, rare diseases (Leukemia),
+    cardiovascular diseases, and sleeping disorders, and also in social sciences.
   keywords: [Clinical NLP, Large Language Models, Text Mining, ICD Coding, Dutch EHR]
-  orcid: ""
-  url: ""
+  orcid: "0000-0001-8325-8848"
+  github: ""
+  google_scholar: "JfU0PB8AAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/chang-sun/"
+  work_url: "https://www.maastrichtuniversity.nl/c-sun"
   email: chang.sun@maastrichtuniversity.nl
 
 - name: Remzi Celebi
   role: Assistant Professor
   group: Faculty
-  themes: [FAIR Data, Clinical NLP]
+  image_url: "assets/people/remzi-celebi.jpg"
+  themes: [Neurosymbolic AI, Regulatory AI]
   bio: >
-    Remzi works at the intersection of FAIR data, rare disease informatics and clinical
-    knowledge graphs. He coordinates multiple European rare disease data infrastructure
-    projects and is an active contributor to FAIR metrics development.
+    Remzi Celebi is an Assistant Professor at Institute of Data Science at Maastricht
+    University . His research lies at the intersection of Responsible AI, knowledge
+    representation, and data curation, with a focus on addressing real-world challenges in
+    health and life sciences. His overarching goal is to develop innovative computational
+    methods that empower individuals and organizations to leverage AI responsibly while
+    ensuring transparency, fairness, and societal impact.
   keywords: [Rare Diseases, FAIR Principles, Linked Data, Ontologies, Knowledge Graphs]
-  orcid: ""
-  url: ""
+  orcid: "0000-0001-7769-4272"
+  github: ""
+  google_scholar: "cB1tSB0AAAAJ"
+  linkedin: ""
+  personal_page: ""
+  blog_feed: "https://rcelebi.github.io/feed.xml"
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/remzi-celebi/"
+  work_url: "https://www.maastrichtuniversity.nl/r-celebi"
   email: r.celebi@maastrichtuniversity.nl
 
 - name: Rohan Nanda
   role: Assistant Professor
   group: Faculty
-  themes: [Precision Medicine]
+  image_url: "assets/people/rohan-nanda.jpg"
+  themes: [Regulatory AI]
   bio: >
-    Rohan focuses on AI-based clinical decision support systems, with a particular interest
-    in risk stratification models, hospital readmission prediction and the integration of
-    structured and unstructured data in electronic health records.
+    Please see my personal webpage for the latest information about my research, teaching,
+    and other activities. Dr. Rohan Nanda has been appointed as an Assistant Professor in
+    Data Science for Law with a joint position at the Maastricht Law and Tech Lab of the
+    Faculty of Law and the Institute of Data Science. His research interests include legal
+    informatics, natural language processing, and applied Data Science. He aims to teach
+    and conduct innovative and interdisciplinary research in Artificial Intelligence and
+    Law.
   keywords: [Clinical Decision Support, Risk Stratification, EHR, Predictive Modelling, Hospital AI]
-  orcid: ""
-  url: ""
+  orcid: "0000-0001-7124-4799"
+  github: ""
+  google_scholar: "BcB7aNAAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/rohan-nanda"
+  work_url: "https://www.maastrichtuniversity.nl/r-nanda"
   email: r.nanda@maastrichtuniversity.nl
 
 - name: Aikaterina Kasimati
   role: Assistant Professor
   group: Faculty
-  themes: [Precision Medicine]
+  image_url: "https://www.maastrichtuniversity.nl/sites/default/files/styles/960x1440/theme/um_base/src/images/placeholder_profile.png"
+  themes: ["Precision Agriculture, Food & Health"]
   bio: >
     Katerina's research combines IoT, wearable sensing and AI to create smart personalised
     health systems. She focuses on precision nutrition and digital interventions for chronic
     disease management, integrating physiological and lifestyle data streams.
   keywords: [IoT, Wearables, Precision Nutrition, Digital Health, Chronic Disease]
-  orcid: ""
-  url: ""
+  orcid: "0000-0002-7620-3782"
+  github: ""
+  google_scholar: "ZF9MRaIAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: ""
+  work_url: "https://www.maastrichtuniversity.nl/kasimati"
   email: a.kasimati@maastrichtuniversity.nl
+
+
+- name: Denise Slenter
+  role: Assistant Professor
+  group: Faculty
+  image_url: "assets/people/denise-slenter.jpg"
+  themes: [Neurosymbolic AI, Computational Biology & Bioinformatics]
+  bio: >
+    Dr. Denise Slenter is an Assistant Professor at the Institute of Data Science, Maastricht
+    University. She completed her PhD (2024, "Symphonies of metabolomics") combining metabolic
+    pathway knowledge, inherited metabolic disorders, semantic web technologies, and
+    metabolomics data. Her work spans WikiPathways, Wikidata, knowledge graphs, and FAIR data
+    principles applied to life sciences. She is a core contributor to WikiPathways and has
+    authored publications on lipidomics bioinformatics, metabolic network analysis, and the
+    COVID-19 Disease Map. She currently holds a Kootstra Talent Fellowship for the Tears of
+    Joy project, developing a risk assessment model for recurrent miscarriage by integrating
+    immunological, ultrasound, and lifestyle data.
+  keywords: [Computational Biology]
+  orcid: "0000-0001-8449-1318"
+  github: ""
+  google_scholar: "Le-4tuQAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/denise-slenter/"
+  work_url: "https://www.maastrichtuniversity.nl/d-slenter"
+  email: ""
+
 
 - name: Pietro Bonizzi
   role: Associate Professor
   group: Faculty
-  themes: [Signal Processing]
+  image_url: "assets/people/pietro-bonizzi.jpg"
+  themes: ["Precision Medicine & Digital Health"]
   bio: >
-    Pietro specialises in biomedical signal processing and machine learning for cardiac
-    monitoring. His work on non-invasive ECG analysis and atrial fibrillation detection
-    from consumer wearables is applied in clinical and home settings.
+    I am an an Associate Professor at Maastricht University in the Department of Advanced
+    Computing Sciences (DACS). I am also the Programme Director of the Bachelor's Computer
+    Science, and of the Bachelor's Data Science & Artificial Intelligence at the Faculty
+    of Science and Engineering. I am a member of the Systems & Control research theme. I
+    completed my PhD in 2010 at the Laboratory of Computer Science, Signals and Systems
+    (I3S) of Sophia Antipolis, Université Côte d'Azur, France.
   keywords: [ECG, Arrhythmia, Atrial Fibrillation, Signal Processing, Wearable AI]
-  orcid: ""
-  url: ""
+  orcid: "0000-0001-8804-235X"
+  github: ""
+  google_scholar: "zKXgsAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/pietro-bonizzi/"
+  work_url: "https://www.maastrichtuniversity.nl/p-bonizzi"
   email: p.bonizzi@maastrichtuniversity.nl
 
 - name: Rachel Cavill
   role: Assistant Professor
   group: Faculty
-  themes: [Computational Biology]
+  image_url: "assets/people/rachel-cavill.jpg"
+  themes: [Computational Biology & Bioinformatics]
   bio: >
-    Rachel develops statistical and machine learning methods for integrating multi-omics
-    datasets. Her research addresses the computational challenges of high-dimensional
-    biological data to identify disease biomarkers and drug targets.
+    Rachel is an assistant professor in the department of Data Science and Knowledge
+    Engineering. Her research has several key themes;
   keywords: [Bioinformatics, Multi-Omics, Biomarker Discovery, Statistical ML, Genomics]
-  orcid: ""
-  url: ""
+  orcid: "0000-0002-3796-1687"
+  github: ""
+  google_scholar: "H56EnEYAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/rachel-cavill/"
+  work_url: "https://www.maastrichtuniversity.nl/r-cavill"
   email: r.cavill@maastrichtuniversity.nl
 
 - name: Konstantia Zarkogianni
   role: Associate Professor
   group: Faculty
-  themes: [Precision Medicine, Signal Processing]
+  image_url: "assets/people/konstantia-zarkogianni.jpg"
+  themes: ["Precision Medicine & Digital Health"]
   bio: >
-    Konstantia works on AI-powered diabetes management, combining continuous glucose
-    monitoring data, dietary logs and wearable biosignals with knowledge graph reasoning
-    to personalise insulin dosing and lifestyle recommendations.
+    Konstantia Zarkogianni received a MEng in Electrical and Computer Engineering (2003)
+    from the Aristotle University of Thessaloniki, a MSc Degree in Electronic and Computer
+    Engineering (2005) from the Technical University of Crete, and a PhD degree (2011)
+    from the National Technical University of Athens (NTUA), Greece. In October 2017, she
+    was appointed as a permanent laboratory teaching staff member at the School of
+    Electrical and Computer Engineering of the NTUA. Since 2023, she has been an Associate
+    Professor of Human-Centered AI at DACS of UM. Her research is mainly focused on AI
+    (e.g., ML, XAI, knowledge bases & reasoning, and recommender systems) and decision
+    intelligence.
   keywords: [Diabetes AI, CGM, Personalised Interventions, Knowledge Graphs, Wearables]
-  orcid: ""
-  url: ""
+  orcid: "0000-0003-3886-1618"
+  github: ""
+  google_scholar: "Gez97HcAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/konstantia-zarkogianni/"
+  work_url: "https://www.maastrichtuniversity.nl/k-zarkogianni"
   email: k.zarkogianni@maastrichtuniversity.nl
 
 - name: Shervin Mehryar
   role: PhD Researcher
   group: Researchers
-  themes: [Knowledge Graphs]
+  image_url: "https://winslab.lids.mit.edu/wp-content/uploads/2018/03/SMehryar-600x600.jpg"
+  themes: [Neurosymbolic AI]
   bio: >
     Shervin's PhD research focuses on semantic annotation of tabular data for
     machine-to-machine interoperability, applying knowledge graph embeddings and
     neuro-symbolic approaches to ontology refinement and annotation prediction.
   keywords: [Knowledge Graph Embeddings, Semantic Annotation, Ontology Development, Neuro-Symbolic AI]
-  orcid: ""
-  url: "https://cris.maastrichtuniversity.nl/en/persons/shervin-mehryar"
+  orcid: "0000-0002-9062-6925"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/shervin-mehryar"
+  work_url: "https://www.maastrichtuniversity.nl/s-mehryar"
   email: ""
 
 - name: Mahmoud Ibrahim
   role: PhD Researcher
   group: Researchers
-  themes: [Precision Medicine]
+  image_url: "assets/people/mahmoud-ibrahim.jpg"
+  themes: ["Precision Medicine & Digital Health"]
   bio: >
-    Mahmoud's PhD research focuses on generative AI for synthetic data generation
-    across multiple medical modalities, enabling privacy-preserving use of clinical
-    data for machine learning and biomedical research.
+    He is working on using synthetic data for a more trustworthy medical AI, under the
+    supervision of Michel Dumontier and Chang Sun from IDS.
   keywords: [Generative AI, Synthetic Data, Medical Data, Generative Models]
   orcid: "0000-0002-5099-7609"
-  url: "https://cris.maastrichtuniversity.nl/en/persons/mahmoud-ibrahim/"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/mahmoud-ibrahim/"
+  work_url: "https://www.maastrichtuniversity.nl/m-ibrahim"
   email: ""
 
 - name: Seun Adekunle
   role: PhD Researcher
   group: Researchers
-  themes: [Precision Medicine]
+  image_url: ""
+  themes: ["Precision Medicine & Digital Health"]
   bio: >
     Seun's PhD research applies machine learning methods to improve pension savings
     outcomes in the Netherlands, combining financial data analysis with AI-driven
     decision support.
   keywords: [Machine Learning, Financial AI, Decision Support]
   orcid: ""
-  url: "https://www.maastrichtuniversity.nl/oh-adekunle"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/seun-adekunle/"
+  work_url: ""
   email: ""
-
+ 
 - name: Özge Erten
   role: PhD Researcher
   group: Researchers
-  themes: [Knowledge Graphs]
+  image_url: "assets/people/zge-erten.jpg"
+  themes: [Neurosymbolic AI]
   bio: >
-    Özge applies knowledge graph embeddings and constraint-based learning to
-    biomedical ontology refinement and semantic error detection, with applications
-    to gene ontology and medical databases such as MIMIC-III.
+    Özge Erten was born in Izmir, Turkey. She finished her Bachelor in Computer
+    Engineering at Ege University with a focus on data management. After that, she
+    completed her Master's degree at the same university. Özge's Master's thesis was about
+    operations on Graph Databases. In 2021, Özge started as a PhD student at Maastricht
+    University under the supervision of Prof. Michel Dumontier. Özge is especially
+    interested in big data and knowledge graphs.
   keywords: [Knowledge Graph Embeddings, Ontology Refinement, Constraint Learning, Semantic Error Detection]
   orcid: "0000-0001-9493-3167"
-  url: "https://cris.maastrichtuniversity.nl/en/persons/%C3%B6zge-erten"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/%C3%B6zge-erten"
+  work_url: "https://www.maastrichtuniversity.nl/o-erten"
   email: ""
 
 - name: Maryam Mohammadi
   role: PhD Researcher
   group: Researchers
-  themes: [Knowledge Graphs]
+  image_url: "assets/people/maryam-mohammadi.jpg"
+  themes: [Neurosymbolic AI]
   bio: >
-    Maryam's PhD research focuses on the automatic construction of knowledge graph
-    metadata, investigating schema coverage, SPARQL query log analysis, and
-    semi-automatic methods for ontology enrichment and knowledge construction.
+    I am a Ph.D. candidate at the Institute of Data Science, Faculty of Engineering and
+    Science, Maastricht University. My research is part of the KnowGraph project, where I
+    focus on addressing the lack of standardized metadata for Knowledge Graphs (KGs) by
+    developing guidelines and methods to generate high-quality metadata automatically. My
+    expertise and interests include KG construction, SPARQL query analysis, FAIR
+    principles, and Large Language Models (LLMs).
   keywords: [Knowledge Graphs, Ontology Enrichment, SPARQL, Query Log Analysis, Semantic Web]
   orcid: "0000-0003-4850-8068"
-  url: "https://cris.maastrichtuniversity.nl/en/persons/maryam-mohammadi/"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/maryam-mohammadi/"
+  work_url: "https://www.maastrichtuniversity.nl/m-mohammadi"
   email: ""
 
 - name: Gijs Wijngaard
   role: PhD Researcher
   group: Researchers
-  themes: [Signal Processing]
+  image_url: "assets/people/gijs-wijngaard.jpg"
+  themes: ["Precision Medicine & Digital Health"]
   bio: >
-    Gijs researches automated audio captioning and audio-language datasets,
-    developing evaluation methods and benchmarks for audio scene and event
-    understanding using machine learning.
+    I am a new PhD researcher at the Institute of Data Science, started 6th December 2021.
+    I will be working on Aud2Sem, a new NWO project with advisors Michel Dumontier and
+    Elia Formisano. The project is about recognising, classifying audio using
+    computational models and building up taxonomies of auditory features. My background is
+    in Machine Learning and Data Science, but I also have knowledge in a variety of topics
+    in Computer Science.
   keywords: [Audio Captioning, Audio Processing, Machine Learning, Evaluation Metrics, Audio-Language Datasets]
   orcid: "0009-0002-3875-1232"
-  url: "https://cris.maastrichtuniversity.nl/en/persons/gijs-wijngaard/"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/gijs-wijngaard/"
+  work_url: "https://www.maastrichtuniversity.nl/gwa-wijngaard"
   email: ""
 
 - name: Kun Li
   role: PhD Researcher
   group: Researchers
-  themes: [Federated AI]
+  image_url: "assets/people/kun-li.jpg"
+  themes: [Federated & Privacy-Preserving AI]
   bio: >
-    Kun's PhD research investigates privacy preservation in healthcare data sharing
-    using blockchain technology, developing decentralised approaches to secure
-    clinical data exchange across institutions.
+    Kun Li is a Ph.D. candidate at Maastricht University from September 2021, supervised
+    by Dr. Visara Urovi and Prof. Michel Dumontier . He is interested in blockchain and
+    privacy preservation and is working on preserving privacy in healthcare data sharing
+    based on blockchain. Kun finished his Bachelor’s in Electronic Information Science and
+    Technology at Nankai University and his Master’s in Information and Communication
+    Engineering at Civil Aviation University of China.
   keywords: [Blockchain, Privacy Preservation, Healthcare Data, Federated Learning, Decentralised Systems]
-  orcid: ""
-  url: "https://www.maastrichtuniversity.nl/k-li"
+  orcid: "0009-0000-2744-7417"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/kun-li/"
+  work_url: "https://www.maastrichtuniversity.nl/k-li"
   email: ""
 
 - name: Yuyang Yan
   role: PhD Researcher
   group: Researchers
-  themes: [Signal Processing]
+  image_url: "assets/people/yuyang-yan.jpg"
+  themes: ["Precision Medicine & Digital Health"]
   bio: >
-    Yuyang's PhD focuses on acoustic biomarkers for respiratory disease monitoring,
-    applying Mel-spectrogram analysis and machine learning to non-invasive COPD
-    recognition from audio signals.
+    Yuyang Yan is a Ph.D. Candidate at the Institute of Data Science at Maastricht
+    University since 2022. He is working on acoustic biomarkers for respiratory Chronic
+    Obstructive Pulmonary Disease (COPD) monitoring based on Machine learning.
   keywords: [Acoustic Biomarkers, COPD, Signal Processing, Machine Learning, Respiratory Monitoring]
-  orcid: ""
-  url: "https://www.maastrichtuniversity.nl/yuyang-yan"
+  orcid: "0000-0002-2538-9046"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/yuyang-yan"
+  work_url: "https://www.maastrichtuniversity.nl/yuyang-yan"
   email: ""
 
 - name: Dong Yang
   role: PhD Researcher
   group: Researchers
-  themes: [Clinical NLP]
+  image_url: "assets/people/dong-yang.jpg"
+  themes: [Regulatory AI]
   bio: >
-    Dong's PhD research leverages large language models and reinforcement learning
-    to address key challenges in medical reasoning, including clinical data
-    management, text processing, and reliable complex reasoning in healthcare.
+    His research focuses on leveraging Large Language Models (LLMs) and Reinforcement
+    Learning (RL) to address key challenges in medical reasoning, including data
+    management, text processing, and reliable complex reasoning. He is Winner of Track 1
+    of Language Model and Knowledge Base Construction at ISWC 2023 . Artificial
+    Intelligence, Large Language Model, Reinforcement Learning, Blockchain
   keywords: [Large Language Models, Reinforcement Learning, Medical Reasoning, Clinical NLP]
-  orcid: ""
-  url: "https://www.maastrichtuniversity.nl/d-yang"
+  orcid: "0000-0003-4507-8162"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/dong-yang/"
+  work_url: "https://www.maastrichtuniversity.nl/d-yang"
   email: ""
 
 - name: Rishabh Jakhar
   role: PhD Researcher
   group: Researchers
-  themes: [FAIR Data]
+  image_url: "assets/people/rishabh-jakhar.jpg"
+  themes: [Neurosymbolic AI]
   bio: >
     Rishabh is a PhD candidate at the Institute of Data Science working on
     data science methods within the DACS Emergent Technologies group.
   keywords: [Data Science, Emergent Technologies]
   orcid: ""
-  url: "https://cris.maastrichtuniversity.nl/en/persons/rishabh-jakhar"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/rishabh-jakhar"
+  work_url: "https://www.maastrichtuniversity.nl/rs-jakhar"
   email: ""
 
 - name: Yaru Zhang
   role: PhD Researcher
   group: Researchers
-  themes: [FAIR Data]
+  image_url: "https://www.maastrichtuniversity.nl/sites/default/files/styles/1488x1488/public/2024-01/Yaru.jpg?h=d803a6d2&itok=tkQYHZar"
+  themes: [Neurosymbolic AI]
   bio: >
-    Yaru is a PhD candidate at the Institute of Data Science contributing to the
-    EU-FarmBook project, working on FAIR data infrastructure and knowledge
-    representation for agricultural and food systems.
+    Yaru Zhang is an alumna from DACS : In 2023, she obtained her Master's Degree in Data
+    Science for Decision Making. Yaru is seeking to use her data science skills to improve
+    people’s lives through data-driven decisions. With a passion for math, statistics, and
+    data, she is driven to uncover insights and create impact. She enjoys exploring new
+    places, experimenting with photography and trying new foods. She is an adventurous and
+    curious learner, eager to make a difference with data science.
   keywords: [FAIR Data, Knowledge Representation, Agricultural Data, Linked Data]
-  orcid: ""
-  url: "https://cris.maastrichtuniversity.nl/en/persons/yaru-zhang"
+  orcid: "0000-0003-3443-7940"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/yaru-zhang"
+  work_url: "https://www.maastrichtuniversity.nl/yaru-zhang"
   email: ""
 
 - name: Komal Gilani
   role: PhD Researcher
   group: Researchers
-  themes: [Federated AI, Knowledge Graphs]
+  image_url: "assets/people/komal-gilani.jpg"
+  themes: [Federated & Privacy-Preserving AI, Neurosymbolic AI]
   bio: >
-    Komal's PhD research, conducted within the iCARE4CVD project, explores
-    federated health data sharing using knowledge graphs and blockchain technology,
-    supervised by Visara Urovi and Michel Dumontier.
+    Komal Gilani is a PhD candidate at the Institute of Data Science, Maastricht
+    University. Her research focuses on ontology engineering, neuro-symbolic AI, and
+    clinical data standardization and harmonization. She holds a master's degree in
+    Software and Information Security, with a research focus on Semantic Web in IoT, and a
+    bachelor's degree in Computer Science.
   keywords: [Ontology, Knowledge Graphs, Blockchain, Cardiovascular Data, Ontology Alignment]
-  orcid: ""
-  url: ""
+  orcid: "0000-0001-7292-1026"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/komal-gilani/"
+  work_url: "https://www.maastrichtuniversity.nl/k-gilani"
   email: ""
 
 - name: Mikołaj Najda
   role: PhD Researcher
   group: Researchers
-  themes: [Signal Processing]
+  image_url: "assets/people/miko-aj-najda.jpg"
+  themes: ["Precision Medicine & Digital Health"]
   bio: >
-    Mikołaj develops explainable AI systems for cardiac diagnosis, using voice and
-    speech analysis with CNN architectures to detect heart failure and monitor the
-    autonomic nervous system non-invasively.
+    I am PhD candidate in the Institute of Data Science (IDS). My research background is
+    strongly related to AI applications in healthcare, as I hold a Bachelor of Science in
+    Biomedical Engineering and a Master of Science in Artificial Intelligence. During my
+    education, I worked in several research grants and start-ups related to my interests.
   keywords: [Explainable AI, Heart Failure, Voice Analysis, Acoustic Features, Medical Signal Processing]
   orcid: "0009-0004-2548-3309"
-  url: "https://cris.maastrichtuniversity.nl/en/persons/miko%C5%82aj-najda"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/miko%C5%82aj-najda"
+  work_url: "https://www.maastrichtuniversity.nl/m-najda"
+  email: ""
+
+- name: Ensar Erol
+  role: Research Software Engineer
+  group: Researchers
+  image_url: "assets/people/ensar-erol.jpg"
+  themes: [Neurosymbolic AI]
+  bio: >
+    I am a Software Developer at the Institute of Data Science (IDS) at Maastricht
+    University, where I work on EU-funded projects in the heatlh-care domain. My work
+    focuses on designing and developing high-performance backend and frontend systems,
+    particularly in the context of Knowledge Graphs. I am also responsible for defining
+    system requirements and ensuring scalable architectures that support research in data
+    science and artificial intelligence.
+  keywords: []
+  orcid: ""
+  github: ""
+  google_scholar: "J4KABjQAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: ""
+  work_url: "https://www.maastrichtuniversity.nl/ee-erol"
+  email: ""
+
+- name: Louis Powell
+  role: Research Software Engineer
+  group: Researchers
+  image_url: "assets/people/louis-powell.jpg"
+  themes: []
+  bio: >
+    TODO: add bio
+  keywords: []
+  orcid: ""
+  github: ""
+  google_scholar: ""
+  linkedin: "lopowell"
+  personal_page: ""
+  cris_url: ""
+  work_url: "https://www.maastrichtuniversity.nl/l-powell"
+  email: louis.powell@maastrichtuniversity.nl
+
+- name: Pranav Bapat
+  role: Research Software Engineer
+  group: Researchers
+  image_url: "assets/people/pranav-bapat.jpg"
+  themes: ["Precision Agriculture, Food & Health"]
+  bio: >
+    I am a Scientific IT Engineer specialising in data science, artificial intelligence,
+    and information retrieval . I work on EU-funded projects in the agricultural sector ,
+    developing platforms that collaborate and disseminate agricultural knowledge to ensure
+    accessibility for all. My expertise lies in machine learning (ML), deep learning (DL),
+    OpenSearch, natural language processing (NLP), and semantic search , with a strong
+    focus on building scalable and efficient architectures for real-world applications.
+  keywords: []
+  orcid: ""
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/pranav-bapat/"
+  work_url: "https://www.maastrichtuniversity.nl/pn-bapat"
+  email: p.bapat@maastrichtuniversity.nl
+
+- name: Felipe Arruda Pontes
+  role: Researcher
+  group: Researchers
+  image_url: "assets/people/felipe-arruda-pontes.jpg"
+  themes: []
+  bio: >
+    Felipe is a researcher at the Institute of Data Science at the Maastricht University
+    (UM) with a strong software engineering background, specialising in ecologically
+    sustainable distributed computing, stream processing, uncertainty awareness, and
+    computer vision. He is also a PhD candidate at the Insight Centre, Data Science
+    Institute, University of Galway in Ireland, where he also obtained his Master's (by
+    research) degree in 2021. Before this, he worked for many years as a senior software
+    engineer in multiple companies worldwide, participating in projects ranging from
+    online solutions for oil and gas exploration to large-scale distributed online
+    marketplace systems over the Cloud.
+  keywords: []
+  orcid: ""
+  github: ""
+  google_scholar: "c1ZyZVAAAAAJ"
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/felipe-arruda-pontes/"
+  work_url: "https://www.maastrichtuniversity.nl/f-arruda-pontes"
+  email: ""
+
+- name: Anas Elghafari
+  role: Researcher
+  group: Researchers
+  image_url: "assets/people/anas-elghafari.jpg"
+  themes: ["Precision Medicine & Digital Health"]
+  bio: >
+    I am Research Developer working in the Department of Advanced Computing Sciences
+    (DACS) at Maastricht University, where I work on several projects including icare4cvd.
+    My interests include Natural Language Processing (NLP), Ontology Engineering, machine
+    learning, the integration of LLMs into research workflows, UI and UX designs for data
+    science. Before joining Maastricht University, I was a research engineer at
+    Sema4/GeneDx in Connecticut where I worked on developing novel visualization
+    approaches for complex patient data, and developing and deploying ML models to aid in
+    genetic research review.
+  keywords: []
+  orcid: "0000-0001-5335-9998"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/anas-elghafari/"
+  work_url: "https://www.maastrichtuniversity.nl/elghafari"
+  email: ""
+
+- name: Wei Wei
+  role: PhD Researcher
+  group: Researchers
+  image_url: "assets/people/wei-wei.jpg"
+  themes: ["Precision Medicine & Digital Health"]
+  bio: >
+    Wei Wei is a PhD student at Maastricht University since September 2024, supervised by
+    Prof. Dr. Visara Urovi and Prof. Dr. Hans-Peter Brunner-La Rocca. She is affiliated
+    with the iCARE4CVD project, and her research focuses on developing multi-agent-based
+    decision support systems for modeling disease progression and optimizing treatment
+    strategies in cardiovascular disease. She obtained her Bachelor’s degree in Clinical
+    Medicine in China, a Master of Public Health (MPH) in the United States, and a Master
+    of Science in Medical Informatics in the Netherlands.
+  keywords: []
+  orcid: ""
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: ""
+  work_url: "https://www.maastrichtuniversity.nl/w-wei"
+  email: ""
+
+- name: Nguyen Nam Doan
+  role: PhD Researcher
+  group: Researchers
+  image_url: "assets/people/nam-doan.jpg"
+  themes: []
+  bio: >
+    TODO: add bio
+  keywords: []
+  orcid: "0000-0002-6166-4826"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: ""
+  work_url: "https://www.maastrichtuniversity.nl/nn-doan"
+  email: ""
+
+- name: Julie Loesch
+  role: PhD Researcher
+  group: Researchers
+  image_url: "assets/people/julie-loesch.jpg"
+  themes: []
+  bio: >
+    TODO: add bio
+  keywords: []
+  orcid: ""
+  github: ""
+  google_scholar: "LdzpPdoAAAAJ"
+  linkedin: "julie-loesch"
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/julie-loesch/"
+  work_url: "https://www.maastrichtuniversity.nl/j-loesch"
+  email: julie.loesch@maastrichtuniversity.nl
+
+- name: Joao Vissoci
+  role: PhD Researcher
+  group: Researchers
+  image_url: "assets/people/joao-vissoci.jpg"
+  themes: []
+  bio: >
+    TODO: add bio
+  keywords: []
+  orcid: ""
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: ""
+  work_url: "https://www.maastrichtuniversity.nl/jr-nickenig-vissoci"
+  email: ""
+
+- name: Hercules Panoutsopoulos
+  role: PhD Researcher
+  group: Researchers
+  image_url: "assets/people/hercules-panoutsopoulos.jpg"
+  themes: []
+  bio: >
+    TODO: add bio
+  keywords: []
+  orcid: "0000-0002-8060-9750"
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  personal_page: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/hercules-panoutsopoulos/"
+  work_url: "https://www.maastrichtuniversity.nl/i-panoutsopoulos"
   email: ""

@@ -1,18 +1,42 @@
 themes:
-  - id: fair
+  - id: precision
     number: "01"
-    title: FAIR Data & Knowledge Graphs
-    icon: "◈"
-    leads: [Michel Dumontier, Remzi Celebi]
+    title: Precision Medicine & Digital Health
+    icon: "◎"
+    leads: [Konstantia Zarkogianni, Remzi Celebi, Chang Sun, Pietro Bonizzi, Visara Urovi, Michel Dumontier]
     desc: >
-      We build interoperable, FAIR-compliant biomedical data ecosystems that enable
-      machines to find, access, interoperate and reuse health data at scale. Our
-      knowledge graph infrastructure links diseases, drugs, genes and clinical
-      guidelines into actionable reasoning networks.
-    projects: [FAIR Health Knowledge Base, Rare Disease FAIR Portal, FAIR Metrics Toolchain]
+      One-size-fits-all medicine is giving way to personalised interventions driven
+      by data. We integrate IoT sensor streams, EHR data and knowledge graphs to
+      deliver closed-loop AI systems that adapt recommendations to individual
+      patients in real time.
+    projects: [CHARM, iCare4CVD, DACIL]
+
+  - id: agriculture
+    number: "02"
+    title: Precision Agriculture, Food & Health
+    icon: "⌇"
+    leads: [Aikaterina Kasimati,Christopher Brewster]
+    desc: >
+      Precision Agriculture, Food & Health integrates data-driven farming, nutrition science, and health analytics to optimize outcomes from soil to society.
+      It leverages AI, sensors, and interoperable data systems to improve crop production, food quality, and personalized health—linking sustainable agriculture directly to better human and environmental well-being.
+    projects: [EU-FarmBook, AMBROSIA]
+
+
+  - id: fair
+    number: "03"
+    title: Neurosymbolic AI
+    icon: "◈"
+    leads: [Michel Dumontier, Remzi Celebi, Denise Slenter]
+    desc: >
+      We build neurosymbolic AI frameworks that enable machines to reason over biomedical data 
+      using both learned representations and formal domain knowledge. Leveraging FAIR data 
+      principles, ontologies, and knowledge graphs, we create semantically grounded models 
+      that connect molecular, clinical, and population-level information. These systems 
+      support explainable inference, hypothesis generation, and trustworthy AI applications in healthcare and life sciences.
+    projects: [GENIUS, BDT, AIDAVA]
 
   - id: federated
-    number: "02"
+    number: "04"
     title: Federated & Privacy-Preserving AI
     icon: "⊞"
     leads: [Visara Urovi, Chang Sun]
@@ -21,152 +45,161 @@ themes:
       architectures that allow AI models to learn from distributed patient data across
       hospitals and countries — without the data ever leaving its source. Our work
       covers algorithm design, privacy guarantees and real-world deployment.
-    projects: [Personal Health Train (PHT), Federated Rare Disease AI, Cross-border Privacy Auditing]
+    projects: [REALM]
 
   - id: nlp
-    number: "03"
-    title: Clinical NLP & Text Mining
-    icon: "❋"
-    leads: [Chang Sun, Remzi Celebi]
-    desc: >
-      The majority of clinical knowledge lives in free text — discharge letters,
-      radiology reports, clinical notes. We develop NLP and LLM methods to extract
-      structured knowledge from these narratives, automate ICD coding, detect adverse
-      events and build clinical phenotype libraries.
-    projects: [MIMIC-NL Dutch Clinical NLP, Automated ICD-10 Coding, Clinical Phenotype Extraction]
-
-  - id: signals
-    number: "04"
-    title: Biomedical Signal Processing
-    icon: "⌇"
-    leads: [Pietro Bonizzi, Konstantia Zarkogianni]
-    desc: >
-      From the heartbeat to the brainwave, physiological signals contain rich
-      diagnostic information. We design deep learning pipelines for real-time
-      analysis of ECG, EEG and wearable sensor data, targeting clinical-grade
-      accuracy in consumer device settings.
-    projects: [AI-ECG Arrhythmia Detection, Wearable EEG Seizure Monitor, PPG for Hypertension]
-
-  - id: precision
     number: "05"
-    title: Precision Medicine & Digital Health
-    icon: "◎"
-    leads: [Aikaterina Kasimati, Rohan Nanda, Konstantia Zarkogianni]
+    title: Regulatory AI
+    icon: "❋"
+    leads: [Rohan Nanda, Michel Dumontier]
     desc: >
-      One-size-fits-all medicine is giving way to personalised interventions driven
-      by data. We integrate IoT sensor streams, EHR data and knowledge graphs to
-      deliver closed-loop AI systems that adapt recommendations to individual
-      patients in real time.
-    projects: [DiabAI, AI Clinical Decision Support Suite, Smart Readmission Reduction]
+      Regulatory AI captures the dual role of AI in modern governance: using AI to improve regulatory processes, and designing regulation to ensure AI systems are safe, transparent, and accountable.
+      It emphasizes a feedback loop where AI enhances evidence generation and oversight, while regulatory frameworks shape trustworthy, human-centered AI deployment.
+    projects: [REALM]
+
 
   - id: bioinfo
     number: "06"
     title: Computational Biology & Bioinformatics
     icon: "⌬"
-    leads: [Rachel Cavill, Christopher Brewster]
+    leads: [Rachel Cavill, Denise Slenter]
     desc: >
       Understanding complex disease requires integrating information across molecular
       scales. We develop scalable computational workflows for multi-omics integration —
       linking genomics, proteomics and metabolomics data — to identify biomarkers and
       advance drug target discovery.
-    projects: [Multi-Omics Integration Platform, IBD Biomarker Discovery, Systems Pharmacology AI]
+    projects: []
 
 projects:
-  - title: FAIR Health Knowledge Base
-    theme: FAIR Data
+  - acronym: AIDAVA
+    title: AI powered Data Curation & Publishing Virtual Assistant
+    theme: Neurosymbolic AI
     desc: >
-      FAIR-compliant biomedical knowledge graph linking diseases, drugs, genes and
-      clinical guidelines to power downstream AI reasoning.
+      AIDAVA develops an AI-powered virtual assistant to automate the curation, integration, and publishing 
+      of personal health data from heterogeneous sources (e.g., hospitals, devices, patient-reported data).
     team: [Michel Dumontier, Remzi Celebi]
-    funder: European Commission (H2020)
-    amount: "€3.4M"
-    period: "2021–2025"
-    status: Active
-
-  - title: Personal Health Train (PHT)
-    theme: Federated AI
-    desc: >
-      Federated infrastructure allowing AI algorithms to travel to distributed patient
-      data across Europe, preserving privacy while enabling large-scale health research.
-    team: [Visara Urovi, Chang Sun, Michel Dumontier]
-    funder: Dutch Research Council (NWO)
-    amount: "€2.1M"
+    funder: European Commission (Horizon Europe)
+    amount: "€7.7M"
     period: "2022–2026"
     status: Active
+    featured: true
+    url: https://aidava.eu/
+    logo: https://www.aidava.eu/user/themes/aidava/images/logo.svg
 
-  - title: AI-ECG Arrhythmia Detection
-    theme: Signal Processing
+  - acronym: REALM
+    title: REALM Real-world-data Enabled Assessment for heaLth regulatory decision-Making
+    theme: Regulatory AI
     desc: >
-      Deep learning models trained on 500,000+ ECG recordings to detect life-threatening
-      arrhythmias in real time via consumer wearable devices.
-    team: [Pietro Bonizzi, Rohan Nanda]
-    funder: ZonMw
-    amount: "€890K"
+      REALM builds a collaborative regulatory ecosystem for evaluating and certifying medical device software (including AI) 
+      using real-world and synthetic data.
+    team: [Visara Urovi, Chang Sun, Michel Dumontier]
+    funder: European Commission (Horizon Europe)
+    amount: "€7M"
     period: "2023–2026"
     status: Active
+    featured: true
+    url: https://www.realm-project.eu/
+    logo: https://vito.be/sites/vito/files/styles/logo/public/logo/realm-logo.png?itok=BNkUKxCi
 
-  - title: MIMIC-NL Dutch Clinical NLP
-    theme: Clinical NLP
+  - acronym: CHARM
+    title: CHARM
+    theme: Precision Medicine & Digital Health
     desc: >
-      Adapting large language models to Dutch clinical text to automate ICD coding,
-      adverse event detection and phenotyping at scale.
-    team: [Chang Sun, Remzi Celebi]
-    funder: Maastricht UMC+
-    amount: "€450K"
-    period: "2022–2025"
+      The CHARM project is an Advanced Research Projects Agency for Health–funded initiative developing a complete, 
+      AI-enabled biomedical data pipeline that spans data collection through to clinical decision support.
+    team: [Chang Sun, Michel Dumontier]
+    funder: ARPA-H
+    amount: "€8.7M"
+    period: "2024–2027"
     status: Active
+    featured: true
+    logo: https://avatars.githubusercontent.com/u/197785359?s=200&v=4
 
-  - title: DiabAI
-    theme: Precision Medicine
+  - acronym: BDT
+    title: Biomedical Data Translator
+    theme: Neurosymbolic AI
     desc: >
-      A closed-loop AI system integrating CGM sensor data, lifestyle signals and
-      knowledge graphs to personalise insulin and dietary recommendations.
-    team: [Konstantia Zarkogianni, Aikaterina Kasimati]
+      The Biomedical Data Translator is a flagship program of the National Center for Advancing Translational Sciences 
+      that aims to integrate and “translate” diverse biomedical data into actionable knowledge for research and clinical discovery.
+    team: [Remzi Celebi, Michel Dumontier]
+    funder: NIH
+    amount: "€2.5M"
+    period: "2016–2024"
+    status: Completed
+    url: https://ncats.nih.gov/translator
+
+  - acronym: AMBROSIA
+    title: Ambrosia - Bridging Knowledge, Communication, and Action for Food Safety in a Changing Climate
+    theme: Precision Agriculture, Food & Health
+    desc: >
+      AMBROSIA is a Horizon Europe project focused on transforming how Europe assesses and manages food safety
+      risks under climate change. It develops a holistic, AI-enabled risk assessment framework that integrates
+      climate models with food safety data across the entire supply chain (“farm to fork”).
+    team: [Christopher Brewster, Michel Dumontier]
     funder: European Commission (Horizon Europe)
-    amount: "€1.8M"
+    amount: "€3.97M"
+    period: "2024–2027"
+    status: Active
+    url: https://www.ambrosia-project.eu/
+    logo: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJWx-L9ym7JzQwRVz7bExqj81WHofXg-NFUQ&s
+
+  - acronym: EU-FarmBook
+    title: EU-FarmBook
+    theme: Precision Agriculture, Food & Health
+    desc: >
+      EU-FarmBook develops an EU-wide digital knowledge platform to support knowledge exchange in agriculture 
+      and forestry. It connects stakeholders within Agricultural Knowledge and Innovation Systems (AKIS), 
+      including farmers, advisors, researchers, and policymakers.
+    team: [Christopher Brewster]
+    funder: European Commission (Horizon Europe)
+    amount: ""
+    period: "2022–2026"
+    status: Active
+    url: https://welcome.eufarmbook.eu/
+    logo: https://welcome.eufarmbook.eu/wp-content/uploads/Photo-01_EU-FarmBook_Logo_-Horizontal_Color.png
+
+  - acronym: GENIUS
+    title: Generative-Enhanced Next-generation Intelligent Understanding SystemsIUS
+    theme: Neurosymbolic AI
+    desc: >
+      GENIUS is a public-private partnership that specifically targets the development of next-generation generative AI systems that 
+      augment human expertise, combining advances in large language models with structured knowledge 
+      and domain-specific reasoning.
+    team: [Chang Sun, Remzi Celebi, Christopher Brewster, Michel Dumontier]
+    funder: NWO (Netherlands Organisation for Scientific Research)
+    amount: "€3M"
+    period: "2024–2028"
+    status: Active
+    url: https://www.genius-lab.nl/
+    logo: https://images.squarespace-cdn.com/content/v1/67b32da4169313782ad07b05/f892c172-2ee8-4f9c-8851-e7efb0c3e674/Genius+Transparent-V2.png?format=1500w
+
+  - acronym: iCARE4CVD
+    title: Intelligent CArdiovascular pREvention and care for Chronic Vascular Diseases
+    theme: Precision Medicine & Digital Health
+    desc: >
+      iCARE4CVD is a Horizon Europe project that develops AI-driven approaches for personalised
+      prevention and management of cardiovascular disease. It integrates clinical, lifestyle,
+      and real-world data (including wearables) to enable early risk prediction, continuous
+      monitoring, and tailored interventions, supporting a shift from reactive treatment to
+      proactive, preventive care.
+    team: [Visara Urovi, Michel Dumontier]
+    funder: European Union (Horizon Europe)
+    amount: "€6–10M"
     period: "2023–2027"
     status: Active
+    url: https://icare4cvd.eu/
+    logo: https://www.ihi.europa.eu/sites/default/files/projects/logos/iCare4CVD.png
 
-  - title: Multi-Omics Integration Platform
-    theme: Computational Biology
+  - acronym: DACIL
+    title: Developing A digital COPD companion for Improving Lifestyle
+    theme: Precision Medicine & Digital Health
     desc: >
-      Scalable computational workflows integrating genomics, proteomics and
-      metabolomics data to identify biomarkers for complex diseases.
-    team: [Rachel Cavill, Christopher Brewster]
-    funder: NWO
-    amount: "€650K"
-    period: "2021–2024"
-    status: Completed
-
-  - title: Rare Disease FAIR Portal
-    theme: FAIR Data
-    desc: >
-      FAIR data infrastructure for rare disease patient registries across 14 European
-      countries, supporting federated queries and metadata harmonisation.
-    team: [Remzi Celebi, Michel Dumontier]
-    funder: EC Rare Disease Programme
-    amount: "€1.2M"
-    period: "2020–2024"
-    status: Completed
-
-  - title: Smart Readmission Reduction
-    theme: Precision Medicine
-    desc: >
-      AI models predicting 30-day readmission risk, integrated in Maastricht UMC+
-      clinical workflow to support discharge planning decisions.
-    team: [Rohan Nanda]
-    funder: ZonMw
-    amount: "€320K"
-    period: "2022–2024"
-    status: Active
-
-  - title: Wearable EEG Seizure Monitor
-    theme: Signal Processing
-    desc: >
-      Lightweight deep learning pipeline for epileptic seizure detection on
-      low-power wearable EEG devices for home monitoring.
-    team: [Pietro Bonizzi]
-    funder: Epilepsy Fund NL
-    amount: "€280K"
-    period: "2023–2025"
+      DACIL develops an AI-supported digital companion for people with chronic obstructive pulmonary disease (COPD),
+      enabling continuous, non-invasive monitoring in the home environment using speech and sensor data. The system
+      supports early detection of disease deterioration and provides personalised lifestyle guidance, empowering
+      patients to self-manage their condition, reduce hospitalisation, and address health inequalities.
+    team: [Visara Urovi]
+    funder: NWO (Dutch Research Council) – KIC programme
+    amount: "Multi-partner public-private funding (exact amount not publicly specified)"
+    period: "2023–2029"
     status: Active

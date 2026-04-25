@@ -16,8 +16,95 @@
     .pub-stat:first-child { background: var(--slate); }
     .pub-stat-val { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 700; color: var(--slate); line-height: 1; }
     .pub-stat:first-child .pub-stat-val { color: var(--white); }
+    .pub-stat-val .denom { opacity: 0.45; font-size: 1.4rem; font-weight: 600; margin-left: 4px; }
     .pub-stat-lbl { font-size: 0.76rem; color: var(--text-muted); margin-top: 6px; }
     .pub-stat:first-child .pub-stat-lbl { color: rgba(255,255,255,0.5); }
+
+    .year-dist {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 28px;
+    }
+    .year-dist-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+    }
+    .year-dist-title {
+      font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.09em;
+      color: var(--text-muted); font-weight: 600;
+    }
+    .chart-toggle { display: flex; gap: 4px; }
+    .chart-toggle-btn {
+      padding: 3px 10px; border-radius: 5px; font-size: 0.72rem; font-weight: 500;
+      border: 1px solid var(--border); color: var(--text-muted); background: var(--white);
+      cursor: pointer; transition: all var(--transition);
+    }
+    .chart-toggle-btn.active { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+
+    .year-range-wrap {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 18px 24px; margin-bottom: 28px;
+    }
+    .year-range-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+    }
+    .year-range-label-val {
+      font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.9rem; color: var(--slate);
+    }
+    .year-range-track {
+      position: relative; height: 4px; background: var(--border); border-radius: 2px; margin: 10px 0;
+    }
+    .year-range-fill {
+      position: absolute; height: 100%; background: var(--blue); border-radius: 2px; pointer-events: none;
+    }
+    .year-range-track input[type=range] {
+      position: absolute; width: 100%; height: 4px; top: 0; left: 0; margin: 0;
+      -webkit-appearance: none; appearance: none;
+      background: transparent; pointer-events: none;
+    }
+    .year-range-track input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--blue); border: 2px solid var(--white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25); pointer-events: all; cursor: pointer;
+    }
+    .year-range-track input[type=range]::-moz-range-thumb {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--blue); border: 2px solid var(--white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25); pointer-events: all; cursor: pointer; border: none;
+    }
+    .year-range-ticks {
+      display: flex; justify-content: space-between;
+      font-size: 0.7rem; color: var(--text-muted); margin-top: 8px;
+      font-family: 'Fraunces', serif; font-weight: 600;
+    }
+    .year-chart {
+      display: flex; align-items: stretch; gap: 4px;
+      height: 200px; overflow-x: auto;
+    }
+    .year-bar-col {
+      flex: 1; min-width: 26px;
+      display: flex; flex-direction: column;
+    }
+    .year-bar-stack {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: flex-end; align-items: stretch;
+    }
+    .year-bar-val {
+      text-align: center; font-size: 0.66rem; color: var(--text-muted);
+      font-variant-numeric: tabular-nums; margin-bottom: 2px; min-height: 12px;
+    }
+    .year-bar-fill {
+      background: var(--blue); border-radius: 4px 4px 0 0;
+      width: 100%; transition: height var(--transition);
+    }
+    .year-bar-col:hover .year-bar-fill { background: var(--blue-mid); }
+    .year-bar-label {
+      font-size: 0.72rem; color: var(--text-muted); text-align: center;
+      margin-top: 6px; font-family: 'Fraunces', serif; font-weight: 600;
+    }
+    .year-baseline {
+      font-size: 0.7rem; color: var(--text-muted); text-align: right;
+      margin-top: 6px; font-variant-numeric: tabular-nums;
+    }
 
     .pure-notice {
       background: var(--blue-lighter); border: 1px solid rgba(46,143,160,0.2);
@@ -44,6 +131,9 @@
     .pub-title-link:hover { color: var(--blue); }
     .pub-authors { font-size: 0.81rem; color: var(--text-muted); margin-bottom: 4px; }
     .pub-venue   { font-size: 0.79rem; font-style: italic; color: var(--text-light); margin-bottom: 8px; }
+    .pub-summary { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 8px; }
+    .pub-summary-toggle { font-size: 0.74rem; color: var(--blue); background: none; border: none; padding: 0; cursor: pointer; margin-bottom: 8px; }
+    .pub-summary-toggle:hover { text-decoration: underline; }
     .pub-actions { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
     .pub-action {
       padding: 4px 11px; border-radius: 5px; font-size: 0.74rem; font-weight: 500;
@@ -51,6 +141,7 @@
       transition: all var(--transition); display: inline-flex; align-items: center; gap: 4px;
     }
     .pub-action:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .pub-action-success { border-color: var(--blue) !important; color: var(--blue) !important; background: var(--blue-light) !important; }
 
     @media (max-width: 580px) { .pub-stats { grid-template-columns: repeat(2,1fr); } }
   </style>
@@ -72,9 +163,20 @@
     <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
     <div id="pubPage" class="hidden">
       <div class="pub-stats" id="pubStats"></div>
-      <div class="pure-notice">
-        🔗 This is a curated selection.
-        For the complete live record see our <a href="https://cris.maastrichtuniversity.nl" target="_blank" style="font-weight:600;color:var(--blue)">PURE research portal</a> — API integration coming soon.
+      <div class="year-dist" id="yearDist"></div>
+      <div class="year-range-wrap hidden" id="yearRange">
+        <div class="year-range-header">
+          <span class="year-dist-title">Year range</span>
+          <span class="year-range-label-val" id="yearRangeLabelVal"></span>
+        </div>
+        <div class="year-range-track">
+          <div class="year-range-fill" id="yearRangeFill"></div>
+          <input type="range" id="yearMin" />
+          <input type="range" id="yearMax" />
+        </div>
+        <div class="year-range-ticks">
+          <span id="yearTickMin"></span><span id="yearTickMax"></span>
+        </div>
       </div>
       <div class="filter-bar">
         <input class="search-input" id="pubSearch" type="text" placeholder="Search title, author or keyword…" oninput="renderPubs()" />
@@ -86,29 +188,162 @@
 </section>
 
 <script>
-let allPubs = [], activeType = 'All';
+let allPubs = [], orcidToName = {}, activeType = 'All', activeChart = 'publications';
+let totalCount = 0, totalCitations = 0, currentYearLabel = '';
+let activeYearMin = null, activeYearMax = null;
 
 (async () => {
-  const data = await CMS.load('content/publications.yaml');
+  const [data, people] = await CMS.loadAll(
+    'content/publications.generated.yaml',
+    'content/people.yaml'
+  );
   allPubs = data.publications;
+  orcidToName = Object.fromEntries(
+    (people || []).filter(p => p.orcid).map(p => [p.orcid, p.name])
+  );
+  totalCount = allPubs.length;
+  totalCitations = allPubs.reduce((s,p) => s + (p.citations||0), 0);
+  currentYearLabel = data.stats.this_year_label || `Published in ${new Date().getFullYear()}`;
 
-  /* Stats */
-  const s = data.stats;
-  document.getElementById('pubStats').innerHTML = `
-    <div class="pub-stat"><div class="pub-stat-val">${s.total}</div><div class="pub-stat-lbl">Total publications</div></div>
-    <div class="pub-stat"><div class="pub-stat-val">${s.citations}</div><div class="pub-stat-lbl">Total citations</div></div>
-    <div class="pub-stat"><div class="pub-stat-val">${s.h_index}</div><div class="pub-stat-lbl">h-index (group)</div></div>
-    <div class="pub-stat"><div class="pub-stat-val">${s.this_year}</div><div class="pub-stat-lbl">${s.this_year_label}</div></div>`;
+  /* Pre-fill search from ?q=… so person modals can deep-link here. */
+  const urlQ = new URLSearchParams(location.search).get('q');
+  if (urlQ) document.getElementById('pubSearch').value = urlQ;
 
   const types = ['All', ...new Set(allPubs.map(p=>p.type))];
   document.getElementById('typeChips').innerHTML = types.map(t=>
     `<button class="chip${t==='All'?' active':''}" onclick="setType('${t}')">${t}</button>`
   ).join('');
 
+  const dataMinYear = Math.min(...allPubs.map(p => p.year));
+  const dataMaxYear = Math.max(...allPubs.map(p => p.year));
+  initRangeSlider(dataMinYear, dataMaxYear);
+
   document.getElementById('loading').remove();
   document.getElementById('pubPage').classList.remove('hidden');
   renderPubs();
 })();
+
+function initRangeSlider(minY, maxY) {
+  activeYearMin = minY;
+  activeYearMax = maxY;
+  const minInput = document.getElementById('yearMin');
+  const maxInput = document.getElementById('yearMax');
+  minInput.min = maxInput.min = minY;
+  minInput.max = maxInput.max = maxY;
+  minInput.value = minY;
+  maxInput.value = maxY;
+  document.getElementById('yearTickMin').textContent = minY;
+  document.getElementById('yearTickMax').textContent = maxY;
+  minInput.oninput = () => {
+    if (+minInput.value > +maxInput.value) minInput.value = maxInput.value;
+    activeYearMin = +minInput.value;
+    updateRangeSlider();
+    renderPubs();
+  };
+  maxInput.oninput = () => {
+    if (+maxInput.value < +minInput.value) maxInput.value = minInput.value;
+    activeYearMax = +maxInput.value;
+    updateRangeSlider();
+    renderPubs();
+  };
+  document.getElementById('yearRange').classList.remove('hidden');
+  updateRangeSlider();
+}
+
+function updateRangeSlider() {
+  const minInput = document.getElementById('yearMin');
+  const maxInput = document.getElementById('yearMax');
+  const lo = +minInput.value, hi = +maxInput.value;
+  const total = +minInput.max - +minInput.min;
+  const leftPct  = (lo - +minInput.min) / total * 100;
+  const rightPct = (hi - +minInput.min) / total * 100;
+  document.getElementById('yearRangeFill').style.cssText =
+    `left:${leftPct}%;width:${rightPct - leftPct}%`;
+  document.getElementById('yearRangeLabelVal').textContent =
+    lo === hi ? lo : `${lo} – ${hi}`;
+}
+
+function fmt(n) { return Number(n).toLocaleString(); }
+
+function hIndex(citations) {
+  const sorted = citations.slice().sort((a,b) => b - a);
+  let h = 0;
+  for (let i = 0; i < sorted.length; i++) {
+    if (sorted[i] >= i + 1) h = i + 1;
+    else break;
+  }
+  return h;
+}
+
+function renderStats(filtered) {
+  const isFiltered = filtered.length !== totalCount;
+  const cites = filtered.reduce((s,p) => s + (p.citations||0), 0);
+  const h = hIndex(filtered.map(p => p.citations||0));
+  const currentYear = new Date().getFullYear();
+  const inThisYear = filtered.filter(p => p.year === currentYear).length;
+
+  const num = (val, total) =>
+    isFiltered ? `${fmt(val)}<span class="denom">/ ${fmt(total)}</span>` : fmt(total);
+
+  document.getElementById('pubStats').innerHTML = `
+    <div class="pub-stat"><div class="pub-stat-val">${num(filtered.length, totalCount)}</div><div class="pub-stat-lbl">${isFiltered?'Matching':'Total'} publications</div></div>
+    <div class="pub-stat"><div class="pub-stat-val">${num(cites, totalCitations)}</div><div class="pub-stat-lbl">${isFiltered?'Citations in selection':'Total citations'}</div></div>
+    <div class="pub-stat"><div class="pub-stat-val">${fmt(h)}</div><div class="pub-stat-lbl">h-index${isFiltered?' (selection)':' (group)'}</div></div>
+    <div class="pub-stat"><div class="pub-stat-val">${fmt(inThisYear)}</div><div class="pub-stat-lbl">${currentYearLabel}</div></div>`;
+}
+
+function setChart(mode) {
+  activeChart = mode;
+  renderYearDist(window._lastFiltered || []);
+}
+
+function renderYearDist(filtered) {
+  window._lastFiltered = filtered;
+  const toggleHtml = `
+    <div class="chart-toggle">
+      <button class="chart-toggle-btn${activeChart==='publications'?' active':''}" onclick="setChart('publications')">Publications</button>
+      <button class="chart-toggle-btn${activeChart==='citations'?' active':''}" onclick="setChart('citations')">Citations</button>
+    </div>`;
+
+  if (!filtered.length) {
+    document.getElementById('yearDist').innerHTML =
+      `<div class="year-dist-header"><div class="year-dist-title">No data</div>${toggleHtml}</div>
+       <div style="color:var(--text-muted);font-size:0.84rem">No matching publications.</div>`;
+    return;
+  }
+
+  const citesByYear = {}, pubsByYear = {};
+  filtered.forEach(p => {
+    citesByYear[p.year] = (citesByYear[p.year]||0) + (p.citations||0);
+    pubsByYear[p.year]  = (pubsByYear[p.year] ||0) + 1;
+  });
+  const minY = Math.min(...filtered.map(p => p.year));
+  const maxY = Math.max(...filtered.map(p => p.year));
+  const years = [];
+  for (let y = minY; y <= maxY; y++) years.push(y);
+
+  const isCitations = activeChart === 'citations';
+  const dataByYear  = isCitations ? citesByYear : pubsByYear;
+  const title       = isCitations ? 'Citations per year' : 'Publications per year';
+  const dataMax     = Math.max(1, ...years.map(y => dataByYear[y] || 0));
+
+  document.getElementById('yearDist').innerHTML = `
+    <div class="year-dist-header"><div class="year-dist-title">${title}</div>${toggleHtml}</div>
+    <div class="year-chart">
+      ${years.map(y => {
+        const val = dataByYear[y] || 0;
+        const pct = Math.max(val > 0 ? 2 : 0, val / dataMax * 100);
+        return `
+          <div class="year-bar-col" title="${y}: ${fmt(val)} ${isCitations?'citations':'publications'}">
+            <div class="year-bar-stack">
+              <span class="year-bar-val">${val > 0 ? fmt(val) : ''}</span>
+              <div class="year-bar-fill" style="height:${pct}%"></div>
+            </div>
+            <div class="year-bar-label">${String(y).slice(2)}</div>
+          </div>`;
+      }).join('')}
+    </div>`;
+}
 
 function setType(t) {
   activeType = t;
@@ -120,9 +355,15 @@ function renderPubs() {
   const q = document.getElementById('pubSearch').value.toLowerCase();
   const filtered = allPubs.filter(p => {
     const typeOk = activeType==='All' || p.type===activeType;
-    const qOk = !q || (p.title+p.authors+(p.tags||[]).join(' ')).toLowerCase().includes(q);
-    return typeOk && qOk;
+    const yearOk = activeYearMin === null || (p.year >= activeYearMin && p.year <= activeYearMax);
+    const memberNames = (p.orcids||[]).map(o => orcidToName[o] || '').join(' ');
+    const haystack = [p.title, p.authors, (p.tags||[]).join(' '), memberNames, p.summary||'', p.abstract||''].join(' ').toLowerCase();
+    const qOk = !q || haystack.includes(q);
+    return typeOk && yearOk && qOk;
   });
+
+  renderStats(filtered);
+  renderYearDist(filtered);
 
   const byYear = {};
   filtered.forEach(p => { if (!byYear[p.year]) byYear[p.year]=[]; byYear[p.year].push(p); });
@@ -138,13 +379,14 @@ function renderPubs() {
             <a class="pub-title-link" href="${p.doi?'https://doi.org/'+p.doi:'#'}" target="_blank">${p.title}</a>
             <div class="pub-authors">${p.authors}</div>
             <div class="pub-venue">${p.venue}</div>
+            ${p.summary ? `<div class="pub-summary">${p.summary}</div>` : ''}
             <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">
               ${(p.tags||[]).map(t=>`<span class="tag tag-muted">${t}</span>`).join('')}
             </div>
             <div class="pub-actions">
               ${p.doi?`<a class="pub-action" href="https://doi.org/${p.doi}" target="_blank">🔗 DOI</a>`:''}
-              <a class="pub-action" href="#">📄 PDF</a>
-              <a class="pub-action" href="#">📋 Cite</a>
+              <button class="pub-action" onclick="citeToClipboard(this)" data-citation="${buildVancouver(p).replace(/"/g,'&quot;')}">📋 Cite</button>
+              <button class="pub-action" onclick="citeToClipboard(this)" data-citation="${buildBibtex(p).replace(/"/g,'&quot;')}">BibTeX</button>
             </div>
           </div>
         </div>`).join('')}
@@ -152,6 +394,48 @@ function renderPubs() {
   : '<p style="text-align:center;padding:48px;color:var(--text-muted)">No publications match your search.</p>';
 
   CMS.revealNew(document.getElementById('pubList'));
+}
+
+function buildVancouver(p) {
+  const parts = [];
+  if (p.authors) parts.push(p.authors + '.');
+  if (p.title)   parts.push(p.title + '.');
+  if (p.venue)   parts.push(p.venue + '.');
+  parts.push(String(p.year) + '.');
+  if (p.doi)     parts.push('doi:' + p.doi);
+  return parts.join(' ');
+}
+
+function buildBibtex(p) {
+  const typeMap = {
+    'Journal': 'article', 'Conference': 'inproceedings',
+    'Book Chapter': 'incollection', 'Book': 'book',
+    'Preprint': 'misc', 'Report': 'techreport',
+    'Dataset': 'misc', 'Thesis': 'phdthesis',
+  };
+  const entryType = typeMap[p.type] || 'misc';
+  const firstAuthor = (p.authors || '').split(',')[0].trim().split(' ')[0];
+  const titleWord = (p.title || '').split(/\s+/).find(w => w.length > 3) || '';
+  const key = (firstAuthor + p.year + titleWord).replace(/[^a-zA-Z0-9]/g, '');
+  const venueField = entryType === 'article' ? 'journal'
+    : entryType === 'inproceedings' ? 'booktitle' : 'publisher';
+  const lines = [`@${entryType}{${key},`];
+  if (p.authors) lines.push(`  author    = {${p.authors}},`);
+  if (p.title)   lines.push(`  title     = {${p.title}},`);
+  if (p.venue)   lines.push(`  ${venueField.padEnd(9)} = {${p.venue}},`);
+  lines.push(`  year      = {${p.year}},`);
+  if (p.doi)     lines.push(`  doi       = {${p.doi}},`);
+  lines.push('}');
+  return lines.join('\n');
+}
+
+function citeToClipboard(btn) {
+  navigator.clipboard.writeText(btn.dataset.citation).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    btn.classList.add('pub-action-success');
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('pub-action-success'); }, 2000);
+  });
 }
 </script>
 </body>

@@ -70,7 +70,7 @@
   <div class="container">
     <span class="section-label">What we investigate</span>
     <h1>Research</h1>
-    <p class="lead">Six interconnected themes advancing health AI — from data infrastructure to clinical translation.</p>
+    <p class="lead">Six interconnected themes advancing health AI — from data infrastructure to AI deployment.</p>
   </div>
 </div>
 
@@ -91,7 +91,10 @@
     </div>
     <div class="filter-bar">
       <input class="search-input" id="projSearch" type="text" placeholder="Search projects…" oninput="filterProjects()" />
+      <div style="flex-basis:100%;height:0"></div>
       <div class="filter-chips" id="projChips"></div>
+      <div style="flex-basis:100%;height:0"></div>
+      <div class="filter-chips" id="statusChips"></div>
     </div>
     <div class="grid-3" id="allProjects"></div>
   </div>
@@ -110,7 +113,8 @@
   /* Theme sections */
   document.getElementById('themesContainer').innerHTML = data.themes.map((t,i) => {
     const themeProjs = data.projects.filter(p =>
-      t.projects.some(tp => p.title.toLowerCase().startsWith(tp.split(' ')[0].toLowerCase()))
+      p.status === 'Active' &&
+      t.projects.some(tp => p.acronym.toLowerCase().startsWith(tp.split(' ')[0].toLowerCase()))
     ).slice(0,3);
 
     return `
@@ -134,7 +138,8 @@
                     <span class="tag">${p.theme}</span>
                     <span class="tag ${p.status==='Active'?'tag-active':'tag-muted'}" style="font-size:0.7rem">${p.status}</span>
                   </div>
-                  <h4>${p.title}</h4>
+                  <h4>${p.acronym}</h4>
+                  <p>${p.title.trim()}</p>
                   <p>${p.desc.trim()}</p>
                   <div class="proj-mini-meta">
                     <span>${p.funder} · ${p.amount}</span>
@@ -156,8 +161,24 @@
     `<button class="chip${t==='All'?' active':''}" onclick="setTag('${t}')">${t}</button>`
   ).join('');
 
+  const statuses = ['All', ...new Set(data.projects.map(p=>p.status))];
+  document.getElementById('statusChips').innerHTML = statuses.map(s=>
+    `<button class="chip${s==='Active'?' active':''}" onclick="setStatus('${s}')">${s}</button>`
+  ).join('');
+
   window._projects = data.projects;
   filterProjects();
+
+  /* Jump to the URL hash now that themes + all-projects grid are rendered.
+     The browser's native anchor-scroll ran before the yaml finished loading,
+     when the target either didn't exist (#theme-<id>) or its final offset
+     wasn't yet stable (#projects, pushed down as themes populate). */
+  if (location.hash) {
+    requestAnimationFrame(() => {
+      const target = document.querySelector(location.hash);
+      if (target) target.scrollIntoView();
+    });
+  }
 
   /* Sticky active subnav */
   const themeEls = data.themes.map(t => document.getElementById('theme-'+t.id));
@@ -171,17 +192,24 @@
 })();
 
 let activeTag = 'All';
+let activeStatus = 'Active';
 function setTag(t) {
   activeTag = t;
   document.querySelectorAll('#projChips .chip').forEach(c=>c.classList.toggle('active',c.textContent===t));
+  filterProjects();
+}
+function setStatus(s) {
+  activeStatus = s;
+  document.querySelectorAll('#statusChips .chip').forEach(c=>c.classList.toggle('active',c.textContent===s));
   filterProjects();
 }
 function filterProjects() {
   const q = document.getElementById('projSearch').value.toLowerCase();
   const filtered = (window._projects||[]).filter(p => {
     const tagOk = activeTag==='All' || p.theme===activeTag;
+    const statusOk = activeStatus==='All' || p.status===activeStatus;
     const qOk = !q || (p.title+p.desc+p.team.join(' ')).toLowerCase().includes(q);
-    return tagOk && qOk;
+    return tagOk && statusOk && qOk;
   });
   document.getElementById('allProjects').innerHTML = filtered.map(p=>`
     <div class="all-proj-card reveal">
@@ -189,7 +217,8 @@ function filterProjects() {
         <span class="tag">${p.theme}</span>
         <span class="tag ${p.status==='Active'?'tag-active':'tag-muted'}">${p.status}</span>
       </div>
-      <h4>${p.title}</h4>
+      <h4>${p.acronym}</h4>
+      <p>${p.title.trim()}</p>
       <p>${p.desc.trim()}</p>
       <div class="proj-detail">
         <span>${p.funder} · ${p.amount}</span>

@@ -8,21 +8,21 @@ pure_url: https://cris.maastrichtuniversity.nl
 um_url: https://www.maastrichtuniversity.nl
 dacs_url: https://www.dacs.unimaas.nl
 
-tagline: AI for a healthier world
-tagline_italic: healthier
+tagline: Responsible Data Science. Trustworthy AI. Better Health
+tagline_italic: Better Health
 hero_body: >
-  We develop artificial intelligence and data science methods that transform
-  how healthcare knowledge is created, shared, and applied —
-  from the clinic to the genome.
-
+  We use data science and AI to explore what we eat, how we live, and how healthy we are — from the molecular machines in our body, to the nutrients in our food, and to the health of our planet.
+  
+  Our work combines responsible data science with trustworthy artificial intelligence to make make data usable and to ensure AI is aligned to human values. We build tools that bring knowledge to the fingertips of citizens, researchers, clinicians, farmers, and policymakers so they can make better decisions. 
+  
 stats:
-  - value: "10"
+  - source: people.faculty
     label: Faculty members
-  - value: "30+"
+  - source: people.researchers
     label: Researchers & staff
-  - value: "€12M+"
+  - source: funding.active
     label: Active funding
-  - value: "200+"
+  - source: publications.total
     label: Publications
 
 nav_links:
@@ -32,8 +32,8 @@ nav_links:
     href: people.html
   - label: Publications
     href: publications.html
-  - label: Media
-    href: media.html
+  - label: News
+    href: news.html
   - label: Students
     href: students.html
     cta: true

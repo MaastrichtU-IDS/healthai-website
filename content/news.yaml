@@ -1,0 +1,106 @@
+news:
+- day: '25'
+  month: Apr
+  year: 2026
+  title: Welcome to the new HAIR Group website
+  body: "We've launched a new website for the Health AI Research Group at Maastricht\
+    \ University. It brings together our people, research themes, publications, and\
+    \ news in one place — with live data drawn from ORCID and Crossref. Explore\
+    \ what we do and get in touch."
+blog:
+- date: 20 Apr 2026
+  tag: Machine Learning
+  title: 'Principal Component Analysis: Cutting Through High-Dimensional Data to Find
+    What Actually Matters'
+  url: https://rcelebi.github.io/posts/2026/04/PCA-dimension-reduction/
+  excerpt: '1. Introduction: The Curse of Dimensionality'
+  author: Remzi Celebi
+  initials: RC
+  img: ''
+  source: feed
+- date: 15 Apr 2026
+  tag: Data Visualization
+  title: 'Data Visualization and Exploration: A Scientific Necessity'
+  url: https://rcelebi.github.io/posts/2026/04/data-visualization/
+  excerpt: Data visualization is far more than creating aesthetic charts; it is a
+    critical scientific tool for understanding trends and patterns. Our biological
+    capacity to process information is physically limited, but our visual sense acts
+    as a high-bandwidth "network cable" for…
+  author: Remzi Celebi
+  initials: RC
+  img: ''
+  source: feed
+- date: 10 Apr 2026
+  tag: Machine Learning
+  title: 'Data Preprocessing: Why Noisy and Incomplete Data Breaks Machine Learning
+    Models'
+  url: https://rcelebi.github.io/posts/2026/04/data-preprocessing/
+  excerpt: 1. The Messy Reality of Raw Data
+  author: Remzi Celebi
+  initials: RC
+  img: ''
+  source: feed
+- date: 10 Apr 2026
+  tag: Machine Learning
+  title: 'Feature Engineering: Teaching Machines What to See'
+  url: https://rcelebi.github.io/posts/2026/04/feature-engineering/
+  excerpt: 'Introduction: The Signal and the Noise'
+  author: Remzi Celebi
+  initials: RC
+  img: ''
+  source: feed
+- date: 4 Apr 2026
+  tag: Large Language Models
+  title: 'Beyond Leaderboards: Why Ontology-Based Benchmarks Give a More Accurate
+    Picture of LLM Reasoning'
+  url: https://rcelebi.github.io/posts/2026/04/ontology-based-llm-benchmarks/
+  excerpt: Everyone agrees that Large Language Models should be evaluated rigorously.
+    Dozens of benchmarks exist — MMLU, HellaSwag, BIG-Bench, GSM8K, and many more.
+    Leaderboards are updated weekly. New models claim state-of-the-art performance
+    almost daily.
+  author: Remzi Celebi
+  initials: RC
+  img: ''
+  source: feed
+- date: 4 Apr 2026
+  tag: Knowledge Graphs
+  title: Why Knowledge Graphs Still Matter in the Age of LLMs
+  url: https://rcelebi.github.io/posts/2026/04/why-knowledge-graphs-still-matter/
+  excerpt: 'Large Language Models have taken the world by storm. GPT-4, Llama, Mistral
+    — they can write code, summarise papers, answer complex questions, and even pass
+    medical licensing exams. It is tempting to ask: if LLMs can do all of this,…'
+  author: Remzi Celebi
+  initials: RC
+  img: ''
+  source: feed
+- date: 6 May 2022
+  tag: Knowlegde Graphs
+  title: KG Construction From Unstructured Text
+  url: https://rcelebi.github.io/posts/2022/05/blog_1_kg_construction/
+  excerpt: Lots of valuable information is available on the web such as Twitter, legal
+    documents, financial/sports news and scientific articles as unstructured data.
+    Although a lot of Knowledge Graphs (KGs) including WikiData and DBPedia are made
+    publicly available, it may be…
+  author: Remzi Celebi
+  initials: RC
+  img: ''
+  source: feed
+talks:
+- event: 'Official visit of Ms. Maria Cristina Russo (Deputy Director-General, DG RTD, European Commission) to Maastricht University'
+  date: 22 Apr 2026
+  title: 'AI for Europe: Trust. Understand. Apply.'
+  speaker: Michel Dumontier
+  type: Presentation
+  url: https://doi.org/10.5281/zenodo.19764579
+  description: The presentation outlines a vision for positioning Europe as a global
+    leader in artificial intelligence by focusing on trustworthy, interpretable, and
+    impactful AI. It argues that AI should function as a public good—reliable, accountable,
+    and beneficial to society—while advancing European science.
+podcasts:
+- show: The Digital Health Podcast
+  episode: Ep. 142
+  title: 'AI that respects privacy: building the Personal Health Train'
+  guest: Visara Urovi
+  duration: 48 min
+  date: Mar 2026
+  icon: 🤖

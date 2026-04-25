@@ -5,16 +5,14 @@
     { href: 'research.html',     label: 'Research',     special: false },
     { href: 'people.html',       label: 'People',       special: false },
     { href: 'publications.html', label: 'Publications', special: false },
-    { href: 'media.html',        label: 'Media',        special: false },
-    { href: 'students.html',     label: 'Students',     special: true  },
+    { href: 'news.html',        label: 'News',        special: false },
   ];
 
   const DISPLAY_LINKS = [
     { href: 'research.html',     label: 'Research'     },
     { href: 'people.html',       label: 'People'       },
     { href: 'publications.html', label: 'Publications' },
-    { href: 'media.html',        label: 'Media'        },
-    { href: 'students.html',     label: 'Students', cta: true },
+    { href: 'news.html',        label: 'News'        },
   ];
 
   function buildNav() {
@@ -69,16 +67,14 @@
             <h5>Group</h5>
             <ul>
               <li><a href="people.html">People</a></li>
-              <li><a href="media.html">News & Media</a></li>
-              <li><a href="students.html">For Students</a></li>
+              <li><a href="news.html">News & Media</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h5>University</h5>
             <ul>
               <li><a href="https://www.maastrichtuniversity.nl" target="_blank">Maastricht University</a></li>
-              <li><a href="https://www.dacs.unimaas.nl" target="_blank">Dept. of ACS</a></li>
-              <li><a href="https://cris.maastrichtuniversity.nl" target="_blank">PURE Portal</a></li>
+              <li><a href="https://maastrichtuniversity.nl/dacs" target="_blank">DACS</a></li>
             </ul>
           </div>
         </div>

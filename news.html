@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media · HAIR Group · Maastricht University</title>
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+
+    .news-search { position:relative; margin-bottom:16px; }
+    .news-search input {
+      width:100%; padding:11px 40px 11px 42px; font-size:0.95rem;
+      border:1px solid var(--border); border-radius: var(--radius-lg);
+      background:var(--white); color:var(--slate); outline:none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      box-sizing:border-box;
+    }
+    .news-search input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+    .news-search .search-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:1rem; pointer-events:none; }
+    .news-search .search-clear { position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:var(--text-muted); font-size:1.1rem; line-height:1; padding:0; display:none; }
+
+    .type-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; }
+    .type-filter {
+      padding:5px 14px; border-radius:99px; font-size:0.82rem; font-weight:600;
+      border:1px solid var(--border); background:var(--white); color:var(--text-muted);
+      cursor:pointer; transition: all var(--transition);
+    }
+    .type-filter:hover { border-color:var(--slate); color:var(--slate); }
+    .type-filter.active { background:var(--slate); color:white; border-color:var(--slate); }
+
+    .item-row { display:flex; gap:14px; padding:18px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+    .item-type { flex-shrink:0; font-size:0.67rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:3px 8px; border-radius:4px; margin-top:3px; white-space:nowrap; }
+    .itype-news     { background:#dbeafe; color:#1e40af; }
+    .itype-blog     { background:#dcfce7; color:#166534; }
+    .itype-talk     { background:#fef3c7; color:#92400e; }
+    .itype-podcast  { background:#f3e8ff; color:#6b21a8; }
+    .item-title { font-family:'Fraunces',serif; font-size:0.97rem; font-weight:700; color:var(--slate); line-height:1.35; margin-bottom:4px; }
+    .item-title a { color:inherit; text-decoration:none; }
+    .item-title a:hover { color:var(--blue); }
+    .item-meta { font-size:0.79rem; color:var(--text-muted); margin-bottom:5px; }
+    .item-excerpt { font-size:0.84rem; color:var(--text); line-height:1.55; margin-top:5px; }
+    .no-results { padding:48px 0; text-align:center; color:var(--text-muted); }
+  </style>
+</head>
+<body class="page-body">
+<script src="nav.js"></script>
+<script src="cms.js"></script>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="section-label">The latest news</span>
+    <h1>News & Media</h1>
+    <p class="lead">News, press, blog posts, talks, and podcasts from the HAIR Group.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
+    <div id="mediaPage" class="hidden" style="max-width:780px">
+      <div class="news-search">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="newsSearch" placeholder="Search news, blog posts, talks, podcasts…" oninput="renderItems()">
+        <button class="search-clear" id="searchClear" onclick="clearSearch()" title="Clear">✕</button>
+      </div>
+      <div class="type-filters">
+        <button class="type-filter active" data-type="all"     onclick="setFilter(this)">All</button>
+        <button class="type-filter"        data-type="news"    onclick="setFilter(this)">News</button>
+        <button class="type-filter"        data-type="talk"    onclick="setFilter(this)">Presentations</button>
+        <button class="type-filter"        data-type="blog"    onclick="setFilter(this)">Blog posts</button>
+        <button class="type-filter"        data-type="podcast" onclick="setFilter(this)">Podcasts</button>
+      </div>
+      <div id="itemsList"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+let _items = [];
+let _activeFilter = 'all';
+
+(async () => {
+  const data = await CMS.load('content/news.yaml');
+  document.getElementById('loading').remove();
+  document.getElementById('mediaPage').classList.remove('hidden');
+
+  const toDate = s => s ? new Date(s) : new Date(0);
+  _items = [
+    ...(data.news||[]).map(n => ({
+      type: 'news', label: 'News',
+      title: n.title, url: n.url || null,
+      meta: [n.day, n.month, n.year].filter(Boolean).join(' '),
+      excerpt: n.body || '',
+      search: [n.title, n.body].join(' '),
+      sortDate: toDate(`${n.day} ${n.month} ${n.year}`),
+    })),
+    ...(data.blog||[]).map(b => ({
+      type: 'blog', label: 'Blog',
+      title: b.title, url: b.url || null,
+      meta: [b.author, b.tag, b.date].filter(Boolean).join(' · '),
+      excerpt: b.excerpt || '',
+      search: [b.title, b.excerpt, b.author, b.tag].join(' '),
+      sortDate: toDate(b.date),
+    })),
+    ...(data.talks||[]).map(t => ({
+      type: 'talk', label: 'Talk',
+      title: t.title, url: t.url || null,
+      meta: [t.type, t.speaker, t.event, t.date].filter(Boolean).join(' · '),
+      excerpt: t.description || '',
+      search: [t.title, t.speaker, t.event, t.type, t.description].join(' '),
+      sortDate: toDate(t.date),
+    })),
+    ...(data.podcasts||[]).map(p => ({
+      type: 'podcast', label: 'Podcast',
+      title: p.title, url: null,
+      meta: [p.show, p.guest, p.date, p.duration].filter(Boolean).join(' · '),
+      excerpt: '',
+      search: [p.title, p.show, p.guest].join(' '),
+      sortDate: toDate(p.date),
+    })),
+  ].sort((a, b) => b.sortDate - a.sortDate);
+
+  renderItems();
+  CMS.revealNew(document.getElementById('mediaPage'));
+})();
+
+function renderItems() {
+  const q = (document.getElementById('newsSearch').value || '').trim().toLowerCase();
+  document.getElementById('searchClear').style.display = q ? 'block' : 'none';
+
+  const hits = _items.filter(item => {
+    const typeOk = _activeFilter === 'all' || item.type === _activeFilter;
+    const textOk = !q || item.search.toLowerCase().includes(q);
+    return typeOk && textOk;
+  });
+
+  const list = document.getElementById('itemsList');
+  if (!hits.length) {
+    list.innerHTML = `<div class="no-results">No results${q ? ` for "<strong>${q}</strong>"` : ''}.</div>`;
+    return;
+  }
+  list.innerHTML = hits.map(h => `
+    <div class="item-row">
+      <span class="item-type itype-${h.type}">${h.label}</span>
+      <div>
+        <div class="item-title">${h.url ? `<a href="${h.url}" target="_blank" rel="noopener">${h.title}</a>` : h.title}</div>
+        <div class="item-meta">${h.meta}</div>
+        ${h.excerpt ? `<div class="item-excerpt">${h.excerpt.trim()}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+function setFilter(btn) {
+  _activeFilter = btn.dataset.type;
+  document.querySelectorAll('.type-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderItems();
+}
+
+function clearSearch() {
+  document.getElementById('newsSearch').value = '';
+  renderItems();
+  document.getElementById('newsSearch').focus();
+}
+</script>
+</body>
+</html>

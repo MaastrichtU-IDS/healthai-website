@@ -9,14 +9,13 @@
   <style>
     /* ── Hero ── */
     .hero {
-      min-height: 88vh; display: grid;
-      grid-template-columns: 1fr 1fr;
+      min-height: 88vh; display: flex; align-items: center;
       border-bottom: 1px solid var(--border);
     }
     .hero-left {
-      padding: 80px 64px 80px 32px;
+      padding: 80px 64px;
       display: flex; flex-direction: column; justify-content: center;
-      max-width: 640px; margin-left: auto;
+      max-width: 900px; margin: 0 auto; width: 100%;
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
@@ -29,7 +28,7 @@
     .hero h1 em { color: var(--blue); font-style: italic; font-weight: 300; }
     .hero .lead {
       font-size: 1.06rem; color: var(--text-muted);
-      line-height: 1.8; max-width: 460px; margin-bottom: 36px;
+      line-height: 1.8; margin-bottom: 36px;
     }
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
     .hero-stats {
@@ -64,13 +63,17 @@
       box-shadow: var(--card-shadow-hover);
     }
     .hero-photo-inner .img-placeholder { height: 100%; }
+    .hero-photo-inner img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
 
     /* ── Theme cards ── */
     .theme-card {
       background: var(--white); border: 1px solid var(--border);
       border-radius: var(--radius-lg); padding: 24px 22px;
       box-shadow: var(--card-shadow);
-      transition: all var(--transition); cursor: default;
+      transition: all var(--transition); cursor: pointer;
+      display: block; color: inherit; text-decoration: none;
     }
     .theme-card:hover {
       border-color: var(--blue); box-shadow: var(--card-shadow-hover);
@@ -112,6 +115,15 @@
     .pub-title { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: var(--slate); margin-bottom: 5px; line-height: 1.35; }
     .pub-authors { font-size: 0.81rem; color: var(--text-muted); margin-bottom: 4px; }
     .pub-venue   { font-size: 0.79rem; font-style: italic; color: var(--text-light); }
+    .pub-summary { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; margin-top: 6px; }
+    .pub-actions { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
+    .pub-action {
+      padding: 4px 11px; border-radius: 5px; font-size: 0.74rem; font-weight: 500;
+      border: 1px solid var(--border); color: var(--text-muted); background: none;
+      transition: all var(--transition); display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+    }
+    .pub-action:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .pub-action-success { border-color: var(--blue) !important; color: var(--blue) !important; background: var(--blue-light) !important; }
 
     /* ── News ── */
     .news-row {
@@ -122,7 +134,14 @@
     .news-day { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: var(--slate); line-height: 1; }
     .news-mon { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
     .news-content h5 { margin-bottom: 4px; font-size: 0.92rem; }
+    .news-content h5 a { color: inherit; text-decoration: none; }
+    .news-content h5 a:hover { color: var(--blue); }
     .news-content p  { font-size: 0.83rem; }
+    .news-badge { display:inline-block; font-size:0.65rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:2px 7px; border-radius:4px; margin-bottom:5px; }
+    .nbadge-news    { background:#dbeafe; color:#1e40af; }
+    .nbadge-blog    { background:#dcfce7; color:#166534; }
+    .nbadge-talk    { background:#fef3c7; color:#92400e; }
+    .nbadge-podcast { background:#f3e8ff; color:#6b21a8; }
 
     @media (max-width: 840px) {
       .hero { grid-template-columns: 1fr; }
@@ -141,28 +160,20 @@
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="heroSection">
-  <div class="hero-left container" style="max-width:none">
+  <div class="hero-left">
     <div class="hero-eyebrow">Dept. of Advanced Computing Sciences · Maastricht University</div>
     <h1 id="heroTitle"></h1>
     <p class="lead" id="heroBody"></p>
     <div class="hero-actions">
-      <a href="research.html" class="btn btn-primary">Explore our research</a>
+      <a href="#what-we-do" class="btn btn-primary">Explore our research</a>
       <a href="people.html"   class="btn btn-secondary">Meet the team</a>
     </div>
     <div class="hero-stats" id="heroStats"></div>
   </div>
-  <div class="hero-right">
-    <canvas id="heroCanvas"></canvas>
-    <div class="hero-photo">
-      <div class="hero-photo-inner">
-        <div class="img-placeholder" style="height:100%;font-size:0.72rem">[ research team / lab photograph ]</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- ══ THEMES ══ -->
-<section>
+<section id="what-we-do">
   <div class="container">
     <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
       <div>
@@ -211,7 +222,7 @@
         <span class="section-label">Latest</span>
         <h2>News & highlights</h2>
       </div>
-      <a href="media.html" class="btn btn-secondary btn-sm">All news →</a>
+      <a href="news.html" class="btn btn-secondary btn-sm">All news →</a>
     </div>
     <div id="newsList"></div>
   </div>
@@ -235,45 +246,65 @@
 <script>
 (async () => {
   try {
-    const [site, research, pubs, media] = await CMS.loadAll(
+    const [site, research, pubs, media, people] = await CMS.loadAll(
       'content/site.yaml',
       'content/research.yaml',
-      'content/publications.yaml',
-      'content/media.yaml'
+      'content/publications.generated.yaml',
+      'content/news.yaml',
+      'content/people.yaml'
     );
 
     /* Hero */
-    const parts = site.tagline.split(site.tagline_italic);
-    document.getElementById('heroTitle').innerHTML =
-      `${parts[0]}<em>${site.tagline_italic}</em>${parts[1] || ''}`;
+    const taglineParts = site.tagline.split('. ');
+    document.getElementById('heroTitle').innerHTML = taglineParts.map(phrase =>
+      `<span style="display:block">${phrase === site.tagline_italic ? `<em>${phrase}</em>` : phrase}</span>`
+    ).join('');
     document.getElementById('heroBody').textContent = site.hero_body;
-    document.getElementById('heroStats').innerHTML = site.stats.map((s,i) => `
-      <div class="hero-stat${i===0?' ':''}">
-        <div class="hero-stat-val">${s.value}</div>
+
+    const parseAmount = a => {
+      const m = /([\d.]+)\s*([MK])/i.exec(a || '');
+      if (!m) return 0;
+      return parseFloat(m[1]) * (m[2].toUpperCase() === 'M' ? 1e6 : 1e3);
+    };
+    const activeFunding = research.projects
+      .filter(p => p.status === 'Active')
+      .reduce((sum, p) => sum + parseAmount(p.amount), 0);
+
+    const sources = {
+      'people.faculty':     () => people.filter(p => p.group === 'Faculty').length,
+      'people.researchers': () => people.filter(p => p.group === 'Researchers').length,
+      'funding.active':     () => `€${Math.floor(activeFunding / 1e6)}M+`,
+      'publications.total': () => pubs.stats.total,
+    };
+    const resolve = s => s.source ? sources[s.source]() : s.value;
+
+    document.getElementById('heroStats').innerHTML = site.stats.map(s => `
+      <div class="hero-stat">
+        <div class="hero-stat-val">${resolve(s)}</div>
         <div class="hero-stat-lbl">${s.label}</div>
       </div>`).join('');
 
     /* Themes */
     document.getElementById('themesGrid').innerHTML = research.themes.map((t,i) => `
-      <div class="theme-card reveal" data-delay="${i*70}">
+      <a href="research.html#theme-${t.id}" class="theme-card reveal" data-delay="${i*70}">
         <div class="theme-icon-num">${t.number}</div>
         <h4>${t.title}</h4>
         <p>${t.desc.trim().slice(0,120)}…</p>
         <div class="theme-leads">
           ${t.leads.map(l => `<span class="tag tag-muted">${l.split(' ').pop()}</span>`).join('')}
         </div>
-      </div>`).join('');
+      </a>`).join('');
 
-    /* Projects (first 3 active) */
-    const active = research.projects.filter(p => p.status === 'Active').slice(0,3);
-    document.getElementById('projectsGrid').innerHTML = active.map((p,i) => `
+    /* Projects (featured) */
+    const featured = research.projects.filter(p => p.featured);
+    document.getElementById('projectsGrid').innerHTML = featured.map((p,i) => `
       <div class="proj-card reveal" data-delay="${i*70}">
         <div class="proj-card-head">
           <span class="tag">${p.theme}</span>
           <span class="tag tag-muted" style="font-size:0.7rem">${p.period}</span>
         </div>
         <div class="proj-card-body">
-          <h4>${p.title}</h4>
+          <h4>${p.acronym}</h4>
           <p>${p.desc.trim()}</p>
           <div class="proj-meta">
             <span>${p.funder}</span>
@@ -294,19 +325,64 @@
           <div style="margin-top:6px;display:flex;gap:5px;flex-wrap:wrap">
             ${p.tags.map(t=>`<span class="tag tag-muted">${t}</span>`).join('')}
           </div>
+          <div class="pub-actions">
+            ${p.doi?`<a class="pub-action" href="https://doi.org/${p.doi}" target="_blank">🔗 DOI</a>`:''}
+            <button class="pub-action" onclick="citeToClipboard(this)" data-citation="${buildVancouver(p).replace(/"/g,'&quot;')}">📋 Cite</button>
+            <button class="pub-action" onclick="citeToClipboard(this)" data-citation="${buildBibtex(p).replace(/"/g,'&quot;')}">BibTeX</button>
+          </div>
         </div>
       </div>`).join('');
 
-    /* News */
-    document.getElementById('newsList').innerHTML = media.news.map(n => `
+    /* News — all types merged, 6 most recent */
+    const TYPE_LABELS = { news:'News', blog:'Blog', talk:'Talk', podcast:'Podcast' };
+
+    function toSortDate(item) {
+      if (item._type === 'news') return new Date(`${item.day} ${item.month} ${item.year}`);
+      return item.date ? new Date(item.date) : new Date(0);
+    }
+    function itemDay(item) {
+      if (item._type === 'news') return item.day;
+      const d = (item.date || '').split(' ');
+      return d.length >= 3 ? d[0] : '—';
+    }
+    function itemMon(item) {
+      if (item._type === 'news') return item.month;
+      const d = (item.date || '').split(' ');
+      return d.length >= 3 ? d[1] : d[0] || '';
+    }
+    function itemBody(item) {
+      return item.body || item.excerpt || item.description || '';
+    }
+    function itemTitle(item) {
+      const url = item.url && item.url !== '#' ? item.url : null;
+      return url ? `<a href="${url}" target="_blank" rel="noopener">${item.title}</a>` : item.title;
+    }
+
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 120);
+    const typeCounts = {};
+    const allNewsItems = [
+      ...(media.news||[]).map(n => ({...n, _type:'news'})),
+      ...(media.blog||[]).map(b => ({...b, _type:'blog'})),
+      ...(media.talks||[]).map(t => ({...t, _type:'talk'})),
+      ...(media.podcasts||[]).map(p => ({...p, _type:'podcast'})),
+    ].sort((a,b) => toSortDate(b) - toSortDate(a))
+     .filter(item => toSortDate(item) >= cutoff)
+     .filter(item => {
+       typeCounts[item._type] = (typeCounts[item._type] || 0) + 1;
+       return typeCounts[item._type] <= 3;
+     });
+
+    document.getElementById('newsList').innerHTML = allNewsItems.map(n => `
       <div class="news-row reveal">
         <div class="news-date">
-          <div class="news-day">${n.day}</div>
-          <div class="news-mon">${n.month}</div>
+          <div class="news-day">${itemDay(n)}</div>
+          <div class="news-mon">${itemMon(n)}</div>
         </div>
         <div class="news-content">
-          <h5>${n.title}</h5>
-          <p>${n.body}</p>
+          <span class="news-badge nbadge-${n._type}">${TYPE_LABELS[n._type]}</span>
+          <h5>${itemTitle(n)}</h5>
+          ${itemBody(n) ? `<p>${itemBody(n)}</p>` : ''}
         </div>
       </div>`).join('');
 
@@ -360,6 +436,48 @@ function initCanvas() {
     });
     requestAnimationFrame(draw);
   })();
+}
+
+function buildVancouver(p) {
+  const parts = [];
+  if (p.authors) parts.push(p.authors + '.');
+  if (p.title)   parts.push(p.title + '.');
+  if (p.venue)   parts.push(p.venue + '.');
+  parts.push(String(p.year) + '.');
+  if (p.doi)     parts.push('doi:' + p.doi);
+  return parts.join(' ');
+}
+
+function buildBibtex(p) {
+  const typeMap = {
+    'Journal': 'article', 'Conference': 'inproceedings',
+    'Book Chapter': 'incollection', 'Book': 'book',
+    'Preprint': 'misc', 'Report': 'techreport',
+    'Dataset': 'misc', 'Thesis': 'phdthesis',
+  };
+  const entryType = typeMap[p.type] || 'misc';
+  const firstAuthor = (p.authors || '').split(',')[0].trim().split(' ')[0];
+  const titleWord = (p.title || '').split(/\s+/).find(w => w.length > 3) || '';
+  const key = (firstAuthor + p.year + titleWord).replace(/[^a-zA-Z0-9]/g, '');
+  const venueField = entryType === 'article' ? 'journal'
+    : entryType === 'inproceedings' ? 'booktitle' : 'publisher';
+  const lines = [`@${entryType}{${key},`];
+  if (p.authors) lines.push(`  author    = {${p.authors}},`);
+  if (p.title)   lines.push(`  title     = {${p.title}},`);
+  if (p.venue)   lines.push(`  ${venueField.padEnd(9)} = {${p.venue}},`);
+  lines.push(`  year      = {${p.year}},`);
+  if (p.doi)     lines.push(`  doi       = {${p.doi}},`);
+  lines.push('}');
+  return lines.join('\n');
+}
+
+function citeToClipboard(btn) {
+  navigator.clipboard.writeText(btn.dataset.citation).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    btn.classList.add('pub-action-success');
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('pub-action-success'); }, 2000);
+  });
 }
 </script>
 </body>
