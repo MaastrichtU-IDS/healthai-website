@@ -107,11 +107,3 @@ podcasts:
   description: A NotebookLM generated AI-podcast discussing the seminal paper for the Simplified Upper Level Ontology (SULO).
   audio_url: https://zenodo.org/records/19766194/files/SULO_Minimalist_Blueprint_For_Medical_Data.m4a
   url: https://zenodo.org/records/19766194
-
-- show: The Digital Health Podcast
-  episode: Ep. 142
-  title: 'AI that respects privacy: building the Personal Health Train'
-  guest: Visara Urovi
-  duration: 48 min
-  date: Mar 2026
-  icon: 🤖
