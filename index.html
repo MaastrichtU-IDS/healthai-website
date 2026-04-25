@@ -383,6 +383,7 @@
           <span class="news-badge nbadge-${n._type}">${TYPE_LABELS[n._type]}</span>
           <h5>${itemTitle(n)}</h5>
           ${itemBody(n) ? `<p>${itemBody(n)}</p>` : ''}
+          ${n.audio_url ? `<audio controls preload="none" style="margin-top:8px;width:100%;max-width:480px"><source src="${n.audio_url}" type="audio/mp4"></audio>` : ''}
         </div>
       </div>`).join('');
 
