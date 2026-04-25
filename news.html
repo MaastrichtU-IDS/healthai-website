@@ -116,7 +116,7 @@ let _activeFilter = 'all';
       title: p.title, url: p.url || null,
       audio_url: p.audio_url || null,
       meta: [p.show, p.guest, p.date, p.duration].filter(Boolean).join(' · '),
-      excerpt: '',
+      excerpt: p.description || '',
       search: [p.title, p.show, p.guest].join(' '),
       sortDate: toDate(p.date),
     })),

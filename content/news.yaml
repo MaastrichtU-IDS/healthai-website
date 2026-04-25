@@ -104,6 +104,7 @@ podcasts:
   duration: 49 min
   date: 25 Apr 2026
   icon: 🎙️
+  description: A NotebookLM generated AI-podcast discussing the seminal paper for the Simplified Upper Level Ontology (SULO).
   audio_url: https://zenodo.org/records/19766194/files/SULO_Minimalist_Blueprint_For_Medical_Data.m4a
   url: https://zenodo.org/records/19766194
 
