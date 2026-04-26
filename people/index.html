@@ -10,9 +10,7 @@
   <style>
     /* ── Hero ── */
     #personPage .page-hero { background: var(--slate); border-bottom-color: transparent; padding: 32px 0 28px; }
-    .person-hero-inner {
-      display: flex; gap: 36px; align-items: flex-start;
-    }
+    .person-hero-inner { display: flex; gap: 36px; align-items: flex-start; }
     .person-avatar-lg {
       width: 130px; height: 130px; flex-shrink: 0; border-radius: 50%;
       overflow: hidden; background: rgba(255,255,255,0.1);
@@ -21,7 +19,7 @@
       font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 700;
       color: rgba(255,255,255,0.35);
     }
-    .person-avatar-lg img { width:100%; height:100%; object-fit:cover; object-position:50% 15%; }
+    .person-avatar-lg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
     .person-hero-text { flex: 1; }
     .person-hero-text .back-link {
       font-size: 0.78rem; color: rgba(255,255,255,0.4); text-decoration: none;
@@ -44,7 +42,6 @@
       padding-bottom: 8px; border-bottom: 1.5px solid var(--border);
     }
     .profile-bio { font-size: 0.92rem; line-height: 1.85; color: var(--text-muted); }
-
     .profile-links { display: flex; flex-wrap: wrap; gap: 8px; }
     .profile-link {
       padding: 7px 14px; border-radius: 6px; font-size: 0.8rem;
@@ -54,114 +51,9 @@
     }
     .profile-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
 
-    /* ── Publication browser ── */
-    .pub-stats {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1px; background: var(--border);
-      border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 28px;
-    }
-    .pub-stat { background: var(--white); padding: 22px 20px; }
-    .pub-stat:first-child { background: var(--slate); }
-    .pub-stat-val { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; color: var(--slate); line-height: 1; }
-    .pub-stat:first-child .pub-stat-val { color: var(--white); }
-    .pub-stat-val .denom { opacity: 0.45; font-size: 1.3rem; font-weight: 600; margin-left: 3px; }
-    .pub-stat-lbl { font-size: 0.74rem; color: var(--text-muted); margin-top: 6px; }
-    .pub-stat:first-child .pub-stat-lbl { color: rgba(255,255,255,0.5); }
-
-    .year-dist {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: 18px 22px; margin-bottom: 22px;
-    }
-    .year-dist-header {
-      display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
-    }
-    .year-dist-title { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-muted); font-weight: 600; }
-    .chart-toggle { display: flex; gap: 4px; }
-    .chart-toggle-btn {
-      padding: 3px 10px; border-radius: 5px; font-size: 0.72rem; font-weight: 500;
-      border: 1px solid var(--border); color: var(--text-muted); background: var(--white);
-      cursor: pointer; transition: all var(--transition);
-    }
-    .chart-toggle-btn.active { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
-    .year-chart { display: flex; align-items: stretch; gap: 3px; height: 160px; overflow-x: auto; }
-    .year-bar-col { flex: 1; min-width: 22px; display: flex; flex-direction: column; }
-    .year-bar-stack { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; }
-    .year-bar-val { text-align: center; font-size: 0.62rem; color: var(--text-muted); font-variant-numeric: tabular-nums; margin-bottom: 2px; min-height: 11px; }
-    .year-bar-fill { background: var(--blue); border-radius: 3px 3px 0 0; width: 100%; transition: height var(--transition); }
-    .year-bar-col:hover .year-bar-fill { background: var(--blue-mid); }
-    .year-bar-label { font-size: 0.68rem; color: var(--text-muted); text-align: center; margin-top: 5px; font-family: 'Fraunces', serif; font-weight: 600; }
-
-    .year-range-wrap {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: 16px 22px; margin-bottom: 22px;
-    }
-    .year-range-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .year-range-label-val { font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.9rem; color: var(--slate); }
-    .year-range-track { position: relative; height: 4px; background: var(--border); border-radius: 2px; margin: 10px 0; }
-    .year-range-fill { position: absolute; height: 100%; background: var(--blue); border-radius: 2px; pointer-events: none; }
-    .year-range-track input[type=range] {
-      position: absolute; width: 100%; height: 4px; top: 0; left: 0; margin: 0;
-      -webkit-appearance: none; appearance: none; background: transparent; pointer-events: none;
-    }
-    .year-range-track input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%;
-      background: var(--blue); border: 2px solid var(--white); box-shadow: 0 1px 4px rgba(0,0,0,0.25); pointer-events: all; cursor: pointer;
-    }
-    .year-range-track input[type=range]::-moz-range-thumb {
-      width: 16px; height: 16px; border-radius: 50%; background: var(--blue);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.25); pointer-events: all; cursor: pointer; border: none;
-    }
-    .year-range-ticks { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; font-family: 'Fraunces', serif; font-weight: 600; }
-
-    .year-heading {
-      font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700;
-      color: var(--slate); margin: 32px 0 4px;
-      display: flex; align-items: center; gap: 14px;
-    }
-    .year-heading::after { content:''; flex:1; height:1px; background:var(--border); }
-
-    .pub-row {
-      display: grid; grid-template-columns: 56px 1fr; gap: 20px;
-      padding: 20px 0; border-bottom: 1px solid var(--border);
-      transition: background var(--transition);
-    }
-    .pub-row:hover { background: var(--bg-alt); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 8px; }
-    .pub-year-lbl { font-family: 'Fraunces', serif; font-size: 0.9rem; font-weight: 700; color: var(--blue-mid); text-align: right; padding-top: 2px; }
-    .pub-title-link { font-family: 'Fraunces', serif; font-size: 0.97rem; font-weight: 700; color: var(--slate); line-height: 1.35; display: block; margin-bottom: 5px; transition: color var(--transition); }
-    .pub-title-link:hover { color: var(--blue); }
-    .pub-authors { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
-    .pub-venue   { font-size: 0.78rem; font-style: italic; color: var(--text-light); margin-bottom: 6px; }
-    .pub-actions { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
-    .pub-action {
-      padding: 4px 11px; border-radius: 5px; font-size: 0.74rem; font-weight: 500;
-      border: 1px solid var(--border); color: var(--text-muted);
-      transition: all var(--transition); display: inline-flex; align-items: center; gap: 4px;
-      background: none; cursor: pointer;
-    }
-    .pub-action:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
-    .pub-action-success { border-color: var(--blue) !important; color: var(--blue) !important; background: var(--blue-light) !important; }
-
-    /* ── Pagination ── */
-    .pagination {
-      display: flex; align-items: center; justify-content: center;
-      gap: 6px; padding: 28px 0 8px; flex-wrap: wrap;
-    }
-    .page-btn {
-      min-width: 36px; height: 36px; padding: 0 10px; border-radius: 6px;
-      border: 1px solid var(--border); background: var(--white); color: var(--slate-mid);
-      font-size: 0.82rem; font-weight: 500; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all var(--transition);
-    }
-    .page-btn:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
-    .page-btn.active { background: var(--slate); color: white; border-color: var(--slate); }
-    .page-btn:disabled { opacity: 0.35; cursor: default; }
-    .page-info { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 6px; }
-
     @media (max-width: 600px) {
       .person-hero-inner { flex-direction: column; gap: 18px; }
       .person-avatar-lg { width: 90px; height: 90px; font-size: 2rem; }
-      .pub-stats { grid-template-columns: repeat(2,1fr); }
     }
   </style>
 </head>
@@ -200,13 +92,11 @@
 
   <section>
     <div class="container profile-content">
-
       <div class="profile-section" id="secBio"></div>
       <div class="profile-section" id="secThemes"></div>
       <div class="profile-section" id="secLinks"></div>
       <div class="profile-section" id="secActivity"></div>
       <div class="profile-section" id="secPubs"></div>
-
     </div>
   </section>
 </div>
@@ -221,293 +111,15 @@ const ICONS = {
   pure:     ICON('M4 4h6a4 4 0 0 1 0 8H6v8H4V4zm2 2v4h4a2 2 0 0 0 0-4H6zm8-2h2v16h-2V4zm4 0h4v2h-4v6h3v2h-3v6h-2V4h2z'),
   work:     ICON('M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'),
   pubs:     ICON('M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'),
+  home:     ICON('M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'),
 };
 
-function imgSrc(url) {
-  if (!url) return '';
-  return url.startsWith('http') ? url : url;
-}
+function imgSrc(url) { return url || ''; }
 
-function fmt(n) { return Number(n).toLocaleString(); }
+const fmt = n => Number(n).toLocaleString();
 
-let _highlightName = '';
-function highlightAuthor(authors) {
-  if (!_highlightName || !authors) return authors || '';
-  const escaped = _highlightName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return authors.replace(new RegExp(`(${escaped})`, 'gi'),
-    '<strong style="color:var(--slate);font-weight:700">$1</strong>');
-}
-
-function hIndex(citations) {
-  const sorted = citations.slice().sort((a, b) => b - a);
-  let h = 0;
-  for (let i = 0; i < sorted.length; i++) {
-    if (sorted[i] >= i + 1) h = i + 1; else break;
-  }
-  return h;
-}
-
-// ── Publication browser state ──
-const PAGE_SIZE = 20;
-let _allPubs = [], _activeType = 'All', _activeChart = 'publications';
-let _yearMin = null, _yearMax = null, _page = 1;
-
-function initPubBrowser(pubs) {
-  _allPubs = pubs;
-  if (!pubs.length) return;
-
-  const totalCites = pubs.reduce((s, p) => s + (p.citations || 0), 0);
-  const h = hIndex(pubs.map(p => p.citations || 0));
-
-  // Stats
-  document.getElementById('pbStats').innerHTML = `
-    <div class="pub-stat"><div class="pub-stat-val" id="pbStatPubs">${fmt(pubs.length)}</div><div class="pub-stat-lbl">Publications</div></div>
-    <div class="pub-stat"><div class="pub-stat-val">${fmt(totalCites)}</div><div class="pub-stat-lbl">Citations</div></div>
-    <div class="pub-stat"><div class="pub-stat-val">${fmt(h)}</div><div class="pub-stat-lbl">h-index</div></div>`;
-
-  // Type chips
-  const types = ['All', ...new Set(pubs.map(p => p.type).filter(Boolean))];
-  document.getElementById('pbTypeChips').innerHTML = types.map(t =>
-    `<button class="chip${t === 'All' ? ' active' : ''}" onclick="pbSetType('${t}')">${t}</button>`
-  ).join('');
-
-  // Year range
-  const minY = Math.min(...pubs.map(p => p.year));
-  const maxY = Math.max(...pubs.map(p => p.year));
-  _yearMin = minY; _yearMax = maxY;
-  const minEl = document.getElementById('pbYearMin');
-  const maxEl = document.getElementById('pbYearMax');
-  minEl.min = maxEl.min = minY; minEl.max = maxEl.max = maxY;
-  minEl.value = minY; maxEl.value = maxY;
-  document.getElementById('pbTickMin').textContent = minY;
-  document.getElementById('pbTickMax').textContent = maxY;
-  minEl.oninput = () => {
-    if (+minEl.value > +maxEl.value) minEl.value = maxEl.value;
-    _yearMin = +minEl.value; _page = 1;
-    pbUpdateSlider(); renderPubs();
-  };
-  maxEl.oninput = () => {
-    if (+maxEl.value < +minEl.value) maxEl.value = minEl.value;
-    _yearMax = +maxEl.value; _page = 1;
-    pbUpdateSlider(); renderPubs();
-  };
-  pbUpdateSlider();
-  document.getElementById('pbYearRange').classList.remove('hidden');
-
-  renderPubs();
-}
-
-function pbUpdateSlider() {
-  const minEl = document.getElementById('pbYearMin');
-  const maxEl = document.getElementById('pbYearMax');
-  const lo = +minEl.value, hi = +maxEl.value;
-  const total = +minEl.max - +minEl.min || 1;
-  const leftPct  = (lo - +minEl.min) / total * 100;
-  const rightPct = (hi - +minEl.min) / total * 100;
-  document.getElementById('pbRangeFill').style.cssText = `left:${leftPct}%;width:${rightPct - leftPct}%`;
-  document.getElementById('pbRangeVal').textContent = lo === hi ? lo : `${lo} – ${hi}`;
-}
-
-function pbSetType(t) {
-  _activeType = t;
-  _page = 1;
-  document.querySelectorAll('#pbTypeChips .chip').forEach(c => c.classList.toggle('active', c.textContent === t));
-  renderPubs();
-}
-
-function pbSetChart(mode) {
-  _activeChart = mode;
-  renderChart(window._pbLastFiltered || []);
-}
-
-function renderChart(filtered) {
-  window._pbLastFiltered = filtered;
-  const isCites = _activeChart === 'citations';
-  const toggleHtml = `
-    <div class="chart-toggle">
-      <button class="chart-toggle-btn${!isCites ? ' active' : ''}" onclick="pbSetChart('publications')">Publications</button>
-      <button class="chart-toggle-btn${isCites ? ' active' : ''}" onclick="pbSetChart('citations')">Citations</button>
-    </div>`;
-
-  if (!filtered.length) {
-    document.getElementById('pbChart').innerHTML =
-      `<div class="year-dist-header"><div class="year-dist-title">No data</div>${toggleHtml}</div>`;
-    return;
-  }
-  const byYear = {};
-  filtered.forEach(p => {
-    byYear[p.year] = byYear[p.year] || { pubs: 0, cites: 0 };
-    byYear[p.year].pubs++;
-    byYear[p.year].cites += (p.citations || 0);
-  });
-  const minY = Math.min(...filtered.map(p => p.year));
-  const maxY = Math.max(...filtered.map(p => p.year));
-  const years = [];
-  for (let y = minY; y <= maxY; y++) years.push(y);
-  const key = isCites ? 'cites' : 'pubs';
-  const dataMax = Math.max(1, ...years.map(y => (byYear[y] || {})[key] || 0));
-  const title = isCites ? 'Citations per year' : 'Publications per year';
-
-  document.getElementById('pbChart').innerHTML = `
-    <div class="year-dist-header"><div class="year-dist-title">${title}</div>${toggleHtml}</div>
-    <div class="year-chart">
-      ${years.map(y => {
-        const val = (byYear[y] || {})[key] || 0;
-        const pct = Math.max(val > 0 ? 2 : 0, val / dataMax * 100);
-        return `<div class="year-bar-col" title="${y}: ${fmt(val)} ${isCites ? 'citations' : 'publications'}">
-          <div class="year-bar-stack">
-            <span class="year-bar-val">${val > 0 ? fmt(val) : ''}</span>
-            <div class="year-bar-fill" style="height:${pct}%"></div>
-          </div>
-          <div class="year-bar-label">${String(y).slice(2)}</div>
-        </div>`;
-      }).join('')}
-    </div>`;
-}
-
-function renderPubs() {
-  const q = (document.getElementById('pbSearch').value || '').toLowerCase();
-  const filtered = _allPubs.filter(p => {
-    const typeOk = _activeType === 'All' || p.type === _activeType;
-    const yearOk = p.year >= _yearMin && p.year <= _yearMax;
-    const hay = [p.title, p.authors, (p.tags || []).join(' '), p.summary || ''].join(' ').toLowerCase();
-    return typeOk && yearOk && (!q || hay.includes(q));
-  }).sort((a, b) => b.year - a.year);
-
-  renderChart(filtered);
-
-  // Update pub count stat
-  const countEl = document.getElementById('pbStatPubs');
-  if (countEl) {
-    countEl.innerHTML = filtered.length !== _allPubs.length
-      ? `${fmt(filtered.length)}<span class="denom">/ ${fmt(_allPubs.length)}</span>`
-      : fmt(_allPubs.length);
-  }
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  if (_page > totalPages) _page = totalPages;
-
-  const pageItems = filtered.slice((_page - 1) * PAGE_SIZE, _page * PAGE_SIZE);
-
-  // Group current page items by year
-  const byYear = {};
-  pageItems.forEach(p => { (byYear[p.year] = byYear[p.year] || []).push(p); });
-  const years = Object.keys(byYear).sort((a, b) => b - a);
-
-  const listEl = document.getElementById('pbList');
-  listEl.innerHTML = filtered.length ? years.map(y => `
-    <div>
-      <div class="year-heading">${y}</div>
-      ${byYear[y].map(p => `
-        <div class="pub-row">
-          <div class="pub-year-lbl">${p.type === 'Preprint' ? '<span style="font-size:0.62rem;font-family:monospace;color:var(--text-light)">pre</span>' : ''}</div>
-          <div>
-            <a class="pub-title-link" href="${p.doi ? 'https://doi.org/' + p.doi : '#'}" target="_blank">${p.title}</a>
-            <div class="pub-authors">${highlightAuthor(p.authors)}</div>
-            <div class="pub-venue">${p.venue || ''}</div>
-            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px">
-              ${(p.tags || []).map(t => `<span class="tag tag-muted">${t}</span>`).join('')}
-            </div>
-            <div class="pub-actions">
-              ${p.doi ? `<a class="pub-action" href="https://doi.org/${p.doi}" target="_blank">🔗 DOI</a>` : ''}
-              <button class="pub-action" onclick="citeToClipboard(this)" data-citation="${buildVancouver(p).replace(/"/g,'&quot;')}">📋 Cite</button>
-              <button class="pub-action" onclick="citeToClipboard(this)" data-citation="${buildBibtex(p).replace(/"/g,'&quot;')}">BibTeX</button>
-            </div>
-          </div>
-        </div>`).join('')}
-    </div>`).join('')
-  : '<p style="text-align:center;padding:40px;color:var(--text-muted)">No publications match your search.</p>';
-
-  // Pagination
-  renderPagination(totalPages, filtered.length);
-}
-
-function renderPagination(totalPages, totalItems) {
-  const paginEl = document.getElementById('pbPagination');
-  const infoEl  = document.getElementById('pbPageInfo');
-
-  const from = Math.min((_page - 1) * PAGE_SIZE + 1, totalItems);
-  const to   = Math.min(_page * PAGE_SIZE, totalItems);
-  infoEl.textContent = totalItems ? `Showing ${from}–${to} of ${fmt(totalItems)} publications` : '';
-
-  if (totalPages <= 1) { paginEl.innerHTML = ''; return; }
-
-  const pages = paginPages(_page, totalPages);
-  let html = `<button class="page-btn" onclick="pbGoPage(${_page - 1})" ${_page === 1 ? 'disabled' : ''}>‹</button>`;
-  pages.forEach(p => {
-    if (p === '…') {
-      html += `<span class="page-btn" style="cursor:default;border:none">…</span>`;
-    } else {
-      html += `<button class="page-btn${p === _page ? ' active' : ''}" onclick="pbGoPage(${p})">${p}</button>`;
-    }
-  });
-  html += `<button class="page-btn" onclick="pbGoPage(${_page + 1})" ${_page === totalPages ? 'disabled' : ''}>›</button>`;
-  paginEl.innerHTML = html;
-}
-
-function paginPages(current, total) {
-  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
-  const pages = [];
-  const add = p => { if (!pages.includes(p)) pages.push(p); };
-  add(1);
-  if (current > 3) pages.push('…');
-  for (let p = Math.max(2, current - 1); p <= Math.min(total - 1, current + 1); p++) add(p);
-  if (current < total - 2) pages.push('…');
-  add(total);
-  return pages;
-}
-
-function pbGoPage(p) {
-  _page = p;
-  renderPubs();
-  document.getElementById('secPubs').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function buildVancouver(p) {
-  const parts = [];
-  if (p.authors) parts.push(p.authors + '.');
-  if (p.title)   parts.push(p.title + '.');
-  if (p.venue)   parts.push(p.venue + '.');
-  parts.push(String(p.year) + '.');
-  if (p.doi)     parts.push('doi:' + p.doi);
-  return parts.join(' ');
-}
-
-function buildBibtex(p) {
-  const typeMap = {
-    'Journal': 'article', 'Conference': 'inproceedings',
-    'Book Chapter': 'incollection', 'Book': 'book',
-    'Preprint': 'misc', 'Report': 'techreport',
-    'Dataset': 'misc', 'Thesis': 'phdthesis',
-  };
-  const entryType = typeMap[p.type] || 'misc';
-  const firstAuthor = (p.authors || '').split(',')[0].trim().split(' ').pop();
-  const titleWord = (p.title || '').split(/\s+/).find(w => w.length > 3) || '';
-  const key = (firstAuthor + p.year + titleWord).replace(/[^a-zA-Z0-9]/g, '');
-  const venueField = entryType === 'article' ? 'journal' : entryType === 'inproceedings' ? 'booktitle' : 'publisher';
-  const lines = [`@${entryType}{${key},`];
-  if (p.authors) lines.push(`  author    = {${p.authors}},`);
-  if (p.title)   lines.push(`  title     = {${p.title}},`);
-  if (p.venue)   lines.push(`  ${venueField.padEnd(9)} = {${p.venue}},`);
-  lines.push(`  year      = {${p.year}},`);
-  if (p.doi)     lines.push(`  doi       = {${p.doi}},`);
-  lines.push('}');
-  return lines.join('\n');
-}
-
-function citeToClipboard(btn) {
-  navigator.clipboard.writeText(btn.dataset.citation).then(() => {
-    const orig = btn.innerHTML;
-    btn.innerHTML = '✓ Copied!';
-    btn.classList.add('pub-action-success');
-    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('pub-action-success'); }, 2000);
-  });
-}
-
-// ── Main ──
 (async () => {
   const slug = new URLSearchParams(location.search).get('id');
-
   if (!slug) {
     document.getElementById('loading').remove();
     document.getElementById('notFound').classList.remove('hidden');
@@ -529,7 +141,6 @@ function citeToClipboard(btn) {
   }
 
   document.getElementById('pageTitle').textContent = `${person.name} · HAIR Group`;
-  _highlightName = person.name.split(' ').pop();
 
   // Hero
   const src = imgSrc(person.image_url);
@@ -561,8 +172,8 @@ function citeToClipboard(btn) {
   const kws = (person.keywords || []).filter(Boolean);
   if (themes.length || kws.length) {
     let html = '<div class="profile-section-title">Research</div>';
-    if (themes.length) html += `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:${kws.length?10:0}px">${themes.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`;
-    if (kws.length) html += `<div style="display:flex;gap:6px;flex-wrap:wrap">${kws.map(k=>`<span class="tag tag-muted">${k}</span>`).join('')}</div>`;
+    if (themes.length) html += `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:${kws.length ? 10 : 0}px">${themes.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
+    if (kws.length) html += `<div style="display:flex;gap:6px;flex-wrap:wrap">${kws.map(k => `<span class="tag tag-muted">${k}</span>`).join('')}</div>`;
     document.getElementById('secThemes').innerHTML = html;
   }
 
@@ -574,6 +185,7 @@ function citeToClipboard(btn) {
   if (person.linkedin)       links.push(`<a class="profile-link" href="https://www.linkedin.com/in/${person.linkedin}" target="_blank" rel="noopener">${ICONS.linkedin} LinkedIn</a>`);
   if (person.cris_url)       links.push(`<a class="profile-link" href="${person.cris_url}" target="_blank" rel="noopener">${ICONS.pure} PURE</a>`);
   if (person.work_url)       links.push(`<a class="profile-link" href="${person.work_url}" target="_blank" rel="noopener">${ICONS.work} UM page</a>`);
+  if (person.personal_page)  links.push(`<a class="profile-link" href="${person.personal_page}" target="_blank" rel="noopener">${ICONS.home} Personal page</a>`);
   if (links.length) {
     document.getElementById('secLinks').innerHTML = `
       <div class="profile-section-title">Links</div>
@@ -582,38 +194,18 @@ function citeToClipboard(btn) {
 
   // Publications browser
   if (myPubs.length) {
-    document.getElementById('secPubs').innerHTML = `
-      <div class="profile-section-title">Publications</div>
-      <div class="pub-stats" id="pbStats"></div>
-      <div class="year-dist" id="pbChart"></div>
-      <div class="year-range-wrap hidden" id="pbYearRange">
-        <div class="year-range-header">
-          <span class="year-dist-title">Year range</span>
-          <span class="year-range-label-val" id="pbRangeVal"></span>
-        </div>
-        <div class="year-range-track">
-          <div class="year-range-fill" id="pbRangeFill"></div>
-          <input type="range" id="pbYearMin" />
-          <input type="range" id="pbYearMax" />
-        </div>
-        <div class="year-range-ticks"><span id="pbTickMin"></span><span id="pbTickMax"></span></div>
-      </div>
-      <div class="filter-bar" style="margin-bottom:8px">
-        <input class="search-input" id="pbSearch" type="text" placeholder="Search title, author or keyword…" oninput="_page=1;renderPubs()" />
-        <div class="filter-chips" id="pbTypeChips"></div>
-      </div>
-      <div id="pbList"></div>
-      <div class="pagination" id="pbPagination"></div>
-      <div class="page-info" id="pbPageInfo"></div>`;
-
-    initPubBrowser(myPubs);
+    CMS.PubBrowser.init(document.getElementById('secPubs'), myPubs, {
+      highlightName: person.name.split(' ').pop(),
+      pageSize: 20,
+      scrollTarget: 'secPubs',
+      sectionTitle: 'Publications',
+    });
   }
 
-  // Activity — filter shared normalized items by person's name appearing in searchable fields
+  // Activity
   const personName = person.name.toLowerCase();
   const activity = CMS.normalizeNewsItems(news)
     .filter(item => item.search.toLowerCase().includes(personName));
-
   if (activity.length) {
     document.getElementById('secActivity').innerHTML = `
       <div class="profile-section-title">News & Activity</div>

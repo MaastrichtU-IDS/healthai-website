@@ -143,6 +143,7 @@ const ICONS = {
   pure:     ICON('M4 4h6a4 4 0 0 1 0 8H6v8H4V4zm2 2v4h4a2 2 0 0 0 0-4H6zm8-2h2v16h-2V4zm4 0h4v2h-4v6h3v2h-3v6h-2V4h2z'),
   work:     ICON('M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'),
   pubs:     ICON('M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'),
+  home:     ICON('M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'),
 };
 let people = [], activeTheme = 'All';
 
@@ -217,6 +218,7 @@ function openModal(p) {
   if (p.linkedin)       links.push(`<a class="modal-link" href="https://www.linkedin.com/in/${p.linkedin}" target="_blank" rel="noopener">${ICONS.linkedin} LinkedIn</a>`);
   if (p.cris_url)       links.push(`<a class="modal-link" href="${p.cris_url}" target="_blank" rel="noopener">${ICONS.pure} PURE</a>`);
   if (p.work_url)       links.push(`<a class="modal-link" href="${p.work_url}" target="_blank" rel="noopener">${ICONS.work} UM page</a>`);
+  if (p.personal_page) links.push(`<a class="modal-link" href="${p.personal_page}" target="_blank" rel="noopener">${ICONS.home} Personal page</a>`);
   links.push(`<a class="modal-link" href="publications.html?q=${encodeURIComponent(p.name)}">${ICONS.pubs} Publications</a>`);
 
   const profileUrl = `people/?id=${p.slug || p.name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}`;
