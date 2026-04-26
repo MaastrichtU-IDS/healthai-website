@@ -10,6 +10,7 @@ themes:
       deliver closed-loop AI systems that adapt recommendations to individual
       patients in real time.
     projects: [CHARM, iCare4CVD, DACIL]
+    featured_pubs: []
 
   - id: agriculture
     number: "02"
@@ -20,6 +21,7 @@ themes:
       Precision Agriculture, Food & Health integrates data-driven farming, nutrition science, and health analytics to optimize outcomes from soil to society.
       It leverages AI, sensors, and interoperable data systems to improve crop production, food quality, and personalized health—linking sustainable agriculture directly to better human and environmental well-being.
     projects: [EU-FarmBook, AMBROSIA]
+    featured_pubs: []
 
   - id: bioinfo
     number: "03"
@@ -32,6 +34,7 @@ themes:
       linking genomics, proteomics and metabolomics data — to identify biomarkers and
       advance drug target discovery.
     projects: []
+    featured_pubs: []
 
   - id: fair
     number: "04"
@@ -45,6 +48,7 @@ themes:
       that connect molecular, clinical, and population-level information. These systems 
       support explainable inference, hypothesis generation, and trustworthy AI applications in healthcare and life sciences.
     projects: [GENIUS, BDT, AIDAVA]
+    featured_pubs: []
 
   - id: federated
     number: "05"
@@ -57,6 +61,7 @@ themes:
       hospitals and countries — without the data ever leaving its source. Our work
       covers algorithm design, privacy guarantees and real-world deployment.
     projects: [REALM]
+    featured_pubs: []
 
   - id: nlp
     number: "05"
@@ -67,6 +72,7 @@ themes:
       Regulatory AI captures the dual role of AI in modern governance: using AI to improve regulatory processes, and designing regulation to ensure AI systems are safe, transparent, and accountable.
       It emphasizes a feedback loop where AI enhances evidence generation and oversight, while regulatory frameworks shape trustworthy, human-centered AI deployment.
     projects: [REALM]
+    featured_pubs: []
 
 
 projects:

@@ -46,18 +46,6 @@
       font-size: 0.62rem; font-weight: 700;
     }
 
-    .proj-mini { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--card-shadow); transition: all var(--transition); }
-    .proj-mini:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
-    .proj-mini h4 { font-size: 0.92rem; margin-bottom: 7px; }
-    .proj-mini p  { font-size: 0.81rem; margin-bottom: 12px; }
-    .proj-mini-meta { font-size: 0.74rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 3px; padding-top: 10px; border-top: 1px solid var(--border); }
-
-    .all-proj-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--card-shadow); transition: all var(--transition); }
-    .all-proj-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
-    .all-proj-card h4 { font-size: 0.95rem; margin-bottom: 8px; }
-    .all-proj-card p  { font-size: 0.84rem; margin-bottom: 14px; }
-    .proj-detail { font-size: 0.76rem; color: var(--text-muted); padding-top: 12px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 3px; }
-
     @media (max-width: 860px) {
       .theme-inner { grid-template-columns: 1fr; gap: 28px; }
       .theme-sidebar { position: static; }
@@ -83,30 +71,18 @@
 <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
 <div id="themesContainer"></div>
 
-<section id="projects" style="scroll-margin-top:110px">
-  <div class="container">
-    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
-      <div>
-        <span class="section-label">Full list</span>
-        <h2>All projects</h2>
-      </div>
-    </div>
-    <div class="filter-bar">
-      <input class="search-input" id="projSearch" type="text" placeholder="Search projects…" oninput="filterProjects()" />
-      <div style="flex-basis:100%;height:0"></div>
-      <div class="filter-chips" id="projChips"></div>
-      <div style="flex-basis:100%;height:0"></div>
-      <div class="filter-chips" id="statusChips"></div>
-    </div>
-    <div class="grid-3" id="allProjects"></div>
-  </div>
-</section>
-
 <script>
 (async () => {
-  const [data, people] = await CMS.loadAll('content/research.yaml', 'content/people.yaml');
-  const nameToSlug = Object.fromEntries((people || []).filter(p => p.slug).map(p => [p.name, p.slug]));
+  const [data, people, pubsData] = await CMS.loadAll(
+    'content/research.yaml',
+    'content/people.yaml',
+    'content/publications.generated.yaml'
+  );
   document.getElementById('loading').remove();
+
+  const nameToSlug  = Object.fromEntries((people || []).filter(p => p.slug).map(p => [p.name, p.slug]));
+  const nameToOrcid = Object.fromEntries((people || []).filter(p => p.orcid).map(p => [p.name, p.orcid]));
+  const allPubs     = (pubsData || {}).publications || [];
 
   /* Theme subnav */
   document.getElementById('themeNavLinks').innerHTML = data.themes.map(t =>
@@ -114,14 +90,29 @@
   ).join('');
 
   /* Theme sections */
-  document.getElementById('themesContainer').innerHTML = data.themes.map((t,i) => {
-    const themeProjs = data.projects.filter(p =>
-      p.status === 'Active' &&
-      t.projects.some(tp => p.acronym.toLowerCase().startsWith(tp.split(' ')[0].toLowerCase()))
-    ).slice(0,3);
+  document.getElementById('themesContainer').innerHTML = data.themes.map((t, i) => {
+    /* Projects for this theme */
+    const themeProjs = data.projects
+      .filter(p => (t.projects || []).includes(p.acronym))
+      .sort((a, b) => (b.status === 'Active') - (a.status === 'Active'));
+
+    /* Publications: featured DOIs first, then recent pubs from leads' ORCIDs */
+    const leadOrcids   = new Set((t.leads || []).map(l => nameToOrcid[l]).filter(Boolean));
+    const featuredDois = new Set(t.featured_pubs || []);
+    const featured     = allPubs.filter(p => featuredDois.has(p.doi));
+    const usedDois     = new Set(featured.map(p => p.doi));
+    const recent       = allPubs
+      .filter(p => !usedDois.has(p.doi) && (p.orcids || []).some(o => leadOrcids.has(o)))
+      .sort((a, b) => b.year - a.year)
+      .slice(0, 5 - featured.length);
+    const themePubs = [...featured, ...recent];
+
+    const pubsLink = t.leads.length
+      ? `publications.html?q=${encodeURIComponent(t.leads[0])}`
+      : 'publications.html';
 
     return `
-    <div class="theme-block${i%2===1?' alt':''}" id="theme-${t.id}">
+    <div class="theme-block${i % 2 === 1 ? ' alt' : ''}" id="theme-${t.id}">
       <div class="container">
         <div class="theme-inner">
           <div class="theme-sidebar reveal">
@@ -138,25 +129,31 @@
               }).join('')}
             </div>
           </div>
+
           <div class="reveal" data-delay="100">
-            <p style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-muted);margin-bottom:16px;font-weight:600">Projects</p>
-            <div style="display:flex;flex-direction:column;gap:14px">
-              ${themeProjs.length ? themeProjs.map(p=>`
-                <div class="proj-mini">
-                  <div style="display:flex;justify-content:space-between;margin-bottom:10px">
-                    <span class="tag">${p.theme}</span>
-                    <span class="tag ${p.status==='Active'?'tag-active':'tag-muted'}" style="font-size:0.7rem">${p.status}</span>
-                  </div>
-                  <h4>${p.acronym}</h4>
-                  <p>${p.title.trim()}</p>
-                  <p>${p.desc.trim()}</p>
-                  <div class="proj-mini-meta">
-                    <span>${p.funder} · ${p.amount}</span>
-                    <span>${p.period} · ${p.team.join(', ')}</span>
-                  </div>
-                </div>`).join('')
-              : `<p style="color:var(--text-muted);font-size:0.86rem">Projects coming soon.</p>`}
-            </div>
+            ${themeProjs.length ? `
+              <p class="theme-content-label">Projects
+                <a class="theme-content-link" href="projects.html">View all →</a>
+              </p>
+              <div class="theme-proj-grid">
+                ${themeProjs.map(p => renderCard(p, nameToSlug)).join('')}
+              </div>` : ''}
+
+            <p class="theme-content-label">Recent Publications
+              <a class="theme-content-link" href="${pubsLink}">View all →</a>
+            </p>
+            ${themePubs.length ? themePubs.map(p => {
+              const authorParts = p.authors.split(', ');
+              const authorShort = authorParts.length > 3
+                ? authorParts.slice(0, 3).join(', ') + ' et al.'
+                : p.authors;
+              return `
+              <div class="theme-pub-row">
+                <a class="theme-pub-title" href="${p.doi ? 'https://doi.org/' + p.doi : '#'}" target="_blank" rel="noopener">${p.title}</a>
+                <div class="theme-pub-meta">${authorShort} · ${p.venue || ''} · ${p.year}</div>
+              </div>`;
+            }).join('')
+            : `<p style="color:var(--text-muted);font-size:0.86rem">No publications yet.</p>`}
           </div>
         </div>
       </div>
@@ -164,24 +161,7 @@
   }).join('');
   CMS.revealNew(document.getElementById('themesContainer'));
 
-  /* All projects */
-  const tags = ['All', ...new Set(data.projects.map(p=>p.theme))];
-  document.getElementById('projChips').innerHTML = tags.map(t=>
-    `<button class="chip${t==='All'?' active':''}" onclick="setTag('${t}')">${t}</button>`
-  ).join('');
-
-  const statuses = ['All', ...new Set(data.projects.map(p=>p.status))];
-  document.getElementById('statusChips').innerHTML = statuses.map(s=>
-    `<button class="chip${s==='Active'?' active':''}" onclick="setStatus('${s}')">${s}</button>`
-  ).join('');
-
-  window._projects = data.projects;
-  filterProjects();
-
-  /* Jump to the URL hash now that themes + all-projects grid are rendered.
-     The browser's native anchor-scroll ran before the yaml finished loading,
-     when the target either didn't exist (#theme-<id>) or its final offset
-     wasn't yet stable (#projects, pushed down as themes populate). */
+  /* Jump to anchor now that DOM is populated */
   if (location.hash) {
     requestAnimationFrame(() => {
       const target = document.querySelector(location.hash);
@@ -190,52 +170,52 @@
   }
 
   /* Sticky active subnav */
-  const themeEls = data.themes.map(t => document.getElementById('theme-'+t.id));
+  const themeEls = data.themes.map(t => document.getElementById('theme-' + t.id));
   const navLinks = document.querySelectorAll('.theme-subnav a');
   window.addEventListener('scroll', () => {
     const top = 64 + 45 + 80;
     let cur = 0;
-    themeEls.forEach((el,i) => { if (el && el.getBoundingClientRect().top < top + 60) cur = i; });
-    navLinks.forEach((a,i) => a.classList.toggle('active', i===cur));
+    themeEls.forEach((el, i) => { if (el && el.getBoundingClientRect().top < top + 60) cur = i; });
+    navLinks.forEach((a, i) => a.classList.toggle('active', i === cur));
   });
 })();
 
-let activeTag = 'All';
-let activeStatus = 'Active';
-function setTag(t) {
-  activeTag = t;
-  document.querySelectorAll('#projChips .chip').forEach(c=>c.classList.toggle('active',c.textContent===t));
-  filterProjects();
-}
-function setStatus(s) {
-  activeStatus = s;
-  document.querySelectorAll('#statusChips .chip').forEach(c=>c.classList.toggle('active',c.textContent===s));
-  filterProjects();
-}
-function filterProjects() {
-  const q = document.getElementById('projSearch').value.toLowerCase();
-  const filtered = (window._projects||[]).filter(p => {
-    const tagOk = activeTag==='All' || p.theme===activeTag;
-    const statusOk = activeStatus==='All' || p.status===activeStatus;
-    const qOk = !q || (p.title+p.desc+p.team.join(' ')).toLowerCase().includes(q);
-    return tagOk && statusOk && qOk;
-  });
-  document.getElementById('allProjects').innerHTML = filtered.map(p=>`
-    <div class="all-proj-card reveal">
-      <div style="display:flex;justify-content:space-between;margin-bottom:14px">
-        <span class="tag">${p.theme}</span>
-        <span class="tag ${p.status==='Active'?'tag-active':'tag-muted'}">${p.status}</span>
+function renderCard(p, nameToSlug) {
+  const statusCls = p.status === 'Active' ? 'tag-active' : 'tag-muted';
+  const logo = p.logo
+    ? `<div class="proj-logo"><img src="${p.logo}" alt="${p.acronym} logo" loading="lazy"></div>`
+    : '';
+  const teamHtml = (p.team || []).map(name => {
+    const slug = nameToSlug[name];
+    return slug
+      ? `<a class="proj-member" href="people/?id=${slug}">${name}</a>`
+      : `<span class="proj-member">${name}</span>`;
+  }).join('');
+  const meta = [p.period, p.funder, p.amount].filter(Boolean).join(' · ');
+  const titleLine = p.title && p.title.trim() && p.title.trim() !== p.acronym
+    ? `<div class="proj-title">${p.title.trim()}</div>` : '';
+  const urlLink = p.url
+    ? `<a class="proj-url" href="${p.url}" target="_blank" rel="noopener">Visit project →</a>` : '';
+  const featuredBadge = p.featured
+    ? `<span class="tag tag-gold" style="font-size:0.68rem">Featured</span>` : '';
+  return `
+    <div class="proj-card${p.featured ? ' is-featured' : ''} reveal">
+      ${logo}
+      <div class="proj-body">
+        <div class="proj-top">
+          <span class="tag ${statusCls}" style="font-size:0.68rem">${p.status}</span>
+          <div class="proj-badges">${featuredBadge}</div>
+        </div>
+        <div class="proj-acronym">${p.acronym}</div>
+        ${titleLine}
+        <p class="proj-desc">${(p.desc || '').trim()}</p>
+        <div class="proj-footer">
+          ${teamHtml ? `<div class="proj-team">${teamHtml}</div>` : ''}
+          ${meta ? `<div class="proj-meta">${meta}</div>` : ''}
+          ${urlLink}
+        </div>
       </div>
-      <h4>${p.acronym}</h4>
-      <p>${p.title.trim()}</p>
-      <p>${p.desc.trim()}</p>
-      <div class="proj-detail">
-        <span>${p.funder} · ${p.amount}</span>
-        <span>${p.period}</span>
-        <span>${p.team.join(', ')}</span>
-      </div>
-    </div>`).join('');
-  CMS.revealNew(document.getElementById('allProjects'));
+    </div>`;
 }
 </script>
 </body>

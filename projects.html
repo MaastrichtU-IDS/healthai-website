@@ -7,82 +7,15 @@
   <link rel="stylesheet" href="styles.css?v=2" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <style>
-    /* ── Stats bar ── */
     .proj-stats {
       display: flex; gap: 1px; background: var(--border);
       border: 1px solid var(--border); border-radius: var(--radius);
       overflow: hidden; margin-bottom: 32px;
     }
-    .proj-stat {
-      flex: 1; background: var(--white); padding: 18px 20px;
-      text-align: center;
-    }
-    .proj-stat-val {
-      font-family: 'Fraunces', serif; font-size: 1.8rem;
-      font-weight: 700; color: var(--slate); line-height: 1;
-    }
+    .proj-stat { flex: 1; background: var(--white); padding: 18px 20px; text-align: center; }
+    .proj-stat-val { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: var(--slate); line-height: 1; }
     .proj-stat-lbl { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
-
-    /* ── Project cards ── */
-    .proj-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 22px;
-    }
-    .proj-card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); box-shadow: var(--card-shadow);
-      transition: all var(--transition); display: flex; flex-direction: column;
-      overflow: hidden;
-    }
-    .proj-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
-    .proj-card.is-featured { border-color: var(--gold); }
-
-    .proj-logo {
-      height: 80px; background: var(--bg-alt);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      padding: 12px 24px;
-    }
-    .proj-logo img { max-height: 52px; max-width: 100%; object-fit: contain; }
-
-    .proj-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
-
-    .proj-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 12px; }
-    .proj-theme-link {
-      font-size: 0.72rem; font-weight: 600; color: var(--blue);
-      text-decoration: none; background: rgba(45,140,160,0.08);
-      padding: 3px 10px; border-radius: 20px;
-      transition: background var(--transition);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%;
-    }
-    .proj-theme-link:hover { background: rgba(45,140,160,0.16); }
-    .proj-badges { display: flex; gap: 6px; flex-shrink: 0; }
-
-    .proj-acronym {
-      font-family: 'Fraunces', serif; font-size: 1.2rem;
-      font-weight: 700; color: var(--slate); margin-bottom: 2px;
-    }
-    .proj-title { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4; }
-    .proj-desc { font-size: 0.84rem; line-height: 1.75; color: var(--text); margin-bottom: 16px; flex: 1; }
-
-    .proj-footer { border-top: 1px solid var(--border); padding-top: 14px; display: flex; flex-direction: column; gap: 10px; }
-    .proj-team { display: flex; flex-wrap: wrap; gap: 6px; }
-    .proj-member {
-      font-size: 0.76rem; padding: 3px 10px; border-radius: 20px;
-      background: var(--bg-alt); border: 1px solid var(--border);
-      color: var(--slate); transition: all var(--transition);
-      text-decoration: none;
-    }
-    a.proj-member:hover { border-color: var(--blue); color: var(--blue); background: rgba(45,140,160,0.06); }
-    .proj-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 4px 12px; }
-    .proj-url {
-      font-size: 0.78rem; font-weight: 500; color: var(--blue);
-      text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
-      transition: color var(--transition);
-    }
-    .proj-url:hover { color: var(--slate); }
-
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
     @media (max-width: 640px) {
       .proj-stats { flex-wrap: wrap; }
       .proj-stat { flex: 1 1 45%; }
