@@ -333,57 +333,29 @@
         </div>
       </div>`).join('');
 
-    /* News — all types merged, 6 most recent */
-    const TYPE_LABELS = { news:'News', blog:'Blog', talk:'Talk', podcast:'Podcast' };
-
-    function toSortDate(item) {
-      if (item._type === 'news') return new Date(`${item.day} ${item.month} ${item.year}`);
-      return item.date ? new Date(item.date) : new Date(0);
-    }
-    function itemDay(item) {
-      if (item._type === 'news') return item.day;
-      const d = (item.date || '').split(' ');
-      return d.length >= 3 ? d[0] : '—';
-    }
-    function itemMon(item) {
-      if (item._type === 'news') return item.month;
-      const d = (item.date || '').split(' ');
-      return d.length >= 3 ? d[1] : d[0] || '';
-    }
-    function itemBody(item) {
-      return item.body || item.excerpt || item.description || '';
-    }
-    function itemTitle(item) {
-      const url = item.url && item.url !== '#' ? item.url : null;
-      return url ? `<a href="${url}" target="_blank" rel="noopener">${item.title}</a>` : item.title;
-    }
-
+    /* News — all types merged, capped at 3 per type within 120 days */
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - 120);
     const typeCounts = {};
-    const allNewsItems = [
-      ...(media.news||[]).map(n => ({...n, _type:'news'})),
-      ...(media.blog||[]).map(b => ({...b, _type:'blog'})),
-      ...(media.talks||[]).map(t => ({...t, _type:'talk'})),
-      ...(media.podcasts||[]).map(p => ({...p, _type:'podcast'})),
-    ].sort((a,b) => toSortDate(b) - toSortDate(a))
-     .filter(item => toSortDate(item) >= cutoff)
-     .filter(item => {
-       typeCounts[item._type] = (typeCounts[item._type] || 0) + 1;
-       return typeCounts[item._type] <= 3;
-     });
+    const allNewsItems = CMS.normalizeNewsItems(media)
+      .filter(item => item.sortDate >= cutoff)
+      .filter(item => {
+        typeCounts[item.type] = (typeCounts[item.type] || 0) + 1;
+        return typeCounts[item.type] <= 3;
+      });
 
     document.getElementById('newsList').innerHTML = allNewsItems.map(n => `
       <div class="news-row reveal">
         <div class="news-date">
-          <div class="news-day">${itemDay(n)}</div>
-          <div class="news-mon">${itemMon(n)}</div>
+          <div class="news-day">${n.day || '—'}</div>
+          <div class="news-mon">${n.mon || ''}</div>
         </div>
         <div class="news-content">
-          <span class="news-badge nbadge-${n._type}">${TYPE_LABELS[n._type]}</span>
-          <h5>${itemTitle(n)}</h5>
-          ${itemBody(n) ? `<p>${itemBody(n)}</p>` : ''}
+          <span class="news-badge nbadge-${n.type}">${n.label}</span>
+          <h5>${n.url ? `<a href="${n.url}" target="_blank" rel="noopener">${n.title}</a>` : n.title}</h5>
+          ${n.excerpt ? `<p>${n.excerpt}</p>` : ''}
           ${n.audio_url ? `<audio controls preload="none" style="margin-top:8px;width:100%;max-width:480px"><source src="${n.audio_url}" type="audio/mp4"></audio>` : ''}
+          ${n.slides_url ? `<button class="ni-slides-btn" onclick="CMS.toggleSlides(this,'${encodeURIComponent(n.slides_url)}','hs-${n.sortDate.getTime()}')">▶ View slides</button><div id="hs-${n.sortDate.getTime()}" style="display:none;margin-top:8px"><iframe src="" style="width:100%;height:400px;border:1px solid #e5e7eb;border-radius:6px" allowfullscreen></iframe></div>` : ''}
         </div>
       </div>`).join('');
 

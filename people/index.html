@@ -158,23 +158,6 @@
     .page-btn:disabled { opacity: 0.35; cursor: default; }
     .page-info { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 6px; }
 
-    /* ── Activity ── */
-    .activity-row { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
-    .activity-row:last-child { border-bottom: none; }
-    .activity-badge {
-      flex-shrink:0; font-size:0.65rem; font-weight:700; letter-spacing:.05em;
-      text-transform:uppercase; padding:3px 8px; border-radius:4px; margin-top:3px; white-space:nowrap;
-    }
-    .ab-news    { background:#dbeafe; color:#1e40af; }
-    .ab-blog    { background:#dcfce7; color:#166534; }
-    .ab-talk    { background:#fef3c7; color:#92400e; }
-    .ab-podcast { background:#f3e8ff; color:#6b21a8; }
-    .activity-title { font-family:'Fraunces',serif; font-size:0.93rem; font-weight:700; color:var(--slate); line-height:1.35; margin-bottom:3px; }
-    .activity-title a { color:inherit; text-decoration:none; }
-    .activity-title a:hover { color:var(--blue); }
-    .activity-meta { font-size:0.78rem; color:var(--text-muted); margin-bottom:3px; }
-    .activity-excerpt { font-size:0.82rem; color:var(--text); line-height:1.55; margin-top:3px; }
-
     @media (max-width: 600px) {
       .person-hero-inner { flex-direction: column; gap: 18px; }
       .person-avatar-lg { width: 90px; height: 90px; font-size: 2rem; }
@@ -626,52 +609,15 @@ function citeToClipboard(btn) {
     initPubBrowser(myPubs);
   }
 
-  // Activity
-  const name = person.name.toLowerCase();
-  const toDate = s => s ? new Date(s) : new Date(0);
-  const activity = [];
-
-  (news.talks || []).forEach(t => {
-    if ((t.speaker || '').toLowerCase().includes(name)) {
-      activity.push({ type:'talk', label:'Talk', title:t.title, url:t.url||null,
-        meta:[t.type,t.event,t.date].filter(Boolean).join(' · '), excerpt:t.description||'', sortDate:toDate(t.date) });
-    }
-  });
-  (news.podcasts || []).forEach(p => {
-    if ((p.guest || '').toLowerCase().includes(name)) {
-      activity.push({ type:'podcast', label:'Podcast', title:p.title, url:p.url||null,
-        meta:[p.show,p.date,p.duration].filter(Boolean).join(' · '), excerpt:p.description||'',
-        audio_url:p.audio_url||null, sortDate:toDate(p.date) });
-    }
-  });
-  (news.blog || []).forEach(b => {
-    if ((b.author || '').toLowerCase().includes(name)) {
-      activity.push({ type:'blog', label:'Blog', title:b.title, url:b.url||null,
-        meta:[b.tag,b.date].filter(Boolean).join(' · '), excerpt:b.excerpt||'', sortDate:toDate(b.date) });
-    }
-  });
-  (news.news || []).forEach(n => {
-    if ([n.title,n.body].join(' ').toLowerCase().includes(name)) {
-      activity.push({ type:'news', label:'News', title:n.title, url:n.url||null,
-        meta:[n.day,n.month,n.year].filter(Boolean).join(' '), excerpt:n.body||'',
-        sortDate:toDate(`${n.day} ${n.month} ${n.year}`) });
-    }
-  });
-  activity.sort((a, b) => b.sortDate - a.sortDate);
+  // Activity — filter shared normalized items by person's name appearing in searchable fields
+  const personName = person.name.toLowerCase();
+  const activity = CMS.normalizeNewsItems(news)
+    .filter(item => item.search.toLowerCase().includes(personName));
 
   if (activity.length) {
     document.getElementById('secActivity').innerHTML = `
       <div class="profile-section-title">News & Activity</div>
-      ${activity.map(a => `
-        <div class="activity-row">
-          <span class="activity-badge ab-${a.type}">${a.label}</span>
-          <div>
-            <div class="activity-title">${a.url?`<a href="${a.url}" target="_blank" rel="noopener">${a.title}</a>`:a.title}</div>
-            <div class="activity-meta">${a.meta}</div>
-            ${a.excerpt ? `<div class="activity-excerpt">${a.excerpt.trim()}</div>` : ''}
-            ${a.audio_url ? `<audio controls preload="none" style="margin-top:8px;width:100%;max-width:460px"><source src="${a.audio_url}" type="audio/mp4"></audio>` : ''}
-          </div>
-        </div>`).join('')}`;
+      ${activity.map(item => CMS.renderNewsItem(item)).join('')}`;
   }
 
   document.getElementById('personPage').classList.remove('hidden');
