@@ -111,7 +111,7 @@
     </div>
     <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
     <div class="people-grid" id="peopleGrid"></div>
-    <p class="hidden text-center" id="noResults" style="padding:48px 0;color:var(--text-muted)">No matching people found.</p>
+    <p class="hidden no-results" id="noResults">No matching people found.</p>
   </div>
 </section>
 
@@ -201,14 +201,7 @@ function renderPeople() {
 function openModal(p) {
   const themes = (p.themes||[]).map(t=>`<span class="tag">${t}</span>`).join('');
   const kws = (p.keywords||[]).map(k=>`<span class="tag tag-muted">${k}</span>`).join('');
-  const links = [];
-  if (p.email)          links.push(`<a class="modal-link" href="mailto:${p.email}">${ICONS.email} Email</a>`);
-  if (p.orcid)          links.push(`<a class="modal-link" href="https://orcid.org/${p.orcid}" target="_blank" rel="noopener">${ICONS.orcid} ORCID</a>`);
-  if (p.google_scholar) links.push(`<a class="modal-link" href="https://scholar.google.com/citations?user=${p.google_scholar}" target="_blank" rel="noopener">${ICONS.scholar} Google Scholar</a>`);
-  if (p.linkedin)       links.push(`<a class="modal-link" href="https://www.linkedin.com/in/${p.linkedin}" target="_blank" rel="noopener">${ICONS.linkedin} LinkedIn</a>`);
-  if (p.cris_url)       links.push(`<a class="modal-link" href="${p.cris_url}" target="_blank" rel="noopener">${ICONS.pure} PURE</a>`);
-  if (p.work_url)       links.push(`<a class="modal-link" href="${p.work_url}" target="_blank" rel="noopener">${ICONS.work} UM page</a>`);
-  if (p.personal_page) links.push(`<a class="modal-link" href="${p.personal_page}" target="_blank" rel="noopener">${ICONS.home} Personal page</a>`);
+  const links = CMS.personLinks(p, 'modal-link');
   links.push(`<a class="modal-link" href="publications.html?q=${encodeURIComponent(p.name)}">${ICONS.pubs} Publications</a>`);
 
   const profileUrl = `people/?id=${p.slug || p.name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}`;
@@ -225,12 +218,12 @@ function openModal(p) {
     <div class="modal-body">
       <div class="modal-section-label">About</div>
       <p class="modal-bio">${p.bio}</p>
-      ${themes ? `<div class="modal-section-label">Research themes</div><div style="display:flex;gap:6px;flex-wrap:wrap">${themes}</div>` : ''}
+      ${themes ? `<div class="modal-section-label">Research themes</div><div class="tag-row">${themes}</div>` : ''}
       <div class="modal-section-label">Keywords</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">${kws}</div>
+      <div class="tag-row">${kws}</div>
       <div class="modal-section-label">Links</div>
       <div class="modal-links">${links.join('')}</div>
-      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+      <div class="modal-divider">
         <a href="${profileUrl}" class="btn btn-primary" style="font-size:0.82rem;padding:8px 18px">View full profile →</a>
       </div>
     </div>`;

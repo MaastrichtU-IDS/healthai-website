@@ -21,6 +21,22 @@ window.CMS = (function () {
     return Promise.all(paths.map(load));
   }
 
+  /* ── Person link helper ── */
+
+  function personLinks(p, cls) {
+    const ext = 'target="_blank" rel="noopener"';
+    const a = (href, icn, label, extra = '') => `<a class="${cls}" href="${href}" ${extra}>${icn} ${label}</a>`;
+    const links = [];
+    if (p.email)          links.push(a(`mailto:${p.email}`, ICONS.email, 'Email'));
+    if (p.orcid)          links.push(a(`https://orcid.org/${p.orcid}`, ICONS.orcid, 'ORCID', ext));
+    if (p.google_scholar) links.push(a(`https://scholar.google.com/citations?user=${p.google_scholar}`, ICONS.scholar, 'Google Scholar', ext));
+    if (p.linkedin)       links.push(a(`https://www.linkedin.com/in/${p.linkedin}`, ICONS.linkedin, 'LinkedIn', ext));
+    if (p.cris_url)       links.push(a(p.cris_url, ICONS.pure, 'PURE', ext));
+    if (p.work_url)       links.push(a(p.work_url, ICONS.work, 'UM page', ext));
+    if (p.personal_page)  links.push(a(p.personal_page, ICONS.home, 'Personal page', ext));
+    return links;
+  }
+
   /* ── SVG icon helpers ── */
 
   const icon = d => `<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="${d}"/></svg>`;
@@ -123,8 +139,8 @@ window.CMS = (function () {
         <div class="ni-title">${item.url ? `<a href="${item.url}" target="_blank" rel="noopener">${item.title}</a>` : item.title}</div>
         <div class="ni-meta">${item.meta}</div>
         ${item.excerpt ? `<div class="ni-excerpt">${item.excerpt.trim()}</div>` : ''}
-        ${item.audio_url ? `<audio controls preload="none" style="margin-top:8px;width:100%;max-width:480px"><source src="${item.audio_url}" type="audio/mp4"></audio>` : ''}
-        ${item.slides_url ? `<button class="ni-slides-btn" onclick="CMS.toggleSlides(this,'${encodeURIComponent(item.slides_url)}','${sid}')">▶ View slides</button><div id="${sid}" style="display:none;margin-top:8px"><iframe src="" style="width:100%;height:480px;border:1px solid #e5e7eb;border-radius:6px" allowfullscreen></iframe></div>` : ''}
+        ${item.audio_url ? `<audio class="ni-audio" controls preload="none"><source src="${item.audio_url}" type="audio/mp4"></audio>` : ''}
+        ${item.slides_url ? `<button class="ni-slides-btn" onclick="CMS.toggleSlides(this,'${encodeURIComponent(item.slides_url)}','${sid}')">▶ View slides</button><div id="${sid}" class="ni-slides-panel"><iframe src="" class="ni-slides-frame" allowfullscreen></iframe></div>` : ''}
       </div>
     </div>`;
   }
@@ -160,7 +176,7 @@ window.CMS = (function () {
       const name = _opts.highlightName;
       if (!name || !authors) return authors || '';
       const e = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      return authors.replace(new RegExp(`(${e})`, 'gi'), '<strong style="color:var(--slate);font-weight:700">$1</strong>');
+      return authors.replace(new RegExp(`(${e})`, 'gi'), '<strong class="pub-author-hl">$1</strong>');
     }
 
     function _vancouver(p) {
@@ -285,13 +301,13 @@ window.CMS = (function () {
           <div class="year-heading">${y}</div>
           ${byY[y].map(p => `
             <div class="pub-row reveal">
-              <div class="pub-year-lbl">${p.type === 'Preprint' ? '<span style="font-size:0.62rem;font-family:monospace;color:var(--text-light)">pre</span>' : ''}</div>
+              <div class="pub-year-lbl">${p.type === 'Preprint' ? '<span class="pub-preprint-lbl">pre</span>' : ''}</div>
               <div>
                 <a class="pub-title-link" href="${p.doi ? 'https://doi.org/' + p.doi : '#'}" target="_blank">${p.title}</a>
                 <div class="pub-authors">${_hl(p.authors)}</div>
                 <div class="pub-venue">${p.venue || ''}</div>
                 ${p.summary ? `<div class="pub-summary">${p.summary}</div>` : ''}
-                <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px">${(p.tags || []).map(t => `<span class="tag tag-muted">${t}</span>`).join('')}</div>
+                <div class="pub-tag-row">${(p.tags || []).map(t => `<span class="tag tag-muted">${t}</span>`).join('')}</div>
                 <div class="pub-actions">
                   ${p.doi ? `<a class="pub-action" href="https://doi.org/${p.doi}" target="_blank">🔗 DOI</a>` : ''}
                   <button class="pub-action" onclick="CMS.PubBrowser.citeToClipboard(this)" data-citation="${_vancouver(p).replace(/"/g, '&quot;')}">📋 Cite</button>
@@ -300,7 +316,7 @@ window.CMS = (function () {
               </div>
             </div>`).join('')}
         </div>`).join('')
-      : '<p style="text-align:center;padding:40px;color:var(--text-muted)">No publications match your search.</p>';
+      : '<p class="no-results">No publications match your search.</p>';
 
       revealNew(listEl);
       if (ps !== Infinity) _renderPagination(tp, filtered.length);
@@ -316,7 +332,7 @@ window.CMS = (function () {
       const pages = _paginPages(_page, tp);
       let html = `<button class="page-btn" onclick="CMS.PubBrowser.goPage(${_page - 1})" ${_page === 1 ? 'disabled' : ''}>‹</button>`;
       pages.forEach(p => {
-        if (p === '…') html += `<span class="page-btn" style="cursor:default;border:none">…</span>`;
+        if (p === '…') html += `<span class="page-btn page-ellipsis">…</span>`;
         else html += `<button class="page-btn${p === _page ? ' active' : ''}" onclick="CMS.PubBrowser.goPage(${p})">${p}</button>`;
       });
       html += `<button class="page-btn" onclick="CMS.PubBrowser.goPage(${_page + 1})" ${_page === tp ? 'disabled' : ''}>›</button>`;
@@ -401,6 +417,6 @@ window.CMS = (function () {
     return { init, setType, setChart, onSearch, goPage, citeToClipboard };
   })();
 
-  return { load, loadAll, icon, ICONS, initials, tag, levelClass, revealNew,
+  return { load, loadAll, icon, ICONS, personLinks, initials, tag, levelClass, revealNew,
            normalizeNewsItems, renderNewsItem, toggleSlides, PubBrowser };
 })();

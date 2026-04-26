@@ -162,20 +162,13 @@ const fmt = n => Number(n).toLocaleString();
   const kws = (person.keywords || []).filter(Boolean);
   if (themes.length || kws.length) {
     let html = '<div class="profile-section-title">Research</div>';
-    if (themes.length) html += `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:${kws.length ? 10 : 0}px">${themes.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
-    if (kws.length) html += `<div style="display:flex;gap:6px;flex-wrap:wrap">${kws.map(k => `<span class="tag tag-muted">${k}</span>`).join('')}</div>`;
+    if (themes.length) html += `<div class="tag-row${kws.length ? ' mb-8' : ''}">${themes.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
+    if (kws.length) html += `<div class="tag-row">${kws.map(k => `<span class="tag tag-muted">${k}</span>`).join('')}</div>`;
     document.getElementById('secThemes').innerHTML = html;
   }
 
   // Links
-  const links = [];
-  if (person.email)          links.push(`<a class="profile-link" href="mailto:${person.email}">${ICONS.email} Email</a>`);
-  if (person.orcid)          links.push(`<a class="profile-link" href="https://orcid.org/${person.orcid}" target="_blank" rel="noopener">${ICONS.orcid} ORCID</a>`);
-  if (person.google_scholar) links.push(`<a class="profile-link" href="https://scholar.google.com/citations?user=${person.google_scholar}" target="_blank" rel="noopener">${ICONS.scholar} Google Scholar</a>`);
-  if (person.linkedin)       links.push(`<a class="profile-link" href="https://www.linkedin.com/in/${person.linkedin}" target="_blank" rel="noopener">${ICONS.linkedin} LinkedIn</a>`);
-  if (person.cris_url)       links.push(`<a class="profile-link" href="${person.cris_url}" target="_blank" rel="noopener">${ICONS.pure} PURE</a>`);
-  if (person.work_url)       links.push(`<a class="profile-link" href="${person.work_url}" target="_blank" rel="noopener">${ICONS.work} UM page</a>`);
-  if (person.personal_page)  links.push(`<a class="profile-link" href="${person.personal_page}" target="_blank" rel="noopener">${ICONS.home} Personal page</a>`);
+  const links = CMS.personLinks(person, 'profile-link');
   if (links.length) {
     document.getElementById('secLinks').innerHTML = `
       <div class="profile-section-title">Links</div>

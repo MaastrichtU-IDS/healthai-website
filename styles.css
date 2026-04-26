@@ -315,6 +315,11 @@ section.dark p  { color: rgba(255,255,255,0.68); }
 .flex  { display: flex; } .flex-center { display: flex; align-items: center; }
 .gap-8 { gap: 8px; } .gap-12 { gap: 12px; } .gap-16 { gap: 16px; }
 
+/* ── Shared utilities ── */
+.tag-row   { display: flex; gap: 6px; flex-wrap: wrap; }
+.no-results { padding: 48px 0; text-align: center; color: var(--text-muted); }
+.modal-divider { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+
 /* ── Shared news / activity item row ── */
 .ni-row { display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
 .ni-row:last-child { border-bottom:none; }
@@ -331,6 +336,9 @@ section.dark p  { color: rgba(255,255,255,0.68); }
 .ni-excerpt { font-size:0.84rem; color:var(--text); line-height:1.55; margin-top:4px; }
 .ni-slides-btn { margin-top:8px; font-size:0.8rem; padding:4px 12px; border:1px solid #d1d5db; border-radius:4px; background:#f9fafb; color:var(--slate); cursor:pointer; }
 .ni-slides-btn:hover { background:#f3f4f6; }
+.ni-audio { display:block; margin-top:8px; width:100%; max-width:480px; }
+.ni-slides-panel { display:none; margin-top:8px; }
+.ni-slides-frame { width:100%; height:480px; border:1px solid #e5e7eb; border-radius:6px; }
 
 /* ── Loading spinner ── */
 .loading {
@@ -430,6 +438,10 @@ section.dark p  { color: rgba(255,255,255,0.68); }
 }
 .pub-action:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
 .pub-action-success { border-color: var(--blue) !important; color: var(--blue) !important; background: var(--blue-light) !important; }
+.pub-preprint-lbl { font-size: 0.62rem; font-family: monospace; color: var(--text-light); }
+.pub-tag-row { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 4px; }
+.pub-author-hl { color: var(--slate); font-weight: 700; }
+.page-ellipsis { cursor: default; border-color: transparent; pointer-events: none; }
 
 .pure-notice {
   background: var(--blue-lighter); border: 1px solid rgba(46,143,160,0.2);
