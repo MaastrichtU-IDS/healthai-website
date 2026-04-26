@@ -247,6 +247,14 @@ function imgSrc(url) {
 
 function fmt(n) { return Number(n).toLocaleString(); }
 
+let _highlightName = '';
+function highlightAuthor(authors) {
+  if (!_highlightName || !authors) return authors || '';
+  const escaped = _highlightName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return authors.replace(new RegExp(`(${escaped})`, 'gi'),
+    '<strong style="color:var(--slate);font-weight:700">$1</strong>');
+}
+
 function hIndex(citations) {
   const sorted = citations.slice().sort((a, b) => b - a);
   let h = 0;
@@ -412,7 +420,7 @@ function renderPubs() {
           <div class="pub-year-lbl">${p.type === 'Preprint' ? '<span style="font-size:0.62rem;font-family:monospace;color:var(--text-light)">pre</span>' : ''}</div>
           <div>
             <a class="pub-title-link" href="${p.doi ? 'https://doi.org/' + p.doi : '#'}" target="_blank">${p.title}</a>
-            <div class="pub-authors">${p.authors || ''}</div>
+            <div class="pub-authors">${highlightAuthor(p.authors)}</div>
             <div class="pub-venue">${p.venue || ''}</div>
             <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px">
               ${(p.tags || []).map(t => `<span class="tag tag-muted">${t}</span>`).join('')}
@@ -538,6 +546,7 @@ function citeToClipboard(btn) {
   }
 
   document.getElementById('pageTitle').textContent = `${person.name} · HAIR Group`;
+  _highlightName = person.name.split(' ').pop();
 
   // Hero
   const src = imgSrc(person.image_url);
