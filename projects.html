@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects · HAIR Group · Maastricht University</title>
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    /* ── Stats bar ── */
+    .proj-stats {
+      display: flex; gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; margin-bottom: 32px;
+    }
+    .proj-stat {
+      flex: 1; background: var(--white); padding: 18px 20px;
+      text-align: center;
+    }
+    .proj-stat-val {
+      font-family: 'Fraunces', serif; font-size: 1.8rem;
+      font-weight: 700; color: var(--slate); line-height: 1;
+    }
+    .proj-stat-lbl { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ── Project cards ── */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 22px;
+    }
+    .proj-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); box-shadow: var(--card-shadow);
+      transition: all var(--transition); display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .proj-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+    .proj-card.is-featured { border-color: var(--gold); }
+
+    .proj-logo {
+      height: 80px; background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      padding: 12px 24px;
+    }
+    .proj-logo img { max-height: 52px; max-width: 100%; object-fit: contain; }
+
+    .proj-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+
+    .proj-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 12px; }
+    .proj-theme-link {
+      font-size: 0.72rem; font-weight: 600; color: var(--blue);
+      text-decoration: none; background: rgba(45,140,160,0.08);
+      padding: 3px 10px; border-radius: 20px;
+      transition: background var(--transition);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%;
+    }
+    .proj-theme-link:hover { background: rgba(45,140,160,0.16); }
+    .proj-badges { display: flex; gap: 6px; flex-shrink: 0; }
+
+    .proj-acronym {
+      font-family: 'Fraunces', serif; font-size: 1.2rem;
+      font-weight: 700; color: var(--slate); margin-bottom: 2px;
+    }
+    .proj-title { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4; }
+    .proj-desc { font-size: 0.84rem; line-height: 1.75; color: var(--text); margin-bottom: 16px; flex: 1; }
+
+    .proj-footer { border-top: 1px solid var(--border); padding-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+    .proj-team { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proj-member {
+      font-size: 0.76rem; padding: 3px 10px; border-radius: 20px;
+      background: var(--bg-alt); border: 1px solid var(--border);
+      color: var(--slate); transition: all var(--transition);
+      text-decoration: none;
+    }
+    a.proj-member:hover { border-color: var(--blue); color: var(--blue); background: rgba(45,140,160,0.06); }
+    .proj-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 4px 12px; }
+    .proj-url {
+      font-size: 0.78rem; font-weight: 500; color: var(--blue);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+      transition: color var(--transition);
+    }
+    .proj-url:hover { color: var(--slate); }
+
+    @media (max-width: 640px) {
+      .proj-stats { flex-wrap: wrap; }
+      .proj-stat { flex: 1 1 45%; }
+      .proj-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="page-body">
+<script src="nav.js"></script>
+<script src="cms.js"></script>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="section-label">What we build</span>
+    <h1>Projects</h1>
+    <p class="lead">Funded research projects spanning AI, health, agriculture and regulatory science.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
+
+    <div id="pageContent" class="hidden">
+      <div class="proj-stats" id="projStats"></div>
+
+      <div class="filter-bar">
+        <input class="search-input" id="projSearch" type="text"
+               placeholder="Search projects by title, description, team or funder…"
+               oninput="filterProjects()" />
+        <div style="flex-basis:100%;height:0"></div>
+        <div class="filter-chips" id="statusChips"></div>
+        <div style="flex-basis:100%;height:0"></div>
+        <div class="filter-chips" id="themeChips"></div>
+      </div>
+
+      <div class="proj-grid" id="projGrid"></div>
+      <p class="hidden no-results" id="noResults">No matching projects found.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+let _projects = [], _nameToSlug = {}, _themeToId = {};
+let activeStatus = 'All', activeTheme = 'All';
+
+(async () => {
+  const [data, people] = await CMS.loadAll('content/research.yaml', 'content/people.yaml');
+  document.getElementById('loading').remove();
+  document.getElementById('pageContent').classList.remove('hidden');
+
+  _nameToSlug = Object.fromEntries((people || []).filter(p => p.slug).map(p => [p.name, p.slug]));
+  _themeToId  = Object.fromEntries((data.themes || []).map(t => [t.title, t.id]));
+  _projects   = data.projects || [];
+
+  /* Stats */
+  const active    = _projects.filter(p => p.status === 'Active').length;
+  const completed = _projects.filter(p => p.status === 'Completed').length;
+  document.getElementById('projStats').innerHTML = [
+    { val: _projects.length, lbl: 'Total projects' },
+    { val: active,           lbl: 'Active' },
+    { val: completed,        lbl: 'Completed' },
+    { val: (data.themes||[]).length, lbl: 'Research themes' },
+  ].map(s => `<div class="proj-stat"><div class="proj-stat-val">${s.val}</div><div class="proj-stat-lbl">${s.lbl}</div></div>`).join('');
+
+  /* Status chips */
+  const statuses = ['All', ...new Set(_projects.map(p => p.status).filter(Boolean))];
+  document.getElementById('statusChips').innerHTML = statuses.map(s =>
+    `<button class="chip${s === 'Active' ? ' active' : ''}" onclick="setStatus('${s}')">${s}</button>`
+  ).join('');
+  activeStatus = 'Active';
+
+  /* Theme chips */
+  const themes = ['All', ...new Set(_projects.map(p => p.theme).filter(Boolean))];
+  document.getElementById('themeChips').innerHTML = themes.map(t =>
+    `<button class="chip${t === 'All' ? ' active' : ''}" onclick="setTheme('${encodeURIComponent(t)}')">${t}</button>`
+  ).join('');
+
+  filterProjects();
+})();
+
+function setStatus(s) {
+  activeStatus = s;
+  document.querySelectorAll('#statusChips .chip').forEach(c => c.classList.toggle('active', c.textContent === s));
+  filterProjects();
+}
+function setTheme(encoded) {
+  const t = decodeURIComponent(encoded);
+  activeTheme = t;
+  document.querySelectorAll('#themeChips .chip').forEach(c => c.classList.toggle('active', c.textContent === t));
+  filterProjects();
+}
+
+function filterProjects() {
+  const q = document.getElementById('projSearch').value.toLowerCase();
+  const filtered = _projects.filter(p => {
+    if (activeStatus !== 'All' && p.status !== activeStatus) return false;
+    if (activeTheme !== 'All' && p.theme !== activeTheme) return false;
+    if (!q) return true;
+    return [p.acronym, p.title, p.desc, p.funder, (p.team||[]).join(' ')].join(' ').toLowerCase().includes(q);
+  });
+  const grid = document.getElementById('projGrid');
+  grid.innerHTML = filtered.map(p => renderCard(p)).join('');
+  document.getElementById('noResults').classList.toggle('hidden', filtered.length > 0);
+  CMS.revealNew(grid);
+}
+
+function renderCard(p) {
+  const themeId  = _themeToId[p.theme];
+  const themeUrl = themeId ? `research.html#theme-${themeId}` : 'research.html';
+  const statusCls = p.status === 'Active' ? 'tag-active' : 'tag-muted';
+
+  const logo = p.logo
+    ? `<div class="proj-logo"><img src="${p.logo}" alt="${p.acronym} logo" loading="lazy"></div>`
+    : '';
+
+  const teamHtml = (p.team || []).map(name => {
+    const slug = _nameToSlug[name];
+    return slug
+      ? `<a class="proj-member" href="people/?id=${slug}">${name}</a>`
+      : `<span class="proj-member">${name}</span>`;
+  }).join('');
+
+  const meta = [p.period, p.funder, p.amount].filter(Boolean).join(' · ');
+
+  const titleLine = p.title && p.title.trim() && p.title.trim() !== p.acronym
+    ? `<div class="proj-title">${p.title.trim()}</div>`
+    : '';
+
+  const urlLink = p.url
+    ? `<a class="proj-url" href="${p.url}" target="_blank" rel="noopener">Visit project →</a>`
+    : '';
+
+  const featuredBadge = p.featured ? `<span class="tag tag-gold" style="font-size:0.68rem">Featured</span>` : '';
+
+  return `
+    <div class="proj-card${p.featured ? ' is-featured' : ''} reveal">
+      ${logo}
+      <div class="proj-body">
+        <div class="proj-top">
+          <a class="proj-theme-link" href="${themeUrl}">${p.theme || ''}</a>
+          <div class="proj-badges">
+            ${featuredBadge}
+            <span class="tag ${statusCls}" style="font-size:0.68rem">${p.status}</span>
+          </div>
+        </div>
+        <div class="proj-acronym">${p.acronym}</div>
+        ${titleLine}
+        <p class="proj-desc">${(p.desc || '').trim()}</p>
+        <div class="proj-footer">
+          ${teamHtml ? `<div class="proj-team">${teamHtml}</div>` : ''}
+          ${meta ? `<div class="proj-meta">${meta}</div>` : ''}
+          ${urlLink}
+        </div>
+      </div>
+    </div>`;
+}
+</script>
+</body>
+</html>

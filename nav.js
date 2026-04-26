@@ -10,9 +10,10 @@
 
   const DISPLAY_LINKS = [
     { href: 'research.html',     label: 'Research'     },
+    { href: 'projects.html',     label: 'Projects'     },
     { href: 'people.html',       label: 'People'       },
     { href: 'publications.html', label: 'Publications' },
-    { href: 'news.html',        label: 'News'        },
+    { href: 'news.html',         label: 'News'         },
   ];
 
   function buildNav() {
@@ -59,7 +60,7 @@
             <h5>Research</h5>
             <ul>
               <li><a href="research.html">Research Themes</a></li>
-              <li><a href="research.html#projects">Projects</a></li>
+              <li><a href="projects.html">Projects</a></li>
               <li><a href="publications.html">Publications</a></li>
             </ul>
           </div>

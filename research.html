@@ -36,7 +36,9 @@
       display: flex; align-items: center; gap: 10px;
       padding: 8px 12px; border-radius: 7px; background: var(--white);
       border: 1px solid var(--border); font-size: 0.83rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
     }
+    a.lead-chip:hover { border-color: var(--blue); box-shadow: var(--card-shadow); }
     .lead-dot {
       width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
       background: var(--slate); color: white;
@@ -102,7 +104,8 @@
 
 <script>
 (async () => {
-  const data = await CMS.load('content/research.yaml');
+  const [data, people] = await CMS.loadAll('content/research.yaml', 'content/people.yaml');
+  const nameToSlug = Object.fromEntries((people || []).filter(p => p.slug).map(p => [p.name, p.slug]));
   document.getElementById('loading').remove();
 
   /* Theme subnav */
@@ -126,7 +129,13 @@
             <h2>${t.title}</h2>
             <p>${t.desc.trim()}</p>
             <div class="lead-chips">
-              ${t.leads.map(l=>`<div class="lead-chip"><div class="lead-dot">${CMS.initials(l)}</div><span>${l}</span></div>`).join('')}
+              ${t.leads.map(l => {
+                const slug = nameToSlug[l];
+                const inner = `<div class="lead-dot">${CMS.initials(l)}</div><span>${l}</span>`;
+                return slug
+                  ? `<a class="lead-chip" href="people/?id=${slug}" style="text-decoration:none;color:inherit">${inner}</a>`
+                  : `<div class="lead-chip">${inner}</div>`;
+              }).join('')}
             </div>
           </div>
           <div class="reveal" data-delay="100">
