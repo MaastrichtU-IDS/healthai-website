@@ -171,7 +171,7 @@
   role: Assistant Professor
   group: Faculty
   image_url: "assets/people/denise-slenter.jpg"
-  themes: [Neurosymbolic AI, Computational Biology & Bioinformatics]
+  themes: [Computational Biology & Bioinformatics]
   bio: >
     Dr. Denise Slenter is an Assistant Professor at the Institute of Data Science, Maastricht
     University. She completed her PhD (2024, "Symphonies of metabolomics") combining metabolic
@@ -182,7 +182,7 @@
     COVID-19 Disease Map. She currently holds a Kootstra Talent Fellowship for the Tears of
     Joy project, developing a risk assessment model for recurrent miscarriage by integrating
     immunological, ultrasound, and lifestyle data.
-  keywords: [Computational Biology]
+  keywords: [Wikipathways,Computational Biology]
   orcid: "0000-0001-8449-1318"
   github: ""
   google_scholar: "Le-4tuQAAAAJ"
