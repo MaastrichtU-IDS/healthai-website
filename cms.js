@@ -170,7 +170,7 @@ window.CMS = (function () {
   // ── Publication Browser ──────────────────────────────────────────────────
   const PubBrowser = (() => {
     let _pubs = [], _type = 'All', _chartMode = 'publications';
-    let _yearMin = null, _yearMax = null, _page = 1, _opts = {};
+    let _yearMin = null, _yearMax = null, _page = 1, _opts = {}, _pageSizeOptions = null;
 
     const _fmt  = n => Number(n).toLocaleString();
     const _fmtK = n => n >= 1000 ? parseFloat((n / 1000).toFixed(1)) + 'k' : String(n);
@@ -355,13 +355,18 @@ window.CMS = (function () {
       : '<p class="no-results">No publications match your search.</p>';
 
       revealNew(listEl);
-      if (ps !== Infinity) _renderPagination(tp, filtered.length);
+      _renderPagination(tp, filtered.length);
     }
 
     function _renderPagination(tp, total) {
       const el = document.getElementById('_pbPagination'), info = document.getElementById('_pbPageInfo');
       if (!el) return;
       const ps = _opts.pageSize || Infinity;
+      if (ps === Infinity) {
+        el.innerHTML = '';
+        if (info) info.textContent = total ? `Showing all ${_fmt(total)} publications` : '';
+        return;
+      }
       const from = Math.min((_page - 1) * ps + 1, total), to = Math.min(_page * ps, total);
       if (info) info.textContent = total ? `Showing ${from}–${to} of ${_fmt(total)} publications` : '';
       if (tp <= 1) { el.innerHTML = ''; return; }
@@ -386,7 +391,8 @@ window.CMS = (function () {
 
     function init(container, pubs, opts = {}) {
       _pubs = pubs; _type = 'All'; _chartMode = 'publications'; _page = 1; _opts = opts;
-      const ps = opts.pageSize || Infinity, hasPag = ps !== Infinity;
+      _pageSizeOptions = opts.pageSizeOptions || null;
+      const ps = opts.pageSize || Infinity, hasPag = ps !== Infinity || !!_pageSizeOptions;
       let html = '';
       if (opts.sectionTitle) html += `<div class="profile-section-title">${opts.sectionTitle}</div>`;
       html += `
@@ -409,8 +415,22 @@ window.CMS = (function () {
           <div class="filter-chips" id="_pbChips"></div>
         </div>
         <div id="_pbList"></div>
-        ${hasPag ? '<div class="pagination" id="_pbPagination"></div><div class="page-info" id="_pbPageInfo"></div>' : ''}`;
+        ${hasPag ? `
+          <div class="pagination" id="_pbPagination"></div>
+          <div class="pub-paging-footer">
+            <span class="page-info" id="_pbPageInfo"></span>
+            ${_pageSizeOptions ? '<div class="filter-chips" id="_pbPageSizePicker"></div>' : ''}
+          </div>` : ''}`;
       container.innerHTML = html;
+
+      if (_pageSizeOptions) {
+        const szEl = document.getElementById('_pbPageSizePicker');
+        if (szEl) szEl.innerHTML = _pageSizeOptions.map(s => {
+          const lbl = isFinite(s) ? String(s) : 'All';
+          return `<button class="chip${s === ps ? ' active' : ''}" onclick="CMS.PubBrowser.setPageSize(${isFinite(s) ? s : 'Infinity'})">${lbl}</button>`;
+        }).join('');
+      }
+
       if (!pubs.length) return;
 
       const types = ['All', ...new Set(pubs.map(p => p.type).filter(Boolean))];
@@ -450,7 +470,17 @@ window.CMS = (function () {
       if (t) { const el = typeof t === 'string' ? document.getElementById(t) : t; if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     }
 
-    return { init, setType, setChart, onSearch, goPage, citeToClipboard };
+    function setPageSize(ps) {
+      _opts = { ..._opts, pageSize: isFinite(ps) ? ps : Infinity };
+      _page = 1;
+      document.querySelectorAll('#_pbPageSizePicker .chip').forEach(c => {
+        const match = isFinite(ps) ? c.textContent === String(ps) : c.textContent === 'All';
+        c.classList.toggle('active', match);
+      });
+      _renderPubs();
+    }
+
+    return { init, setType, setChart, onSearch, goPage, setPageSize, citeToClipboard };
   })();
 
   return { load, loadAll, icon, ICONS, personLinks, initials, tag, levelClass, revealNew,
