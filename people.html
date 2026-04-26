@@ -219,6 +219,7 @@ function openModal(p) {
   if (p.work_url)       links.push(`<a class="modal-link" href="${p.work_url}" target="_blank" rel="noopener">${ICONS.work} UM page</a>`);
   links.push(`<a class="modal-link" href="publications.html?q=${encodeURIComponent(p.name)}">${ICONS.pubs} Publications</a>`);
 
+  const profileUrl = `people/${p.slug || p.name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}`;
   document.getElementById('modalContent').innerHTML = `
     <div class="modal-header">
       <div class="modal-avatar">${p.image_url ? `<img src="${p.image_url}" alt="${p.name}">` : CMS.initials(p.name)}</div>
@@ -237,6 +238,9 @@ function openModal(p) {
       <div style="display:flex;gap:6px;flex-wrap:wrap">${kws}</div>
       <div class="modal-section-label">Links</div>
       <div class="modal-links">${links.join('')}</div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+        <a href="${profileUrl}" class="btn btn-primary" style="font-size:0.82rem;padding:8px 18px">View full profile →</a>
+      </div>
     </div>`;
   document.getElementById('modalOverlay').classList.add('open');
 }

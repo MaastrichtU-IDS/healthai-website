@@ -1,4 +1,5 @@
 - name: Michel Dumontier
+  slug: michel-dumontier
   role: Distinguished Professor
   group: Faculty
   image_url: "assets/people/michel-dumontier.jpg"
@@ -21,6 +22,7 @@
   email: michel.dumontier@maastrichtuniversity.nl
 
 - name: Christopher Brewster
+  slug: christopher-brewster
   role: Full Professor
   group: Faculty
   image_url: "assets/people/christopher-brewster.jpg"
@@ -46,6 +48,7 @@
   email: c.brewster@maastrichtuniversity.nl
 
 - name: Visara Urovi
+  slug: visara-urovi
   role: Associate Professor
   group: Faculty
   image_url: "assets/people/visara-urovi.jpg"
@@ -70,6 +73,7 @@
   email: v.urovi@maastrichtuniversity.nl
 
 - name: Chang Sun
+  slug: chang-sun
   role: Assistant Professor
   group: Faculty
   image_url: "assets/people/chang-sun.jpg"
@@ -94,6 +98,7 @@
   email: chang.sun@maastrichtuniversity.nl
 
 - name: Remzi Celebi
+  slug: remzi-celebi
   role: Assistant Professor
   group: Faculty
   image_url: "assets/people/remzi-celebi.jpg"
@@ -117,6 +122,7 @@
   email: r.celebi@maastrichtuniversity.nl
 
 - name: Rohan Nanda
+  slug: rohan-nanda
   role: Assistant Professor
   group: Faculty
   image_url: "assets/people/rohan-nanda.jpg"
@@ -140,6 +146,7 @@
   email: r.nanda@maastrichtuniversity.nl
 
 - name: Aikaterina Kasimati
+  slug: aikaterina-kasimati
   role: Assistant Professor
   group: Faculty
   image_url: "https://www.maastrichtuniversity.nl/sites/default/files/styles/960x1440/theme/um_base/src/images/placeholder_profile.png"
@@ -160,6 +167,7 @@
 
 
 - name: Denise Slenter
+  slug: denise-slenter
   role: Assistant Professor
   group: Faculty
   image_url: "assets/people/denise-slenter.jpg"
@@ -186,6 +194,7 @@
 
 
 - name: Pietro Bonizzi
+  slug: pietro-bonizzi
   role: Associate Professor
   group: Faculty
   image_url: "assets/people/pietro-bonizzi.jpg"
@@ -208,6 +217,7 @@
   email: p.bonizzi@maastrichtuniversity.nl
 
 - name: Rachel Cavill
+  slug: rachel-cavill
   role: Assistant Professor
   group: Faculty
   image_url: "assets/people/rachel-cavill.jpg"
@@ -226,6 +236,7 @@
   email: r.cavill@maastrichtuniversity.nl
 
 - name: Konstantia Zarkogianni
+  slug: konstantia-zarkogianni
   role: Associate Professor
   group: Faculty
   image_url: "assets/people/konstantia-zarkogianni.jpg"
@@ -251,6 +262,7 @@
   email: k.zarkogianni@maastrichtuniversity.nl
 
 - name: Shervin Mehryar
+  slug: shervin-mehryar
   role: PhD Researcher
   group: Researchers
   image_url: "https://winslab.lids.mit.edu/wp-content/uploads/2018/03/SMehryar-600x600.jpg"
@@ -270,6 +282,7 @@
   email: ""
 
 - name: Mahmoud Ibrahim
+  slug: mahmoud-ibrahim
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/mahmoud-ibrahim.jpg"
@@ -288,6 +301,7 @@
   email: ""
 
 - name: Seun Adekunle
+  slug: seun-adekunle
   role: PhD Researcher
   group: Researchers
   image_url: ""
@@ -307,6 +321,7 @@
   email: ""
  
 - name: Özge Erten
+  slug: ozge-erten
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/zge-erten.jpg"
@@ -329,6 +344,7 @@
   email: ""
 
 - name: Maryam Mohammadi
+  slug: maryam-mohammadi
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/maryam-mohammadi.jpg"
@@ -351,6 +367,7 @@
   email: ""
 
 - name: Gijs Wijngaard
+  slug: gijs-wijngaard
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/gijs-wijngaard.jpg"
@@ -373,6 +390,7 @@
   email: ""
 
 - name: Kun Li
+  slug: kun-li
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/kun-li.jpg"
@@ -395,6 +413,7 @@
   email: ""
 
 - name: Yuyang Yan
+  slug: yuyang-yan
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/yuyang-yan.jpg"
@@ -414,6 +433,7 @@
   email: ""
 
 - name: Dong Yang
+  slug: dong-yang
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/dong-yang.jpg"
@@ -435,6 +455,7 @@
   email: ""
 
 - name: Rishabh Jakhar
+  slug: rishabh-jakhar
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/rishabh-jakhar.jpg"
@@ -453,6 +474,7 @@
   email: ""
 
 - name: Yaru Zhang
+  slug: yaru-zhang
   role: PhD Researcher
   group: Researchers
   image_url: "https://www.maastrichtuniversity.nl/sites/default/files/styles/1488x1488/public/2024-01/Yaru.jpg?h=d803a6d2&itok=tkQYHZar"
@@ -475,6 +497,7 @@
   email: ""
 
 - name: Komal Gilani
+  slug: komal-gilani
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/komal-gilani.jpg"
@@ -496,6 +519,7 @@
   email: ""
 
 - name: Mikołaj Najda
+  slug: mikoaj-najda
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/miko-aj-najda.jpg"
@@ -516,6 +540,7 @@
   email: ""
 
 - name: Ensar Erol
+  slug: ensar-erol
   role: Research Software Engineer
   group: Researchers
   image_url: "assets/people/ensar-erol.jpg"
@@ -538,6 +563,7 @@
   email: ""
 
 - name: Louis Powell
+  slug: louis-powell
   role: Research Software Engineer
   group: Researchers
   image_url: "assets/people/louis-powell.jpg"
@@ -555,6 +581,7 @@
   email: louis.powell@maastrichtuniversity.nl
 
 - name: Pranav Bapat
+  slug: pranav-bapat
   role: Research Software Engineer
   group: Researchers
   image_url: "assets/people/pranav-bapat.jpg"
@@ -577,6 +604,7 @@
   email: p.bapat@maastrichtuniversity.nl
 
 - name: Felipe Arruda Pontes
+  slug: felipe-arruda-pontes
   role: Researcher
   group: Researchers
   image_url: "assets/people/felipe-arruda-pontes.jpg"
@@ -602,6 +630,7 @@
   email: ""
 
 - name: Anas Elghafari
+  slug: anas-elghafari
   role: Researcher
   group: Researchers
   image_url: "assets/people/anas-elghafari.jpg"
@@ -626,6 +655,7 @@
   email: ""
 
 - name: Wei Wei
+  slug: wei-wei
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/wei-wei.jpg"
@@ -649,6 +679,7 @@
   email: ""
 
 - name: Nguyen Nam Doan
+  slug: nguyen-nam-doan
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/nam-doan.jpg"
@@ -666,6 +697,7 @@
   email: ""
 
 - name: Julie Loesch
+  slug: julie-loesch
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/julie-loesch.jpg"
@@ -683,6 +715,7 @@
   email: julie.loesch@maastrichtuniversity.nl
 
 - name: Joao Vissoci
+  slug: joao-vissoci
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/joao-vissoci.jpg"
@@ -700,6 +733,7 @@
   email: ""
 
 - name: Hercules Panoutsopoulos
+  slug: hercules-panoutsopoulos
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/hercules-panoutsopoulos.jpg"
@@ -717,6 +751,7 @@
   email: ""
 
 - name: Ankur Lohachab
+  slug: ankur-lohachab
   role: Postdoctoral Researcher
   group: Researchers
   image_url: "assets/people/ankur-lohachab.jpg"
@@ -741,6 +776,7 @@
   email: "ankur.lohachab@maastrichtuniversity.nl"
 
 - name: Vageesh Saxena
+  slug: vageesh-saxena
   role: PhD Researcher
   group: Researchers
   image_url: "assets/people/vageesh-saxena.jpg"
@@ -763,6 +799,7 @@
   email: "v.saxena@maastrichtuniversity.nl"
 
 - name: Siham Eddamiri
+  slug: siham-eddamiri
   role: Postdoctoral Researcher
   group: Researchers
   image_url: "assets/people/siham-eddamiri.jpg"
@@ -786,6 +823,7 @@
   email: "siham.eddamiri@maastrichtuniversity.nl"
 
 - name: Enrique Hortal Quesada
+  slug: enrique-hortal-quesada
   role: Assistant Professor
   group: Faculty
   image_url: "assets/people/enrique-hortal-quesada.jpg"

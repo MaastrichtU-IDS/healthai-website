@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Profile · HAIR Group · Maastricht University</title>
+  <link rel="stylesheet" href="../styles.css?v=2" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .person-hero-inner {
+      display: flex; gap: 36px; align-items: flex-start; padding: 48px 0 36px;
+    }
+    .person-avatar-lg {
+      width: 130px; height: 130px; flex-shrink: 0; border-radius: 50%;
+      overflow: hidden; background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 700;
+      color: rgba(255,255,255,0.35);
+    }
+    .person-avatar-lg img { width:100%; height:100%; object-fit:cover; object-position:50% 15%; }
+    .person-hero-text { flex: 1; }
+    .person-hero-text .back-link {
+      font-size: 0.78rem; color: rgba(255,255,255,0.4); text-decoration: none;
+      display: inline-block; margin-bottom: 14px; transition: color var(--transition);
+    }
+    .person-hero-text .back-link:hover { color: rgba(255,255,255,0.7); }
+    .person-hero-text h1 { color: white; margin-bottom: 6px; line-height: 1.15; }
+    .person-hero-role { color: rgba(46,143,160,0.9); font-size: 0.95rem; font-weight: 500; margin-bottom: 4px; }
+    .person-hero-dept { color: rgba(255,255,255,0.45); font-size: 0.8rem; margin-bottom: 22px; }
+    .hero-stat-row { display: flex; gap: 32px; }
+    .hero-stat-val { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; color: white; line-height: 1; }
+    .hero-stat-lbl { font-size: 0.7rem; color: rgba(255,255,255,0.45); margin-top: 3px; }
+
+    .profile-content { max-width: 860px; padding-top: 48px; padding-bottom: 80px; }
+    .profile-section { margin-bottom: 52px; }
+    .profile-section-title {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 14px;
+      padding-bottom: 8px; border-bottom: 1.5px solid var(--border);
+    }
+    .profile-bio { font-size: 0.92rem; line-height: 1.85; color: var(--text-muted); }
+
+    .profile-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .profile-link {
+      padding: 7px 14px; border-radius: 6px; font-size: 0.8rem;
+      border: 1px solid var(--border); color: var(--slate-mid);
+      display: flex; align-items: center; gap: 6px; text-decoration: none;
+      transition: all var(--transition);
+    }
+    .profile-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+
+    .pub-year-group { margin-bottom: 28px; }
+    .pub-year-heading {
+      font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700;
+      color: var(--slate); margin-bottom: 0; padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pub-item {
+      display: flex; gap: 10px; padding: 11px 0;
+      border-bottom: 1px solid var(--border); align-items: flex-start;
+    }
+    .pub-item:last-child { border-bottom: none; }
+    .pub-badge {
+      flex-shrink: 0; font-size: 0.62rem; font-weight: 700; letter-spacing: .04em;
+      text-transform: uppercase; padding: 2px 7px; border-radius: 3px;
+      margin-top: 3px; white-space: nowrap;
+    }
+    .pub-badge-journal     { background:#dbeafe; color:#1e40af; }
+    .pub-badge-conference  { background:#dcfce7; color:#166534; }
+    .pub-badge-book        { background:#fef3c7; color:#92400e; }
+    .pub-badge-preprint    { background:#f3e8ff; color:#6b21a8; }
+    .pub-badge-other       { background:#f1f5f9; color:#475569; }
+    .pub-title { font-size: 0.87rem; font-weight: 600; color: var(--slate); line-height: 1.4; margin-bottom: 3px; }
+    .pub-title a { color: inherit; text-decoration: none; }
+    .pub-title a:hover { color: var(--blue); }
+    .pub-venue { font-size: 0.77rem; color: var(--text-muted); }
+
+    .activity-row { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+    .activity-row:last-child { border-bottom: none; }
+    .activity-badge {
+      flex-shrink:0; font-size:0.65rem; font-weight:700; letter-spacing:.05em;
+      text-transform:uppercase; padding:3px 8px; border-radius:4px; margin-top:3px; white-space:nowrap;
+    }
+    .ab-news    { background:#dbeafe; color:#1e40af; }
+    .ab-blog    { background:#dcfce7; color:#166534; }
+    .ab-talk    { background:#fef3c7; color:#92400e; }
+    .ab-podcast { background:#f3e8ff; color:#6b21a8; }
+    .activity-title { font-family:'Fraunces',serif; font-size:0.93rem; font-weight:700; color:var(--slate); line-height:1.35; margin-bottom:3px; }
+    .activity-title a { color:inherit; text-decoration:none; }
+    .activity-title a:hover { color:var(--blue); }
+    .activity-meta { font-size:0.78rem; color:var(--text-muted); margin-bottom:3px; }
+    .activity-excerpt { font-size:0.82rem; color:var(--text); line-height:1.55; margin-top:3px; }
+
+    @media (max-width: 600px) {
+      .person-hero-inner { flex-direction: column; gap: 18px; }
+      .person-avatar-lg { width: 90px; height: 90px; font-size: 2rem; }
+    }
+  </style>
+</head>
+<body class="page-body">
+<script src="../nav.js"></script>
+<script src="../cms.js"></script>
+
+<div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
+
+<div id="notFound" class="hidden">
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">Not found</span>
+      <h1>Person not found</h1>
+      <p class="lead">No team member matches that profile URL.</p>
+      <a href="../people.html" class="btn btn-primary" style="margin-top:16px">← Back to People</a>
+    </div>
+  </div>
+</div>
+
+<div id="personPage" class="hidden">
+  <div class="page-hero">
+    <div class="container">
+      <div class="person-hero-inner">
+        <div class="person-avatar-lg" id="heroAvatar"></div>
+        <div class="person-hero-text">
+          <a href="../people.html" class="back-link">← People</a>
+          <h1 id="heroName"></h1>
+          <div class="person-hero-role" id="heroRole"></div>
+          <div class="person-hero-dept">Dept. of Advanced Computing Sciences · Maastricht University</div>
+          <div class="hero-stat-row" id="heroStats"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container profile-content">
+
+      <div class="profile-section" id="secBio"></div>
+      <div class="profile-section" id="secThemes"></div>
+      <div class="profile-section" id="secLinks"></div>
+      <div class="profile-section" id="secPubs"></div>
+      <div class="profile-section" id="secActivity"></div>
+
+    </div>
+  </section>
+</div>
+
+<script>
+const ICON = d => `<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="${d}"/></svg>`;
+const ICONS = {
+  email:    ICON('M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'),
+  orcid:    ICON('M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947 0 .525-.422.947-.947.947-.525 0-.946-.422-.946-.947 0-.525.421-.947.946-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z'),
+  scholar:  ICON('M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z'),
+  linkedin: ICON('M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'),
+  pure:     ICON('M4 4h6a4 4 0 0 1 0 8H6v8H4V4zm2 2v4h4a2 2 0 0 0 0-4H6zm8-2h2v16h-2V4zm4 0h4v2h-4v6h3v2h-3v6h-2V4h2z'),
+  work:     ICON('M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'),
+  pubs:     ICON('M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'),
+};
+
+function imgSrc(url) {
+  if (!url) return '';
+  return url.startsWith('http') ? url : '../' + url;
+}
+
+function pubBadgeClass(type) {
+  if (!type) return 'pub-badge-other';
+  const t = type.toLowerCase();
+  if (t.includes('journal')) return 'pub-badge-journal';
+  if (t.includes('conference') || t.includes('proceedings')) return 'pub-badge-conference';
+  if (t.includes('book')) return 'pub-badge-book';
+  if (t.includes('preprint')) return 'pub-badge-preprint';
+  return 'pub-badge-other';
+}
+
+function pubBadgeLabel(type) {
+  if (!type) return 'Other';
+  const t = type.toLowerCase();
+  if (t.includes('journal')) return 'Journal';
+  if (t.includes('conference') || t.includes('proceedings')) return 'Conf.';
+  if (t.includes('book')) return 'Book';
+  if (t.includes('preprint')) return 'Preprint';
+  return type;
+}
+
+(async () => {
+  // --- Resolve slug ---
+  let slug = sessionStorage.getItem('__hair_person');
+  if (slug) {
+    sessionStorage.removeItem('__hair_person');
+    const cleanPath = window.location.pathname.replace(/\/?$/, '/') + slug;
+    history.replaceState(null, '', cleanPath);
+  } else {
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    const pi = parts.indexOf('people');
+    if (pi !== -1 && parts[pi + 1]) {
+      slug = parts[pi + 1];
+    } else {
+      slug = new URLSearchParams(location.search).get('id');
+    }
+  }
+
+  if (!slug) {
+    document.getElementById('loading').remove();
+    document.getElementById('notFound').classList.remove('hidden');
+    return;
+  }
+
+  // --- Load data in parallel ---
+  const [people, news, pubs] = await Promise.all([
+    CMS.load('../content/people.yaml'),
+    CMS.load('../content/news.yaml'),
+    CMS.load('../content/publications.generated.yaml').catch(() => []),
+  ]);
+
+  document.getElementById('loading').remove();
+
+  const person = (Array.isArray(people) ? people : []).find(p => p.slug === slug);
+  if (!person) {
+    document.getElementById('notFound').classList.remove('hidden');
+    return;
+  }
+
+  // --- Update page title ---
+  document.getElementById('pageTitle').textContent = `${person.name} · HAIR Group`;
+
+  // --- Hero ---
+  const avatar = document.getElementById('heroAvatar');
+  const src = imgSrc(person.image_url);
+  avatar.innerHTML = src
+    ? `<img src="${src}" alt="${person.name}">`
+    : CMS.initials(person.name);
+
+  document.getElementById('heroName').textContent = person.name;
+  document.getElementById('heroRole').textContent = person.role;
+
+  // Publication stats
+  const myPubs = (Array.isArray(pubs) ? pubs : []).filter(
+    pub => person.orcid && (pub.orcids || []).includes(person.orcid)
+  );
+  const totalCites = myPubs.reduce((s, p) => s + (p.citations || 0), 0);
+  const statsEl = document.getElementById('heroStats');
+  if (myPubs.length) {
+    statsEl.innerHTML = `
+      <div>
+        <div class="hero-stat-val">${myPubs.length}</div>
+        <div class="hero-stat-lbl">Publications</div>
+      </div>
+      <div>
+        <div class="hero-stat-val">${totalCites.toLocaleString()}</div>
+        <div class="hero-stat-lbl">Citations</div>
+      </div>`;
+  }
+
+  // --- Bio ---
+  if (person.bio && person.bio.trim() && !person.bio.includes('TODO')) {
+    document.getElementById('secBio').innerHTML = `
+      <div class="profile-section-title">About</div>
+      <p class="profile-bio">${person.bio.trim()}</p>`;
+  }
+
+  // --- Themes & Keywords ---
+  const themes = (person.themes || []).filter(Boolean);
+  const kws = (person.keywords || []).filter(Boolean);
+  if (themes.length || kws.length) {
+    let html = '<div class="profile-section-title">Research</div>';
+    if (themes.length) {
+      html += `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:${kws.length ? 10 : 0}px">
+        ${themes.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
+    }
+    if (kws.length) {
+      html += `<div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${kws.map(k => `<span class="tag tag-muted">${k}</span>`).join('')}</div>`;
+    }
+    document.getElementById('secThemes').innerHTML = html;
+  }
+
+  // --- Links ---
+  const links = [];
+  if (person.email)          links.push(`<a class="profile-link" href="mailto:${person.email}">${ICONS.email} Email</a>`);
+  if (person.orcid)          links.push(`<a class="profile-link" href="https://orcid.org/${person.orcid}" target="_blank" rel="noopener">${ICONS.orcid} ORCID</a>`);
+  if (person.google_scholar) links.push(`<a class="profile-link" href="https://scholar.google.com/citations?user=${person.google_scholar}" target="_blank" rel="noopener">${ICONS.scholar} Google Scholar</a>`);
+  if (person.linkedin)       links.push(`<a class="profile-link" href="https://www.linkedin.com/in/${person.linkedin}" target="_blank" rel="noopener">${ICONS.linkedin} LinkedIn</a>`);
+  if (person.cris_url)       links.push(`<a class="profile-link" href="${person.cris_url}" target="_blank" rel="noopener">${ICONS.pure} PURE</a>`);
+  if (person.work_url)       links.push(`<a class="profile-link" href="${person.work_url}" target="_blank" rel="noopener">${ICONS.work} UM page</a>`);
+  if (myPubs.length)         links.push(`<a class="profile-link" href="../publications.html?q=${encodeURIComponent(person.name)}">${ICONS.pubs} All publications</a>`);
+  if (links.length) {
+    document.getElementById('secLinks').innerHTML = `
+      <div class="profile-section-title">Links</div>
+      <div class="profile-links">${links.join('')}</div>`;
+  }
+
+  // --- Publications ---
+  if (myPubs.length) {
+    const byYear = {};
+    myPubs.forEach(pub => {
+      const y = pub.year || 'Unknown';
+      (byYear[y] = byYear[y] || []).push(pub);
+    });
+    const years = Object.keys(byYear).sort((a, b) => b - a);
+
+    const pubHtml = years.map(y => `
+      <div class="pub-year-group">
+        <div class="pub-year-heading">${y}</div>
+        ${byYear[y].map(pub => `
+          <div class="pub-item">
+            <span class="pub-badge ${pubBadgeClass(pub.type)}">${pubBadgeLabel(pub.type)}</span>
+            <div>
+              <div class="pub-title">${pub.doi
+                ? `<a href="https://doi.org/${pub.doi}" target="_blank" rel="noopener">${pub.title}</a>`
+                : pub.title}</div>
+              <div class="pub-venue">${[pub.authors, pub.venue].filter(Boolean).join(' · ')}</div>
+            </div>
+          </div>`).join('')}
+      </div>`).join('');
+
+    document.getElementById('secPubs').innerHTML = `
+      <div class="profile-section-title">Publications (${myPubs.length})</div>
+      ${pubHtml}`;
+  }
+
+  // --- Activity ---
+  const name = person.name.toLowerCase();
+  const toDate = s => s ? new Date(s) : new Date(0);
+  const activity = [];
+
+  (news.talks || []).forEach(t => {
+    if ((t.speaker || '').toLowerCase().includes(name)) {
+      activity.push({
+        type: 'talk', label: 'Talk',
+        title: t.title, url: t.url || null,
+        meta: [t.type, t.event, t.date].filter(Boolean).join(' · '),
+        excerpt: t.description || '',
+        sortDate: toDate(t.date),
+      });
+    }
+  });
+
+  (news.podcasts || []).forEach(p => {
+    if ((p.guest || '').toLowerCase().includes(name)) {
+      activity.push({
+        type: 'podcast', label: 'Podcast',
+        title: p.title, url: p.url || null,
+        meta: [p.show, p.date, p.duration].filter(Boolean).join(' · '),
+        excerpt: p.description || '',
+        audio_url: p.audio_url || null,
+        sortDate: toDate(p.date),
+      });
+    }
+  });
+
+  (news.blog || []).forEach(b => {
+    if ((b.author || '').toLowerCase().includes(name)) {
+      activity.push({
+        type: 'blog', label: 'Blog',
+        title: b.title, url: b.url || null,
+        meta: [b.tag, b.date].filter(Boolean).join(' · '),
+        excerpt: b.excerpt || '',
+        sortDate: toDate(b.date),
+      });
+    }
+  });
+
+  (news.news || []).forEach(n => {
+    const text = [n.title, n.body].join(' ').toLowerCase();
+    if (text.includes(name)) {
+      activity.push({
+        type: 'news', label: 'News',
+        title: n.title, url: n.url || null,
+        meta: [n.day, n.month, n.year].filter(Boolean).join(' '),
+        excerpt: n.body || '',
+        sortDate: toDate(`${n.day} ${n.month} ${n.year}`),
+      });
+    }
+  });
+
+  activity.sort((a, b) => b.sortDate - a.sortDate);
+
+  if (activity.length) {
+    const actHtml = activity.map(a => `
+      <div class="activity-row">
+        <span class="activity-badge ab-${a.type}">${a.label}</span>
+        <div>
+          <div class="activity-title">${a.url
+            ? `<a href="${a.url}" target="_blank" rel="noopener">${a.title}</a>`
+            : a.title}</div>
+          <div class="activity-meta">${a.meta}</div>
+          ${a.excerpt ? `<div class="activity-excerpt">${a.excerpt.trim()}</div>` : ''}
+          ${a.audio_url ? `<audio controls preload="none" style="margin-top:8px;width:100%;max-width:460px"><source src="${a.audio_url}" type="audio/mp4"></audio>` : ''}
+        </div>
+      </div>`).join('');
+
+    document.getElementById('secActivity').innerHTML = `
+      <div class="profile-section-title">News & Activity</div>
+      ${actHtml}`;
+  }
+
+  document.getElementById('personPage').classList.remove('hidden');
+  CMS.revealNew(document.getElementById('personPage'));
+})();
+</script>
+</body>
+</html>
