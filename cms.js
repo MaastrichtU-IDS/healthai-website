@@ -32,7 +32,7 @@ window.CMS = (function () {
 
   /* ── Person link helper ── */
 
-  function personLinks(p, cls) {
+  function personLinks(p, cls = 'person-link') {
     const ext = 'target="_blank" rel="noopener"';
     const a = (href, icn, label, extra = '') => `<a class="${cls}" href="${href}" ${extra}>${icn} ${label}</a>`;
     const links = [];
@@ -294,6 +294,7 @@ window.CMS = (function () {
 
       _renderStats(filtered);
       _renderChart(filtered);
+      if (_opts.onFilter) _opts.onFilter(filtered);
 
       const ps = _opts.pageSize || Infinity;
       const tp = ps === Infinity ? 1 : Math.max(1, Math.ceil(filtered.length / ps));

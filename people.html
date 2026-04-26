@@ -81,14 +81,6 @@
       letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 8px; margin-top: 18px;
     }
     .modal-bio { font-size: 0.88rem; line-height: 1.75; color: var(--text-muted); }
-    .modal-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
-    .modal-link {
-      padding: 6px 13px; border-radius: 6px; font-size: 0.78rem;
-      border: 1px solid var(--border); color: var(--slate-mid);
-      display: flex; align-items: center; gap: 5px;
-      transition: all var(--transition);
-    }
-    .modal-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
   </style>
 </head>
 <body class="page-body">
@@ -201,8 +193,8 @@ function renderPeople() {
 function openModal(p) {
   const themes = (p.themes||[]).map(t=>`<span class="tag">${t}</span>`).join('');
   const kws = (p.keywords||[]).map(k=>`<span class="tag tag-muted">${k}</span>`).join('');
-  const links = CMS.personLinks(p, 'modal-link');
-  links.push(`<a class="modal-link" href="publications.html?q=${encodeURIComponent(p.name)}">${ICONS.pubs} Publications</a>`);
+  const links = CMS.personLinks(p);
+  links.push(`<a class="person-link" href="publications.html?q=${encodeURIComponent(p.name)}">${ICONS.pubs} Publications</a>`);
 
   const profileUrl = `people/?id=${p.slug || p.name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}`;
   document.getElementById('modalContent').innerHTML = `
@@ -222,7 +214,7 @@ function openModal(p) {
       <div class="modal-section-label">Keywords</div>
       <div class="tag-row">${kws}</div>
       <div class="modal-section-label">Links</div>
-      <div class="modal-links">${links.join('')}</div>
+      <div class="person-links">${links.join('')}</div>
       <div class="modal-divider">
         <a href="${profileUrl}" class="btn btn-primary" style="font-size:0.82rem;padding:8px 18px">View full profile →</a>
       </div>

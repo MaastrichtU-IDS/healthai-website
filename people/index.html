@@ -42,14 +42,6 @@
       padding-bottom: 8px; border-bottom: 1.5px solid var(--border);
     }
     .profile-bio { font-size: 0.92rem; line-height: 1.85; color: var(--text-muted); }
-    .profile-links { display: flex; flex-wrap: wrap; gap: 8px; }
-    .profile-link {
-      padding: 7px 14px; border-radius: 6px; font-size: 0.8rem;
-      border: 1px solid var(--border); color: var(--slate-mid);
-      display: flex; align-items: center; gap: 6px; text-decoration: none;
-      transition: all var(--transition);
-    }
-    .profile-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
 
     @media (max-width: 600px) {
       .person-hero-inner { flex-direction: column; gap: 18px; }
@@ -168,11 +160,11 @@ const fmt = n => Number(n).toLocaleString();
   }
 
   // Links
-  const links = CMS.personLinks(person, 'profile-link');
+  const links = CMS.personLinks(person);
   if (links.length) {
     document.getElementById('secLinks').innerHTML = `
       <div class="profile-section-title">Links</div>
-      <div class="profile-links">${links.join('')}</div>`;
+      <div class="person-links">${links.join('')}</div>`;
   }
 
   // Publications browser
@@ -182,6 +174,19 @@ const fmt = n => Number(n).toLocaleString();
       pageSize: 20,
       scrollTarget: 'secPubs',
       sectionTitle: 'Publications',
+      onFilter: filtered => {
+        const cites = filtered.reduce((s, p) => s + (p.citations || 0), 0);
+        const isFiltered = filtered.length !== myPubs.length;
+        document.getElementById('heroStats').innerHTML = `
+          <div>
+            <div class="hero-stat-val">${filtered.length}</div>
+            <div class="hero-stat-lbl">${isFiltered ? 'Matching pubs' : 'Publications'}</div>
+          </div>
+          <div>
+            <div class="hero-stat-val">${fmt(cites)}</div>
+            <div class="hero-stat-lbl">Citations</div>
+          </div>`;
+      },
     });
   }
 
