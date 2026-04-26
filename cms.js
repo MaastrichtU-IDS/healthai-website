@@ -172,7 +172,8 @@ window.CMS = (function () {
     let _pubs = [], _type = 'All', _chartMode = 'publications';
     let _yearMin = null, _yearMax = null, _page = 1, _opts = {};
 
-    const _fmt = n => Number(n).toLocaleString();
+    const _fmt  = n => Number(n).toLocaleString();
+    const _fmtK = n => n >= 1000 ? parseFloat((n / 1000).toFixed(1)) + 'k' : String(n);
 
     function _hIdx(arr) {
       const s = arr.slice().sort((a, b) => b - a);
@@ -285,7 +286,7 @@ window.CMS = (function () {
             const cumPct = Math.max(total > 0 ? 2 : 0, total / dmax * 100);
             const currPct = total > 0 ? curr / total * 100 : 0;
             return `<div class="year-bar-col" title="${y}: ${_fmt(curr)} new · ${_fmt(total)} cumulative">
-              <div class="year-bar-stack"><span class="year-bar-val">${total > 0 ? _fmt(total) : ''}</span>
+              <div class="year-bar-stack"><span class="year-bar-val">${total > 0 ? _fmtK(total) : ''}</span>
                 <div class="year-bar-fill year-bar-fill--stacked" style="height:${cumPct}%">
                   <div class="year-bar-curr" style="height:${currPct}%"></div>
                   <div class="year-bar-prev" style="height:${100 - currPct}%"></div>
@@ -300,7 +301,7 @@ window.CMS = (function () {
           <div class="year-chart">${years.map(y => {
             const val = (byY[y] || {}).pubs || 0, pct = Math.max(val > 0 ? 2 : 0, val / dmax * 100);
             return `<div class="year-bar-col" title="${y}: ${_fmt(val)} publications">
-              <div class="year-bar-stack"><span class="year-bar-val">${val > 0 ? _fmt(val) : ''}</span><div class="year-bar-fill" style="height:${pct}%"></div></div>
+              <div class="year-bar-stack"><span class="year-bar-val">${val > 0 ? _fmtK(val) : ''}</span><div class="year-bar-fill" style="height:${pct}%"></div></div>
               <div class="year-bar-label">${String(y).slice(2)}</div></div>`;
           }).join('')}</div>`;
       }
