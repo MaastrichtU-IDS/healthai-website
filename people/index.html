@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../styles.css?v=2" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <style>
+    /* ── Hero ── */
     .person-hero-inner {
       display: flex; gap: 36px; align-items: flex-start; padding: 48px 0 36px;
     }
@@ -32,7 +33,8 @@
     .hero-stat-val { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; color: white; line-height: 1; }
     .hero-stat-lbl { font-size: 0.7rem; color: rgba(255,255,255,0.45); margin-top: 3px; }
 
-    .profile-content { max-width: 860px; padding-top: 48px; padding-bottom: 80px; }
+    /* ── Profile sections ── */
+    .profile-content { max-width: 900px; padding-top: 48px; padding-bottom: 80px; }
     .profile-section { margin-bottom: 52px; }
     .profile-section-title {
       font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
@@ -50,32 +52,111 @@
     }
     .profile-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
 
-    .pub-year-group { margin-bottom: 28px; }
-    .pub-year-heading {
-      font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700;
-      color: var(--slate); margin-bottom: 0; padding: 6px 0;
-      border-bottom: 1px solid var(--border);
+    /* ── Publication browser ── */
+    .pub-stats {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border);
+      border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 28px;
     }
-    .pub-item {
-      display: flex; gap: 10px; padding: 11px 0;
-      border-bottom: 1px solid var(--border); align-items: flex-start;
-    }
-    .pub-item:last-child { border-bottom: none; }
-    .pub-badge {
-      flex-shrink: 0; font-size: 0.62rem; font-weight: 700; letter-spacing: .04em;
-      text-transform: uppercase; padding: 2px 7px; border-radius: 3px;
-      margin-top: 3px; white-space: nowrap;
-    }
-    .pub-badge-journal     { background:#dbeafe; color:#1e40af; }
-    .pub-badge-conference  { background:#dcfce7; color:#166534; }
-    .pub-badge-book        { background:#fef3c7; color:#92400e; }
-    .pub-badge-preprint    { background:#f3e8ff; color:#6b21a8; }
-    .pub-badge-other       { background:#f1f5f9; color:#475569; }
-    .pub-title { font-size: 0.87rem; font-weight: 600; color: var(--slate); line-height: 1.4; margin-bottom: 3px; }
-    .pub-title a { color: inherit; text-decoration: none; }
-    .pub-title a:hover { color: var(--blue); }
-    .pub-venue { font-size: 0.77rem; color: var(--text-muted); }
+    .pub-stat { background: var(--white); padding: 22px 20px; }
+    .pub-stat:first-child { background: var(--slate); }
+    .pub-stat-val { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; color: var(--slate); line-height: 1; }
+    .pub-stat:first-child .pub-stat-val { color: var(--white); }
+    .pub-stat-val .denom { opacity: 0.45; font-size: 1.3rem; font-weight: 600; margin-left: 3px; }
+    .pub-stat-lbl { font-size: 0.74rem; color: var(--text-muted); margin-top: 6px; }
+    .pub-stat:first-child .pub-stat-lbl { color: rgba(255,255,255,0.5); }
 
+    .year-dist {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 18px 22px; margin-bottom: 22px;
+    }
+    .year-dist-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+    }
+    .year-dist-title { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-muted); font-weight: 600; }
+    .chart-toggle { display: flex; gap: 4px; }
+    .chart-toggle-btn {
+      padding: 3px 10px; border-radius: 5px; font-size: 0.72rem; font-weight: 500;
+      border: 1px solid var(--border); color: var(--text-muted); background: var(--white);
+      cursor: pointer; transition: all var(--transition);
+    }
+    .chart-toggle-btn.active { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .year-chart { display: flex; align-items: stretch; gap: 3px; height: 160px; overflow-x: auto; }
+    .year-bar-col { flex: 1; min-width: 22px; display: flex; flex-direction: column; }
+    .year-bar-stack { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; }
+    .year-bar-val { text-align: center; font-size: 0.62rem; color: var(--text-muted); font-variant-numeric: tabular-nums; margin-bottom: 2px; min-height: 11px; }
+    .year-bar-fill { background: var(--blue); border-radius: 3px 3px 0 0; width: 100%; transition: height var(--transition); }
+    .year-bar-col:hover .year-bar-fill { background: var(--blue-mid); }
+    .year-bar-label { font-size: 0.68rem; color: var(--text-muted); text-align: center; margin-top: 5px; font-family: 'Fraunces', serif; font-weight: 600; }
+
+    .year-range-wrap {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 16px 22px; margin-bottom: 22px;
+    }
+    .year-range-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .year-range-label-val { font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.9rem; color: var(--slate); }
+    .year-range-track { position: relative; height: 4px; background: var(--border); border-radius: 2px; margin: 10px 0; }
+    .year-range-fill { position: absolute; height: 100%; background: var(--blue); border-radius: 2px; pointer-events: none; }
+    .year-range-track input[type=range] {
+      position: absolute; width: 100%; height: 4px; top: 0; left: 0; margin: 0;
+      -webkit-appearance: none; appearance: none; background: transparent; pointer-events: none;
+    }
+    .year-range-track input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--blue); border: 2px solid var(--white); box-shadow: 0 1px 4px rgba(0,0,0,0.25); pointer-events: all; cursor: pointer;
+    }
+    .year-range-track input[type=range]::-moz-range-thumb {
+      width: 16px; height: 16px; border-radius: 50%; background: var(--blue);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25); pointer-events: all; cursor: pointer; border: none;
+    }
+    .year-range-ticks { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; font-family: 'Fraunces', serif; font-weight: 600; }
+
+    .year-heading {
+      font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700;
+      color: var(--slate); margin: 32px 0 4px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .year-heading::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    .pub-row {
+      display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+      padding: 20px 0; border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+    .pub-row:hover { background: var(--bg-alt); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 8px; }
+    .pub-year-lbl { font-family: 'Fraunces', serif; font-size: 0.9rem; font-weight: 700; color: var(--blue-mid); text-align: right; padding-top: 2px; }
+    .pub-title-link { font-family: 'Fraunces', serif; font-size: 0.97rem; font-weight: 700; color: var(--slate); line-height: 1.35; display: block; margin-bottom: 5px; transition: color var(--transition); }
+    .pub-title-link:hover { color: var(--blue); }
+    .pub-authors { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+    .pub-venue   { font-size: 0.78rem; font-style: italic; color: var(--text-light); margin-bottom: 6px; }
+    .pub-actions { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
+    .pub-action {
+      padding: 4px 11px; border-radius: 5px; font-size: 0.74rem; font-weight: 500;
+      border: 1px solid var(--border); color: var(--text-muted);
+      transition: all var(--transition); display: inline-flex; align-items: center; gap: 4px;
+      background: none; cursor: pointer;
+    }
+    .pub-action:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .pub-action-success { border-color: var(--blue) !important; color: var(--blue) !important; background: var(--blue-light) !important; }
+
+    /* ── Pagination ── */
+    .pagination {
+      display: flex; align-items: center; justify-content: center;
+      gap: 6px; padding: 28px 0 8px; flex-wrap: wrap;
+    }
+    .page-btn {
+      min-width: 36px; height: 36px; padding: 0 10px; border-radius: 6px;
+      border: 1px solid var(--border); background: var(--white); color: var(--slate-mid);
+      font-size: 0.82rem; font-weight: 500; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition);
+    }
+    .page-btn:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .page-btn.active { background: var(--slate); color: white; border-color: var(--slate); }
+    .page-btn:disabled { opacity: 0.35; cursor: default; }
+    .page-info { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 6px; }
+
+    /* ── Activity ── */
     .activity-row { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
     .activity-row:last-child { border-bottom: none; }
     .activity-badge {
@@ -95,6 +176,7 @@
     @media (max-width: 600px) {
       .person-hero-inner { flex-direction: column; gap: 18px; }
       .person-avatar-lg { width: 90px; height: 90px; font-size: 2rem; }
+      .pub-stats { grid-template-columns: repeat(2,1fr); }
     }
   </style>
 </head>
@@ -161,28 +243,276 @@ function imgSrc(url) {
   return url.startsWith('http') ? url : '../' + url;
 }
 
-function pubBadgeClass(type) {
-  if (!type) return 'pub-badge-other';
-  const t = type.toLowerCase();
-  if (t.includes('journal')) return 'pub-badge-journal';
-  if (t.includes('conference') || t.includes('proceedings')) return 'pub-badge-conference';
-  if (t.includes('book')) return 'pub-badge-book';
-  if (t.includes('preprint')) return 'pub-badge-preprint';
-  return 'pub-badge-other';
+function fmt(n) { return Number(n).toLocaleString(); }
+
+function hIndex(citations) {
+  const sorted = citations.slice().sort((a, b) => b - a);
+  let h = 0;
+  for (let i = 0; i < sorted.length; i++) {
+    if (sorted[i] >= i + 1) h = i + 1; else break;
+  }
+  return h;
 }
 
-function pubBadgeLabel(type) {
-  if (!type) return 'Other';
-  const t = type.toLowerCase();
-  if (t.includes('journal')) return 'Journal';
-  if (t.includes('conference') || t.includes('proceedings')) return 'Conf.';
-  if (t.includes('book')) return 'Book';
-  if (t.includes('preprint')) return 'Preprint';
-  return type;
+// ── Publication browser state ──
+const PAGE_SIZE = 20;
+let _allPubs = [], _activeType = 'All', _activeChart = 'publications';
+let _yearMin = null, _yearMax = null, _page = 1;
+
+function initPubBrowser(pubs) {
+  _allPubs = pubs;
+  if (!pubs.length) return;
+
+  const totalCites = pubs.reduce((s, p) => s + (p.citations || 0), 0);
+  const h = hIndex(pubs.map(p => p.citations || 0));
+
+  // Stats
+  document.getElementById('pbStats').innerHTML = `
+    <div class="pub-stat"><div class="pub-stat-val" id="pbStatPubs">${fmt(pubs.length)}</div><div class="pub-stat-lbl">Publications</div></div>
+    <div class="pub-stat"><div class="pub-stat-val">${fmt(totalCites)}</div><div class="pub-stat-lbl">Citations</div></div>
+    <div class="pub-stat"><div class="pub-stat-val">${fmt(h)}</div><div class="pub-stat-lbl">h-index</div></div>`;
+
+  // Type chips
+  const types = ['All', ...new Set(pubs.map(p => p.type).filter(Boolean))];
+  document.getElementById('pbTypeChips').innerHTML = types.map(t =>
+    `<button class="chip${t === 'All' ? ' active' : ''}" onclick="pbSetType('${t}')">${t}</button>`
+  ).join('');
+
+  // Year range
+  const minY = Math.min(...pubs.map(p => p.year));
+  const maxY = Math.max(...pubs.map(p => p.year));
+  _yearMin = minY; _yearMax = maxY;
+  const minEl = document.getElementById('pbYearMin');
+  const maxEl = document.getElementById('pbYearMax');
+  minEl.min = maxEl.min = minY; minEl.max = maxEl.max = maxY;
+  minEl.value = minY; maxEl.value = maxY;
+  document.getElementById('pbTickMin').textContent = minY;
+  document.getElementById('pbTickMax').textContent = maxY;
+  minEl.oninput = () => {
+    if (+minEl.value > +maxEl.value) minEl.value = maxEl.value;
+    _yearMin = +minEl.value; _page = 1;
+    pbUpdateSlider(); renderPubs();
+  };
+  maxEl.oninput = () => {
+    if (+maxEl.value < +minEl.value) maxEl.value = minEl.value;
+    _yearMax = +maxEl.value; _page = 1;
+    pbUpdateSlider(); renderPubs();
+  };
+  pbUpdateSlider();
+  document.getElementById('pbYearRange').classList.remove('hidden');
+
+  renderPubs();
 }
 
+function pbUpdateSlider() {
+  const minEl = document.getElementById('pbYearMin');
+  const maxEl = document.getElementById('pbYearMax');
+  const lo = +minEl.value, hi = +maxEl.value;
+  const total = +minEl.max - +minEl.min || 1;
+  const leftPct  = (lo - +minEl.min) / total * 100;
+  const rightPct = (hi - +minEl.min) / total * 100;
+  document.getElementById('pbRangeFill').style.cssText = `left:${leftPct}%;width:${rightPct - leftPct}%`;
+  document.getElementById('pbRangeVal').textContent = lo === hi ? lo : `${lo} – ${hi}`;
+}
+
+function pbSetType(t) {
+  _activeType = t;
+  _page = 1;
+  document.querySelectorAll('#pbTypeChips .chip').forEach(c => c.classList.toggle('active', c.textContent === t));
+  renderPubs();
+}
+
+function pbSetChart(mode) {
+  _activeChart = mode;
+  renderChart(window._pbLastFiltered || []);
+}
+
+function renderChart(filtered) {
+  window._pbLastFiltered = filtered;
+  const isCites = _activeChart === 'citations';
+  const toggleHtml = `
+    <div class="chart-toggle">
+      <button class="chart-toggle-btn${!isCites ? ' active' : ''}" onclick="pbSetChart('publications')">Publications</button>
+      <button class="chart-toggle-btn${isCites ? ' active' : ''}" onclick="pbSetChart('citations')">Citations</button>
+    </div>`;
+
+  if (!filtered.length) {
+    document.getElementById('pbChart').innerHTML =
+      `<div class="year-dist-header"><div class="year-dist-title">No data</div>${toggleHtml}</div>`;
+    return;
+  }
+  const byYear = {};
+  filtered.forEach(p => {
+    byYear[p.year] = byYear[p.year] || { pubs: 0, cites: 0 };
+    byYear[p.year].pubs++;
+    byYear[p.year].cites += (p.citations || 0);
+  });
+  const minY = Math.min(...filtered.map(p => p.year));
+  const maxY = Math.max(...filtered.map(p => p.year));
+  const years = [];
+  for (let y = minY; y <= maxY; y++) years.push(y);
+  const key = isCites ? 'cites' : 'pubs';
+  const dataMax = Math.max(1, ...years.map(y => (byYear[y] || {})[key] || 0));
+  const title = isCites ? 'Citations per year' : 'Publications per year';
+
+  document.getElementById('pbChart').innerHTML = `
+    <div class="year-dist-header"><div class="year-dist-title">${title}</div>${toggleHtml}</div>
+    <div class="year-chart">
+      ${years.map(y => {
+        const val = (byYear[y] || {})[key] || 0;
+        const pct = Math.max(val > 0 ? 2 : 0, val / dataMax * 100);
+        return `<div class="year-bar-col" title="${y}: ${fmt(val)} ${isCites ? 'citations' : 'publications'}">
+          <div class="year-bar-stack">
+            <span class="year-bar-val">${val > 0 ? fmt(val) : ''}</span>
+            <div class="year-bar-fill" style="height:${pct}%"></div>
+          </div>
+          <div class="year-bar-label">${String(y).slice(2)}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function renderPubs() {
+  const q = (document.getElementById('pbSearch').value || '').toLowerCase();
+  const filtered = _allPubs.filter(p => {
+    const typeOk = _activeType === 'All' || p.type === _activeType;
+    const yearOk = p.year >= _yearMin && p.year <= _yearMax;
+    const hay = [p.title, p.authors, (p.tags || []).join(' '), p.summary || ''].join(' ').toLowerCase();
+    return typeOk && yearOk && (!q || hay.includes(q));
+  }).sort((a, b) => b.year - a.year);
+
+  renderChart(filtered);
+
+  // Update pub count stat
+  const countEl = document.getElementById('pbStatPubs');
+  if (countEl) {
+    countEl.innerHTML = filtered.length !== _allPubs.length
+      ? `${fmt(filtered.length)}<span class="denom">/ ${fmt(_allPubs.length)}</span>`
+      : fmt(_allPubs.length);
+  }
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  if (_page > totalPages) _page = totalPages;
+
+  const pageItems = filtered.slice((_page - 1) * PAGE_SIZE, _page * PAGE_SIZE);
+
+  // Group current page items by year
+  const byYear = {};
+  pageItems.forEach(p => { (byYear[p.year] = byYear[p.year] || []).push(p); });
+  const years = Object.keys(byYear).sort((a, b) => b - a);
+
+  const listEl = document.getElementById('pbList');
+  listEl.innerHTML = filtered.length ? years.map(y => `
+    <div>
+      <div class="year-heading">${y}</div>
+      ${byYear[y].map(p => `
+        <div class="pub-row">
+          <div class="pub-year-lbl">${p.type === 'Preprint' ? '<span style="font-size:0.62rem;font-family:monospace;color:var(--text-light)">pre</span>' : ''}</div>
+          <div>
+            <a class="pub-title-link" href="${p.doi ? 'https://doi.org/' + p.doi : '#'}" target="_blank">${p.title}</a>
+            <div class="pub-authors">${p.authors || ''}</div>
+            <div class="pub-venue">${p.venue || ''}</div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px">
+              ${(p.tags || []).map(t => `<span class="tag tag-muted">${t}</span>`).join('')}
+            </div>
+            <div class="pub-actions">
+              ${p.doi ? `<a class="pub-action" href="https://doi.org/${p.doi}" target="_blank">🔗 DOI</a>` : ''}
+              <button class="pub-action" onclick="citeToClipboard(this)" data-citation="${buildVancouver(p).replace(/"/g,'&quot;')}">📋 Cite</button>
+              <button class="pub-action" onclick="citeToClipboard(this)" data-citation="${buildBibtex(p).replace(/"/g,'&quot;')}">BibTeX</button>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>`).join('')
+  : '<p style="text-align:center;padding:40px;color:var(--text-muted)">No publications match your search.</p>';
+
+  // Pagination
+  renderPagination(totalPages, filtered.length);
+}
+
+function renderPagination(totalPages, totalItems) {
+  const paginEl = document.getElementById('pbPagination');
+  const infoEl  = document.getElementById('pbPageInfo');
+
+  const from = Math.min((_page - 1) * PAGE_SIZE + 1, totalItems);
+  const to   = Math.min(_page * PAGE_SIZE, totalItems);
+  infoEl.textContent = totalItems ? `Showing ${from}–${to} of ${fmt(totalItems)} publications` : '';
+
+  if (totalPages <= 1) { paginEl.innerHTML = ''; return; }
+
+  const pages = paginPages(_page, totalPages);
+  let html = `<button class="page-btn" onclick="pbGoPage(${_page - 1})" ${_page === 1 ? 'disabled' : ''}>‹</button>`;
+  pages.forEach(p => {
+    if (p === '…') {
+      html += `<span class="page-btn" style="cursor:default;border:none">…</span>`;
+    } else {
+      html += `<button class="page-btn${p === _page ? ' active' : ''}" onclick="pbGoPage(${p})">${p}</button>`;
+    }
+  });
+  html += `<button class="page-btn" onclick="pbGoPage(${_page + 1})" ${_page === totalPages ? 'disabled' : ''}>›</button>`;
+  paginEl.innerHTML = html;
+}
+
+function paginPages(current, total) {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const pages = [];
+  const add = p => { if (!pages.includes(p)) pages.push(p); };
+  add(1);
+  if (current > 3) pages.push('…');
+  for (let p = Math.max(2, current - 1); p <= Math.min(total - 1, current + 1); p++) add(p);
+  if (current < total - 2) pages.push('…');
+  add(total);
+  return pages;
+}
+
+function pbGoPage(p) {
+  _page = p;
+  renderPubs();
+  document.getElementById('secPubs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function buildVancouver(p) {
+  const parts = [];
+  if (p.authors) parts.push(p.authors + '.');
+  if (p.title)   parts.push(p.title + '.');
+  if (p.venue)   parts.push(p.venue + '.');
+  parts.push(String(p.year) + '.');
+  if (p.doi)     parts.push('doi:' + p.doi);
+  return parts.join(' ');
+}
+
+function buildBibtex(p) {
+  const typeMap = {
+    'Journal': 'article', 'Conference': 'inproceedings',
+    'Book Chapter': 'incollection', 'Book': 'book',
+    'Preprint': 'misc', 'Report': 'techreport',
+    'Dataset': 'misc', 'Thesis': 'phdthesis',
+  };
+  const entryType = typeMap[p.type] || 'misc';
+  const firstAuthor = (p.authors || '').split(',')[0].trim().split(' ').pop();
+  const titleWord = (p.title || '').split(/\s+/).find(w => w.length > 3) || '';
+  const key = (firstAuthor + p.year + titleWord).replace(/[^a-zA-Z0-9]/g, '');
+  const venueField = entryType === 'article' ? 'journal' : entryType === 'inproceedings' ? 'booktitle' : 'publisher';
+  const lines = [`@${entryType}{${key},`];
+  if (p.authors) lines.push(`  author    = {${p.authors}},`);
+  if (p.title)   lines.push(`  title     = {${p.title}},`);
+  if (p.venue)   lines.push(`  ${venueField.padEnd(9)} = {${p.venue}},`);
+  lines.push(`  year      = {${p.year}},`);
+  if (p.doi)     lines.push(`  doi       = {${p.doi}},`);
+  lines.push('}');
+  return lines.join('\n');
+}
+
+function citeToClipboard(btn) {
+  navigator.clipboard.writeText(btn.dataset.citation).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    btn.classList.add('pub-action-success');
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('pub-action-success'); }, 2000);
+  });
+}
+
+// ── Main ──
 (async () => {
-  // --- Resolve slug ---
   let slug = sessionStorage.getItem('__hair_person');
   if (slug) {
     sessionStorage.removeItem('__hair_person');
@@ -191,11 +521,8 @@ function pubBadgeLabel(type) {
   } else {
     const parts = window.location.pathname.split('/').filter(Boolean);
     const pi = parts.indexOf('people');
-    if (pi !== -1 && parts[pi + 1]) {
-      slug = parts[pi + 1];
-    } else {
-      slug = new URLSearchParams(location.search).get('id');
-    }
+    if (pi !== -1 && parts[pi + 1]) slug = parts[pi + 1];
+    else slug = new URLSearchParams(location.search).get('id');
   }
 
   if (!slug) {
@@ -204,11 +531,10 @@ function pubBadgeLabel(type) {
     return;
   }
 
-  // --- Load data in parallel ---
-  const [people, news, pubs] = await Promise.all([
+  const [people, news, pubData] = await Promise.all([
     CMS.load('../content/people.yaml'),
     CMS.load('../content/news.yaml'),
-    CMS.load('../content/publications.generated.yaml').catch(() => []),
+    CMS.load('../content/publications.generated.yaml').catch(() => ({ publications: [] })),
   ]);
 
   document.getElementById('loading').remove();
@@ -219,61 +545,44 @@ function pubBadgeLabel(type) {
     return;
   }
 
-  // --- Update page title ---
   document.getElementById('pageTitle').textContent = `${person.name} · HAIR Group`;
 
-  // --- Hero ---
-  const avatar = document.getElementById('heroAvatar');
+  // Hero
   const src = imgSrc(person.image_url);
-  avatar.innerHTML = src
+  document.getElementById('heroAvatar').innerHTML = src
     ? `<img src="${src}" alt="${person.name}">`
     : CMS.initials(person.name);
-
   document.getElementById('heroName').textContent = person.name;
   document.getElementById('heroRole').textContent = person.role;
 
-  // Publication stats
-  const myPubs = (Array.isArray(pubs) ? pubs : []).filter(
-    pub => person.orcid && (pub.orcids || []).includes(person.orcid)
-  );
+  const allPubs = (pubData.publications || []);
+  const myPubs = allPubs.filter(pub => person.orcid && (pub.orcids || []).includes(person.orcid));
   const totalCites = myPubs.reduce((s, p) => s + (p.citations || 0), 0);
-  const statsEl = document.getElementById('heroStats');
+
   if (myPubs.length) {
-    statsEl.innerHTML = `
-      <div>
-        <div class="hero-stat-val">${myPubs.length}</div>
-        <div class="hero-stat-lbl">Publications</div>
-      </div>
-      <div>
-        <div class="hero-stat-val">${totalCites.toLocaleString()}</div>
-        <div class="hero-stat-lbl">Citations</div>
-      </div>`;
+    document.getElementById('heroStats').innerHTML = `
+      <div><div class="hero-stat-val">${myPubs.length}</div><div class="hero-stat-lbl">Publications</div></div>
+      <div><div class="hero-stat-val">${fmt(totalCites)}</div><div class="hero-stat-lbl">Citations</div></div>`;
   }
 
-  // --- Bio ---
+  // Bio
   if (person.bio && person.bio.trim() && !person.bio.includes('TODO')) {
     document.getElementById('secBio').innerHTML = `
       <div class="profile-section-title">About</div>
       <p class="profile-bio">${person.bio.trim()}</p>`;
   }
 
-  // --- Themes & Keywords ---
+  // Themes & Keywords
   const themes = (person.themes || []).filter(Boolean);
   const kws = (person.keywords || []).filter(Boolean);
   if (themes.length || kws.length) {
     let html = '<div class="profile-section-title">Research</div>';
-    if (themes.length) {
-      html += `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:${kws.length ? 10 : 0}px">
-        ${themes.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
-    }
-    if (kws.length) {
-      html += `<div style="display:flex;gap:6px;flex-wrap:wrap">
-        ${kws.map(k => `<span class="tag tag-muted">${k}</span>`).join('')}</div>`;
-    }
+    if (themes.length) html += `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:${kws.length?10:0}px">${themes.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`;
+    if (kws.length) html += `<div style="display:flex;gap:6px;flex-wrap:wrap">${kws.map(k=>`<span class="tag tag-muted">${k}</span>`).join('')}</div>`;
     document.getElementById('secThemes').innerHTML = html;
   }
 
-  // --- Links ---
+  // Links
   const links = [];
   if (person.email)          links.push(`<a class="profile-link" href="mailto:${person.email}">${ICONS.email} Email</a>`);
   if (person.orcid)          links.push(`<a class="profile-link" href="https://orcid.org/${person.orcid}" target="_blank" rel="noopener">${ICONS.orcid} ORCID</a>`);
@@ -281,116 +590,87 @@ function pubBadgeLabel(type) {
   if (person.linkedin)       links.push(`<a class="profile-link" href="https://www.linkedin.com/in/${person.linkedin}" target="_blank" rel="noopener">${ICONS.linkedin} LinkedIn</a>`);
   if (person.cris_url)       links.push(`<a class="profile-link" href="${person.cris_url}" target="_blank" rel="noopener">${ICONS.pure} PURE</a>`);
   if (person.work_url)       links.push(`<a class="profile-link" href="${person.work_url}" target="_blank" rel="noopener">${ICONS.work} UM page</a>`);
-  if (myPubs.length)         links.push(`<a class="profile-link" href="../publications.html?q=${encodeURIComponent(person.name)}">${ICONS.pubs} All publications</a>`);
   if (links.length) {
     document.getElementById('secLinks').innerHTML = `
       <div class="profile-section-title">Links</div>
       <div class="profile-links">${links.join('')}</div>`;
   }
 
-  // --- Publications ---
+  // Publications browser
   if (myPubs.length) {
-    const byYear = {};
-    myPubs.forEach(pub => {
-      const y = pub.year || 'Unknown';
-      (byYear[y] = byYear[y] || []).push(pub);
-    });
-    const years = Object.keys(byYear).sort((a, b) => b - a);
-
-    const pubHtml = years.map(y => `
-      <div class="pub-year-group">
-        <div class="pub-year-heading">${y}</div>
-        ${byYear[y].map(pub => `
-          <div class="pub-item">
-            <span class="pub-badge ${pubBadgeClass(pub.type)}">${pubBadgeLabel(pub.type)}</span>
-            <div>
-              <div class="pub-title">${pub.doi
-                ? `<a href="https://doi.org/${pub.doi}" target="_blank" rel="noopener">${pub.title}</a>`
-                : pub.title}</div>
-              <div class="pub-venue">${[pub.authors, pub.venue].filter(Boolean).join(' · ')}</div>
-            </div>
-          </div>`).join('')}
-      </div>`).join('');
-
     document.getElementById('secPubs').innerHTML = `
-      <div class="profile-section-title">Publications (${myPubs.length})</div>
-      ${pubHtml}`;
+      <div class="profile-section-title">Publications</div>
+      <div class="pub-stats" id="pbStats"></div>
+      <div class="year-dist" id="pbChart"></div>
+      <div class="year-range-wrap hidden" id="pbYearRange">
+        <div class="year-range-header">
+          <span class="year-dist-title">Year range</span>
+          <span class="year-range-label-val" id="pbRangeVal"></span>
+        </div>
+        <div class="year-range-track">
+          <div class="year-range-fill" id="pbRangeFill"></div>
+          <input type="range" id="pbYearMin" />
+          <input type="range" id="pbYearMax" />
+        </div>
+        <div class="year-range-ticks"><span id="pbTickMin"></span><span id="pbTickMax"></span></div>
+      </div>
+      <div class="filter-bar" style="margin-bottom:8px">
+        <input class="search-input" id="pbSearch" type="text" placeholder="Search title, author or keyword…" oninput="_page=1;renderPubs()" />
+        <div class="filter-chips" id="pbTypeChips"></div>
+      </div>
+      <div id="pbList"></div>
+      <div class="pagination" id="pbPagination"></div>
+      <div class="page-info" id="pbPageInfo"></div>`;
+
+    initPubBrowser(myPubs);
   }
 
-  // --- Activity ---
+  // Activity
   const name = person.name.toLowerCase();
   const toDate = s => s ? new Date(s) : new Date(0);
   const activity = [];
 
   (news.talks || []).forEach(t => {
     if ((t.speaker || '').toLowerCase().includes(name)) {
-      activity.push({
-        type: 'talk', label: 'Talk',
-        title: t.title, url: t.url || null,
-        meta: [t.type, t.event, t.date].filter(Boolean).join(' · '),
-        excerpt: t.description || '',
-        sortDate: toDate(t.date),
-      });
+      activity.push({ type:'talk', label:'Talk', title:t.title, url:t.url||null,
+        meta:[t.type,t.event,t.date].filter(Boolean).join(' · '), excerpt:t.description||'', sortDate:toDate(t.date) });
     }
   });
-
   (news.podcasts || []).forEach(p => {
     if ((p.guest || '').toLowerCase().includes(name)) {
-      activity.push({
-        type: 'podcast', label: 'Podcast',
-        title: p.title, url: p.url || null,
-        meta: [p.show, p.date, p.duration].filter(Boolean).join(' · '),
-        excerpt: p.description || '',
-        audio_url: p.audio_url || null,
-        sortDate: toDate(p.date),
-      });
+      activity.push({ type:'podcast', label:'Podcast', title:p.title, url:p.url||null,
+        meta:[p.show,p.date,p.duration].filter(Boolean).join(' · '), excerpt:p.description||'',
+        audio_url:p.audio_url||null, sortDate:toDate(p.date) });
     }
   });
-
   (news.blog || []).forEach(b => {
     if ((b.author || '').toLowerCase().includes(name)) {
-      activity.push({
-        type: 'blog', label: 'Blog',
-        title: b.title, url: b.url || null,
-        meta: [b.tag, b.date].filter(Boolean).join(' · '),
-        excerpt: b.excerpt || '',
-        sortDate: toDate(b.date),
-      });
+      activity.push({ type:'blog', label:'Blog', title:b.title, url:b.url||null,
+        meta:[b.tag,b.date].filter(Boolean).join(' · '), excerpt:b.excerpt||'', sortDate:toDate(b.date) });
     }
   });
-
   (news.news || []).forEach(n => {
-    const text = [n.title, n.body].join(' ').toLowerCase();
-    if (text.includes(name)) {
-      activity.push({
-        type: 'news', label: 'News',
-        title: n.title, url: n.url || null,
-        meta: [n.day, n.month, n.year].filter(Boolean).join(' '),
-        excerpt: n.body || '',
-        sortDate: toDate(`${n.day} ${n.month} ${n.year}`),
-      });
+    if ([n.title,n.body].join(' ').toLowerCase().includes(name)) {
+      activity.push({ type:'news', label:'News', title:n.title, url:n.url||null,
+        meta:[n.day,n.month,n.year].filter(Boolean).join(' '), excerpt:n.body||'',
+        sortDate:toDate(`${n.day} ${n.month} ${n.year}`) });
     }
   });
-
   activity.sort((a, b) => b.sortDate - a.sortDate);
 
   if (activity.length) {
-    const actHtml = activity.map(a => `
-      <div class="activity-row">
-        <span class="activity-badge ab-${a.type}">${a.label}</span>
-        <div>
-          <div class="activity-title">${a.url
-            ? `<a href="${a.url}" target="_blank" rel="noopener">${a.title}</a>`
-            : a.title}</div>
-          <div class="activity-meta">${a.meta}</div>
-          ${a.excerpt ? `<div class="activity-excerpt">${a.excerpt.trim()}</div>` : ''}
-          ${a.audio_url ? `<audio controls preload="none" style="margin-top:8px;width:100%;max-width:460px"><source src="${a.audio_url}" type="audio/mp4"></audio>` : ''}
-        </div>
-      </div>`).join('');
-
     document.getElementById('secActivity').innerHTML = `
       <div class="profile-section-title">News & Activity</div>
-      ${actHtml}`;
+      ${activity.map(a => `
+        <div class="activity-row">
+          <span class="activity-badge ab-${a.type}">${a.label}</span>
+          <div>
+            <div class="activity-title">${a.url?`<a href="${a.url}" target="_blank" rel="noopener">${a.title}</a>`:a.title}</div>
+            <div class="activity-meta">${a.meta}</div>
+            ${a.excerpt ? `<div class="activity-excerpt">${a.excerpt.trim()}</div>` : ''}
+            ${a.audio_url ? `<audio controls preload="none" style="margin-top:8px;width:100%;max-width:460px"><source src="${a.audio_url}" type="audio/mp4"></audio>` : ''}
+          </div>
+        </div>`).join('')}`;
   }
 
   document.getElementById('personPage').classList.remove('hidden');
