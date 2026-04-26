@@ -514,17 +514,7 @@ function citeToClipboard(btn) {
 
 // ── Main ──
 (async () => {
-  let slug = sessionStorage.getItem('__hair_person');
-  if (slug) {
-    sessionStorage.removeItem('__hair_person');
-    const cleanPath = window.location.pathname.replace(/\/?$/, '/') + slug;
-    history.replaceState(null, '', cleanPath);
-  } else {
-    const parts = window.location.pathname.split('/').filter(Boolean);
-    const pi = parts.indexOf('people');
-    if (pi !== -1 && parts[pi + 1]) slug = parts[pi + 1];
-    else slug = new URLSearchParams(location.search).get('id');
-  }
+  const slug = new URLSearchParams(location.search).get('id');
 
   if (!slug) {
     document.getElementById('loading').remove();

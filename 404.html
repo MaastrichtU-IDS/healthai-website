@@ -13,8 +13,7 @@
   var path = window.location.pathname;
   var m = path.match(/(.*\/people\/)([^/]+)\/?$/);
   if (m) {
-    sessionStorage.setItem('__hair_person', m[2]);
-    window.location.replace(m[1]);
+    window.location.replace(m[1] + '?id=' + m[2]);
     return;
   }
   document.getElementById('hero404').classList.remove('hidden');
