@@ -21,9 +21,20 @@ themes:
       It leverages AI, sensors, and interoperable data systems to improve crop production, food quality, and personalized health—linking sustainable agriculture directly to better human and environmental well-being.
     projects: [EU-FarmBook, AMBROSIA]
 
+  - id: bioinfo
+    number: "03"
+    title: Computational Biology & Bioinformatics
+    icon: "⌬"
+    leads: [Rachel Cavill, Denise Slenter]
+    desc: >
+      Understanding complex disease requires integrating information across molecular
+      scales. We develop scalable computational workflows for multi-omics integration —
+      linking genomics, proteomics and metabolomics data — to identify biomarkers and
+      advance drug target discovery.
+    projects: []
 
   - id: fair
-    number: "03"
+    number: "04"
     title: Neurosymbolic AI
     icon: "◈"
     leads: [Michel Dumontier, Remzi Celebi, Denise Slenter]
@@ -36,7 +47,7 @@ themes:
     projects: [GENIUS, BDT, AIDAVA]
 
   - id: federated
-    number: "04"
+    number: "05"
     title: Federated & Privacy-Preserving AI
     icon: "⊞"
     leads: [Visara Urovi, Chang Sun]
@@ -57,18 +68,6 @@ themes:
       It emphasizes a feedback loop where AI enhances evidence generation and oversight, while regulatory frameworks shape trustworthy, human-centered AI deployment.
     projects: [REALM]
 
-
-  - id: bioinfo
-    number: "06"
-    title: Computational Biology & Bioinformatics
-    icon: "⌬"
-    leads: [Rachel Cavill, Denise Slenter]
-    desc: >
-      Understanding complex disease requires integrating information across molecular
-      scales. We develop scalable computational workflows for multi-omics integration —
-      linking genomics, proteomics and metabolomics data — to identify biomarkers and
-      advance drug target discovery.
-    projects: []
 
 projects:
   - acronym: AIDAVA
