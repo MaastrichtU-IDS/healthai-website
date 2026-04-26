@@ -219,7 +219,7 @@ function openModal(p) {
   if (p.work_url)       links.push(`<a class="modal-link" href="${p.work_url}" target="_blank" rel="noopener">${ICONS.work} UM page</a>`);
   links.push(`<a class="modal-link" href="publications.html?q=${encodeURIComponent(p.name)}">${ICONS.pubs} Publications</a>`);
 
-  const profileUrl = `people/${p.slug || p.name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}`;
+  const profileUrl = `people/?id=${p.slug || p.name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}`;
   document.getElementById('modalContent').innerHTML = `
     <div class="modal-header">
       <div class="modal-avatar">${p.image_url ? `<img src="${p.image_url}" alt="${p.name}">` : CMS.initials(p.name)}</div>
