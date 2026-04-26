@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="pageTitle">Profile · HAIR Group · Maastricht University</title>
-  <link rel="stylesheet" href="../styles.css?v=2" />
+  <base href="../" />
+  <link rel="stylesheet" href="styles.css?v=2" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <style>
     /* ── Hero ── */
@@ -182,8 +183,8 @@
   </style>
 </head>
 <body class="page-body">
-<script src="../nav.js"></script>
-<script src="../cms.js"></script>
+<script src="nav.js"></script>
+<script src="cms.js"></script>
 
 <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
 
@@ -193,7 +194,7 @@
       <span class="section-label">Not found</span>
       <h1>Person not found</h1>
       <p class="lead">No team member matches that profile URL.</p>
-      <a href="../people.html" class="btn btn-primary" style="margin-top:16px">← Back to People</a>
+      <a href="people.html" class="btn btn-primary" style="margin-top:16px">← Back to People</a>
     </div>
   </div>
 </div>
@@ -204,7 +205,7 @@
       <div class="person-hero-inner">
         <div class="person-avatar-lg" id="heroAvatar"></div>
         <div class="person-hero-text">
-          <a href="../people.html" class="back-link">← People</a>
+          <a href="people.html" class="back-link">← People</a>
           <h1 id="heroName"></h1>
           <div class="person-hero-role" id="heroRole"></div>
           <div class="person-hero-dept">Dept. of Advanced Computing Sciences · Maastricht University</div>
@@ -241,7 +242,7 @@ const ICONS = {
 
 function imgSrc(url) {
   if (!url) return '';
-  return url.startsWith('http') ? url : '../' + url;
+  return url.startsWith('http') ? url : url;
 }
 
 function fmt(n) { return Number(n).toLocaleString(); }
@@ -523,9 +524,9 @@ function citeToClipboard(btn) {
   }
 
   const [people, news, pubData] = await Promise.all([
-    CMS.load('../content/people.yaml'),
-    CMS.load('../content/news.yaml'),
-    CMS.load('../content/publications.generated.yaml').catch(() => ({ publications: [] })),
+    CMS.load('content/people.yaml'),
+    CMS.load('content/news.yaml'),
+    CMS.load('content/publications.generated.yaml').catch(() => ({ publications: [] })),
   ]);
 
   document.getElementById('loading').remove();
