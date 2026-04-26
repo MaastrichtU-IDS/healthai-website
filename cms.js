@@ -6,24 +6,13 @@
 
 window.CMS = (function () {
   const cache = {};
-  const _SS = 'cms_v1_';
 
   async function load(path) {
     if (cache[path]) return cache[path];
-
-    try {
-      const stored = sessionStorage.getItem(_SS + path);
-      if (stored) { cache[path] = JSON.parse(stored); return cache[path]; }
-    } catch (_) {}
-
     const res = await fetch(path);
     if (!res.ok) throw new Error(`CMS: failed to load ${path} (${res.status})`);
-    const parsed = jsyaml.load(await res.text());
-    cache[path] = parsed;
-
-    try { sessionStorage.setItem(_SS + path, JSON.stringify(parsed)); } catch (_) {}
-
-    return parsed;
+    cache[path] = jsyaml.load(await res.text());
+    return cache[path];
   }
 
   async function loadAll(...paths) {
@@ -323,9 +312,11 @@ window.CMS = (function () {
       if (_opts.onFilter) _opts.onFilter(filtered);
 
       const ps = _opts.pageSize || Infinity;
-      const tp = ps === Infinity ? 1 : Math.max(1, Math.ceil(filtered.length / ps));
+      /* When a search query is active, show all results so year headings remain intact */
+      const effectivePs = (q && ps !== Infinity) ? Infinity : ps;
+      const tp = effectivePs === Infinity ? 1 : Math.max(1, Math.ceil(filtered.length / effectivePs));
       if (_page > tp) _page = tp;
-      const items = ps === Infinity ? filtered : filtered.slice((_page - 1) * ps, _page * ps);
+      const items = effectivePs === Infinity ? filtered : filtered.slice((_page - 1) * effectivePs, _page * effectivePs);
 
       const byY = {};
       items.forEach(p => { (byY[p.year] = byY[p.year] || []).push(p); });
@@ -355,13 +346,13 @@ window.CMS = (function () {
       : '<p class="no-results">No publications match your search.</p>';
 
       revealNew(listEl);
-      _renderPagination(tp, filtered.length);
+      _renderPagination(tp, filtered.length, effectivePs);
     }
 
-    function _renderPagination(tp, total) {
+    function _renderPagination(tp, total, effectivePs) {
       const el = document.getElementById('_pbPagination'), info = document.getElementById('_pbPageInfo');
       if (!el) return;
-      const ps = _opts.pageSize || Infinity;
+      const ps = effectivePs !== undefined ? effectivePs : (_opts.pageSize || Infinity);
       if (ps === Infinity) {
         el.innerHTML = '';
         if (info) info.textContent = total ? `Showing all ${_fmt(total)} publications` : '';

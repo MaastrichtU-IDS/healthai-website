@@ -121,6 +121,26 @@ def h_index(citations: list[int]) -> int:
     return h
 
 
+def author_orcid_map() -> dict[tuple[str, str], str]:
+    """Return (family_lower, first_initial_lower) -> orcid for all people with ORCIDs."""
+    people_file = ROOT / "content" / "people.yaml"
+    if not people_file.exists():
+        return {}
+    people = yaml.safe_load(people_file.read_text()) or []
+    mapping: dict[tuple[str, str], str] = {}
+    for p in people:
+        orcid = p.get("orcid", "").strip()
+        name = p.get("name", "").strip()
+        if not orcid or not name:
+            continue
+        parts = name.split()
+        if len(parts) >= 2:
+            # Use last word as family name, first word's initial as given initial
+            key = (parts[-1].lower(), parts[0][0].lower())
+            mapping[key] = orcid
+    return mapping
+
+
 def main() -> int:
     if not ORCID_CACHE.exists() or not CROSSREF_CACHE.exists():
         print("Caches missing. Run fetch_orcid_works.py and fetch_crossref.py first.")
@@ -128,6 +148,9 @@ def main() -> int:
 
     claims = doi_to_orcids()
     print(f"{len(claims)} DOIs from ORCID")
+
+    name_to_orcid = author_orcid_map()
+    print(f"{len(name_to_orcid)} people with ORCIDs for author matching")
 
     pubs = []
     citations: list[int] = []
@@ -150,6 +173,17 @@ def main() -> int:
         cites = int(msg.get("is-referenced-by-count") or 0)
         citations_total += cites
         citations.append(cites)
+        # Augment orcids: add any known person whose name matches a Crossref author entry
+        augmented_orcids = set(claims[doi])
+        for a in msg.get("author") or []:
+            family = (a.get("family") or "").strip().lower()
+            given = (a.get("given") or "").strip()
+            if family and given:
+                key = (family, given[0].lower())
+                orcid = name_to_orcid.get(key)
+                if orcid:
+                    augmented_orcids.add(orcid)
+
         entry: dict = {
             "year": year,
             "type": map_type(msg.get("type")),
@@ -158,7 +192,7 @@ def main() -> int:
             "venue": venue(msg),
             "doi": doi,
             "citations": cites,
-            "orcids": sorted(claims[doi]),
+            "orcids": sorted(augmented_orcids),
             "tags": [],
         }
         abstract = load_abstract(doi)
