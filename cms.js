@@ -269,16 +269,41 @@ window.CMS = (function () {
       });
       const minY = Math.min(...filtered.map(p => p.year)), maxY = Math.max(...filtered.map(p => p.year));
       const years = []; for (let y = minY; y <= maxY; y++) years.push(y);
-      const key = ic ? 'cites' : 'pubs';
-      const dmax = Math.max(1, ...years.map(y => (byY[y] || {})[key] || 0));
-      el.innerHTML = `
-        <div class="year-dist-header"><div class="year-dist-title">${ic ? 'Citations' : 'Publications'} per year</div>${tog}</div>
-        <div class="year-chart">${years.map(y => {
-          const val = (byY[y] || {})[key] || 0, pct = Math.max(val > 0 ? 2 : 0, val / dmax * 100);
-          return `<div class="year-bar-col" title="${y}: ${_fmt(val)} ${ic ? 'citations' : 'publications'}">
-            <div class="year-bar-stack"><span class="year-bar-val">${val > 0 ? _fmt(val) : ''}</span><div class="year-bar-fill" style="height:${pct}%"></div></div>
-            <div class="year-bar-label">${String(y).slice(2)}</div></div>`;
-        }).join('')}</div>`;
+
+      if (ic) {
+        /* Cumulative citations: bar height = running total; split into
+           bottom (all prior years, muted) + top (this year alone, blue). */
+        let running = 0;
+        const cumul = {};
+        years.forEach(y => { running += (byY[y] || { cites: 0 }).cites; cumul[y] = running; });
+        const dmax = Math.max(1, running);
+        el.innerHTML = `
+          <div class="year-dist-header"><div class="year-dist-title">Cumulative citations</div>${tog}</div>
+          <div class="year-chart">${years.map(y => {
+            const curr = (byY[y] || { cites: 0 }).cites;
+            const total = cumul[y];
+            const cumPct = Math.max(total > 0 ? 2 : 0, total / dmax * 100);
+            const currPct = total > 0 ? curr / total * 100 : 0;
+            return `<div class="year-bar-col" title="${y}: ${_fmt(curr)} new · ${_fmt(total)} cumulative">
+              <div class="year-bar-stack"><span class="year-bar-val">${total > 0 ? _fmt(total) : ''}</span>
+                <div class="year-bar-fill year-bar-fill--stacked" style="height:${cumPct}%">
+                  <div class="year-bar-curr" style="height:${currPct}%"></div>
+                  <div class="year-bar-prev" style="height:${100 - currPct}%"></div>
+                </div>
+              </div>
+              <div class="year-bar-label">${String(y).slice(2)}</div></div>`;
+          }).join('')}</div>`;
+      } else {
+        const dmax = Math.max(1, ...years.map(y => (byY[y] || {}).pubs || 0));
+        el.innerHTML = `
+          <div class="year-dist-header"><div class="year-dist-title">Publications per year</div>${tog}</div>
+          <div class="year-chart">${years.map(y => {
+            const val = (byY[y] || {}).pubs || 0, pct = Math.max(val > 0 ? 2 : 0, val / dmax * 100);
+            return `<div class="year-bar-col" title="${y}: ${_fmt(val)} publications">
+              <div class="year-bar-stack"><span class="year-bar-val">${val > 0 ? _fmt(val) : ''}</span><div class="year-bar-fill" style="height:${pct}%"></div></div>
+              <div class="year-bar-label">${String(y).slice(2)}</div></div>`;
+          }).join('')}</div>`;
+      }
     }
 
     function _renderPubs() {
