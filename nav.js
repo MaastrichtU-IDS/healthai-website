@@ -53,7 +53,7 @@
             <div class="name">Health AI Research Group</div>
             <p>Department of Advanced Computing Sciences<br>Maastricht University<br>the Netherlands</p>
             <div style="margin-top:16px">
-              <a href="mailto:hair@maastrichtuniversity.nl" style="color:rgba(255,255,255,0.45);font-size:0.82rem;transition:color 0.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">hair@maastrichtuniversity.nl</a>
+              <a href="mailto:michel.dumontier@maastrichtuniversity.nl" style="color:rgba(255,255,255,0.45);font-size:0.82rem;transition:color 0.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">michel.dumontier@maastrichtuniversity.nl</a>
             </div>
           </div>
           <div class="footer-col">
