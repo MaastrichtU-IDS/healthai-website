@@ -1,6 +1,6 @@
-# HAIR Group Website
+# HealthAI Group Website
 
-Public website for the [Health AI Research (HAIR) group](https://maastrichtuniversity.nl) at the [Institute of Data Science](https://ids.maastrichtuniversity.nl), Maastricht University.
+Public website for the [Health AI Research (HealthAI) group](https://maastrichtuniversity.nl) at the [Institute of Data Science](https://ids.maastrichtuniversity.nl), Maastricht University.
 
 ## Architecture
 
