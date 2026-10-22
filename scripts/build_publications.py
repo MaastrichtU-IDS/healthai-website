@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import datetime
 import json
+import re
+import unicodedata
 import sys
 import urllib.parse
 from pathlib import Path
@@ -111,6 +113,50 @@ def doi_to_orcids() -> dict[str, set[str]]:
     return mapping
 
 
+def pure_claims() -> dict[str, set[str]]:
+    """Map normalised DOI -> set of ORCIDs, from the Pure Portal + Pure API.
+
+    Pure is authoritative for Maastricht affiliation. The Portal RSS gives each
+    publication's UM co-authors as person slugs, which map onto cris_url in
+    people.yaml; cache/pure_dois.json supplies the DOI for each title. This is
+    exact attribution, unlike the ORCID path which infers authorship from
+    (family name, first initial).
+    """
+    pure_dir = ROOT / "cache" / "pure"
+    doi_file = ROOT / "cache" / "pure_dois.json"
+    if not pure_dir.exists() or not doi_file.exists():
+        return {}
+
+    slug_to_orcid: dict[str, str] = {}
+    people_file = ROOT / "content" / "people.yaml"
+    if people_file.exists():
+        for person in yaml.safe_load(people_file.read_text()) or []:
+            m = re.search(r"/persons/([^/?#]+)", person.get("cris_url", "") or "")
+            if m and person.get("orcid"):
+                slug_to_orcid[m.group(1)] = person["orcid"]
+
+    titles = json.loads(doi_file.read_text())
+    mapping: dict[str, set[str]] = {}
+    for f in pure_dir.glob("*.json"):
+        for item in json.loads(f.read_text()).get("items", []):
+            rec = titles.get(norm_pure_title(item.get("title", "")))
+            if not rec or not rec.get("doi"):
+                continue
+            d = normalize_doi(rec["doi"])
+            if not d:
+                continue
+            for slug in item.get("um_coauthor_slugs") or []:
+                if slug in slug_to_orcid:
+                    mapping.setdefault(d, set()).add(slug_to_orcid[slug])
+            mapping.setdefault(d, set())
+    return mapping
+
+
+def norm_pure_title(s: str) -> str:
+    s = unicodedata.normalize("NFKD", s or "").encode("ascii", "ignore").decode()
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]", " ", s.lower())).strip()
+
+
 def h_index(citations: list[int]) -> int:
     h = 0
     for i, c in enumerate(sorted(citations, reverse=True), 1):
@@ -148,6 +194,13 @@ def main() -> int:
 
     claims = doi_to_orcids()
     print(f"{len(claims)} DOIs from ORCID")
+
+    pure = pure_claims()
+    new_dois = len(set(pure) - set(claims))
+    for d, orcids in pure.items():
+        claims.setdefault(d, set()).update(orcids)
+    print(f"{len(pure)} DOIs from Pure ({new_dois} not already claimed via ORCID)")
+    print(f"{len(claims)} DOIs total")
 
     name_to_orcid = author_orcid_map()
     print(f"{len(name_to_orcid)} people with ORCIDs for author matching")

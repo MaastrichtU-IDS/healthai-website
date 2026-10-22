@@ -3,3 +3,8 @@ cache/
 logs/
 *.log
 scripts/__pycache__/
+
+# secrets: Pure/CRIS UBKey etc
+.env
+.env.*
+!.env.example
