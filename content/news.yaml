@@ -86,6 +86,21 @@ blog:
   img: ''
   source: feed
 talks:
+- event: TAI-DISC at BNAIC 2026
+  date: 21 Oct 2026
+  title: 'Justifying trust in AI: a medical AI perspective'
+  speaker: Michel Dumontier
+  type: Keynote
+  url: https://doi.org/10.5281/zenodo.23539304
+  slides_url: https://zenodo.org/records/23539304/files/2026_BNAIC_TAI_DISC_Keynote_final.pptx
+  description: What would justify trusting an AI system in clinical care? Working
+    through an intensive care scenario, the talk asks what evidence would be needed
+    at each step, from the reliability of a continuous glucose monitor to AI summaries
+    used at handover and the obligations that follow when a system is regulated as
+    software as a medical device. It argues that trust rests on evidence supporting
+    the intended use and on accountability across the innovation pathway, and that
+    Europe must make credible evaluation easier, faster, more transparent and more
+    reliable.
 - event: 'Official visit of Ms. Maria Cristina Russo (Deputy Director-General, DG RTD, European Commission) to Maastricht University'
   date: 22 Apr 2026
   title: 'AI for Europe: Trust. Understand. Apply.'
