@@ -77,6 +77,41 @@ python3 scripts/build_publications.py
 
 Caches live in `cache/orcid/`, `cache/crossref/`, `cache/abstracts/`, and `cache/summaries/`. The pipeline is incremental — re-running only fetches new DOIs.
 
+### Pure / CRIS (authoritative for UM affiliation)
+
+Pure knows which publications belong to Maastricht people, and attributes them by person
+rather than by guessing from surname and initial. Two sources, because neither alone suffices:
+
+```bash
+# everything end to end (runs step 2 over ssh on n3)
+./scripts/refresh_publications.sh
+
+# or individually:
+python3 scripts/fetch_pure_publications.py --delay 12   # Portal RSS, per person
+python3 scripts/fetch_pure_api.py                       # API index -- n3 ONLY
+python3 scripts/join_pure_dois.py                       # exact title join
+python3 scripts/resolve_pure_dois.py                    # Crossref fallback
+```
+
+| | Portal RSS | crisapi |
+|---|---|---|
+| Reachable | public, anywhere | **university network only** |
+| Per person | yes, via `cris_url` slug | no, organisation only |
+| DOI | none | yes, ~80% |
+
+Things that will bite you:
+
+- **The portal is behind Cloudflare.** `--delay 12` is not cosmetic; rapid requests get a
+  "Just a moment..." interstitial and then 403s. The fetcher aborts rather than caching it.
+- **The RSS feed caps at 50 items per person**, `size` is ignored and `page=2` is refused. The
+  ORCID/Crossref backfill remains the historical base for prolific authors.
+- **crisapi requires `?format=json`** (the Accept header is ignored), pages with `page=N` not
+  `offset`, and returns HTTP 200 with the *full unfiltered result* for any parameter it does
+  not recognise. Always check that a filter actually changed the count.
+- **Pure splits "Name: Subtitle"** across `title` and `subTitle` in the API but joins them in
+  the RSS. `fetch_pure_api.py` indexes both forms; indexing only `title` silently loses every
+  subtitled publication (80% join rate instead of 99%).
+
 Optional: fetch full abstracts and generate plain-language summaries (requires [Ollama](https://ollama.ai) running locally):
 
 ```bash
