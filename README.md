@@ -79,45 +79,31 @@ Caches live in `cache/orcid/`, `cache/crossref/`, `cache/abstracts/`, and `cache
 
 ### Pure / CRIS (authoritative for UM affiliation)
 
-Pure knows which publications belong to Maastricht people, and attributes them by person
-rather than by guessing from surname and initial. Two sources, because neither alone suffices:
+Pure knows which publications belong to Maastricht people, attributes them per
+person, and carries DOIs. One call per person; no title matching.
 
 ```bash
-# everything end to end (runs step 2 over ssh on n3)
-./scripts/refresh_publications.sh
-
-# or individually:
-python3 scripts/fetch_pure_publications.py --delay 12   # Portal RSS, per person
-python3 scripts/fetch_pure_api.py                       # API index -- n3 ONLY
-python3 scripts/join_pure_dois.py                       # exact title join
-python3 scripts/resolve_pure_dois.py                    # Crossref fallback
+./scripts/refresh_publications.sh          # everything
+python3 scripts/fetch_pure_publications.py # just the Pure step
 ```
 
-| | Portal RSS | crisapi |
-|---|---|---|
-| Reachable | public, anywhere | **university network only** |
-| Per person | yes, via `cris_url` slug | no, organisation only |
-| DOI | none | yes, ~80% |
+**Network.** `crisapi` answers only on the university network. In a cluster pod
+set `PURE_HTTPS_PROXY` to the egress-proxy; on a node leave it unset. Do not
+rely on ambient `HTTPS_PROXY`: n3's points at the general university proxy,
+which returns `503` for crisapi.
 
-Things that will bite you:
+**API notes** (spec at `/swagger/docs/v524`, university network only):
 
-- **The portal is behind Cloudflare.** `--delay 12` is not cosmetic; rapid requests get a
-  "Just a moment..." interstitial and then 403s. The fetcher aborts rather than caching it.
-- **The RSS feed caps at 50 items per person**, `size` is ignored and `page=2` is refused. The
-  ORCID/Crossref backfill remains the historical base for prolific authors.
-- **crisapi requires `?format=json`** (the Accept header is ignored), pages with `page=N` not
-  `offset`, and returns HTTP 200 with the *full unfiltered result* for any parameter it does
-  not recognise. Always check that a filter actually changed the count.
-- **Pure splits "Name: Subtitle"** across `title` and `subTitle` in the API but joins them in
-  the RSS. `fetch_pure_api.py` indexes both forms; indexing only `title` silently loses every
-  subtitled publication (80% join rate instead of 99%).
-
-Optional: fetch full abstracts and generate plain-language summaries (requires [Ollama](https://ollama.ai) running locally):
-
-```bash
-python3 scripts/fetch_abstracts.py
-python3 scripts/generate_summaries.py
-```
+- `format=json` is required; the `Accept` header is ignored and XML comes back.
+- Paging is `page=N`, 1-based. `offset` is accepted and silently ignored.
+- `/api/ResearchOutput/{id}` needs **`ID_type`** — `person_uuids`, `org_uuids`,
+  `pub_uuids`. Without it the path id is ignored and you get everything.
+- `/api/Person/{orcid}?ID_type=orcid` returns a **bare object**, not
+  `{"items": […]}`.
+- `searchString` works on Person, Organisation and ResearchOutput.
+- An unrecognised parameter returns HTTP 200 with the **full unfiltered
+  result**, never an error. Always check the count actually changed.
+- The service occasionally returns non-JSON; the fetcher retries once.
 
 ### Sync blog feeds
 

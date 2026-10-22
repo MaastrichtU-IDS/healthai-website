@@ -75,6 +75,19 @@ def main() -> int:
         all_dois.update(extract_dois(json.loads(f.read_text())))
     print(f"{len(all_dois)} unique DOIs across ORCID caches.")
 
+    # Pure contributes DOIs that ORCID does not have, and without this they
+    # reach build_publications.py with no Crossref metadata and are silently
+    # dropped from the output.
+    pure_dir = ROOT / "cache" / "pure"
+    if pure_dir.exists():
+        before = len(all_dois)
+        for f in sorted(pure_dir.glob("*.json")):
+            for item in json.loads(f.read_text()).get("items", []):
+                if item.get("doi"):
+                    all_dois.add(item["doi"])
+        print(f"{len(all_dois) - before} further DOIs from the Pure cache "
+              f"({len(all_dois)} total).")
+
     fetched = skipped = failed = 0
     for doi in sorted(all_dois):
         out = CROSSREF_CACHE / f"{safe_filename(doi)}.json"
