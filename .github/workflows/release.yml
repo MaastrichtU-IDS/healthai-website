@@ -1,0 +1,71 @@
+# Publish the image the cluster runs for the weekly publication refresh.
+#
+# ids3 deploys from GitOps: ArgoCD watches MaastrichtU-IDS/services and syncs
+# ids3/projects/healthai-website/dev. Nothing there builds anything, so this is
+# where the image comes from, and a manifest naming a tag this never pushed
+# deploys nothing.
+#
+# THE MANIFEST PINS A sha- TAG, NOT :edge. A mutable tag leaves the manifest
+# text unchanged when it moves, so Argo sees nothing to sync and running pods
+# keep the bytes they already pulled -- a deploy that reports success and
+# changes nothing. imagePullPolicy: Always does not save you; it is consulted
+# when a pod is created, not when a tag moves under a running one. `edge` is
+# published anyway for anyone who wants to follow main by hand.
+#
+# ONLY WHEN THE PIPELINE CHANGES. The site's own content lives in this repo and
+# changes constantly; rebuilding a CronJob image because a news item was edited
+# would be noise. Hence the paths filter.
+name: Release publication tools image
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "Dockerfile"
+      - "requirements.txt"
+      - ".github/workflows/release.yml"
+    tags: ["v*"]
+  # For a republish with no commit behind it: rebuilding onto a patched base
+  # image, or re-running a push that failed on a registry outage. Without this
+  # the only way to reissue is an empty commit, which puts a lie in the history
+  # to work a button.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/maastrichtu-ids/healthai-website-tools
+          tags: |
+            type=ref,event=tag
+            type=raw,value=edge,enable={{is_default_branch}}
+            type=sha,format=long,enable={{is_default_branch}}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Tag to pin in the services manifest
+        run: |
+          echo "Pin this in ids3/projects/healthai-website/dev/cronjob.yaml:" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "ghcr.io/maastrichtu-ids/healthai-website-tools:sha-${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY

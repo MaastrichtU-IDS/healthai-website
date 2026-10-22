@@ -1,0 +1,3 @@
+# The only third-party dependency the publication pipeline has. Everything
+# else it uses is in the standard library.
+PyYAML>=6.0
