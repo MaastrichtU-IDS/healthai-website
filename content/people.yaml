@@ -11,7 +11,7 @@
     Reusable) data principles. His research aims to unlock the potential of data for
     scientific research. He is an expert in building and mining knowledge graphs for drug
     discovery and personalised medicine.
-  keywords: [FAIR Data, Knowledge Graphs, Semantic Web, Drug Discovery, Personalized Medicine,Open Science]
+  keywords: [FAIR Data, Knowledge Graphs, Semantic Web, Drug Discovery, Personalized Medicine, Open Science]
   orcid: "0000-0003-4727-9435"
   github: "micheldumontier"
   google_scholar: "vyofzOcAAAAJ"
@@ -89,7 +89,7 @@
     cardiovascular diseases, and sleeping disorders, and also in social sciences.
   keywords: [Clinical NLP, Large Language Models, Text Mining, ICD Coding, Dutch EHR]
   orcid: "0000-0001-8325-8848"
-  github: ""
+  github: "sunchang0124"
   google_scholar: "JfU0PB8AAAAJ"
   linkedin: ""
   personal_page: ""
@@ -112,7 +112,7 @@
     ensuring transparency, fairness, and societal impact.
   keywords: [Rare Diseases, FAIR Principles, Linked Data, Ontologies, Knowledge Graphs]
   orcid: "0000-0001-7769-4272"
-  github: ""
+  github: "rcelebi"
   google_scholar: "cB1tSB0AAAAJ"
   linkedin: ""
   personal_page: "https://rcelebi.github.io/"
@@ -161,7 +161,7 @@
   google_scholar: "ZF9MRaIAAAAJ"
   linkedin: ""
   personal_page: ""
-  cris_url: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/a388a66f-3d83-48a8-9925-63226da02401/"
   work_url: "https://www.maastrichtuniversity.nl/kasimati"
   email: a.kasimati@maastrichtuniversity.nl
 
@@ -182,9 +182,9 @@
     COVID-19 Disease Map. She currently holds a Kootstra Talent Fellowship for the Tears of
     Joy project, developing a risk assessment model for recurrent miscarriage by integrating
     immunological, ultrasound, and lifestyle data.
-  keywords: [Wikipathways,Computational Biology]
+  keywords: [Wikipathways, Computational Biology]
   orcid: "0000-0001-8449-1318"
-  github: ""
+  github: "DeniseSl22"
   google_scholar: "Le-4tuQAAAAJ"
   linkedin: ""
   personal_page: ""
@@ -312,14 +312,13 @@
     decision support.
   keywords: [Machine Learning, Financial AI, Decision Support]
   orcid: ""
-  github: ""
+  github: "seunAdeks"
   google_scholar: ""
   linkedin: ""
   personal_page: ""
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/seun-adekunle/"
   work_url: ""
   email: ""
- 
 - name: Özge Erten
   slug: ozge-erten
   role: PhD Researcher
@@ -381,7 +380,7 @@
     in Computer Science.
   keywords: [Audio Captioning, Audio Processing, Machine Learning, Evaluation Metrics, Audio-Language Datasets]
   orcid: "0009-0002-3875-1232"
-  github: ""
+  github: "GLJS"
   google_scholar: ""
   linkedin: ""
   personal_page: ""
@@ -424,7 +423,7 @@
     Obstructive Pulmonary Disease (COPD) monitoring based on Machine learning.
   keywords: [Acoustic Biomarkers, COPD, Signal Processing, Machine Learning, Respiratory Monitoring]
   orcid: "0000-0002-2538-9046"
-  github: ""
+  github: "Yuyang-YAN"
   google_scholar: ""
   linkedin: ""
   personal_page: ""
@@ -446,7 +445,7 @@
     Intelligence, Large Language Model, Reinforcement Learning, Blockchain
   keywords: [Large Language Models, Reinforcement Learning, Medical Reasoning, Clinical NLP]
   orcid: "0000-0003-4507-8162"
-  github: ""
+  github: "dongyang-cs"
   google_scholar: ""
   linkedin: ""
   personal_page: ""
@@ -465,7 +464,7 @@
     data science methods within the DACS Emergent Technologies group.
   keywords: [Data Science, Emergent Technologies]
   orcid: ""
-  github: ""
+  github: "RishabhJakhar"
   google_scholar: ""
   linkedin: ""
   personal_page: ""
@@ -510,7 +509,7 @@
     bachelor's degree in Computer Science.
   keywords: [Ontology, Knowledge Graphs, Blockchain, Cardiovascular Data, Ontology Alignment]
   orcid: "0000-0001-7292-1026"
-  github: ""
+  github: "komi786"
   google_scholar: ""
   linkedin: ""
   personal_page: ""
@@ -531,7 +530,7 @@
     education, I worked in several research grants and start-ups related to my interests.
   keywords: [Explainable AI, Heart Failure, Voice Analysis, Acoustic Features, Medical Signal Processing]
   orcid: "0009-0004-2548-3309"
-  github: ""
+  github: "najdamikolaj00"
   google_scholar: ""
   linkedin: ""
   personal_page: ""
@@ -554,7 +553,7 @@
     science and artificial intelligence.
   keywords: []
   orcid: ""
-  github: ""
+  github: "ensaremirerol"
   google_scholar: "J4KABjQAAAAJ"
   linkedin: ""
   personal_page: ""
@@ -572,7 +571,7 @@
     TODO: add bio
   keywords: []
   orcid: ""
-  github: ""
+  github: "letp1985"
   google_scholar: ""
   linkedin: "lopowell"
   personal_page: ""
@@ -594,8 +593,8 @@
     OpenSearch, natural language processing (NLP), and semantic search , with a strong
     focus on building scalable and efficient architectures for real-world applications.
   keywords: []
-  orcid: ""
-  github: ""
+  orcid: "0009-0006-9294-7462"
+  github: "pranavnbapat"
   google_scholar: ""
   linkedin: ""
   personal_page: ""
@@ -620,8 +619,8 @@
     online solutions for oil and gas exploration to large-scale distributed online
     marketplace systems over the Cloud.
   keywords: []
-  orcid: ""
-  github: ""
+  orcid: "0000-0002-9062-7653"
+  github: "arruda"
   google_scholar: "c1ZyZVAAAAAJ"
   linkedin: ""
   personal_page: ""
@@ -646,7 +645,7 @@
     genetic research review.
   keywords: []
   orcid: "0000-0001-5335-9998"
-  github: ""
+  github: "anas-elghafari"
   google_scholar: ""
   linkedin: ""
   personal_page: ""
@@ -669,12 +668,12 @@
     Medicine in China, a Master of Public Health (MPH) in the United States, and a Master
     of Science in Medical Informatics in the Netherlands.
   keywords: []
-  orcid: ""
+  orcid: "0009-0005-1737-1910"
   github: ""
   google_scholar: ""
   linkedin: ""
   personal_page: ""
-  cris_url: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/41a9cf7e-c5b6-46a8-9668-329514648cb1/"
   work_url: "https://www.maastrichtuniversity.nl/w-wei"
   email: ""
 
@@ -692,7 +691,7 @@
   google_scholar: ""
   linkedin: ""
   personal_page: ""
-  cris_url: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/d3524c04-d50f-46a8-bb9b-73f7d01c6773/"
   work_url: "https://www.maastrichtuniversity.nl/nn-doan"
   email: ""
 
@@ -705,8 +704,8 @@
   bio: >
     TODO: add bio
   keywords: []
-  orcid: ""
-  github: ""
+  orcid: "0009-0009-0736-8389"
+  github: "jloe2911"
   google_scholar: "LdzpPdoAAAAJ"
   linkedin: "julie-loesch"
   personal_page: ""
@@ -723,12 +722,12 @@
   bio: >
     TODO: add bio
   keywords: []
-  orcid: ""
+  orcid: "0000-0001-7276-0402"
   github: ""
   google_scholar: ""
   linkedin: ""
   personal_page: ""
-  cris_url: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/a9600833-c5ed-47bf-b3f0-87c29ee4ff09/"
   work_url: "https://www.maastrichtuniversity.nl/jr-nickenig-vissoci"
   email: ""
 
@@ -767,7 +766,7 @@
     mechanism for secure and GDPR-compliant medical data sharing.
   keywords: []
   orcid: "0000-0002-5291-7860"
-  github: ""
+  github: "AnkurLohachab"
   google_scholar: "YE0ewKUAAAAJ"
   linkedin: ""
   personal_page: ""
@@ -790,7 +789,7 @@
     online market advertisements.
   keywords: []
   orcid: "0009-0001-3282-7737"
-  github: ""
+  github: "vageeshSaxena"
   google_scholar: "fVLj_hsAAAAJ"
   linkedin: ""
   personal_page: ""
