@@ -1,0 +1,13 @@
+# Keep the build context to what the job actually runs.
+.git
+.github
+__pycache__
+**/__pycache__
+*.pyc
+cache/            # local caches; the pod has its own PVC
+.venv
+.env              # the Pure UBKey. The pod gets it from Vault, never the image
+assets            # site assets; nothing here serves the website
+*.html
+*.css
+*.js
