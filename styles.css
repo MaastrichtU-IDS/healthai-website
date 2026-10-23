@@ -107,7 +107,28 @@ section.dark p  { color: rgba(255,255,255,0.68); }
   font-size: 0.67rem; color: var(--text-muted);
   text-transform: uppercase; letter-spacing: 0.07em;
 }
+/* Spans in the logo are inline by default, so the name and department ran
+   together and wrapped mid-phrase once the bar got tight. */
+.nav-logo-text .name, .nav-logo-text .dept { display: block; }
+
 .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+
+/* Hamburger. Hidden on desktop; the media query below swaps it in. */
+.nav-toggle {
+  display: none; background: none; border: 0; cursor: pointer;
+  width: 40px; height: 40px; padding: 9px 8px; border-radius: 6px;
+}
+.nav-toggle:hover { background: var(--bg-alt); }
+.nav-toggle span {
+  display: block; height: 2px; border-radius: 2px;
+  background: var(--slate); transition: transform var(--transition), opacity var(--transition);
+}
+.nav-toggle span + span { margin-top: 5px; }
+.site-nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.site-nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.site-nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
 .nav-links a {
   padding: 6px 13px; border-radius: 5px;
   font-size: 0.87rem; font-weight: 500; color: var(--text-muted);
@@ -539,3 +560,44 @@ a.proj-member:hover { border-color: var(--blue); color: var(--blue); background:
 .theme-pub-meta { font-size: 0.75rem; color: var(--text-muted); }
 
 @media (max-width: 860px) { .theme-proj-grid { grid-template-columns: 1fr; } }
+
+/* ── Mobile navigation ──────────────────────────────────────────────
+   Placed at the end on purpose. These rules and the desktop `.nav-links a`
+   rule have equal specificity, so source order decides; when this block sat
+   above it the desktop padding won inside the media query and the touch
+   targets stayed at 34px. */
+@media (max-width: 860px) {
+  .nav-inner { padding: 0 16px; }
+  .nav-toggle { display: block; }
+  .nav-logo-text .name { font-size: 0.8rem; }
+  .nav-logo-text .dept { font-size: 0.6rem; }
+
+  /* The links become a panel under the bar. Not display:none, so the open
+     state can animate and so the links stay in the DOM for assistive tech. */
+  .nav-links {
+    position: absolute; top: var(--nav-h); left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--white); border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(30,45,61,0.10);
+    max-height: 0; overflow: hidden; visibility: hidden;
+    transition: max-height var(--transition), visibility var(--transition);
+  }
+  .site-nav.nav-open .nav-links {
+    max-height: 70vh; overflow-y: auto; visibility: visible;
+  }
+  /* 15px padding plus a 1.5 line-height clears 44px, the minimum
+     comfortable touch target; the desktop rule gave 36px here. */
+  .nav-links a {
+    display: block; padding: 15px 16px; border-radius: 0;
+    font-size: 0.95rem; line-height: 1.5; border-top: 1px solid var(--border);
+  }
+  /* .nav-cta sets padding with !important for the desktop pill, which also
+     shrank it to 38px in the stacked menu while its neighbours were 54px.
+     Matching !important is the only way to beat it without unpicking the
+     desktop rule. */
+  .nav-cta {
+    margin: 0;
+    border-radius: 0 !important;
+    padding: 15px 16px !important;
+  }
+}

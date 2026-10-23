@@ -37,9 +37,28 @@
             <span class="dept">Maastricht University</span>
           </div>
         </a>
-        <ul class="nav-links">${linksHtml}</ul>
+        <button class="nav-toggle" type="button" aria-label="Menu"
+                aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">${linksHtml}</ul>
       </div>`;
     document.body.insertBefore(nav, document.body.firstChild);
+
+    /* Mobile menu. Below the breakpoint the six links are far wider than a
+       phone, and with no toggle they were simply clipped: Publications, News
+       and Students were unreachable on a 390px screen. */
+    const toggle = nav.querySelector('.nav-toggle');
+    const setOpen = open => {
+      nav.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('nav-open')));
+    // Close on navigation, on Escape, and when the viewport grows back, so
+    // the panel cannot be left open and stranded over a desktop layout.
+    nav.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 860) setOpen(false); });
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 12);
     });
