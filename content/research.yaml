@@ -9,7 +9,7 @@ themes:
       by data. We integrate IoT sensor streams, EHR data and knowledge graphs to
       deliver closed-loop AI systems that adapt recommendations to individual
       patients in real time.
-    projects: [CHARM, iCare4CVD, DACIL]
+    projects: [CHARM, iCARE4CVD, DACIL]
     featured_pubs: []
 
   - id: agriculture
@@ -187,7 +187,7 @@ projects:
       and real-world data (including wearables) to enable early risk prediction, continuous
       monitoring, and tailored interventions, supporting a shift from reactive treatment to
       proactive, preventive care.
-    team: [Visara Urovi, Michel Dumontier]
+    team: [Michel Dumontier, Visara Urovi, Anas Elghafari, Ankur Lohachab, Komal Gilani]
     funder: European Union (Horizon Europe)
     amount: "€6–10M"
     period: "2023–2027"
