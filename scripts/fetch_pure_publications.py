@@ -60,6 +60,16 @@ _opener = urllib.request.build_opener(
 )
 
 
+class NotFound(Exception):
+    """Pure found no match.
+
+    Not an HTTP 404: the API answers 200 with an XML body,
+    `<XML>Nothing found / 404</XML>`, even when asked for JSON. Without a
+    type of its own this arrives as a JSONDecodeError and is indistinguishable
+    from the genuinely malformed responses the service also emits.
+    """
+
+
 def api(key: str, path: str, _tries: int = 2, **params) -> dict:
     """One GET. Retries once on a malformed body: the service intermittently
     returns non-JSON (seen mid-run on 2026-10-22), and a single bad response
@@ -69,7 +79,14 @@ def api(key: str, path: str, _tries: int = 2, **params) -> dict:
     for attempt in range(_tries):
         try:
             req = urllib.request.Request(url, headers={"UBKey": key})
-            return json.loads(_opener.open(req, timeout=120).read())
+            body = _opener.open(req, timeout=120).read()
+            # Check before parsing: "nothing found" is a settled answer, so
+            # retrying it just costs the 3s sleep below, once per person.
+            if body.lstrip()[:1] == b"<":
+                if b"Nothing found" in body:
+                    raise NotFound(path)
+                raise ValueError(f"unexpected XML body from {path}: {body[:120]!r}")
+            return json.loads(body)
         except json.JSONDecodeError as e:
             last = e
             if attempt + 1 < _tries:
@@ -95,6 +112,8 @@ def person_uuid(key: str, person: dict) -> str | None:
             # NOTE: this endpoint returns a BARE object, not {"items": [...]}.
             if isinstance(r, dict) and r.get("uuid"):
                 return r["uuid"]
+        except NotFound:
+            pass  # no person with that ORCID; fall through and try by name
         except urllib.error.HTTPError as e:
             # 404 is the honest answer "no person with that ORCID"; fall
             # through and try by name. Anything else is our problem.
@@ -105,6 +124,8 @@ def person_uuid(key: str, person: dict) -> str | None:
         items = r.get("items") or []
         if len(items) == 1:
             return items[0].get("uuid")
+    except NotFound:
+        pass
     except urllib.error.HTTPError as e:
         if e.code != 404:
             raise
@@ -115,7 +136,10 @@ def outputs(key: str, uuid: str) -> list[dict]:
     """All research outputs for a person, paged. `page` is 1-based."""
     got, page = [], 1
     while True:
-        d = api(key, f"ResearchOutput/{uuid}", ID_type="person_uuids", size=PAGE, page=page)
+        try:
+            d = api(key, f"ResearchOutput/{uuid}", ID_type="person_uuids", size=PAGE, page=page)
+        except NotFound:
+            break  # no outputs recorded for this person
         items = d.get("items") or []
         if not items:
             break
