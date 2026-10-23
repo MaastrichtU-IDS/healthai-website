@@ -54,6 +54,15 @@
 
     .req-item { display:flex; gap:10px; padding:9px 0; border-bottom:1px solid var(--border); font-size:0.87rem; }
     .req-item::before { content:'✦'; color:var(--blue); flex-shrink:0; font-size:0.75rem; padding-top:2px; }
+
+    /* Level overview cards */
+    .track-card { display:block; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--card-shadow); transition:all var(--transition); text-decoration:none; color:inherit; }
+    .track-card:hover { box-shadow:var(--card-shadow-hover); transform:translateY(-2px); border-color:var(--blue); }
+    .track-card h4 { font-size:1rem; margin:12px 0 8px; }
+    .track-card p  { font-size:0.85rem; margin-bottom:14px; }
+    .track-more { font-size:0.8rem; font-weight:600; color:var(--blue); }
+
+    .track-sub { font-size:0.95rem; margin-bottom:10px; }
   </style>
 </head>
 <body class="page-body">
@@ -70,34 +79,36 @@
 
 <nav class="sticky-subnav">
   <div class="sticky-subnav-inner">
-    <a href="#working" class="active">Working with us</a>
+    <a href="#bachelor" class="active">Bachelor's</a>
+    <a href="#master">Master's</a>
+    <a href="#phd">PhD</a>
     <a href="#themes">Research themes</a>
     <a href="#supervisors">Supervisors</a>
-    <a href="#approach">Get in touch</a>
-    <a href="#programmes">Programmes</a>
-    <a href="#phd">PhD positions</a>
   </div>
 </nav>
 
 <div class="loading" id="loading" style="padding:80px 0"><div class="spinner"></div> Loading…</div>
 <div id="studentPage" class="hidden">
 
-<section id="working" style="scroll-margin-top:120px">
-  <div class="container" style="max-width:820px">
+<section id="tracksOverview" style="scroll-margin-top:120px">
+  <div class="container">
     <div class="section-header">
-      <span class="section-label">How we work with students</span>
-      <h2>Working with us</h2>
+      <span class="section-label">Three ways in</span>
+      <h2>Bachelor's, master's and PhD</h2>
+      <p>What the work looks like at each level, and the route onto it.</p>
     </div>
-    <div id="workingList"></div>
+    <div class="grid grid-3" id="trackCards"></div>
   </div>
 </section>
+
+<div id="trackSections"></div>
 
 <section id="themes" class="alt" style="scroll-margin-top:120px">
   <div class="container">
     <div class="section-header">
       <span class="section-label">What you could work on</span>
       <h2>Research themes</h2>
-      <p>Student projects come out of these themes. Each lists the staff who lead it.</p>
+      <p>Projects at every level come out of these themes. Each lists the staff who lead it.</p>
     </div>
     <div class="grid grid-3" id="themeGrid"></div>
   </div>
@@ -108,49 +119,9 @@
     <div class="section-header">
       <span class="section-label">Who supervises</span>
       <h2>Supervisors</h2>
-      <p>Academic staff in the group who supervise theses, internships and PhD projects.</p>
+      <p>Academic staff in the group who supervise projects, theses and PhDs. Write to the one whose theme fits.</p>
     </div>
     <div id="supList"></div>
-  </div>
-</section>
-
-<section id="approach" class="alt" style="scroll-margin-top:120px">
-  <div class="container" style="max-width:820px">
-    <div class="section-header">
-      <span class="section-label">Getting started</span>
-      <h2>How to get in touch</h2>
-    </div>
-    <div class="phd-steps" id="approachSteps"></div>
-  </div>
-</section>
-
-<section id="programmes" style="scroll-margin-top:120px">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">Where our students come from</span>
-      <h2>Relevant programmes</h2>
-      <p id="progIntro"></p>
-    </div>
-    <div class="grid grid-2" id="progGrid"></div>
-  </div>
-</section>
-
-<section id="phd" class="alt" style="scroll-margin-top:120px">
-  <div class="container" style="max-width:820px">
-    <div class="section-header">
-      <span class="section-label">Doctoral research</span>
-      <h2>PhD positions</h2>
-      <p id="phdIntro"></p>
-    </div>
-    <div class="phd-steps" id="phdSteps" style="margin-bottom:32px"></div>
-
-    <h3 style="font-size:1rem;margin-bottom:10px">What we look for</h3>
-    <div id="reqList" style="margin-bottom:32px"></div>
-
-    <h3 style="font-size:1rem;margin-bottom:10px">Terms of employment</h3>
-    <p id="employText" style="font-size:0.88rem;margin-bottom:20px"></p>
-
-    <div id="phdLinks" style="display:flex;gap:12px;flex-wrap:wrap"></div>
   </div>
 </section>
 
@@ -173,29 +144,99 @@
   const txt = s => esc(String(s || '').trim());
 
   document.getElementById('heroLead').textContent = (data.intro || '').trim();
-  document.getElementById('progIntro').textContent = (data.programmes_intro || '').trim();
-  document.getElementById('phdIntro').textContent = (data.phd_intro || '').trim();
-  document.getElementById('employText').textContent = (data.phd_employment || '').trim();
-
-  document.getElementById('workingList').innerHTML = (data.working_with_us || []).map((p, i) => `
-    <div class="phil-row reveal" data-delay="${i * 60}">
-      <div class="phil-icon">${esc(p.icon)}</div>
-      <div><h4>${txt(p.title)}</h4><p>${txt(p.text)}</p></div>
-    </div>`).join('');
 
   // Theme cards link to their section on research.html, which renders each
   // theme as id="theme-<id>" and scrolls to location.hash on load.
   //
-  // research.yaml records theme leads as plain names. Resolve each against
-  // people.yaml so a lead is a link, and leave it as text if the name does
-  // not match anyone -- better a plain name than a link to "not found".
-  const bySlugName = new Map((people || []).map(p => [String(p.name).trim(), p]));
+  // research.yaml records theme leads as plain names, not references. Resolve
+  // each against people.yaml so a lead is a link, and leave it as text if the
+  // name matches nobody -- better a plain name than a link to "not found".
+  const byName = new Map((people || []).map(p => [String(p.name).trim(), p]));
   const linkName = n => {
-    const p = bySlugName.get(String(n).trim());
+    const p = byName.get(String(n).trim());
     return p && p.slug
       ? `<a href="people/?id=${encodeURIComponent(p.slug)}">${esc(n)}</a>`
       : esc(n);
   };
+
+  const tracks = data.tracks || [];
+  const progs = data.programmes || [];
+
+  /* Overview cards: one per level, linking down to its own section. */
+  document.getElementById('trackCards').innerHTML = tracks.map((t, i) => `
+    <a class="track-card reveal" data-delay="${i * 55}" href="#${esc(t.id)}">
+      <span class="level-badge ${CMS.levelClass(t.level)}">${esc(t.level)}</span>
+      <h4>${txt(t.title)}</h4>
+      <p>${txt(t.summary)}</p>
+      <span class="track-more">How to get onto it →</span>
+    </a>`).join('');
+
+  /* One full section per level: the work, then the route, then the
+     programmes that feed it. The PhD track has no programme_level, because
+     there is no enrolment route into a PhD -- it runs on funded positions. */
+  document.getElementById('trackSections').innerHTML = tracks.map((t, ti) => {
+    const mine = progs.filter(p => t.programme_level && p.level === t.programme_level);
+    const progHtml = mine.length ? `
+      <h3 class="track-sub">Programmes that lead here</h3>
+      <div class="grid grid-2" style="margin-bottom:8px">
+        ${mine.map(p => `
+          <div class="prog-card">
+            <div style="margin-bottom:12px"><span class="level-badge ${CMS.levelClass(p.level)}">${esc(p.level)}</span></div>
+            <h4>${txt(p.name)}</h4>
+            <p>${txt(p.desc)}</p>
+            <div class="prog-meta">
+              <span>🏛 ${txt(p.dept)}</span>
+              <span>📅 ${txt(p.duration)} · ${txt(p.language)}</span>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+              <a href="${esc(p.url)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Programme →</a>
+              ${p.curriculum_url ? `<a href="${esc(p.curriculum_url)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Curriculum →</a>` : ''}
+            </div>
+          </div>`).join('')}
+      </div>` : '';
+
+    const isPhd = t.id === 'phd';
+    const phdExtra = isPhd ? `
+      <h3 class="track-sub">What we look for</h3>
+      <div style="margin-bottom:26px">
+        ${(data.phd_requirements || []).map(r => `<div class="req-item">${esc(r)}</div>`).join('')}
+      </div>
+      <h3 class="track-sub">Terms of employment</h3>
+      <p style="font-size:0.88rem;margin-bottom:18px">${txt(data.phd_employment)}</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        ${(data.links || {}).um_vacancies ? `<a href="${esc(data.links.um_vacancies)}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">UM vacancies →</a>` : ''}
+        ${(data.links || {}).academic_transfer ? `<a href="${esc(data.links.academic_transfer)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">AcademicTransfer →</a>` : ''}
+      </div>` : '';
+
+    return `
+      <section id="${esc(t.id)}" class="${ti % 2 === 0 ? 'alt' : ''}" style="scroll-margin-top:120px">
+        <div class="container" style="max-width:900px">
+          <div class="section-header">
+            <span class="section-label">${esc(t.level)}</span>
+            <h2>${txt(t.title)}</h2>
+            <p>${txt(t.summary)}</p>
+          </div>
+
+          <h3 class="track-sub">What the work looks like</h3>
+          <div style="margin-bottom:28px">
+            ${(t.work || []).map(w => `<div class="req-item">${esc(w)}</div>`).join('')}
+          </div>
+
+          <h3 class="track-sub">How to get onto it</h3>
+          <p style="font-size:0.88rem;margin-bottom:20px">${txt(t.route_intro)}</p>
+          <div class="phd-steps" style="margin-bottom:28px">
+            ${(t.steps || []).map(st => `
+              <div class="phd-step">
+                <div class="step-num">${esc(st.number)}</div>
+                <div><h4>${txt(st.title)}</h4><p>${txt(st.text)}</p></div>
+              </div>`).join('')}
+          </div>
+
+          ${progHtml}
+          ${phdExtra}
+        </div>
+      </section>`;
+  }).join('');
 
   document.getElementById('themeGrid').innerHTML = (research.themes || []).map((t, i) => `
     <div class="theme-card reveal" data-delay="${i * 55}">
@@ -229,43 +270,9 @@
       ${p.email ? `<a class="btn btn-secondary btn-sm" href="mailto:${esc(p.email)}">Email</a>` : ''}
     </div>`).join('');
 
-  const steps = (list, el) => {
-    document.getElementById(el).innerHTML = (list || []).map(s => `
-      <div class="phd-step reveal">
-        <div class="step-num">${esc(s.number)}</div>
-        <div><h4>${txt(s.title)}</h4><p>${txt(s.text)}</p></div>
-      </div>`).join('');
-  };
-  steps(data.approach, 'approachSteps');
-  steps(data.phd_steps, 'phdSteps');
-
-  document.getElementById('progGrid').innerHTML = (data.programmes || []).map((p, i) => `
-    <div class="prog-card reveal" data-delay="${i * 55}">
-      <div style="margin-bottom:12px"><span class="level-badge ${CMS.levelClass(p.level)}">${esc(p.level)}</span></div>
-      <h4>${txt(p.name)}</h4>
-      <p>${txt(p.desc)}</p>
-      <div class="prog-meta">
-        <span>🏛 ${txt(p.dept)}</span>
-        <span>📅 ${txt(p.duration)} · ${txt(p.language)}</span>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
-        <a href="${esc(p.url)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Programme →</a>
-        ${p.curriculum_url ? `<a href="${esc(p.curriculum_url)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Curriculum →</a>` : ''}
-      </div>
-    </div>`).join('');
-
-  document.getElementById('reqList').innerHTML = (data.phd_requirements || [])
-    .map(r => `<div class="req-item">${esc(r)}</div>`).join('');
-
-  const L = data.links || {};
-  document.getElementById('phdLinks').innerHTML = [
-    L.um_vacancies ? `<a href="${esc(L.um_vacancies)}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">UM vacancies →</a>` : '',
-    L.academic_transfer ? `<a href="${esc(L.academic_transfer)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">AcademicTransfer →</a>` : '',
-  ].join('');
-
   CMS.revealNew(document.getElementById('studentPage'));
 
-  const sects = ['working', 'themes', 'supervisors', 'approach', 'programmes', 'phd'];
+  const sects = ['bachelor', 'master', 'phd', 'themes', 'supervisors'];
   const navAs = document.querySelectorAll('.sticky-subnav a');
   window.addEventListener('scroll', () => {
     let cur = sects[0];
