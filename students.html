@@ -183,12 +183,23 @@
       <div><h4>${txt(p.title)}</h4><p>${txt(p.text)}</p></div>
     </div>`).join('');
 
+  // research.yaml records theme leads as plain names. Resolve each against
+  // people.yaml so a lead is a link, and leave it as text if the name does
+  // not match anyone -- better a plain name than a link to "not found".
+  const bySlugName = new Map((people || []).map(p => [String(p.name).trim(), p]));
+  const linkName = n => {
+    const p = bySlugName.get(String(n).trim());
+    return p && p.slug
+      ? `<a href="people/?id=${encodeURIComponent(p.slug)}">${esc(n)}</a>`
+      : esc(n);
+  };
+
   document.getElementById('themeGrid').innerHTML = (research.themes || []).map((t, i) => `
     <div class="theme-card reveal" data-delay="${i * 55}">
       <div class="theme-icon">${esc(t.icon)}</div>
       <h4>${txt(t.title)}</h4>
       <p>${txt(t.desc)}</p>
-      <div class="theme-leads">Led by ${(t.leads || []).map(esc).join(', ')}</div>
+      <div class="theme-leads">Led by ${(t.leads || []).map(linkName).join(', ')}</div>
     </div>`).join('');
 
   // Roles that supervise. A PhD researcher may co-supervise day to day, but
@@ -197,10 +208,16 @@
     'Distinguished Professor', 'Full Professor', 'Associate Professor', 'Assistant Professor',
   ]);
   const sups = (people || []).filter(p => SUPERVISING.has(p.role));
+  // people/index.html matches strictly on p.slug, with no fallback, so a
+  // person without one would land on its "not found" state. Link only when
+  // there is a slug to link with.
+  const profile = p => p.slug ? `people/?id=${encodeURIComponent(p.slug)}` : null;
   document.getElementById('supList').innerHTML = sups.map(p => `
     <div class="sup-row reveal">
       <div>
-        <div class="sup-name">${txt(p.name)}</div>
+        <div class="sup-name">${profile(p)
+          ? `<a href="${esc(profile(p))}">${txt(p.name)}</a>`
+          : txt(p.name)}</div>
         <div class="sup-role">${txt(p.role)}</div>
         ${(p.themes || []).length ? `<div class="sup-themes">${(p.themes || []).map(esc).join(' · ')}</div>` : ''}
       </div>
