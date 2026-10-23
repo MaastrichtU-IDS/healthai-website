@@ -93,11 +93,6 @@
 
 <section id="tracksOverview" style="scroll-margin-top:120px">
   <div class="container">
-    <div class="section-header">
-      <span class="section-label">Three ways in</span>
-      <h2>Bachelor's, master's and PhD</h2>
-      <p>What the work looks like at each level, and the route onto it.</p>
-    </div>
     <div class="grid grid-3" id="trackCards"></div>
   </div>
 </section>
@@ -160,16 +155,23 @@
       : esc(n);
   };
 
+  // The chips say Bachelor and Masters rather than BSc and MSc: the group
+  // takes students from programmes broader than those two designations. The
+  // underlying `level` values are unchanged, because they are what matches a
+  // programme to a track and what CMS.levelClass styles on.
+  const LEVEL_LABEL = { BSc: 'Bachelor', MSc: 'Masters', PhD: 'PhD' };
+  const levelLabel = l => LEVEL_LABEL[l] || l;
+
   const tracks = data.tracks || [];
   const progs = data.programmes || [];
 
   /* Overview cards: one per level, linking down to its own section. */
   document.getElementById('trackCards').innerHTML = tracks.map((t, i) => `
     <a class="track-card reveal" data-delay="${i * 55}" href="#${esc(t.id)}">
-      <span class="level-badge ${CMS.levelClass(t.level)}">${esc(t.level)}</span>
+      <span class="level-badge ${CMS.levelClass(t.level)}">${esc(levelLabel(t.level))}</span>
       <h4>${txt(t.title)}</h4>
       <p>${txt(t.summary)}</p>
-      <span class="track-more">How to get onto it →</span>
+      <span class="track-more">Learn more →</span>
     </a>`).join('');
 
   /* One full section per level: the work, then the route, then the
@@ -182,7 +184,7 @@
       <div class="grid grid-2" style="margin-bottom:8px">
         ${mine.map(p => `
           <div class="prog-card">
-            <div style="margin-bottom:12px"><span class="level-badge ${CMS.levelClass(p.level)}">${esc(p.level)}</span></div>
+            <div style="margin-bottom:12px"><span class="level-badge ${CMS.levelClass(p.level)}">${esc(levelLabel(p.level))}</span></div>
             <h4>${txt(p.name)}</h4>
             <p>${txt(p.desc)}</p>
             <div class="prog-meta">
@@ -238,7 +240,7 @@
       <section id="${esc(t.id)}" class="${ti % 2 === 0 ? 'alt' : ''}" style="scroll-margin-top:120px">
         <div class="container" style="max-width:900px">
           <div class="section-header">
-            <span class="section-label">${esc(t.level)}</span>
+            <span class="section-label">${esc(levelLabel(t.level))}</span>
             <h2>${txt(t.title)}</h2>
             <p>${txt(t.summary)}</p>
           </div>
