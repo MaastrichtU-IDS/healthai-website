@@ -75,6 +75,32 @@ themes:
     featured_pubs: []
 
 
+# AMOUNTS ARE TOTAL PROJECT COST: the whole consortium's budget, not this
+# group's share and not the funder's contribution where those differ. For
+# EU projects the figure is the "Total cost" field on the project's CORDIS
+# page, which is the authoritative source and is worth preferring over a
+# partner's or a press release's number. For the ARPA-H, NIH and NWO
+# projects the award is the only figure there is, so it stands.
+#
+# Verified against CORDIS:
+#   AIDAVA       €7.7M   101057062  total cost €7,720,615.23
+#   REALM        €6.7M   101095435  total cost €6,659,650.00
+#   AMBROSIA     €3.97M  101181300  CORDIS shows "No data" for total cost,
+#                                   so this is the EU contribution,
+#                                   €3,972,738.63 -- the only figure given
+#   EU-FarmBook  €15M    101060382  total cost €15,002,553.75
+#   iCARE4CVD    €21.5M  101112022  total cost €21,488,522.15
+#
+# Two of those had been wrong in ways that did not show. iCARE4CVD read
+# "€6–10M", and the parser takes a range at its TOP, so it counted as €10M.
+# EU-FarmBook had no amount at all and counted as zero, hiding €15M.
+#
+# DACIL: €2.56M, the NWO award (KICH1.GZ03.21.023, €2,559,133). Like the
+# ARPA-H and NIH entries this is the funder's award rather than a CORDIS
+# total cost, because that is the only figure NWO publishes; a KIC project
+# also carries partner co-funding that is not broken out. Every project now
+# has a figure, so the headline totals no longer hide anything, though the
+# "+" stays honest about the mixed basis above.
 projects:
   - acronym: AIDAVA
     title: AI powered Data Curation & Publishing Virtual Assistant
@@ -99,7 +125,7 @@ projects:
       using real-world and synthetic data.
     team: [Visara Urovi, Chang Sun, Michel Dumontier, Ensar Erol, Anas Elghafari]
     funder: European Commission (Horizon Europe)
-    amount: "€7M"
+    amount: "€6.7M"
     period: "2023–2026"
     status: Active
     featured: true
@@ -157,7 +183,7 @@ projects:
       including farmers, advisors, researchers, and policymakers.
     team: [Christopher Brewster]
     funder: European Commission (Horizon Europe)
-    amount: ""
+    amount: "€15M"
     period: "2022–2026"
     status: Active
     url: https://welcome.eufarmbook.eu/
@@ -189,7 +215,7 @@ projects:
       proactive, preventive care.
     team: [Michel Dumontier, Visara Urovi, Anas Elghafari, Ankur Lohachab, Komal Gilani]
     funder: European Union (Horizon Europe)
-    amount: "€6–10M"
+    amount: "€21.5M"
     period: "2023–2027"
     status: Active
     url: https://icare4cvd.eu/
@@ -205,6 +231,6 @@ projects:
       patients to self-manage their condition, reduce hospitalisation, and address health inequalities.
     team: [Visara Urovi]
     funder: NWO (Dutch Research Council) – KIC programme
-    amount: "Multi-partner public-private funding (exact amount not publicly specified)"
+    amount: "€2.56M"
     period: "2023–2029"
     status: Active

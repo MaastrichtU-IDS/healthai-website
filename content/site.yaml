@@ -22,6 +22,8 @@ stats:
     label: Researchers & staff
   - source: funding.active
     label: Active funding
+  - source: funding.total
+    label: Total funding awarded
   - source: publications.total
     label: Publications
 
