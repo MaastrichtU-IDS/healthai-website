@@ -434,11 +434,24 @@ highlights:
   # the finished thesis was filed, which is within days of the defence, but
   # these are inferences and worth a check.
   #
-  # SUPERVISORS ARE NOT LISTED. A DACS bachelor thesis is formatted as a
-  # paper and names no supervisor on the title page, unlike the master's
-  # ones. Only Ana-Maria Martinescu's names a supervisor. Guessing from the
-  # initials in filenames (_CS, _RC, _md) would be a guess, so these say
-  # nothing rather than something wrong.
+  # SUPERVISORS come from the Board of Examiners thesis-plan emails kept
+  # with each thesis (the *.eml.PDF files), which carry a "Supervision
+  # details" section naming the DACS supervisors. A DACS bachelor thesis is
+  # formatted as a paper and names nobody on its title page, so the plan is
+  # the only record. Ten of fifteen have one.
+  #
+  # Names there are free text and inconsistent, written variously as
+  # "Dumontier, Michel", "Dr. Chang Sun" and once "Rermzi Celebi". They are
+  # normalised here so they resolve against people.yaml.
+  #
+  # Five have none: Charlotte Donnelly and Alina Gavrish have no such email,
+  # and for Simonas Bubnys, Ilian Ariesen and Loris Podevyn the email's
+  # supervision section was not reached. Those entries say nothing rather
+  # than guess from the initials in filenames (_CS, _RC, _md).
+  #
+  # Do not mine these emails further without care: they carry student ID
+  # numbers and addresses, and at least one has a full grade transcript
+  # attached.
   - level: BSc
     name: Ana-Maria Martinescu
     title: Justification-Based Benchmark for Evaluating LLM Reasoning Under Noise
@@ -455,6 +468,9 @@ highlights:
     year: "2026"
     date: 12 June 2026
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Remzi Celebi
 
   - level: BSc
     name: Eve Michaux
@@ -462,6 +478,8 @@ highlights:
     year: "2026"
     date: 9 June 2026
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Chang Sun
 
   - level: BSc
     name: Mikhail Belov
@@ -469,6 +487,9 @@ highlights:
     year: "2026"
     date: 9 June 2026
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Chang Sun
 
   - level: BSc
     name: Taha Ismet Koc
@@ -478,6 +499,9 @@ highlights:
     year: "2026"
     date: 9 June 2026
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Rohan Nanda
+      - Michel Dumontier
 
   - level: BSc
     name: Tunç Sabah
@@ -487,6 +511,8 @@ highlights:
     year: "2026"
     date: 21 August 2026
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
 
   - level: BSc
     name: Daan Schar
@@ -496,6 +522,9 @@ highlights:
     year: "2025"
     date: 25 August 2025
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Remzi Celebi
 
   - level: BSc
     name: Sebastian Schmülling
@@ -505,6 +534,9 @@ highlights:
     year: "2025"
     date: 30 June 2025
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Chang Sun
 
   - level: BSc
     name: Alexandru Valah
@@ -512,6 +544,9 @@ highlights:
     year: "2025"
     date: 27 June 2025
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Chang Sun
 
   - level: BSc
     name: Charlotte Donnelly
@@ -546,6 +581,9 @@ highlights:
     year: "2024"
     date: 20 June 2024
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Remzi Celebi
 
   - level: BSc
     name: Ilian Ariesen
