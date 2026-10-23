@@ -32,7 +32,12 @@
     }
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
     .hero-stats {
-      display: grid; grid-template-columns: repeat(4,1fr);
+      /* auto-fit, not repeat(4): the stat list comes from site.yaml, and a
+         hardcoded 4 left the 5th stat alone on a second row the moment one
+         was added. This fits as many as will hold their width and wraps
+         evenly, so adding or removing a stat needs no CSS change. */
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 1px; background: var(--border);
       border-radius: var(--radius-lg); overflow: hidden;
     }
@@ -266,14 +271,18 @@
       if (!m) return 0;
       return parseFloat(m[1]) * (m[2].toUpperCase() === 'M' ? 1e6 : 1e3);
     };
-    const activeFunding = research.projects
-      .filter(p => p.status === 'Active')
-      .reduce((sum, p) => sum + parseAmount(p.amount), 0);
+    const sumFunding = list => list.reduce((sum, p) => sum + parseAmount(p.amount), 0);
+    const activeFunding = sumFunding(research.projects.filter(p => p.status === 'Active'));
+    // Every project the group has been part of, completed included. Both
+    // figures carry a "+" because a project recording prose instead of a
+    // number contributes zero, so these are floors.
+    const totalFunding = sumFunding(research.projects);
 
     const sources = {
       'people.faculty':     () => people.filter(p => p.group === 'Faculty').length,
       'people.researchers': () => people.filter(p => p.group === 'Researchers').length,
       'funding.active':     () => `€${Math.floor(activeFunding / 1e6)}M+`,
+      'funding.total':      () => `€${Math.floor(totalFunding / 1e6)}M+`,
       'publications.total': () => pubs.stats.total,
     };
     const resolve = s => s.source ? sources[s.source]() : s.value;
