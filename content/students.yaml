@@ -1,0 +1,382 @@
+# Students page.
+#
+# PURPOSE, as set by Michel: (i) show the work the group does with students at
+# bachelor's, master's and PhD level, and (ii) give each of those three a
+# concrete path to follow. The bachelor's and master's routes run through
+# enrolling in a relevant programme and taking its courses; the PhD route runs
+# through funded positions, which have to exist before they can be applied for.
+# The page is therefore organised by level, not by topic.
+#
+# EVERY CLAIM HERE MUST BE CHECKABLE. The previous version of this file was
+# removed because it was not: it named six students who do not appear to
+# exist, credited each with a specific result, and attributed them to real
+# supervisors. See PR #15.
+#
+# Two rules for anything added:
+#   1. No named person without their knowledge, and no claim about a person
+#      they have not confirmed.
+#   2. No number nobody will maintain. Salary scales, ECTS and cohort sizes go
+#      stale silently and are better linked than copied.
+#
+# INCOMPLETE: the programme list below covers DACS and UCM. Michel has
+# flagged that the group takes students from more programmes than these, and
+# that an inventory is needed. See issue #17.
+#
+# Research themes and supervisors are NOT listed here. The page reads them from
+# research.yaml and people.yaml at render time, so they cannot drift.
+
+intro: >
+  We work with students at every level, from a first bachelor's project to a
+  four-year PhD. Projects come out of the group's own research, so the work is
+  part of something ongoing rather than an exercise set aside for a student.
+
+# The three tracks. Each says what the work is, then how to get onto it.
+tracks:
+  - id: bachelor
+    level: BSc
+    title: Bachelor's projects
+    programme_level: BSc
+    summary: >
+      A scoped piece of a larger research question, usually carried out in your
+      final year alongside the group members working on that question.
+    work:
+      - Building or extending a tool, pipeline or dataset the group actually uses
+      - Evaluating an existing method on a new dataset or in a new setting
+      - Making research output usable by others, through interfaces, documentation or visualisation
+    route_intro: >
+      The bachelor's route runs through the programme. Supervision is arranged
+      once you are enrolled and have reached the project stage.
+    steps:
+      - number: "1"
+        title: Enrol in a relevant bachelor's programme
+        text: >
+          Most students who do a project with us come from Data Science and
+          Artificial Intelligence at DACS. We also supervise University College
+          Maastricht students through the Capstone, their final research
+          project. Any UM bachelor's that leaves you able to program and reason
+          about data can work.
+      - number: "2"
+        title: Take the courses that match the work
+        text: >
+          Your programme's curriculum is what prepares you for a project here.
+          Choose the machine learning, data and knowledge representation
+          courses in the direction you want to work.
+      - number: "3"
+        title: Approach a supervisor before the project period
+        text: >
+          Email a staff member whose theme fits, a few months before the
+          project period starts rather than at the start of it. Places are
+          arranged person to person, and good ones go early.
+      - number: "4"
+        title: Shape the project together
+        text: >
+          The first conversations turn an interest into a question that can be
+          answered in the time a bachelor's project allows.
+
+  - id: master
+    level: MSc
+    title: Master's theses and internships
+    programme_level: MSc
+    summary: >
+      A research question of your own within one of the group's themes, at a
+      scale where the result can stand on its own. Research internships are
+      arranged the same way.
+    work:
+      - Thesis research on an open question in one of the group's themes
+      - Research internships, including with our clinical and industry partners
+      - Work that, where it stands up, feeds into the group's publications, software and datasets
+    route_intro: >
+      The master's route also runs through the programme, and the thesis is
+      where the research work happens.
+    steps:
+      - number: "1"
+        title: Enrol in a relevant master's programme
+        text: >
+          The three DACS master's programmes below are the usual routes. We
+          also supervise students from elsewhere in UM, and from other
+          universities for internships.
+      - number: "2"
+        title: Take the courses that match the work
+        text: >
+          Use the elective space in your curriculum to build toward the kind of
+          thesis you want. The curriculum links below show what each programme
+          offers.
+      - number: "3"
+        title: Contact a supervisor well before the thesis period
+        text: >
+          Write to the staff member whose theme fits. Say what in their work
+          interests you and why, your programme and stage, and when you need to
+          start and finish.
+      - number: "4"
+        title: Agree a question, then do the research
+        text: >
+          Supervisors rarely hand over a finished brief. You will have a named
+          academic supervisor, and often a PhD researcher or postdoc close to
+          the topic for day-to-day work.
+
+  - id: phd
+    level: PhD
+    title: PhD positions
+    programme_level: null
+    summary: >
+      Four years of employed research on your own line of work, ending in a
+      thesis and a body of publications.
+    work:
+      - An original line of research within one of the group's themes
+      - Publishing and presenting your own work internationally
+      - Supervising bachelor's and master's students, and contributing to teaching
+    route_intro: >
+      The PhD route is different from the other two. PhD candidates in the
+      Netherlands are employed rather than funded by a stipend, so a position
+      has to exist and be funded before it can be applied for. There is no
+      enrolment route in.
+    steps:
+      - number: "1"
+        title: Wait for a funded position to be advertised
+        text: >
+          Positions appear when a project is funded, and are posted on UM's
+          vacancies site and on AcademicTransfer with a project description and
+          requirements.
+      - number: "2"
+        title: Or bring your own funding
+        text: >
+          If you hold or are applying for a personal fellowship or a national
+          scholarship, approach a prospective supervisor directly and early.
+          This route is slower and needs a concrete research idea.
+      - number: "3"
+        title: Apply to the specific project
+        text: >
+          Applications normally ask for a CV, a motivation letter, transcripts
+          and referees. Write to the project that was advertised rather than
+          sending a general application.
+      - number: "4"
+        title: Interview and employment
+        text: >
+          Shortlisted candidates are interviewed by the supervisor and at least
+          one other panel member. A successful candidate receives an employment
+          contract.
+
+phd_requirements:
+  - A master's degree in computer science, data science, bioinformatics or a closely related field
+  - Programming ability sufficient to carry your own research code
+  - Interest in health and the life sciences; a medical background is not required
+  - Some evidence of research ability, such as a thesis, a publication or a substantial open-source contribution
+  - Working English; Dutch is not required
+
+# No euro figures on purpose. The previous version quoted a range that was
+# already out of date, and these change yearly under the CAO.
+phd_employment: >
+  PhD candidates are employed on scale P of the collective labour agreement for
+  Dutch universities (CAO NU), with holiday allowance, an end-of-year payment
+  and the associated social security. Current figures are stated in each
+  advertised vacancy.
+
+programmes_intro: >
+  These are the Maastricht programmes our bachelor's and master's students
+  usually come from. None is a requirement, but being enrolled in one is the
+  normal way into a project with us.
+
+programmes:
+  - level: BSc
+    name: Data Science and Artificial Intelligence
+    dept: DACS
+    duration: 3 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/data-science-and-artificial-intelligence
+    curriculum_url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/data-science-and-artificial-intelligence/courses-and-curriculum
+    desc: >
+      Maastricht's undergraduate data science and AI degree, formerly called
+      Data Science and Knowledge Engineering. The most common route into a
+      bachelor's project with the group.
+
+  - level: BSc
+    name: University College Maastricht
+    dept: UCM
+    duration: 3 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/university-college-maastricht
+    curriculum_url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/university-college-maastricht/courses-and-curriculum
+    route_note: >
+      Route in is the Capstone, UCM's final research project, for which
+      students choose a topic and an advisor.
+    desc: >
+      Maastricht's liberal arts and sciences bachelor's. Students build their
+      own curriculum, and those heading toward data or health topics can take
+      their Capstone with us.
+
+  - level: MSc
+    name: Artificial Intelligence
+    dept: DACS
+    duration: 2 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/master/programmes/artificial-intelligence
+    curriculum_url: https://www.maastrichtuniversity.nl/education/master/programmes/artificial-intelligence/courses-and-curriculum
+    desc: >
+      AI from foundations to applied systems, including knowledge
+      representation and machine learning.
+
+  - level: MSc
+    name: Data Science for Decision Making
+    dept: DACS
+    duration: 2 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/master/programmes/data-science-decision-making
+    curriculum_url: https://www.maastrichtuniversity.nl/education/master/programmes/data-science-decision-making/courses-and-curriculum
+    desc: >
+      Machine learning and applied mathematics for analysing and improving
+      decisions and processes.
+
+  - level: MSc
+    name: Responsible Data Science
+    dept: DACS
+    duration: 2 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/master/programmes/responsible-data-science
+    curriculum_url: https://www.maastrichtuniversity.nl/education/master/programmes/responsible-data-science/courses-and-curriculum
+    desc: >
+      Technical data science together with ethics, law and societal impact.
+      Started in September 2026, and the closest in outlook to how this group
+      works.
+
+# COMPLETED WORK.
+#
+# Sourced from Pure, but not through its API: the ResearchOutput endpoint
+# returns a trimmed record (electronicVersions, info, language, renderings,
+# subTitle, title, uuid) with no type, author or abstract, so it cannot tell
+# a doctoral thesis from a journal article or say whose it is. Asking for a
+# record by its own uuid returns an unrelated one. These were therefore read
+# off the public CRIS portal pages, which do carry the detail.
+#
+# Every field below is on the cited page. `name` is how the person is listed
+# in people.yaml rather than the full legal name on the thesis, so it
+# resolves to their profile; Gijs appears on the thesis as Gijsbert Willem
+# Adriaan Wijngaard.
+#
+# Supervisors outside the group render as plain text, which is correct.
+highlights:
+  - level: PhD
+    name: Chang Sun
+    title: Privacy-preserving personal data analysis
+    year: "2022"
+    date: 14 November 2022
+    supervisors:
+      - Michel Dumontier
+      - Johan van Soest
+    doi: 10.26481/dis.20221114cs
+    url: https://cris.maastrichtuniversity.nl/en/publications/privacy-preserving-personal-data-analysis/
+    abstract: >
+      Ever-increasing amount of data is generated by our citizens and used in
+      our daily life every single day. These massive amounts of data can be
+      used to improve digital technologies and develop data-driven innovations
+      that can impact every aspect of people’s lives. However, lack of sharing
+      of, access to and reuse of these data hinders the analysis possibilities
+      and hence potential insights from the data. A number of challenges have
+      been recognized such as technical barriers, security, data protection
+      compliance to one or more legal jurisdictions, privacy concerns, and
+      trust issues. This thesis aims to develop new privacy-preserving data
+      sharing and analysis techniques that strengthen and extend the (re-)use
+      of personal data while maximally protecting individuals’ privacy. To
+      achieve this aim, this thesis addressed the research challenges on
+      personal data sharing and use from perspectives of data organisations,
+      scientific researchers, and individuals (citizens).
+
+  - level: PhD
+    name: Gijs Wijngaard
+    title: Data and semantic reasoning in audio-language learning
+    year: "2026"
+    date: 7 September 2026
+    supervisors:
+      - Elia Formisano
+      - Michel Dumontier
+    doi: 10.26481/dis.20260907gw
+    url: https://cris.maastrichtuniversity.nl/en/publications/data-and-semantic-reasoning-in-audio-language-learning/
+    # NOT the CRIS abstract: this record has no abstract field, unlike Chang
+    # Sun's. Condensed by Claude from the thesis's own lay summary, which
+    # Michel supplied. Labelled "Summary" on the page rather than "Abstract",
+    # because it is neither the CRIS abstract nor the author's own wording.
+    # Replace with Gijs's own paragraph if he would rather write one.
+    abstract_label: Summary
+    abstract: >
+      This thesis asks how computers can learn to understand sound and
+      describe it in language, approaching what a person does on hearing a dog
+      bark: recognise it at once and say what is happening. It contributes in
+      five parts. A survey of 69 audio-language datasets maps where the
+      field's training data comes from and finds substantial overlap between
+      sets, which flatters reported performance. A curriculum approach then
+      introduces training examples in order of difficulty, filters duplicates
+      and rebalances overrepresented sound categories, improving audio
+      question answering without extra computation. AudSemThinker, trained on
+      AudSem, a new dataset built from YouTube subtitles and designed not to
+      overlap existing test sets, reasons explicitly about what is making a
+      sound, how it is produced and where it occurs before answering. ACES, a
+      new evaluation metric, judges generated descriptions by whether they
+      capture those semantic elements rather than by word overlap. Finally,
+      AudioToolAgent coordinates several specialised models, delegating speech
+      to a recogniser while consulting others for environmental sound and
+      music, reaching strong benchmark results while staying modular by
+      reusing pre-trained models.
+
+  - level: PhD
+    name: Weiwei Wang
+    title: Category data embedding
+    year: "2025"
+    date: 22 May 2025
+    supervisors:
+      - Michel Dumontier
+      - Stefano Bromuri
+    doi: 10.26481/dis.20250522ww
+    url: https://cris.maastrichtuniversity.nl/en/publications/category-data-embedding/
+    # NOT the CRIS abstract: this record has none either. Condensed by Claude
+    # from the thesis's own summary, supplied by Michel. See the note on
+    # Gijs's entry.
+    abstract_label: Summary
+    abstract: >
+      This thesis represents categorical data by turning tables into graphs,
+      developing three graph-based approaches that connect tabular data to
+      graph embedding methods and recover relationships between categories
+      that ordinary encodings lose. It opens with a survey of categorical
+      feature representation, grouping existing methods by the properties of
+      the embedding function, the data structure and the complexity of the
+      technique, with benchmark implementations released on GitHub and a
+      practical guide to applying them. The first method treats each decision
+      tree in a random forest as a graph, with nodes as splitting points, and
+      learns node embeddings with Node2Vec from random walks over them; used
+      as additional features these improve classification, and they also yield
+      segmentation rules for particular populations. The second builds
+      semantic graphs from logistic regression coefficients and domain expert
+      input and learns embeddings with TransE, showing on two public datasets
+      that encoding domain meaning between categories improves models. The
+      third derives an adjacency matrix from the co-occurrence of categorical
+      values and learns embeddings with a graph neural network using the
+      DiffPool assignment matrix, demonstrated at scale on three public
+      datasets.
+
+# WHERE PROJECT DESCRIPTIONS LIVE.
+#
+# DACS publishes bachelor's and master's project descriptions in Canvas,
+# which only enrolled students can see. The intent is to post them here too,
+# and eventually to synchronise rather than maintain two lists. Until that
+# exists, this section says where to look rather than pretending to be the
+# list -- the page it replaced invented nine projects.
+#
+# To publish projects here, add entries under `open`. Each needs a real
+# supervisor who has agreed to it. An empty list renders as the "where to
+# look" note alone, not an empty heading.
+project_listing:
+  intro: >
+    Project descriptions are published by each programme, and we are working
+    toward listing ours here as well.
+  sources:
+    - name: DACS projects
+      text: >
+        Bachelor's and master's project descriptions for the DACS programmes
+        are posted in Canvas, where enrolled students can see them.
+    - name: UCM Capstone
+      text: >
+        UCM students choose a Capstone topic and advisor through their own
+        programme's procedure, in their final semester.
+  open: []
+
+links:
+  um_vacancies: https://www.maastrichtuniversity.nl/about-um/work-at-um
+  academic_transfer: https://www.academictransfer.com/en/

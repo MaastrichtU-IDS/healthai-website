@@ -34,3 +34,6 @@ nav_links:
     href: publications.html
   - label: News
     href: news.html
+  - label: Students
+    href: students.html
+    cta: true

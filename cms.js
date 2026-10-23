@@ -9,7 +9,19 @@ window.CMS = (function () {
 
   async function load(path) {
     if (cache[path]) return cache[path];
-    const res = await fetch(path);
+    // cache: 'no-cache' revalidates with the server instead of serving a
+    // stale copy from disk. The in-memory `cache` above still means one
+    // fetch per file per page load, so this costs a conditional request
+    // that normally answers 304.
+    //
+    // It matters because these files change without the HTML changing.
+    // content/publications.generated.yaml is rewritten by the weekly
+    // refresh job, and people.yaml whenever someone joins or leaves; with
+    // the default policy a returning visitor can keep seeing the previous
+    // version long after it was replaced. Observed locally: adding a person
+    // to people.yaml left the page rendering the old 38 while the server
+    // was already serving 39.
+    const res = await fetch(path, { cache: 'no-cache' });
     if (!res.ok) throw new Error(`CMS: failed to load ${path} (${res.status})`);
     cache[path] = jsyaml.load(await res.text());
     return cache[path];

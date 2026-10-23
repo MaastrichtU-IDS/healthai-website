@@ -846,3 +846,32 @@
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/enrique-hortal-quesada/"
   work_url: "https://www.maastrichtuniversity.nl/e-hortal-quesada"
   email: enrique.hortal@maastrichtuniversity.nl
+
+- name: Weiwei Wang
+  slug: weiwei-wang
+  role: PhD Researcher
+  group: Alumni
+  # ALUMNI FLAG. Two things key off this, both deliberately:
+  #   people.html lists alumni in their own section, not among current members
+  #   the publication pipeline skips them entirely
+  # The second matters most. people.yaml drives fetch_pure_publications.py,
+  # fetch_orcid_works.py and build_publications.py, so without the flag every
+  # alumnus would add their whole career to the group's publication list, for
+  # ever, and the list would grow with every graduation. Work done here with
+  # current members is already captured through their records.
+  alumni: true
+  alumni_until: "2025"
+  image_url: ""
+  themes: []
+  bio: >
+    Completed her PhD on representing categorical data as graphs, supervised
+    by Michel Dumontier and Stefano Bromuri, in May 2025.
+  keywords: [Categorical Data, Graph Embeddings, Representation Learning]
+  orcid: ""
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  cris_url: ""
+  work_url: ""
+  personal_page: ""
+  email: ""
