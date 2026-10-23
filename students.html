@@ -183,6 +183,9 @@
       <div><h4>${txt(p.title)}</h4><p>${txt(p.text)}</p></div>
     </div>`).join('');
 
+  // Theme cards link to their section on research.html, which renders each
+  // theme as id="theme-<id>" and scrolls to location.hash on load.
+  //
   // research.yaml records theme leads as plain names. Resolve each against
   // people.yaml so a lead is a link, and leave it as text if the name does
   // not match anyone -- better a plain name than a link to "not found".
@@ -197,7 +200,9 @@
   document.getElementById('themeGrid').innerHTML = (research.themes || []).map((t, i) => `
     <div class="theme-card reveal" data-delay="${i * 55}">
       <div class="theme-icon">${esc(t.icon)}</div>
-      <h4>${txt(t.title)}</h4>
+      <h4>${t.id
+        ? `<a href="research.html#theme-${encodeURIComponent(t.id)}">${txt(t.title)}</a>`
+        : txt(t.title)}</h4>
       <p>${txt(t.desc)}</p>
       <div class="theme-leads">Led by ${(t.leads || []).map(linkName).join(', ')}</div>
     </div>`).join('');
