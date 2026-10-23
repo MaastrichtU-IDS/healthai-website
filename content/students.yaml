@@ -353,6 +353,74 @@ highlights:
       DiffPool assignment matrix, demonstrated at scale on three public
       datasets.
 
+  # MASTER'S THESES. Not from Pure: Pure records no master's theses at all
+  # (6 theses across 459 records in the group's feeds, all doctoral). These
+  # come from Michel's own records of completed supervisions, with titles,
+  # programmes, dates and committees read off the title page of each thesis.
+  #
+  # Student numbers appear on those title pages and are deliberately NOT
+  # recorded here. Names are, because MSc theses and defences are public.
+  #
+  # No abstracts yet. They are in the theses and can be added; they were left
+  # out rather than published truncated.
+  - level: MSc
+    name: Timo Anthonijsz
+    title: >
+      Synthetic Data and Hybrid Embeddings for Entity Deduplication in
+      Healthcare Organizational Knowledge Graphs
+    year: "2025"
+    date: 28 August 2025
+    programme: MSc Artificial Intelligence
+    committee:
+      - Remzi Celebi
+      - Michel Dumontier
+
+  - level: MSc
+    name: Sara Falahatkar
+    title: >
+      Benchmarking the Reasoning Capabilities of Large Language Models: a
+      comprehensive framework for ontology-based evaluation
+    year: "2025"
+    date: 24 August 2025
+    programme: MSc Artificial Intelligence
+    supervisors:
+      - Remzi Celebi
+      - Michel Dumontier
+
+  - level: MSc
+    name: Ignacio Cadarso Quevedo
+    title: Generating EHR data with unseen diseases using GANs and LLMs
+    year: "2025"
+    date: August 2025
+    programme: MSc Data Science for Decision Making
+    committee:
+      - Chang Sun
+      - Michele Esposito
+      - Michel Dumontier
+
+  - level: MSc
+    name: Xingru Xu
+    title: >
+      Incorporating Clinical Practice Guidelines into Large Language Models
+      for Leukaemia Treatment Recommendation
+    year: "2025"
+    date: July 2025
+    programme: MSc Data Science for Decision Making
+    committee:
+      - Chang Sun
+      - Michel Dumontier
+
+  - level: MSc
+    name: Kaspar Kallast
+    title: Medical Models on Synthetically Generated Subgroup Data Samples
+    year: "2025"
+    date: January 2025
+    programme: MSc Artificial Intelligence
+    committee:
+      - Michel Dumontier
+      - Mahmoud Ibrahim
+      - Chang Sun
+
 # WHERE PROJECT DESCRIPTIONS LIVE.
 #
 # DACS publishes bachelor's and master's project descriptions in Canvas,
