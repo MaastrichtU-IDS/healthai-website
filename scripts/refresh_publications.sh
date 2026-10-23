@@ -97,9 +97,17 @@ case "$PUSH_MODE" in
     if [ "$PUSH_MODE" = push ]; then
       git push -q origin HEAD:main && echo "pushed to main"
     else
+      # `gh` is NOT in the container image (bash, git, openssh-client,
+      # netcat-openbsd, ca-certificates). `gh pr create || true` therefore
+      # swallowed a 127 and the job exited 0 having pushed a branch and opened
+      # nothing. If this mode is ever used in the cluster, the image needs gh
+      # and a token; say so rather than pretending to have opened a PR.
+      command -v gh >/dev/null || { echo "PUSH_MODE=pr needs gh, which is not installed." >&2; exit 1; }
       b="publications-refresh-$(date +%Y%m%d)"
-      git push -q origin "HEAD:$b"
+      # force-with-lease: a same-day rerun would otherwise be rejected as a
+      # non-fast-forward. The branch is this job's alone, so replacing it is right.
+      git push -q --force-with-lease origin "HEAD:$b"
       gh pr create --head "$b" --title "Refresh publications ($before -> $after)" \
-         --body "Automated refresh. $before -> $after publications." || true
+         --body "Automated refresh. $before -> $after publications."
     fi ;;
 esac
