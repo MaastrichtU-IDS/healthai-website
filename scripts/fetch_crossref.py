@@ -88,7 +88,7 @@ def main() -> int:
         print(f"{len(all_dois) - before} further DOIs from the Pure cache "
               f"({len(all_dois)} total).")
 
-    fetched = skipped = failed = 0
+    fetched = skipped = failed = missing = 0
     for doi in sorted(all_dois):
         out = CROSSREF_CACHE / f"{safe_filename(doi)}.json"
         if out.exists() and not args.refresh:
@@ -100,13 +100,28 @@ def main() -> int:
             fetched += 1
             time.sleep(SLEEP)
         except urllib.error.HTTPError as e:
-            failed += 1
-            print(f"  ! {doi}: HTTP {e.code}")
+            # A 404 means Crossref does not have this DOI, which is permanent
+            # and expected: arXiv and Zenodo DOIs are registered with DataCite,
+            # and some legacy DOIs are simply malformed. Counting those as
+            # failures made this script exit non-zero on every run, and under
+            # `set -e` in refresh_publications.sh that aborted the whole
+            # pipeline before the build. Seen in the cluster on 2026-10-23:
+            # "646 fetched, 0 cached, 28 failed", exit 1, nothing published.
+            if e.code == 404:
+                missing += 1
+                print(f"  - {doi}: not in Crossref (HTTP 404)")
+            else:
+                failed += 1
+                print(f"  ! {doi}: HTTP {e.code}")
         except Exception as e:  # noqa: BLE001
+            # Anything that is not an HTTP status -- DNS, TLS, timeouts, a
+            # missing proxy -- is a real problem and must stop the pipeline
+            # rather than quietly yield a thinner publication list.
             failed += 1
             print(f"  ! {doi}: {e}")
 
-    print(f"\n{fetched} fetched, {skipped} cached, {failed} failed")
+    print(f"\n{fetched} fetched, {skipped} cached, "
+          f"{missing} not in Crossref, {failed} failed")
     return 0 if failed == 0 else 1
 
 
