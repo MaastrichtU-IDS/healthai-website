@@ -63,9 +63,13 @@
     .track-more { font-size:0.8rem; font-weight:600; color:var(--blue); }
 
     .track-sub { font-size:0.95rem; margin-bottom:10px; }
-    .thesis-row { padding:16px 0; border-bottom:1px solid var(--border); }
-    .thesis-title { font-family:'Fraunces',serif; font-size:0.95rem; font-weight:700; color:var(--slate); margin-bottom:4px; }
-    .thesis-meta { font-size:0.8rem; color:var(--text-muted); }
+    .thesis-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--card-shadow); transition:all var(--transition); margin-bottom:18px; }
+    .thesis-card:hover { box-shadow:var(--card-shadow-hover); transform:translateY(-2px); }
+    .thesis-title { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; color:var(--slate); margin-bottom:6px; }
+    .thesis-meta { font-size:0.8rem; color:var(--text-muted); margin-bottom:12px; }
+    .thesis-abstract { font-size:0.86rem; margin-bottom:12px; }
+    .thesis-doi { font-size:0.74rem; color:var(--text-muted); font-family:monospace; }
+    .thesis-noabstract { font-size:0.82rem; color:var(--text-muted); font-style:italic; margin-bottom:12px; }
     .route-note { font-size:0.78rem; color:var(--text-muted); margin-top:10px; padding-left:10px; border-left:2px solid var(--border); }
   </style>
 </head>
@@ -235,7 +239,7 @@
           <h3 class="track-sub">Completed theses</h3>
           <div style="margin-bottom:28px">
             ${hl.map(h => `
-              <div class="thesis-row">
+              <div class="thesis-card">
                 <div class="thesis-title">
                   ${/* Prefer the DOI: it is the persistent identifier, and it
                        resolves to the same CRIS page the portal URL points at,
@@ -246,9 +250,12 @@
                 </div>
                 <div class="thesis-meta">
                   ${linkName(h.name)}${h.date ? ` · ${txt(h.date)}` : ''}
-                  ${(h.supervisors || []).length ? ` · Supervised by ${h.supervisors.map(linkName).join(', ')}` : ''}
-                  ${h.doi ? ` · ${esc(h.doi)}` : ''}
+                  ${(h.supervisors || []).length ? `<br>Supervised by ${h.supervisors.map(linkName).join(', ')}` : ''}
                 </div>
+                ${(h.abstract || '').trim()
+                  ? `<div class="thesis-abstract">${txt(h.abstract)}</div>`
+                  : `<div class="thesis-noabstract">No abstract recorded in CRIS for this thesis.</div>`}
+                ${h.doi ? `<div class="thesis-doi">${esc(h.doi)}</div>` : ''}
               </div>`).join('')}
           </div>` : '';
 
