@@ -97,7 +97,7 @@ projects:
     desc: >
       REALM builds a collaborative regulatory ecosystem for evaluating and certifying medical device software (including AI) 
       using real-world and synthetic data.
-    team: [Visara Urovi, Chang Sun, Michel Dumontier]
+    team: [Visara Urovi, Chang Sun, Michel Dumontier, Ensar Erol, Anas Elghafari]
     funder: European Commission (Horizon Europe)
     amount: "€7M"
     period: "2023–2026"
@@ -112,7 +112,7 @@ projects:
     desc: >
       The CHARM project is an Advanced Research Projects Agency for Health–funded initiative developing a complete, 
       AI-enabled biomedical data pipeline that spans data collection through to clinical decision support.
-    team: [Chang Sun, Michel Dumontier]
+    team: [Chang Sun, Michel Dumontier, Anas Elghafari]
     funder: ARPA-H
     amount: "€8.7M"
     period: "2024–2027"
