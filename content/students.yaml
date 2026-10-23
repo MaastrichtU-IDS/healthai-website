@@ -444,10 +444,11 @@ highlights:
   # "Dumontier, Michel", "Dr. Chang Sun" and once "Rermzi Celebi". They are
   # normalised here so they resolve against people.yaml.
   #
-  # Five have none: Charlotte Donnelly and Alina Gavrish have no such email,
-  # and for Simonas Bubnys, Ilian Ariesen and Loris Podevyn the email's
-  # supervision section was not reached. Those entries say nothing rather
-  # than guess from the initials in filenames (_CS, _RC, _md).
+  # Five had no usable email record: Charlotte Donnelly and Alina Gavrish
+  # have none at all, and for Simonas Bubnys, Ilian Ariesen and Loris
+  # Podevyn the supervision section was not reached. Michel confirmed on
+  # 2026-10-23 that he supervised all five himself, so they are recorded on
+  # his word rather than from a document.
   #
   # Do not mine these emails further without care: they carry student ID
   # numbers and addresses, and at least one has a full grade transcript
@@ -554,6 +555,8 @@ highlights:
     year: "2025"
     date: 4 June 2025
     programme: University College Maastricht (Capstone)
+    supervisors:
+      - Michel Dumontier
 
   - level: BSc
     name: Simonas Bubnys
@@ -563,6 +566,8 @@ highlights:
     year: "2024"
     date: 20 June 2024
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
 
   - level: BSc
     name: Alina Gavrish
@@ -572,6 +577,8 @@ highlights:
     year: "2024"
     date: 20 June 2024
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
 
   - level: BSc
     name: Simon Garland
@@ -593,6 +600,8 @@ highlights:
     year: "2024"
     date: 26 January 2024
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
 
   - level: BSc
     name: Loris Podevyn
@@ -600,6 +609,8 @@ highlights:
     year: "2024"
     date: 10 January 2024
     programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
 
 # WHERE PROJECT DESCRIPTIONS LIVE.
 #
