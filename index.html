@@ -295,8 +295,12 @@
         </div>
       </a>`).join('');
 
-    /* Projects (featured) */
-    const featured = research.projects.filter(p => p.featured);
+    /* Projects (featured) — the heading above this says "Active projects",
+       so status has to be part of the filter. Without it a project that
+       finishes keeps appearing there until someone remembers to unset
+       `featured`, which is how AIDAVA would have stayed listed as active
+       after it closed on 31 August 2026. */
+    const featured = research.projects.filter(p => p.featured && p.status === 'Active');
     document.getElementById('projectsGrid').innerHTML = featured.map((p,i) => `
       <div class="proj-card reveal" data-delay="${i*70}">
         <div class="proj-card-head">
