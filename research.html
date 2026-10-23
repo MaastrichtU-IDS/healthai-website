@@ -92,8 +92,14 @@
   /* Theme sections */
   document.getElementById('themesContainer').innerHTML = data.themes.map((t, i) => {
     /* Projects for this theme */
+    // Case-insensitive on purpose. A theme referencing "iCare4CVD" while the
+    // project's acronym was "iCARE4CVD" matched nothing, so that project
+    // never appeared under its own theme and nothing anywhere reported it.
+    // The data is fixed, but an exact match lets the next typo fail the same
+    // invisible way.
+    const refs = new Set((t.projects || []).map(x => String(x).toLowerCase()));
     const themeProjs = data.projects
-      .filter(p => (t.projects || []).includes(p.acronym))
+      .filter(p => refs.has(String(p.acronym).toLowerCase()))
       .sort((a, b) => (b.status === 'Active') - (a.status === 'Active'));
 
     /* Publications: featured DOIs first, then recent pubs from leads' ORCIDs */
