@@ -83,7 +83,7 @@
         <div class="footer-bottom">
           <span>© 2026 Health AI Research Group · Maastricht University</span>
           <span style="display:flex;gap:18px">
-            <a href="#">Privacy</a><a href="#">Accessibility</a><a href="#">Sitemap</a>
+            <a href="privacy.html">Privacy</a><a href="#">Accessibility</a><a href="#">Sitemap</a>
           </span>
         </div>
       </div>
