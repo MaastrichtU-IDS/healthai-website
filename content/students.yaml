@@ -210,6 +210,25 @@ programmes:
       own curriculum, and those heading toward data or health topics can take
       their Capstone with us.
 
+  - level: BSc
+    name: Maastricht Science Programme
+    dept: FSE
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/maastricht-science-programme
+    curriculum_url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/maastricht-science-programme/courses-and-curriculum
+    # No `duration`: UM's own programme page states degree, language, format,
+    # start date and location, but not the number of years. Rather than
+    # assume three because its sister programme UCM is three, the field is
+    # left out and the card omits it.
+    route_note: >
+      Students assemble their own curriculum, and can take their research
+      project or thesis with us.
+    desc: >
+      Maastricht's liberal arts and sciences bachelor's in the sciences, run
+      by the Faculty of Science and Engineering. Students build their own
+      curriculum from a broad course list and work through problem-based
+      learning.
+
   - level: MSc
     name: Artificial Intelligence
     dept: DACS

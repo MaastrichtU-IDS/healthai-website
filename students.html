@@ -166,7 +166,11 @@
             <p>${txt(p.desc)}</p>
             <div class="prog-meta">
               <span>🏛 ${txt(p.dept)}</span>
-              <span>📅 ${txt(p.duration)} · ${txt(p.language)}</span>
+              ${/* Separate lines, each optional. UM publishes no duration for
+                   the Maastricht Science Programme, and pairing them meant a
+                   calendar icon sitting in front of the word "English". */''}
+              ${p.duration ? `<span>📅 ${txt(p.duration)}</span>` : ''}
+              ${p.language ? `<span>🗣 ${txt(p.language)}</span>` : ''}
             </div>
             ${p.route_note ? `<div class="route-note">${txt(p.route_note)}</div>` : ''}
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
