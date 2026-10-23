@@ -225,7 +225,11 @@
                     : txt(h.title)}
                 </div>
                 <div class="thesis-meta">
-                  ${linkName(h.name)}${h.date ? ` · ${txt(h.date)}` : ''}
+                  ${/* Year only. `date` is kept in the YAML because it orders
+                       entries within a year, but it is deliberately not shown:
+                       a defence month adds nothing to a reader and invites a
+                       precision the bachelor's dates do not actually have. */''}
+                  ${linkName(h.name)}${h.year ? ` · ${txt(h.year)}` : ''}
                   ${h.programme ? `<br>${txt(h.programme)}` : ''}
                   ${/* Doctoral records say "Supervisor"; a master's title page
                        names a thesis committee, which includes examiners as
