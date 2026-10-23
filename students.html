@@ -63,6 +63,9 @@
     .track-more { font-size:0.8rem; font-weight:600; color:var(--blue); }
 
     .track-sub { font-size:0.95rem; margin-bottom:10px; }
+    .thesis-row { padding:16px 0; border-bottom:1px solid var(--border); }
+    .thesis-title { font-family:'Fraunces',serif; font-size:0.95rem; font-weight:700; color:var(--slate); margin-bottom:4px; }
+    .thesis-meta { font-size:0.8rem; color:var(--text-muted); }
     .route-note { font-size:0.78rem; color:var(--text-muted); margin-top:10px; padding-left:10px; border-left:2px solid var(--border); }
   </style>
 </head>
@@ -223,6 +226,32 @@
              </div>`}
     ` : '';
 
+    /* Completed work at this level. Rendered only when there is some, so a
+       level with nothing yet shows no empty heading. The student's name and
+       any supervisor who is in people.yaml link to their profile; supervisors
+       outside the group stay as plain text. */
+    const hl = (data.highlights || []).filter(h => h.level === t.level);
+    const hlHtml = hl.length ? `
+          <h3 class="track-sub">Completed theses</h3>
+          <div style="margin-bottom:28px">
+            ${hl.map(h => `
+              <div class="thesis-row">
+                <div class="thesis-title">
+                  ${/* Prefer the DOI: it is the persistent identifier, and it
+                       resolves to the same CRIS page the portal URL points at,
+                       so linking both would be two links to one destination. */''}
+                  ${(h.doi || h.url)
+                    ? `<a href="${esc(h.doi ? 'https://doi.org/' + h.doi : h.url)}" target="_blank" rel="noopener">${txt(h.title)}</a>`
+                    : txt(h.title)}
+                </div>
+                <div class="thesis-meta">
+                  ${linkName(h.name)}${h.date ? ` · ${txt(h.date)}` : ''}
+                  ${(h.supervisors || []).length ? ` · Supervised by ${h.supervisors.map(linkName).join(', ')}` : ''}
+                  ${h.doi ? ` · ${esc(h.doi)}` : ''}
+                </div>
+              </div>`).join('')}
+          </div>` : '';
+
     const isPhd = t.id === 'phd';
     const phdExtra = isPhd ? `
       <h3 class="track-sub">What we look for</h3>
@@ -249,6 +278,8 @@
           <div style="margin-bottom:28px">
             ${(t.work || []).map(w => `<div class="req-item">${esc(w)}</div>`).join('')}
           </div>
+
+          ${hlHtml}
 
           <h3 class="track-sub">How to get onto it</h3>
           <p style="font-size:0.88rem;margin-bottom:20px">${txt(t.route_intro)}</p>

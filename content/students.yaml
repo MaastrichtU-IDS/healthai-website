@@ -238,6 +238,44 @@ programmes:
       Started in September 2026, and the closest in outlook to how this group
       works.
 
+# COMPLETED WORK.
+#
+# Sourced from Pure, but not through its API: the ResearchOutput endpoint
+# returns a trimmed record (electronicVersions, info, language, renderings,
+# subTitle, title, uuid) with no type, author or abstract, so it cannot tell
+# a doctoral thesis from a journal article or say whose it is. Asking for a
+# record by its own uuid returns an unrelated one. These were therefore read
+# off the public CRIS portal pages, which do carry the detail.
+#
+# Every field below is on the cited page. `name` is how the person is listed
+# in people.yaml rather than the full legal name on the thesis, so it
+# resolves to their profile; Gijs appears on the thesis as Gijsbert Willem
+# Adriaan Wijngaard.
+#
+# Supervisors outside the group render as plain text, which is correct.
+highlights:
+  - level: PhD
+    name: Chang Sun
+    title: Privacy-preserving personal data analysis
+    year: "2022"
+    date: 14 November 2022
+    supervisors:
+      - Michel Dumontier
+      - Johan van Soest
+    doi: 10.26481/dis.20221114cs
+    url: https://cris.maastrichtuniversity.nl/en/publications/privacy-preserving-personal-data-analysis/
+
+  - level: PhD
+    name: Gijs Wijngaard
+    title: Data and semantic reasoning in audio-language learning
+    year: "2026"
+    date: 7 September 2026
+    supervisors:
+      - Elia Formisano
+      - Michel Dumontier
+    doi: 10.26481/dis.20260907gw
+    url: https://cris.maastrichtuniversity.nl/en/publications/data-and-semantic-reasoning-in-audio-language-learning/
+
 # WHERE PROJECT DESCRIPTIONS LIVE.
 #
 # DACS publishes bachelor's and master's project descriptions in Canvas,
