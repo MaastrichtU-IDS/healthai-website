@@ -240,7 +240,13 @@
        level with nothing yet shows no empty heading. The student's name and
        any supervisor who is in people.yaml link to their profile; supervisors
        outside the group stay as plain text. */
-    const hl = (data.highlights || []).filter(h => h.level === t.level);
+    // Newest first, so adding an entry does not mean reordering the file.
+    // Sorts on `date` where present, falling back to `year`.
+    const when = h => Date.parse(h.date || '') || Number(h.year) || 0;
+    const hl = (data.highlights || [])
+      .filter(h => h.level === t.level)
+      .slice()
+      .sort((a, b) => when(b) - when(a));
     const hlHtml = hl.length ? `
           <h3 class="track-sub">Completed theses</h3>
           <div style="margin-bottom:28px">

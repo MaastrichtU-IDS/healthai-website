@@ -316,6 +316,41 @@ highlights:
       music, reaching strong benchmark results while staying modular by
       reusing pre-trained models.
 
+  - level: PhD
+    name: Weiwei Wang
+    title: Category data embedding
+    year: "2025"
+    date: 22 May 2025
+    supervisors:
+      - Michel Dumontier
+      - Stefano Bromuri
+    doi: 10.26481/dis.20250522ww
+    url: https://cris.maastrichtuniversity.nl/en/publications/category-data-embedding/
+    # NOT the CRIS abstract: this record has none either. Condensed by Claude
+    # from the thesis's own summary, supplied by Michel. See the note on
+    # Gijs's entry.
+    abstract_label: Summary
+    abstract: >
+      This thesis represents categorical data by turning tables into graphs,
+      developing three graph-based approaches that connect tabular data to
+      graph embedding methods and recover relationships between categories
+      that ordinary encodings lose. It opens with a survey of categorical
+      feature representation, grouping existing methods by the properties of
+      the embedding function, the data structure and the complexity of the
+      technique, with benchmark implementations released on GitHub and a
+      practical guide to applying them. The first method treats each decision
+      tree in a random forest as a graph, with nodes as splitting points, and
+      learns node embeddings with Node2Vec from random walks over them; used
+      as additional features these improve classification, and they also yield
+      segmentation rules for particular populations. The second builds
+      semantic graphs from logistic regression coefficients and domain expert
+      input and learns embeddings with TransE, showing on two public datasets
+      that encoding domain meaning between categories improves models. The
+      third derives an adjacency matrix from the co-occurrence of categorical
+      values and learns embeddings with a graph neural network using the
+      DiffPool assignment matrix, demonstrated at scale on three public
+      datasets.
+
 # WHERE PROJECT DESCRIPTIONS LIVE.
 #
 # DACS publishes bachelor's and master's project descriptions in Canvas,
