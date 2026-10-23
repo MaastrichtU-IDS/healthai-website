@@ -17,6 +17,39 @@ PUSH_MODE="${PUSH_MODE:-none}"       # none | pr | push
 MIN_RATIO="${MIN_RATIO:-0.90}"       # refuse to publish a sharp shrink
 OUT=content/publications.generated.yaml
 
+# WORK INSIDE A FRESH CLONE when we have somewhere to push to.
+#
+# The container image deliberately carries no .git -- .dockerignore excludes
+# it -- so `git diff` in the image's /work printed its usage text and the job
+# failed after a completely successful build ("publications: 636 -> 639",
+# then exit 1). There was no repository to diff against, let alone push from.
+#
+# Cloning also fixes a subtler bug. The shrink guard compares against the
+# previous count, and reading that from the image means comparing against
+# whatever was baked in at build time. Weeks later that baseline is stale, and
+# a run could shrink the live file while comfortably passing the check. The
+# only baseline worth having is current main.
+#
+# Scripts still come from the image, not the clone, so what runs is the pinned
+# sha and stays legible from the services manifest.
+WORKDIR="$PWD"
+if [ "$PUSH_MODE" != "none" ]; then
+  REPO="${REPO:-git@github.com:MaastrichtU-IDS/healthai-website.git}"
+  CLONE="${CLONE:-/tmp/healthai-website}"
+  rm -rf "$CLONE"
+  echo "== 0/4 clone $REPO =="
+  # Not --depth 1: pushing from a shallow clone can be refused with
+  # "shallow update not allowed", and this repo is small.
+  git clone --quiet "$REPO" "$CLONE"
+  # Keep the caches on the PVC; only content and git metadata come from the clone.
+  rm -rf "$CLONE/cache"
+  ln -s "$WORKDIR/cache" "$CLONE/cache"
+  # rm first: cp -r into an existing directory nests it ($CLONE/scripts/scripts).
+  rm -rf "$CLONE/scripts"
+  cp -r "$WORKDIR/scripts" "$CLONE/scripts"
+  cd "$CLONE"
+fi
+
 before=$($PY -c "import yaml;d=yaml.safe_load(open('$OUT'));print(len(d['publications'] if isinstance(d,dict) else d))" 2>/dev/null || echo 0)
 
 echo "== 1/4 Pure/CRIS, per person =="
@@ -42,6 +75,13 @@ if [ "$before" -gt 0 ]; then
     echo "ABORT: $after is below $MIN_RATIO of $before. Not publishing." >&2
     exit 1
   fi
+fi
+
+# Without a clone there is no repository to diff against, and `git diff` then
+# prints its --no-index usage and exits non-zero rather than saying so.
+if [ ! -d .git ]; then
+  echo "not a git checkout; nothing to commit (PUSH_MODE=$PUSH_MODE)"
+  exit 0
 fi
 
 if git diff --quiet "$OUT"; then echo "no change"; exit 0; fi
