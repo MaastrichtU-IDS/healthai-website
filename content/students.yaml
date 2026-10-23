@@ -1,0 +1,187 @@
+# Students page.
+#
+# EVERY CLAIM ON THIS PAGE MUST BE CHECKABLE. The previous version of this
+# file was removed because it was not: it named six students who do not
+# appear to exist, credited each with a specific result, and attributed them
+# to real supervisors. See PR #15.
+#
+# Two rules for anything added here:
+#   1. No named person without their knowledge, and no claim about a person
+#      that they have not confirmed.
+#   2. No number that nobody is going to maintain. Salary scales, country
+#      counts and cohort sizes go stale silently and are better linked than
+#      copied.
+#
+# Research themes and supervisors are NOT listed here. The page reads them
+# from research.yaml and people.yaml at render time, so they cannot drift out
+# of step with the rest of the site.
+
+intro: >
+  We supervise bachelor's and master's theses, research internships and PhD
+  projects in health AI. Projects are drawn from the group's own research,
+  so the work is part of something ongoing rather than an exercise set aside
+  for a student.
+
+working_with_us:
+  - icon: "🔍"
+    title: Start from a question, not a method
+    text: >
+      Projects begin with a scientific or clinical question. Which methods
+      suit it is something you work out together with your supervisor, rather
+      than something fixed before you start.
+
+  - icon: "👥"
+    title: A named supervisor
+    text: >
+      Every project has a named academic supervisor from the group. Day-to-day
+      you will often also work with a PhD researcher or postdoc close to the
+      topic.
+
+  - icon: "🔗"
+    title: Real data, and its constraints
+    text: >
+      Much of our work uses health data, which brings governance, privacy and
+      access conditions with it. Part of the project is learning to work
+      inside those constraints rather than around them.
+
+  - icon: "📤"
+    title: Work that goes somewhere
+    text: >
+      Student work that stands up feeds into the group's publications,
+      software and datasets. Where that happens, contributions are credited.
+
+# How to approach the group. This is the part that replaces the invented list
+# of nine open projects: it is true on day one and needs no maintenance.
+approach:
+  - number: "1"
+    title: Find a theme that fits
+    text: >
+      Look through the research themes below and the group's recent
+      publications. You are looking for an area you want to spend months in,
+      not a precise title.
+
+  - number: "2"
+    title: Email a supervisor directly
+    text: >
+      Write to the staff member whose theme fits. There is no central intake
+      for thesis projects; supervision is arranged person to person.
+
+  - number: "3"
+    title: Say something specific
+    text: >
+      Include your programme and stage, what in their work interests you and
+      why, and roughly when you need to start and finish. A short paragraph
+      that shows you have read something of theirs is worth more than a CV
+      alone.
+
+  - number: "4"
+    title: Shape the project together
+    text: >
+      Supervisors rarely hand over a finished brief. The first conversations
+      are about turning an interest into a question that can actually be
+      answered in the time available.
+
+programmes_intro: >
+  Most students who do a project with us come from one of the following
+  Maastricht programmes. None of them is a requirement: we also supervise
+  students from elsewhere in UM and, for internships, from other universities.
+
+programmes:
+  - level: BSc
+    name: Data Science and Artificial Intelligence
+    dept: DACS
+    duration: 3 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/data-science-and-artificial-intelligence
+    curriculum_url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/data-science-and-artificial-intelligence/courses-and-curriculum
+    desc: >
+      Maastricht's undergraduate data science and AI degree, formerly called
+      Data Science and Knowledge Engineering. The most common route into a
+      BSc project with the group.
+
+  - level: MSc
+    name: Artificial Intelligence
+    dept: DACS
+    duration: 2 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/master/programmes/artificial-intelligence
+    curriculum_url: https://www.maastrichtuniversity.nl/education/master/programmes/artificial-intelligence/courses-and-curriculum
+    desc: >
+      Covers AI from foundations to applied systems, including knowledge
+      representation and machine learning.
+
+  - level: MSc
+    name: Data Science for Decision Making
+    dept: DACS
+    duration: 2 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/master/programmes/data-science-decision-making
+    curriculum_url: https://www.maastrichtuniversity.nl/education/master/programmes/data-science-decision-making/courses-and-curriculum
+    desc: >
+      Machine learning and applied mathematics for analysing and improving
+      decisions and processes.
+
+  - level: MSc
+    name: Responsible Data Science
+    dept: DACS
+    duration: 2 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/master/programmes/responsible-data-science
+    curriculum_url: https://www.maastrichtuniversity.nl/education/master/programmes/responsible-data-science/courses-and-curriculum
+    desc: >
+      Technical data science together with ethics, law and societal impact.
+      Started in September 2026, and the closest in outlook to how this group
+      works.
+
+phd_intro: >
+  PhD candidates in the Netherlands are employed, not funded by a stipend. A
+  position therefore has to exist and be advertised before it can be applied
+  for, and that is the main thing worth understanding about the route.
+
+phd_steps:
+  - number: "1"
+    title: Wait for an advertised position
+    text: >
+      Positions appear when a project is funded. They are posted on UM's own
+      vacancies site and on AcademicTransfer, each with a project description
+      and requirements.
+
+  - number: "2"
+    title: Or bring your own funding
+    text: >
+      If you hold or are applying for a personal fellowship or a national
+      scholarship, approach a prospective supervisor directly and early. This
+      route takes longer and needs a concrete research idea.
+
+  - number: "3"
+    title: Apply to the advertised position
+    text: >
+      Applications normally ask for a CV, a motivation letter, transcripts and
+      referees. Write to the specific project rather than sending a general
+      application.
+
+  - number: "4"
+    title: Interview and offer
+    text: >
+      Shortlisted candidates are interviewed by the supervisor and at least
+      one other panel member. A successful candidate receives an employment
+      contract.
+
+phd_requirements:
+  - A master's degree in computer science, data science, bioinformatics or a closely related field
+  - Programming ability sufficient to carry your own research code
+  - Interest in health and the life sciences; a medical background is not required
+  - Some evidence of research ability, such as a thesis, a publication or a substantial open-source contribution
+  - Working English; Dutch is not required
+
+# No euro figures here on purpose. The previous version quoted a range that
+# was already out of date, and these change yearly under the CAO.
+phd_employment: >
+  PhD candidates are employed on scale P of the collective labour agreement
+  for Dutch universities (CAO NU), with holiday allowance, an end-of-year
+  payment and the associated social security. Current figures are stated in
+  each advertised vacancy.
+
+links:
+  um_vacancies: https://www.maastrichtuniversity.nl/about-um/work-at-um
+  academic_transfer: https://www.academictransfer.com/en/

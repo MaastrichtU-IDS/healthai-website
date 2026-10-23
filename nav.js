@@ -14,6 +14,7 @@
     { href: 'people.html',       label: 'People'       },
     { href: 'publications.html', label: 'Publications' },
     { href: 'news.html',         label: 'News'         },
+    { href: 'students.html',     label: 'Students', cta: true },
   ];
 
   function buildNav() {
