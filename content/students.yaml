@@ -22,6 +22,10 @@
 # flagged that the group takes students from more programmes than these, and
 # that an inventory is needed. See issue #17.
 #
+# `date` on a thesis entry is for ORDERING ONLY and is never displayed; the
+# cards show the year. Keep it accurate anyway, or entries within a year
+# will sort arbitrarily.
+#
 # Research themes and supervisors are NOT listed here. The page reads them from
 # research.yaml and people.yaml at render time, so they cannot drift.
 
@@ -206,6 +210,25 @@ programmes:
       own curriculum, and those heading toward data or health topics can take
       their Capstone with us.
 
+  - level: BSc
+    name: Maastricht Science Programme
+    dept: FSE
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/maastricht-science-programme
+    curriculum_url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/maastricht-science-programme/courses-and-curriculum
+    # No `duration`: UM's own programme page states degree, language, format,
+    # start date and location, but not the number of years. Rather than
+    # assume three because its sister programme UCM is three, the field is
+    # left out and the card omits it.
+    route_note: >
+      Students assemble their own curriculum, and can take their research
+      project or thesis with us.
+    desc: >
+      Maastricht's liberal arts and sciences bachelor's in the sciences, run
+      by the Faculty of Science and Engineering. Students build their own
+      curriculum from a broad course list and work through problem-based
+      learning.
+
   - level: MSc
     name: Artificial Intelligence
     dept: DACS
@@ -352,6 +375,261 @@ highlights:
       values and learns embeddings with a graph neural network using the
       DiffPool assignment matrix, demonstrated at scale on three public
       datasets.
+
+  # MASTER'S THESES. Not from Pure: Pure records no master's theses at all
+  # (6 theses across 459 records in the group's feeds, all doctoral). These
+  # come from Michel's own records of completed supervisions, with titles,
+  # programmes, dates and committees read off the title page of each thesis.
+  #
+  # Student numbers appear on those title pages and are deliberately NOT
+  # recorded here. Names are, because MSc theses and defences are public.
+  #
+  # No abstracts yet. They are in the theses and can be added; they were left
+  # out rather than published truncated.
+  - level: MSc
+    name: Timo Anthonijsz
+    title: >
+      Synthetic Data and Hybrid Embeddings for Entity Deduplication in
+      Healthcare Organizational Knowledge Graphs
+    year: "2025"
+    date: 28 August 2025
+    programme: MSc Artificial Intelligence
+    committee:
+      - Remzi Celebi
+      - Michel Dumontier
+
+  - level: MSc
+    name: Sara Falahatkar
+    title: >
+      Benchmarking the Reasoning Capabilities of Large Language Models: a
+      comprehensive framework for ontology-based evaluation
+    year: "2025"
+    date: 24 August 2025
+    programme: MSc Artificial Intelligence
+    supervisors:
+      - Remzi Celebi
+      - Michel Dumontier
+
+  - level: MSc
+    name: Ignacio Cadarso Quevedo
+    title: Generating EHR data with unseen diseases using GANs and LLMs
+    year: "2025"
+    date: August 2025
+    programme: MSc Data Science for Decision Making
+    committee:
+      - Chang Sun
+      - Michele Esposito
+      - Michel Dumontier
+
+  - level: MSc
+    name: Xingru Xu
+    title: >
+      Incorporating Clinical Practice Guidelines into Large Language Models
+      for Leukaemia Treatment Recommendation
+    year: "2025"
+    date: July 2025
+    programme: MSc Data Science for Decision Making
+    committee:
+      - Chang Sun
+      - Michel Dumontier
+
+  - level: MSc
+    name: Kaspar Kallast
+    title: Medical Models on Synthetically Generated Subgroup Data Samples
+    year: "2025"
+    date: January 2025
+    programme: MSc Artificial Intelligence
+    committee:
+      - Michel Dumontier
+      - Mahmoud Ibrahim
+      - Chang Sun
+
+  # BACHELOR'S THESES. Same source and same rules as the master's entries:
+  # titles read off each thesis title page, student numbers left out.
+  #
+  # YEARS ARE INFERRED from the file date in Michel's records, except
+  # Charlotte Donnelly's, whose Capstone states 4 June 2025 on the document.
+  # A DACS bachelor thesis title page carries no date. The file date is when
+  # the finished thesis was filed, which is within days of the defence, but
+  # these are inferences and worth a check.
+  #
+  # SUPERVISORS come from the Board of Examiners thesis-plan emails kept
+  # with each thesis (the *.eml.PDF files), which carry a "Supervision
+  # details" section naming the DACS supervisors. A DACS bachelor thesis is
+  # formatted as a paper and names nobody on its title page, so the plan is
+  # the only record. Ten of fifteen have one.
+  #
+  # Names there are free text and inconsistent, written variously as
+  # "Dumontier, Michel", "Dr. Chang Sun" and once "Rermzi Celebi". They are
+  # normalised here so they resolve against people.yaml.
+  #
+  # Five had no usable email record: Charlotte Donnelly and Alina Gavrish
+  # have none at all, and for Simonas Bubnys, Ilian Ariesen and Loris
+  # Podevyn the supervision section was not reached. Michel confirmed on
+  # 2026-10-23 that he supervised all five himself, so they are recorded on
+  # his word rather than from a document.
+  #
+  # Do not mine these emails further without care: they carry student ID
+  # numbers and addresses, and at least one has a full grade transcript
+  # attached.
+  - level: BSc
+    name: Ana-Maria Martinescu
+    title: Justification-Based Benchmark for Evaluating LLM Reasoning Under Noise
+    year: "2026"
+    date: 14 June 2026
+    programme: Maastricht Science Programme
+    supervisors: [Michel Dumontier]
+
+  - level: BSc
+    name: Denisa-Elena Nastasa
+    title: >
+      An Interpretable Multi-Modal Transformer Framework for Parkinson's
+      Disease Drug Repositioning Using Embeddings
+    year: "2026"
+    date: 12 June 2026
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Remzi Celebi
+
+  - level: BSc
+    name: Eve Michaux
+    title: Automated Deep Phenotyping of Clinical Notes Using NLP and HPO Mapping
+    year: "2026"
+    date: 9 June 2026
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Chang Sun
+
+  - level: BSc
+    name: Mikhail Belov
+    title: Evaluating Saliency Methods in Medical Vision-Language Models
+    year: "2026"
+    date: 9 June 2026
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Chang Sun
+
+  - level: BSc
+    name: Taha Ismet Koc
+    title: >
+      Structured Reasoning on Drug Efficacy: a neuro-symbolic approach
+      combining LLMs and computational argumentation frameworks
+    year: "2026"
+    date: 9 June 2026
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Rohan Nanda
+      - Michel Dumontier
+
+  - level: BSc
+    name: Tunç Sabah
+    title: >
+      Distributional and Predictive Metrics Poorly Detect Causal Degradation:
+      a reference-calibrated benchmark on Alzheimer's disease data
+    year: "2026"
+    date: 21 August 2026
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+
+  - level: BSc
+    name: Daan Schar
+    title: >
+      Building a Foundation for Interoperable Hydrological Data: a SULO-based
+      DAMO ontology for asset management
+    year: "2025"
+    date: 25 August 2025
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Remzi Celebi
+
+  - level: BSc
+    name: Sebastian Schmülling
+    title: >
+      Evaluating Prompting Methodologies for Generating Federated SPARQL
+      Queries over Biomedical Knowledge Graphs
+    year: "2025"
+    date: 30 June 2025
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Chang Sun
+
+  - level: BSc
+    name: Alexandru Valah
+    title: "Integrating KG-LLMs for Fitness Guidance: addressing mobility-related limitations"
+    year: "2025"
+    date: 27 June 2025
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Chang Sun
+
+  - level: BSc
+    name: Charlotte Donnelly
+    title: Evaluating AI-Generated Explanations in Dynamic Domains
+    year: "2025"
+    date: 4 June 2025
+    programme: University College Maastricht (Capstone)
+    supervisors:
+      - Michel Dumontier
+
+  - level: BSc
+    name: Simonas Bubnys
+    title: >
+      Drug-Target Interaction Prediction using Transformer Models and
+      ATC Code-Based Stratification
+    year: "2024"
+    date: 20 June 2024
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+
+  - level: BSc
+    name: Alina Gavrish
+    title: >
+      Forecasting Banned Substances: leveraging GNN and explainable AI for
+      sports anti-doping
+    year: "2024"
+    date: 20 June 2024
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+
+  - level: BSc
+    name: Simon Garland
+    title: >
+      ReAgents: uncertainty reasoning of large language model multi-agents
+      within the field of drug repurposing
+    year: "2024"
+    date: 20 June 2024
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+      - Remzi Celebi
+
+  - level: BSc
+    name: Ilian Ariesen
+    title: >
+      Large Language Models as Reasoner of Drug Efficacy: an investigation
+      into justificatory capabilities
+    year: "2024"
+    date: 26 January 2024
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
+
+  - level: BSc
+    name: Loris Podevyn
+    title: Fine-tuning and Applying a Diffusion Model for Therapeutic Protein Design
+    year: "2024"
+    date: 10 January 2024
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Michel Dumontier
 
 # WHERE PROJECT DESCRIPTIONS LIVE.
 #

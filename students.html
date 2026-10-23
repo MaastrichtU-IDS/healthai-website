@@ -59,7 +59,6 @@
     .thesis-meta { font-size:0.8rem; color:var(--text-muted); margin-bottom:12px; }
     .thesis-abstract { font-size:0.86rem; margin:10px 0 12px; }
     .thesis-doi { font-size:0.74rem; color:var(--text-muted); font-family:monospace; }
-    .thesis-noabstract { font-size:0.82rem; color:var(--text-muted); font-style:italic; margin-bottom:12px; }
     /* <details> gives open/closed, keyboard access and find-in-page for free. */
     .thesis-details { margin-bottom:12px; }
     .thesis-details > summary { cursor:pointer; font-size:0.8rem; font-weight:600; color:var(--blue); list-style:none; display:inline-flex; align-items:center; gap:6px; }
@@ -167,7 +166,11 @@
             <p>${txt(p.desc)}</p>
             <div class="prog-meta">
               <span>🏛 ${txt(p.dept)}</span>
-              <span>📅 ${txt(p.duration)} · ${txt(p.language)}</span>
+              ${/* Separate lines, each optional. UM publishes no duration for
+                   the Maastricht Science Programme, and pairing them meant a
+                   calendar icon sitting in front of the word "English". */''}
+              ${p.duration ? `<span>📅 ${txt(p.duration)}</span>` : ''}
+              ${p.language ? `<span>🗣 ${txt(p.language)}</span>` : ''}
             </div>
             ${p.route_note ? `<div class="route-note">${txt(p.route_note)}</div>` : ''}
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
@@ -226,15 +229,27 @@
                     : txt(h.title)}
                 </div>
                 <div class="thesis-meta">
-                  ${linkName(h.name)}${h.date ? ` · ${txt(h.date)}` : ''}
-                  ${(h.supervisors || []).length ? `<br>Supervised by ${h.supervisors.map(linkName).join(', ')}` : ''}
+                  ${/* Year only. `date` is kept in the YAML because it orders
+                       entries within a year, but it is deliberately not shown:
+                       a defence month adds nothing to a reader and invites a
+                       precision the bachelor's dates do not actually have. */''}
+                  ${linkName(h.name)}${h.year ? ` · ${txt(h.year)}` : ''}
+                  ${h.programme ? `<br>${txt(h.programme)}` : ''}
+                  ${/* Doctoral records say "Supervisor"; a master's title page
+                       names a thesis committee, which includes examiners as
+                       well as supervisors. Labelling both as supervision
+                       would misattribute, so each entry says which it is. */''}
+                  ${(h.supervisors || []).length
+                    ? `<br>Supervised by ${h.supervisors.map(linkName).join(', ')}` : ''}
+                  ${(h.committee || []).length
+                    ? `<br>Thesis committee: ${h.committee.map(linkName).join(', ')}` : ''}
                 </div>
                 ${(h.abstract || '').trim()
                   ? `<details class="thesis-details">
                        <summary>${esc(h.abstract_label || 'Abstract')}</summary>
                        <div class="thesis-abstract">${txt(h.abstract)}</div>
                      </details>`
-                  : `<div class="thesis-noabstract">No abstract recorded in CRIS for this thesis.</div>`}
+                  : ''}
                 ${h.doi ? `<div class="thesis-doi">${esc(h.doi)}</div>` : ''}
               </div>`).join('')}
           </div>` : '';
