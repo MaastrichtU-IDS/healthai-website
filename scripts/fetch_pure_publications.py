@@ -78,7 +78,14 @@ def api(key: str, path: str, _tries: int = 2, **params) -> dict:
 
 
 def person_uuid(key: str, person: dict) -> str | None:
-    """Resolve a person to their Pure uuid: cris_url, then ORCID, then name."""
+    """Resolve a person to their Pure uuid: cris_url, then ORCID, then name.
+
+    Returns None ONLY when Pure answered and had no match. Anything that
+    stopped the question being asked -- a revoked UBKey (401), a 5xx, a dead
+    proxy -- is raised. The two handlers here used to swallow those, and a
+    silent None is indistinguishable from "this person has no Pure record":
+    the caller counted them as absent, kept last run's cache, and exited 0.
+    """
     m = re.search(r"/persons/([0-9a-f]{8}-[0-9a-f-]{27})", person.get("cris_url", "") or "")
     if m:
         return m.group(1)
@@ -88,15 +95,19 @@ def person_uuid(key: str, person: dict) -> str | None:
             # NOTE: this endpoint returns a BARE object, not {"items": [...]}.
             if isinstance(r, dict) and r.get("uuid"):
                 return r["uuid"]
-        except Exception:
-            pass
+        except urllib.error.HTTPError as e:
+            # 404 is the honest answer "no person with that ORCID"; fall
+            # through and try by name. Anything else is our problem.
+            if e.code != 404:
+                raise
     try:
         r = api(key, "Person", searchString=person.get("name", ""), size=5)
         items = r.get("items") or []
         if len(items) == 1:
             return items[0].get("uuid")
-    except urllib.error.HTTPError:
-        pass
+    except urllib.error.HTTPError as e:
+        if e.code != 404:
+            raise
     return None
 
 
@@ -148,7 +159,22 @@ def main() -> int:
         targets = targets[: args.limit]
 
     CACHE.mkdir(parents=True, exist_ok=True)
-    total = withdoi = unresolved = 0
+
+    def slug_for(name: str) -> str:
+        return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+    # A cache file for someone no longer in people.yaml would keep publishing
+    # their work: build_publications.py globs this directory rather than
+    # reading people.yaml, so a departed member never leaves the site. Only
+    # prune on a full run, since a filtered one does not know the full set.
+    if not args.name and not args.limit:
+        current = {slug_for(p.get("name") or "") for p in targets}
+        for stale in sorted(CACHE.glob("*.json")):
+            if stale.stem not in current:
+                stale.unlink()
+                print(f"      {stale.stem[:32]:<34} no longer in people.yaml, cache removed")
+
+    total = withdoi = no_record = errored = 0
     print(f"{len(targets)} people")
     for i, p in enumerate(targets, 1):
         name = p.get("name", "?")
@@ -156,26 +182,38 @@ def main() -> int:
             uuid = person_uuid(key, p)
         except Exception as e:
             print(f"  {i:>2}. {name[:32]:<34} lookup failed: {type(e).__name__}", file=sys.stderr)
-            unresolved += 1
+            errored += 1
             continue
         if not uuid:
-            unresolved += 1
+            no_record += 1
             print(f"  {i:>2}. {name[:32]:<34} no Pure person record")
             continue
         try:
             items = [simplify(x) for x in outputs(key, uuid)]
         except Exception as e:
             print(f"  {i:>2}. {name[:32]:<34} ERROR {type(e).__name__}: {e}", file=sys.stderr)
+            errored += 1
             continue
         d = sum(1 for x in items if x["doi"])
         total += len(items)
         withdoi += d
-        slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
-        (CACHE / f"{slug}.json").write_text(json.dumps(
+        (CACHE / f"{slug_for(name)}.json").write_text(json.dumps(
             {"name": name, "pure_uuid": uuid, "count": len(items), "items": items}, indent=1))
         print(f"  {i:>2}. {name[:32]:<34} {len(items):>4} outputs, {d:>4} with DOI")
         time.sleep(args.delay)
-    print(f"\n{total} outputs, {withdoi} with DOI, {unresolved} people unresolved -> {CACHE}")
+    print(f"\n{total} outputs, {withdoi} with DOI, "
+          f"{no_record} with no Pure record, {errored} errored -> {CACHE}")
+
+    # A failed person is not a missing person: their cache file from the last
+    # good run survives untouched, so the build reproduces it and the job
+    # reports "no change" and exits green. A revoked UBKEY fails all 38 people
+    # exactly that way, and the shrink guard cannot see it because it compares
+    # against the cache, not against the fetch. So an error here has to be the
+    # thing that stops the pipeline.
+    if errored:
+        print(f"ABORT: {errored} people errored; their cached data would be "
+              f"republished unchanged and the run would look clean.", file=sys.stderr)
+        return 1
     return 0
 
 
