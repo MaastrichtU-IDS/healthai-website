@@ -3,7 +3,12 @@
 
 Reads cache/orcid/*.json, extracts every DOI, fetches Crossref metadata for
 each unique DOI, and caches to cache/crossref/<url-encoded-doi>.json.
-Skips fetch when cached unless --refresh is passed.
+
+A cache entry older than --max-age-days is re-fetched. Citation counts live
+in this cache (is-referenced-by-count, which build_publications.py turns into
+the site's citation total and h-index), so a cache that is never re-read
+freezes those numbers at whenever each DOI was first seen while the weekly
+job keeps committing them as a refresh.
 """
 from __future__ import annotations
 
@@ -22,6 +27,19 @@ CROSSREF_CACHE = ROOT / "cache" / "crossref"
 USER_AGENT = "hair-website fetch_crossref.py (mailto:hair@maastrichtuniversity.nl)"
 ENDPOINT = "https://api.crossref.org/works/{doi}"
 SLEEP = 0.05
+# A month. Citation counts move slowly, and this is some 650 DOIs: re-fetching
+# the lot every week would be ~650 requests a week to keep numbers that barely
+# change. Entries expire on the anniversary of their own fetch, so the load
+# spreads itself across weeks rather than arriving all at once.
+MAX_AGE_DAYS = 30
+
+
+def is_fresh(path: Path, max_age_days: float) -> bool:
+    if not path.exists():
+        return False
+    if max_age_days <= 0:
+        return False
+    return (time.time() - path.stat().st_mtime) < max_age_days * 86400
 
 
 def safe_filename(doi: str) -> str:
@@ -62,6 +80,8 @@ def fetch(url: str) -> bytes:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--refresh", action="store_true", help="re-fetch even if cached")
+    ap.add_argument("--max-age-days", type=float, default=MAX_AGE_DAYS,
+                    help="re-fetch a cache entry older than this (0 = always)")
     args = ap.parse_args()
 
     if not ORCID_CACHE.exists():
@@ -91,7 +111,7 @@ def main() -> int:
     fetched = skipped = failed = missing = 0
     for doi in sorted(all_dois):
         out = CROSSREF_CACHE / f"{safe_filename(doi)}.json"
-        if out.exists() and not args.refresh:
+        if is_fresh(out, args.max_age_days) and not args.refresh:
             skipped += 1
             continue
         url = ENDPOINT.format(doi=urllib.parse.quote(doi, safe="/"))
@@ -110,6 +130,10 @@ def main() -> int:
             if e.code == 404:
                 missing += 1
                 print(f"  - {doi}: not in Crossref (HTTP 404)")
+                # Record the absence so the expiry above does not re-ask
+                # Crossref about the same arXiv and Zenodo DOIs every month.
+                # build_publications.py skips an entry with no "message".
+                out.write_text(json.dumps({"status": "not-found", "doi": doi}))
             else:
                 failed += 1
                 print(f"  ! {doi}: HTTP {e.code}")
