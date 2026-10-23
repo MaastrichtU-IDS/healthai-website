@@ -290,11 +290,31 @@ highlights:
       - Michel Dumontier
     doi: 10.26481/dis.20260907gw
     url: https://cris.maastrichtuniversity.nl/en/publications/data-and-semantic-reasoning-in-audio-language-learning/
-    # No abstract: this record has no abstract field in CRIS, unlike Chang
-    # Sun's. The page offers a Summary PDF, but the file endpoint is behind a
-    # Cloudflare challenge. Ask Gijs for a paragraph rather than paraphrasing
-    # the thesis. The card renders without one.
-    abstract: ""
+    # NOT the CRIS abstract: this record has no abstract field, unlike Chang
+    # Sun's. Condensed by Claude from the thesis's own lay summary, which
+    # Michel supplied. Labelled "Summary" on the page rather than "Abstract",
+    # because it is neither the CRIS abstract nor the author's own wording.
+    # Replace with Gijs's own paragraph if he would rather write one.
+    abstract_label: Summary
+    abstract: >
+      This thesis asks how computers can learn to understand sound and
+      describe it in language, approaching what a person does on hearing a dog
+      bark: recognise it at once and say what is happening. It contributes in
+      five parts. A survey of 69 audio-language datasets maps where the
+      field's training data comes from and finds substantial overlap between
+      sets, which flatters reported performance. A curriculum approach then
+      introduces training examples in order of difficulty, filters duplicates
+      and rebalances overrepresented sound categories, improving audio
+      question answering without extra computation. AudSemThinker, trained on
+      AudSem, a new dataset built from YouTube subtitles and designed not to
+      overlap existing test sets, reasons explicitly about what is making a
+      sound, how it is produced and where it occurs before answering. ACES, a
+      new evaluation metric, judges generated descriptions by whether they
+      capture those semantic elements rather than by word overlap. Finally,
+      AudioToolAgent coordinates several specialised models, delegating speech
+      to a recogniser while consulting others for environmental sound and
+      music, reaching strong benchmark results while staying modular by
+      reusing pre-trained models.
 
 # WHERE PROJECT DESCRIPTIONS LIVE.
 #

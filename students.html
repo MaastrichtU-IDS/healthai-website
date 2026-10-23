@@ -67,9 +67,15 @@
     .thesis-card:hover { box-shadow:var(--card-shadow-hover); transform:translateY(-2px); }
     .thesis-title { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; color:var(--slate); margin-bottom:6px; }
     .thesis-meta { font-size:0.8rem; color:var(--text-muted); margin-bottom:12px; }
-    .thesis-abstract { font-size:0.86rem; margin-bottom:12px; }
+    .thesis-abstract { font-size:0.86rem; margin:10px 0 12px; }
     .thesis-doi { font-size:0.74rem; color:var(--text-muted); font-family:monospace; }
     .thesis-noabstract { font-size:0.82rem; color:var(--text-muted); font-style:italic; margin-bottom:12px; }
+    /* <details> gives open/closed, keyboard access and find-in-page for free. */
+    .thesis-details { margin-bottom:12px; }
+    .thesis-details > summary { cursor:pointer; font-size:0.8rem; font-weight:600; color:var(--blue); list-style:none; display:inline-flex; align-items:center; gap:6px; }
+    .thesis-details > summary::-webkit-details-marker { display:none; }
+    .thesis-details > summary::before { content:'▸'; font-size:0.7rem; transition:transform var(--transition); }
+    .thesis-details[open] > summary::before { transform:rotate(90deg); }
     .route-note { font-size:0.78rem; color:var(--text-muted); margin-top:10px; padding-left:10px; border-left:2px solid var(--border); }
   </style>
 </head>
@@ -253,7 +259,10 @@
                   ${(h.supervisors || []).length ? `<br>Supervised by ${h.supervisors.map(linkName).join(', ')}` : ''}
                 </div>
                 ${(h.abstract || '').trim()
-                  ? `<div class="thesis-abstract">${txt(h.abstract)}</div>`
+                  ? `<details class="thesis-details">
+                       <summary>${esc(h.abstract_label || 'Abstract')}</summary>
+                       <div class="thesis-abstract">${txt(h.abstract)}</div>
+                     </details>`
                   : `<div class="thesis-noabstract">No abstract recorded in CRIS for this thesis.</div>`}
                 ${h.doi ? `<div class="thesis-doi">${esc(h.doi)}</div>` : ''}
               </div>`).join('')}
