@@ -63,6 +63,7 @@
     .track-more { font-size:0.8rem; font-weight:600; color:var(--blue); }
 
     .track-sub { font-size:0.95rem; margin-bottom:10px; }
+    .route-note { font-size:0.78rem; color:var(--text-muted); margin-top:10px; padding-left:10px; border-left:2px solid var(--border); }
   </style>
 </head>
 <body class="page-body">
@@ -188,12 +189,37 @@
               <span>🏛 ${txt(p.dept)}</span>
               <span>📅 ${txt(p.duration)} · ${txt(p.language)}</span>
             </div>
+            ${p.route_note ? `<div class="route-note">${txt(p.route_note)}</div>` : ''}
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
               <a href="${esc(p.url)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Programme →</a>
               ${p.curriculum_url ? `<a href="${esc(p.curriculum_url)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Curriculum →</a>` : ''}
             </div>
           </div>`).join('')}
       </div>` : '';
+
+    /* Project descriptions, on the taught tracks only: a PhD is advertised as
+       a funded vacancy, not listed as a project. `open` is empty today, so
+       this renders the "where to look" note rather than a bare heading. Once
+       real descriptions are added they appear here instead. */
+    const PL = data.project_listing || {};
+    const openList = (PL.open || []).filter(o => !o.level || o.level === t.level);
+    const projHtml = t.programme_level ? `
+          <h3 class="track-sub">Project descriptions</h3>
+          <p style="font-size:0.88rem;margin-bottom:14px">${txt(PL.intro)}</p>
+          ${openList.length ? `
+            <div class="grid grid-2" style="margin-bottom:8px">
+              ${openList.map(o => `
+                <div class="prog-card">
+                  <h4>${txt(o.title)}</h4>
+                  <p>${txt(o.desc)}</p>
+                  <div class="prog-meta"><span>${linkName(o.supervisor)}</span></div>
+                </div>`).join('')}
+            </div>`
+          : `<div style="margin-bottom:8px">
+              ${(PL.sources || []).map(src => `
+                <div class="req-item"><div><strong>${txt(src.name)}</strong> — ${txt(src.text)}</div></div>`).join('')}
+             </div>`}
+    ` : '';
 
     const isPhd = t.id === 'phd';
     const phdExtra = isPhd ? `
@@ -233,6 +259,7 @@
           </div>
 
           ${progHtml}
+          ${projHtml}
           ${phdExtra}
         </div>
       </section>`;

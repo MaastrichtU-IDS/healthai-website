@@ -18,6 +18,10 @@
 #   2. No number nobody will maintain. Salary scales, ECTS and cohort sizes go
 #      stale silently and are better linked than copied.
 #
+# INCOMPLETE: the programme list below covers DACS and UCM. Michel has
+# flagged that the group takes students from more programmes than these, and
+# that an inventory is needed. See issue #17.
+#
 # Research themes and supervisors are NOT listed here. The page reads them from
 # research.yaml and people.yaml at render time, so they cannot drift.
 
@@ -47,8 +51,10 @@ tracks:
         title: Enrol in a relevant bachelor's programme
         text: >
           Most students who do a project with us come from Data Science and
-          Artificial Intelligence at DACS. Any UM bachelor's that leaves you
-          able to program and reason about data can work.
+          Artificial Intelligence at DACS. We also supervise University College
+          Maastricht students through the Capstone, their final research
+          project. Any UM bachelor's that leaves you able to program and reason
+          about data can work.
       - number: "2"
         title: Take the courses that match the work
         text: >
@@ -86,9 +92,9 @@ tracks:
       - number: "1"
         title: Enrol in a relevant master's programme
         text: >
-          The four DACS programmes below are the usual routes. We also
-          supervise students from elsewhere in UM, and from other universities
-          for internships.
+          The three DACS master's programmes below are the usual routes. We
+          also supervise students from elsewhere in UM, and from other
+          universities for internships.
       - number: "2"
         title: Take the courses that match the work
         text: >
@@ -183,6 +189,21 @@ programmes:
       Data Science and Knowledge Engineering. The most common route into a
       bachelor's project with the group.
 
+  - level: BSc
+    name: University College Maastricht
+    dept: UCM
+    duration: 3 years
+    language: English
+    url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/university-college-maastricht
+    curriculum_url: https://www.maastrichtuniversity.nl/education/bachelor/programmes/university-college-maastricht/courses-and-curriculum
+    route_note: >
+      Route in is the Capstone, UCM's final research project, for which
+      students choose a topic and an advisor.
+    desc: >
+      Maastricht's liberal arts and sciences bachelor's. Students build their
+      own curriculum, and those heading toward data or health topics can take
+      their Capstone with us.
+
   - level: MSc
     name: Artificial Intelligence
     dept: DACS
@@ -216,6 +237,32 @@ programmes:
       Technical data science together with ethics, law and societal impact.
       Started in September 2026, and the closest in outlook to how this group
       works.
+
+# WHERE PROJECT DESCRIPTIONS LIVE.
+#
+# DACS publishes bachelor's and master's project descriptions in Canvas,
+# which only enrolled students can see. The intent is to post them here too,
+# and eventually to synchronise rather than maintain two lists. Until that
+# exists, this section says where to look rather than pretending to be the
+# list -- the page it replaced invented nine projects.
+#
+# To publish projects here, add entries under `open`. Each needs a real
+# supervisor who has agreed to it. An empty list renders as the "where to
+# look" note alone, not an empty heading.
+project_listing:
+  intro: >
+    Project descriptions are published by each programme, and we are working
+    toward listing ours here as well.
+  sources:
+    - name: DACS projects
+      text: >
+        Bachelor's and master's project descriptions for the DACS programmes
+        are posted in Canvas, where enrolled students can see them.
+    - name: UCM Capstone
+      text: >
+        UCM students choose a Capstone topic and advisor through their own
+        programme's procedure, in their final semester.
+  open: []
 
 links:
   um_vacancies: https://www.maastrichtuniversity.nl/about-um/work-at-um
