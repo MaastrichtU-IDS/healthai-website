@@ -57,6 +57,11 @@ def main() -> int:
 
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     people = yaml.safe_load(PEOPLE_YAML.read_text())
+    # Skipped for the same reason as in fetch_pure_publications.py: an
+    # alumnus in people.yaml would otherwise add their whole career to the
+    # group's publication list. Dropping them here also means the prune below
+    # removes their cache file, so the change takes effect on the next run.
+    people = [p for p in people if not p.get("alumni")]
     if args.name:
         needle = args.name.lower()
         people = [p for p in people if needle in (p.get("name") or "").lower()]

@@ -85,7 +85,7 @@
 </head>
 <body class="page-body">
 <script src="nav.js?v=2"></script>
-<script src="cms.js?v=2"></script>
+<script src="cms.js?v=3"></script>
 
 <div class="page-hero">
   <div class="container">
@@ -116,15 +116,21 @@
 
 <script>
 const THEMES_ALL = ['All','Precision Medicine & Digital Health','Precision Agriculture, Food & Health','Neurosymbolic AI','Federated & Privacy-Preserving AI','Regulatory AI','Computational Biology & Bioinformatics'];
+// `alumni: true` is excluded from every current-member section rather than
+// relying on group alone, so someone who leaves is listed once and only once
+// even if their group was not changed at the same time.
+const current = p => !p.alumni;
 const SECTIONS = [
   { label: 'Faculty',
-    match: p => p.group === 'Faculty' },
+    match: p => current(p) && p.group === 'Faculty' },
   { label: 'Postdocs, Researchers, and Research Software Engineers',
-    match: p => p.group === 'Researchers' && p.role !== 'PhD Researcher' },
+    match: p => current(p) && p.group === 'Researchers' && p.role !== 'PhD Researcher' },
   { label: 'PhD Researchers',
-    match: p => p.group === 'Researchers' && p.role === 'PhD Researcher' },
+    match: p => current(p) && p.group === 'Researchers' && p.role === 'PhD Researcher' },
   { label: 'Research Staff',
-    match: p => p.group === 'Staff' },
+    match: p => current(p) && p.group === 'Staff' },
+  { label: 'Alumni',
+    match: p => !!p.alumni },
 ];
 const { icon: ICON, ICONS } = CMS;
 let people = [], activeTheme = 'All';

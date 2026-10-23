@@ -81,7 +81,7 @@
 </head>
 <body class="page-body">
 <script src="nav.js?v=2"></script>
-<script src="cms.js?v=2"></script>
+<script src="cms.js?v=3"></script>
 
 <div class="page-hero">
   <div class="container">
@@ -335,7 +335,10 @@
   const SUPERVISING = new Set([
     'Distinguished Professor', 'Full Professor', 'Associate Professor', 'Assistant Professor',
   ]);
-  const sups = (people || []).filter(p => SUPERVISING.has(p.role));
+  // Alumni excluded: a former member is not someone to write to about a
+  // project. They are still resolved by linkName above, so their name links
+  // from a thesis card.
+  const sups = (people || []).filter(p => !p.alumni && SUPERVISING.has(p.role));
   // people/index.html matches strictly on p.slug, with no fallback, so a
   // person without one would land on its "not found" state. Link only when
   // there is a slug to link with.

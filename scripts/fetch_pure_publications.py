@@ -176,7 +176,14 @@ def main() -> int:
     key = ubkey()
 
     people = yaml.safe_load(PEOPLE.read_text()) or []
-    targets = [p for p in people if p.get("cris_url") or p.get("orcid") or p.get("name")]
+    # Alumni are skipped. people.yaml is the input to this pipeline, so an
+    # alumnus listed here would add their whole publication record to the
+    # group's list, including everything they do after leaving, and the list
+    # would grow with every graduation. Work they did here with current
+    # members already arrives through those members' records.
+    targets = [p for p in people
+               if not p.get("alumni")
+               and (p.get("cris_url") or p.get("orcid") or p.get("name"))]
     if args.name:
         targets = [p for p in targets if args.name.lower() in (p.get("name") or "").lower()]
     if args.limit:

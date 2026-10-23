@@ -50,8 +50,8 @@
   </style>
 </head>
 <body class="page-body">
-<script src="nav.js"></script>
-<script src="cms.js"></script>
+<script src="nav.js?v=2"></script>
+<script src="cms.js?v=3"></script>
 
 <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
 
@@ -130,7 +130,11 @@ const fmt = n => Number(n).toLocaleString();
     ? `<img src="${src}" alt="${person.name}">`
     : CMS.initials(person.name);
   document.getElementById('heroName').textContent = person.name;
-  document.getElementById('heroRole').textContent = person.role;
+  // Say so when someone has left, rather than showing a bare role that reads
+  // as current. Their page stays up: the work happened.
+  document.getElementById('heroRole').textContent = person.alumni
+    ? `${person.role} (alumni${person.alumni_until ? `, until ${person.alumni_until}` : ''})`
+    : person.role;
 
   const allPubs = (pubData.publications || []);
   const myPubs = allPubs.filter(pub => person.orcid && (pub.orcids || []).includes(person.orcid));
