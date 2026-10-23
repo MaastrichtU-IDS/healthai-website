@@ -75,18 +75,25 @@ themes:
     featured_pubs: []
 
 
-# AMOUNTS ARE THE FUNDER'S CONTRIBUTION TO THE WHOLE CONSORTIUM, not this
-# group's share and not the total project cost. AIDAVA sets the precedent:
-# €7.7M is its EU contribution (€7,720,615 on CORDIS 101057062), while the
-# total project cost is €8.6M. Mixing the two makes the site's funding
-# totals meaningless, so stay on contribution.
+# AMOUNTS ARE TOTAL PROJECT COST: the whole consortium's budget, not this
+# group's share and not the funder's contribution where those differ. For
+# EU projects the figure is the "Total cost" field on the project's CORDIS
+# page, which is the authoritative source and is worth preferring over a
+# partner's or a press release's number. For the ARPA-H, NIH and NWO
+# projects the award is the only figure there is, so it stands.
 #
-# Two entries were off that basis and were corrected:
-#   iCARE4CVD   was "€6–10M", a range the parser read as its TOP, so it
-#               counted as €10M. Now €9.9M (CORDIS 101112022: EU
-#               contribution €9,942,458.81; total cost €21.5M).
-#   EU-FarmBook had no amount at all and counted as zero. Now €15M
-#               (CORDIS 101060382: €15,002,553.75, EU-funded in full).
+# Verified against CORDIS:
+#   AIDAVA       €7.7M   101057062  total cost €7,720,615.23
+#   REALM        €6.7M   101095435  total cost €6,659,650.00
+#   AMBROSIA     €3.97M  101181300  CORDIS shows "No data" for total cost,
+#                                   so this is the EU contribution,
+#                                   €3,972,738.63 -- the only figure given
+#   EU-FarmBook  €15M    101060382  total cost €15,002,553.75
+#   iCARE4CVD    €21.5M  101112022  total cost €21,488,522.15
+#
+# Two of those had been wrong in ways that did not show. iCARE4CVD read
+# "€6–10M", and the parser takes a range at its TOP, so it counted as €10M.
+# EU-FarmBook had no amount at all and counted as zero, hiding €15M.
 #
 # DACIL still has prose rather than a figure, so it counts as zero. That is
 # why the headline numbers carry a "+".
@@ -114,7 +121,7 @@ projects:
       using real-world and synthetic data.
     team: [Visara Urovi, Chang Sun, Michel Dumontier, Ensar Erol, Anas Elghafari]
     funder: European Commission (Horizon Europe)
-    amount: "€7M"
+    amount: "€6.7M"
     period: "2023–2026"
     status: Active
     featured: true
@@ -204,7 +211,7 @@ projects:
       proactive, preventive care.
     team: [Michel Dumontier, Visara Urovi, Anas Elghafari, Ankur Lohachab, Komal Gilani]
     funder: European Union (Horizon Europe)
-    amount: "€9.9M"
+    amount: "€21.5M"
     period: "2023–2027"
     status: Active
     url: https://icare4cvd.eu/
