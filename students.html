@@ -233,7 +233,12 @@
                        entries within a year, but it is deliberately not shown:
                        a defence month adds nothing to a reader and invites a
                        precision the bachelor's dates do not actually have. */''}
-                  ${linkName(h.name)}${h.year ? ` · ${txt(h.year)}` : ''}
+                  ${/* `name` is present on doctoral entries only. Master's and
+                       bachelor's students are not named, pending consent, so the
+                       name and its separator both have to drop out rather than
+                       render "undefined · 2025". See content/students.yaml. */''}
+                  ${[h.name ? linkName(h.name) : '', h.year ? txt(h.year) : '']
+                      .filter(Boolean).join(' · ')}
                   ${h.programme ? `<br>${txt(h.programme)}` : ''}
                   ${/* Doctoral records say "Supervisor"; a master's title page
                        names a thesis committee, which includes examiners as
