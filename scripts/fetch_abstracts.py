@@ -25,7 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CROSSREF_CACHE = ROOT / "cache" / "crossref"
 ABSTRACT_CACHE = ROOT / "cache" / "abstracts"
-USER_AGENT = "hair-website fetch_abstracts.py (mailto:hair@maastrichtuniversity.nl)"
+USER_AGENT = "healthai-website fetch_abstracts.py (mailto:hair@maastrichtuniversity.nl)"
 
 EPMC_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:{doi}&resulttype=core&format=json"
 S2_URL = "https://api.semanticscholar.org/graph/v1/paper/DOI:{doi}?fields=abstract"

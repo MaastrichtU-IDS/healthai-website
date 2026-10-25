@@ -65,7 +65,7 @@ def parse_date(s: str) -> datetime:
 
 def fetch_feed(url: str, author_name: str) -> list[dict]:
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "hair-website-bot/1.0"})
+        req = urllib.request.Request(url, headers={"User-Agent": "healthai-website-bot/1.0"})
         with urllib.request.urlopen(req, timeout=15) as r:
             content = r.read()
     except Exception as e:

@@ -1,5 +1,8 @@
 name: Health AI Research Group
-short: HAIR Group
+# No `short:` any more. It held "HAIR Group", and with the acronym gone it
+# would only have duplicated `name`. Nothing reads either field: index.html
+# takes tagline, tagline_italic, hero_body and stats from this file, and the
+# header and footer get the group name from nav.js.
 dept: Department of Advanced Computing Sciences
 university: Maastricht University
 email: hair@maastrichtuniversity.nl
