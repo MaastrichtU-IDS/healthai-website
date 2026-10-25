@@ -24,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ORCID_CACHE = ROOT / "cache" / "orcid"
 CROSSREF_CACHE = ROOT / "cache" / "crossref"
-USER_AGENT = "hair-website fetch_crossref.py (mailto:hair@maastrichtuniversity.nl)"
+USER_AGENT = "healthai-website fetch_crossref.py (mailto:hair@maastrichtuniversity.nl)"
 ENDPOINT = "https://api.crossref.org/works/{doi}"
 SLEEP = 0.05
 # A month. Citation counts move slowly, and this is some 650 DOIs: re-fetching

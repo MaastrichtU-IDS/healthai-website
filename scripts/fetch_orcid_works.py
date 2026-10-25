@@ -22,7 +22,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 PEOPLE_YAML = ROOT / "content" / "people.yaml"
 CACHE_DIR = ROOT / "cache" / "orcid"
-USER_AGENT = "hair-website fetch_orcid_works.py (mailto:hair@maastrichtuniversity.nl)"
+USER_AGENT = "healthai-website fetch_orcid_works.py (mailto:hair@maastrichtuniversity.nl)"
 ENDPOINT = "https://pub.orcid.org/v3.0/{orcid}/works"
 SLEEP = 0.2
 # A week, so the weekly job re-fetches everything. 38 requests is nothing;

@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PEOPLE_YAML = ROOT / "content" / "people.yaml"
 CACHE_DIR = ROOT / "cache" / "people_pages"
 ASSETS_PEOPLE = ROOT / "assets" / "people"
-USER_AGENT = "Mozilla/5.0 (hair-website enrich_people.py)"
+USER_AGENT = "Mozilla/5.0 (healthai-website enrich_people.py)"
 BIO_WIDTH = 90
 BIO_MAX_CHARS = 700
 

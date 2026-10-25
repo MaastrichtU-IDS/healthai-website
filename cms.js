@@ -1,5 +1,5 @@
 /* ================================================================
-   HAIR Group — Shared CMS Utility
+   Health AI Research Group — Shared CMS Utility
    Loads and parses YAML content files using js-yaml.
    Exposes window.CMS for use in all pages.
 ================================================================ */
