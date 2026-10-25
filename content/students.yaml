@@ -15,6 +15,9 @@
 # Two rules for anything added:
 #   1. No named person without their knowledge, and no claim about a person
 #      they have not confirmed.
+#   1a. STUDENTS ARE NOT NAMED. The master's and bachelor's thesis entries
+#      below carry title, year, programme and supervision, and no student
+#      name. See the note above the master's entries.
 #   2. No number nobody will maintain. Salary scales, ECTS and cohort sizes go
 #      stale silently and are better linked than copied.
 #
@@ -272,10 +275,12 @@ programmes:
 # record by its own uuid returns an unrelated one. These were therefore read
 # off the public CRIS portal pages, which do carry the detail.
 #
-# Every field below is on the cited page. `name` is how the person is listed
-# in people.yaml rather than the full legal name on the thesis, so it
-# resolves to their profile; Gijs appears on the thesis as Gijsbert Willem
-# Adriaan Wijngaard.
+# Every field in the three doctoral entries is on the cited page. Their
+# `name` is how the person is listed in people.yaml rather than the full
+# legal name on the thesis, so it resolves to their profile; Gijs appears on
+# the thesis as Gijsbert Willem Adriaan Wijngaard. Doctoral candidates are
+# named because the university published these theses, with DOIs. The
+# master's and bachelor's entries below have no `name` at all.
 #
 # Supervisors outside the group render as plain text, which is correct.
 highlights:
@@ -381,13 +386,28 @@ highlights:
   # come from Michel's own records of completed supervisions, with titles,
   # programmes, dates and committees read off the title page of each thesis.
   #
-  # Student numbers appear on those title pages and are deliberately NOT
-  # recorded here. Names are, because MSc theses and defences are public.
+  # NO STUDENT NAMES, AND NO STUDENT NUMBERS.
+  #
+  # The numbers are on the title pages and were never recorded here. The
+  # names were, until 2026-10-25, on the reasoning that a thesis and its
+  # defence are public. That holds for the doctoral theses above, which the
+  # university published with DOIs. It does not hold here: nothing published
+  # these, and none of the twenty students was asked whether they wanted
+  # their name on a research group's website. Michel is seeking informed
+  # consent from each.
+  #
+  # A name returns only when that student has agreed to it. Add `name:` back
+  # with the consent date in a comment beside it, one student at a time.
+  #
+  # Be aware of what the entry still is. Title, programme and year identify
+  # a student to anyone in the faculty, so dropping the name reduces the
+  # exposure rather than ending it. That was Michel's call, made on
+  # 2026-10-25, and it is the right place to stop only while the consent
+  # round is running.
   #
   # No abstracts yet. They are in the theses and can be added; they were left
   # out rather than published truncated.
   - level: MSc
-    name: Timo Anthonijsz
     title: >
       Synthetic Data and Hybrid Embeddings for Entity Deduplication in
       Healthcare Organizational Knowledge Graphs
@@ -399,7 +419,6 @@ highlights:
       - Michel Dumontier
 
   - level: MSc
-    name: Sara Falahatkar
     title: >
       Benchmarking the Reasoning Capabilities of Large Language Models: a
       comprehensive framework for ontology-based evaluation
@@ -411,7 +430,6 @@ highlights:
       - Michel Dumontier
 
   - level: MSc
-    name: Ignacio Cadarso Quevedo
     title: Generating EHR data with unseen diseases using GANs and LLMs
     year: "2025"
     date: August 2025
@@ -422,7 +440,6 @@ highlights:
       - Michel Dumontier
 
   - level: MSc
-    name: Xingru Xu
     title: >
       Incorporating Clinical Practice Guidelines into Large Language Models
       for Leukaemia Treatment Recommendation
@@ -434,7 +451,6 @@ highlights:
       - Michel Dumontier
 
   - level: MSc
-    name: Kaspar Kallast
     title: Medical Models on Synthetically Generated Subgroup Data Samples
     year: "2025"
     date: January 2025
@@ -447,8 +463,8 @@ highlights:
   # BACHELOR'S THESES. Same source and same rules as the master's entries:
   # titles read off each thesis title page, student numbers left out.
   #
-  # YEARS ARE INFERRED from the file date in Michel's records, except
-  # Charlotte Donnelly's, whose Capstone states 4 June 2025 on the document.
+  # YEARS ARE INFERRED from the file date in Michel's records, except the
+  # UCM Capstone, which states 4 June 2025 on the document itself.
   # A DACS bachelor thesis title page carries no date. The file date is when
   # the finished thesis was filed, which is within days of the defence, but
   # these are inferences and worth a check.
@@ -463,17 +479,16 @@ highlights:
   # "Dumontier, Michel", "Dr. Chang Sun" and once "Rermzi Celebi". They are
   # normalised here so they resolve against people.yaml.
   #
-  # Five had no usable email record: Charlotte Donnelly and Alina Gavrish
-  # have none at all, and for Simonas Bubnys, Ilian Ariesen and Loris
-  # Podevyn the supervision section was not reached. Michel confirmed on
-  # 2026-10-23 that he supervised all five himself, so they are recorded on
-  # his word rather than from a document.
+  # Five had no usable email record: two have none at all, and for three the
+  # supervision section was not reached. Michel confirmed on 2026-10-23 that
+  # he supervised all five himself, so those are recorded on his word rather
+  # than from a document. Each is marked inline below, since the students are
+  # no longer named and cannot be listed here.
   #
   # Do not mine these emails further without care: they carry student ID
   # numbers and addresses, and at least one has a full grade transcript
   # attached.
   - level: BSc
-    name: Ana-Maria Martinescu
     title: Justification-Based Benchmark for Evaluating LLM Reasoning Under Noise
     year: "2026"
     date: 14 June 2026
@@ -481,7 +496,6 @@ highlights:
     supervisors: [Michel Dumontier]
 
   - level: BSc
-    name: Denisa-Elena Nastasa
     title: >
       An Interpretable Multi-Modal Transformer Framework for Parkinson's
       Disease Drug Repositioning Using Embeddings
@@ -493,7 +507,6 @@ highlights:
       - Remzi Celebi
 
   - level: BSc
-    name: Eve Michaux
     title: Automated Deep Phenotyping of Clinical Notes Using NLP and HPO Mapping
     year: "2026"
     date: 9 June 2026
@@ -502,7 +515,6 @@ highlights:
       - Chang Sun
 
   - level: BSc
-    name: Mikhail Belov
     title: Evaluating Saliency Methods in Medical Vision-Language Models
     year: "2026"
     date: 9 June 2026
@@ -512,7 +524,6 @@ highlights:
       - Chang Sun
 
   - level: BSc
-    name: Taha Ismet Koc
     title: >
       Structured Reasoning on Drug Efficacy: a neuro-symbolic approach
       combining LLMs and computational argumentation frameworks
@@ -524,7 +535,6 @@ highlights:
       - Michel Dumontier
 
   - level: BSc
-    name: Tunç Sabah
     title: >
       Distributional and Predictive Metrics Poorly Detect Causal Degradation:
       a reference-calibrated benchmark on Alzheimer's disease data
@@ -535,7 +545,6 @@ highlights:
       - Michel Dumontier
 
   - level: BSc
-    name: Daan Schar
     title: >
       Building a Foundation for Interoperable Hydrological Data: a SULO-based
       DAMO ontology for asset management
@@ -547,7 +556,6 @@ highlights:
       - Remzi Celebi
 
   - level: BSc
-    name: Sebastian Schmülling
     title: >
       Evaluating Prompting Methodologies for Generating Federated SPARQL
       Queries over Biomedical Knowledge Graphs
@@ -559,7 +567,6 @@ highlights:
       - Chang Sun
 
   - level: BSc
-    name: Alexandru Valah
     title: "Integrating KG-LLMs for Fitness Guidance: addressing mobility-related limitations"
     year: "2025"
     date: 27 June 2025
@@ -569,38 +576,40 @@ highlights:
       - Chang Sun
 
   - level: BSc
-    name: Charlotte Donnelly
     title: Evaluating AI-Generated Explanations in Dynamic Domains
     year: "2025"
     date: 4 June 2025
     programme: University College Maastricht (Capstone)
+    # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
+    # email was found for this one.
     supervisors:
       - Michel Dumontier
 
   - level: BSc
-    name: Simonas Bubnys
     title: >
       Drug-Target Interaction Prediction using Transformer Models and
       ATC Code-Based Stratification
     year: "2024"
     date: 20 June 2024
     programme: BSc Data Science and Artificial Intelligence
+    # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
+    # email was found for this one.
     supervisors:
       - Michel Dumontier
 
   - level: BSc
-    name: Alina Gavrish
     title: >
       Forecasting Banned Substances: leveraging GNN and explainable AI for
       sports anti-doping
     year: "2024"
     date: 20 June 2024
     programme: BSc Data Science and Artificial Intelligence
+    # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
+    # email was found for this one.
     supervisors:
       - Michel Dumontier
 
   - level: BSc
-    name: Simon Garland
     title: >
       ReAgents: uncertainty reasoning of large language model multi-agents
       within the field of drug repurposing
@@ -612,22 +621,24 @@ highlights:
       - Remzi Celebi
 
   - level: BSc
-    name: Ilian Ariesen
     title: >
       Large Language Models as Reasoner of Drug Efficacy: an investigation
       into justificatory capabilities
     year: "2024"
     date: 26 January 2024
     programme: BSc Data Science and Artificial Intelligence
+    # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
+    # email was found for this one.
     supervisors:
       - Michel Dumontier
 
   - level: BSc
-    name: Loris Podevyn
     title: Fine-tuning and Applying a Diffusion Model for Therapeutic Protein Design
     year: "2024"
     date: 10 January 2024
     programme: BSc Data Science and Artificial Intelligence
+    # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
+    # email was found for this one.
     supervisors:
       - Michel Dumontier
 
