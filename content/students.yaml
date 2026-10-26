@@ -15,9 +15,10 @@
 # Two rules for anything added:
 #   1. No named person without their knowledge, and no claim about a person
 #      they have not confirmed.
-#   1a. STUDENTS ARE NOT NAMED. The master's and bachelor's thesis entries
+#   1a. BACHELOR'S STUDENTS ARE NOT NAMED. Doctoral and master's theses are
+#      public documents and their authors are named. The bachelor's entries
 #      below carry title, year, programme and supervision, and no student
-#      name. See the note above the master's entries.
+#      name. See the note above the bachelor's entries.
 #   2. No number nobody will maintain. Salary scales, ECTS and cohort sizes go
 #      stale silently and are better linked than copied.
 #
@@ -28,6 +29,11 @@
 # `date` on a thesis entry is for ORDERING ONLY and is never displayed; the
 # cards show the year. Keep it accurate anyway, or entries within a year
 # will sort arbitrarily.
+#
+# `theme` on a thesis entry is a theme `id` from research.yaml, one per
+# entry. It drives the research-theme filter and the coloured tag on each
+# card. Use the id, not the title: titles are editorial and have changed.
+# An entry without one is still listed, but no theme filter will find it.
 #
 # Research themes and supervisors are NOT listed here. The page reads them from
 # research.yaml and people.yaml at render time, so they cannot drift.
@@ -288,6 +294,7 @@ highlights:
     name: Chang Sun
     title: Privacy-preserving personal data analysis
     year: "2022"
+    theme: federated
     date: 14 November 2022
     supervisors:
       - Michel Dumontier
@@ -314,6 +321,7 @@ highlights:
     name: Gijs Wijngaard
     title: Data and semantic reasoning in audio-language learning
     year: "2026"
+    theme: fair
     date: 7 September 2026
     supervisors:
       - Elia Formisano
@@ -350,6 +358,7 @@ highlights:
     name: Weiwei Wang
     title: Category data embedding
     year: "2025"
+    theme: fair
     date: 22 May 2025
     supervisors:
       - Michel Dumontier
@@ -383,35 +392,27 @@ highlights:
 
   # MASTER'S THESES. Not from Pure: Pure records no master's theses at all
   # (6 theses across 459 records in the group's feeds, all doctoral). These
-  # come from Michel's own records of completed supervisions, with titles,
-  # programmes, dates and committees read off the title page of each thesis.
+  # come from Michel's own records of completed supervisions, with names,
+  # titles, programmes, dates and committees read off the title page of each
+  # thesis.
   #
-  # NO STUDENT NAMES, AND NO STUDENT NUMBERS.
+  # NAMED, NO STUDENT NUMBERS. The numbers are on the title pages and were
+  # never recorded here.
   #
-  # The numbers are on the title pages and were never recorded here. The
-  # names were, until 2026-10-25, on the reasoning that a thesis and its
-  # defence are public. That holds for the doctoral theses above, which the
-  # university published with DOIs. It does not hold here: nothing published
-  # these, and none of the twenty students was asked whether they wanted
-  # their name on a research group's website. Michel is seeking informed
-  # consent from each.
-  #
-  # A name returns only when that student has agreed to it. Add `name:` back
-  # with the consent date in a comment beside it, one student at a time.
-  #
-  # Be aware of what the entry still is. Title, programme and year identify
-  # a student to anyone in the faculty, so dropping the name reduces the
-  # exposure rather than ending it. That was Michel's call, made on
-  # 2026-10-25, and it is the right place to stop only while the consent
-  # round is running.
+  # The names came off on 2026-10-25 and went back on 2026-10-26, when Michel
+  # established that a master's thesis is a public document: the author of
+  # one is named the way the authors of the doctoral theses above are. The
+  # bachelor's entries that follow are a separate question and stay nameless.
   #
   # No abstracts yet. They are in the theses and can be added; they were left
   # out rather than published truncated.
   - level: MSc
+    name: Timo Anthonijsz
     title: >
       Synthetic Data and Hybrid Embeddings for Entity Deduplication in
       Healthcare Organizational Knowledge Graphs
     year: "2025"
+    theme: fair
     date: 28 August 2025
     programme: MSc Artificial Intelligence
     committee:
@@ -419,10 +420,12 @@ highlights:
       - Michel Dumontier
 
   - level: MSc
+    name: Sara Falahatkar
     title: >
       Benchmarking the Reasoning Capabilities of Large Language Models: a
       comprehensive framework for ontology-based evaluation
     year: "2025"
+    theme: fair
     date: 24 August 2025
     programme: MSc Artificial Intelligence
     supervisors:
@@ -430,8 +433,10 @@ highlights:
       - Michel Dumontier
 
   - level: MSc
+    name: Ignacio Cadarso Quevedo
     title: Generating EHR data with unseen diseases using GANs and LLMs
     year: "2025"
+    theme: federated
     date: August 2025
     programme: MSc Data Science for Decision Making
     committee:
@@ -440,10 +445,12 @@ highlights:
       - Michel Dumontier
 
   - level: MSc
+    name: Xingru Xu
     title: >
       Incorporating Clinical Practice Guidelines into Large Language Models
       for Leukaemia Treatment Recommendation
     year: "2025"
+    theme: precision
     date: July 2025
     programme: MSc Data Science for Decision Making
     committee:
@@ -451,8 +458,10 @@ highlights:
       - Michel Dumontier
 
   - level: MSc
+    name: Kaspar Kallast
     title: Medical Models on Synthetically Generated Subgroup Data Samples
     year: "2025"
+    theme: federated
     date: January 2025
     programme: MSc Artificial Intelligence
     committee:
@@ -460,8 +469,19 @@ highlights:
       - Mahmoud Ibrahim
       - Chang Sun
 
-  # BACHELOR'S THESES. Same source and same rules as the master's entries:
-  # titles read off each thesis title page, student numbers left out.
+  # BACHELOR'S THESES. Same source as the master's entries: titles read off
+  # each thesis title page, student numbers left out.
+  #
+  # NOT NAMED, unlike the master's and doctoral entries above. A bachelor's
+  # thesis is not published, and none of these fifteen students was asked
+  # whether they wanted their name on a research group's website. Michel is
+  # seeking informed consent. A name goes in only once that student has
+  # agreed, with the consent date in a comment beside it.
+  #
+  # Dropping the name reduces the exposure rather than ending it: title,
+  # programme and year still identify a student to anyone in the faculty.
+  # The page says nothing about the names being held back, because saying so
+  # would read as consent refused, which is not what happened.
   #
   # YEARS ARE INFERRED from the file date in Michel's records, except the
   # UCM Capstone, which states 4 June 2025 on the document itself.
@@ -491,6 +511,7 @@ highlights:
   - level: BSc
     title: Justification-Based Benchmark for Evaluating LLM Reasoning Under Noise
     year: "2026"
+    theme: fair
     date: 14 June 2026
     programme: Maastricht Science Programme
     supervisors: [Michel Dumontier]
@@ -500,6 +521,7 @@ highlights:
       An Interpretable Multi-Modal Transformer Framework for Parkinson's
       Disease Drug Repositioning Using Embeddings
     year: "2026"
+    theme: bioinfo
     date: 12 June 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -509,6 +531,7 @@ highlights:
   - level: BSc
     title: Automated Deep Phenotyping of Clinical Notes Using NLP and HPO Mapping
     year: "2026"
+    theme: precision
     date: 9 June 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -517,6 +540,7 @@ highlights:
   - level: BSc
     title: Evaluating Saliency Methods in Medical Vision-Language Models
     year: "2026"
+    theme: nlp
     date: 9 June 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -528,6 +552,7 @@ highlights:
       Structured Reasoning on Drug Efficacy: a neuro-symbolic approach
       combining LLMs and computational argumentation frameworks
     year: "2026"
+    theme: fair
     date: 9 June 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -539,6 +564,7 @@ highlights:
       Distributional and Predictive Metrics Poorly Detect Causal Degradation:
       a reference-calibrated benchmark on Alzheimer's disease data
     year: "2026"
+    theme: nlp
     date: 21 August 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -549,6 +575,7 @@ highlights:
       Building a Foundation for Interoperable Hydrological Data: a SULO-based
       DAMO ontology for asset management
     year: "2025"
+    theme: fair
     date: 25 August 2025
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -560,6 +587,7 @@ highlights:
       Evaluating Prompting Methodologies for Generating Federated SPARQL
       Queries over Biomedical Knowledge Graphs
     year: "2025"
+    theme: fair
     date: 30 June 2025
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -569,6 +597,7 @@ highlights:
   - level: BSc
     title: "Integrating KG-LLMs for Fitness Guidance: addressing mobility-related limitations"
     year: "2025"
+    theme: precision
     date: 27 June 2025
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -578,6 +607,7 @@ highlights:
   - level: BSc
     title: Evaluating AI-Generated Explanations in Dynamic Domains
     year: "2025"
+    theme: nlp
     date: 4 June 2025
     programme: University College Maastricht (Capstone)
     # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
@@ -590,6 +620,7 @@ highlights:
       Drug-Target Interaction Prediction using Transformer Models and
       ATC Code-Based Stratification
     year: "2024"
+    theme: bioinfo
     date: 20 June 2024
     programme: BSc Data Science and Artificial Intelligence
     # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
@@ -602,6 +633,7 @@ highlights:
       Forecasting Banned Substances: leveraging GNN and explainable AI for
       sports anti-doping
     year: "2024"
+    theme: bioinfo
     date: 20 June 2024
     programme: BSc Data Science and Artificial Intelligence
     # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
@@ -614,6 +646,7 @@ highlights:
       ReAgents: uncertainty reasoning of large language model multi-agents
       within the field of drug repurposing
     year: "2024"
+    theme: bioinfo
     date: 20 June 2024
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -625,6 +658,7 @@ highlights:
       Large Language Models as Reasoner of Drug Efficacy: an investigation
       into justificatory capabilities
     year: "2024"
+    theme: fair
     date: 26 January 2024
     programme: BSc Data Science and Artificial Intelligence
     # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
@@ -635,6 +669,7 @@ highlights:
   - level: BSc
     title: Fine-tuning and Applying a Diffusion Model for Therapeutic Protein Design
     year: "2024"
+    theme: bioinfo
     date: 10 January 2024
     programme: BSc Data Science and Artificial Intelligence
     # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan

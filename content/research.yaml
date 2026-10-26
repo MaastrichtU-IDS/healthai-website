@@ -1,7 +1,11 @@
+# `short` is a chip-length label for the same theme, used where the full
+# title will not fit: the filter chips and card tags on students.html.
+# It is display only. `id` is what other files reference.
 themes:
   - id: precision
     number: "01"
     title: Precision Medicine & Digital Health
+    short: Precision Medicine
     icon: "◎"
     leads: [Konstantia Zarkogianni, Remzi Celebi, Chang Sun, Pietro Bonizzi, Visara Urovi, Michel Dumontier]
     desc: >
@@ -15,6 +19,7 @@ themes:
   - id: agriculture
     number: "02"
     title: Precision Agriculture, Food & Health
+    short: "Agriculture & Food"
     icon: "⌇"
     leads: [Aikaterina Kasimati,Christopher Brewster]
     desc: >
@@ -26,6 +31,7 @@ themes:
   - id: bioinfo
     number: "03"
     title: Computational Biology & Bioinformatics
+    short: Computational Biology
     icon: "⌬"
     leads: [Rachel Cavill, Denise Slenter]
     desc: >
@@ -39,6 +45,7 @@ themes:
   - id: fair
     number: "04"
     title: Neurosymbolic AI
+    short: Neurosymbolic AI
     icon: "◈"
     leads: [Michel Dumontier, Remzi Celebi, Denise Slenter]
     desc: >
@@ -53,6 +60,7 @@ themes:
   - id: federated
     number: "05"
     title: Federated & Privacy-Preserving AI
+    short: "Federated & Privacy"
     icon: "⊞"
     leads: [Visara Urovi, Chang Sun]
     desc: >
@@ -66,6 +74,7 @@ themes:
   - id: nlp
     number: "05"
     title: Regulatory AI
+    short: Regulatory AI
     icon: "❋"
     leads: [Rohan Nanda, Michel Dumontier]
     desc: >
