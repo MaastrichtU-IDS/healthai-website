@@ -45,7 +45,10 @@
     .ftable { display: grid; grid-template-columns: auto 1fr; border-top: 1px solid var(--border); margin-bottom: 28px; }
     .frow { display: contents; }
     .frow > .flabel, .frow > .fcells { border-bottom: 1px solid var(--border); padding: 8px 0; }
-    .frow > .flabel { padding-right: 18px; white-space: nowrap; align-self: center; }
+    /* The label cell must STRETCH to the row's height, or its bottom border
+       sits above the chips' and the two halves of the rule stop lining up.
+       The text is centred inside the stretched cell instead. */
+    .frow > .flabel { padding-right: 18px; white-space: nowrap; display: flex; flex-direction: column; justify-content: center; }
     .frow > .fcells { min-width: 0; }
     .flabel { font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-light); font-weight: 600; }
     .flabel .hint { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--text-muted); display: block; margin-top: 1px; font-size: 0.68rem; }
