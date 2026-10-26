@@ -24,6 +24,136 @@
     .sticky-subnav a:hover { color: var(--slate); }
     .sticky-subnav a.active { color: var(--slate); border-bottom-color: var(--slate); font-weight: 600; }
 
+    /* ── Research theme hues ───────────────────────────────────────────────
+       One per theme id in research.yaml, kept near the house teal in
+       saturation so six together still read as one palette. Colour is the
+       only link between a theme chip and the tag on every card it matches,
+       so these are page furniture rather than decoration. Keyed by id: the
+       titles are editorial and have changed, the ids have not. */
+    :root {
+      --t-precision:   #2e8fa0;
+      --t-agriculture: #5a8a46;
+      --t-bioinfo:     #7a5aa6;
+      --t-fair:        #3a6ea5;
+      --t-federated:   #a1526c;
+      --t-nlp:         #b4791f;
+    }
+
+    /* ── Filter table ──────────────────────────────────────────────────────
+       Rows rather than one run-on bar: five dimensions side by side need a
+       label each, or nobody can tell a level chip from a theme chip. */
+    .ftable { display: grid; grid-template-columns: auto 1fr; border-top: 1px solid var(--border); margin-bottom: 28px; }
+    .frow { display: contents; }
+    .frow > .flabel, .frow > .fcells { border-bottom: 1px solid var(--border); padding: 8px 0; }
+    .frow > .flabel { padding-right: 18px; white-space: nowrap; align-self: center; }
+    .frow > .fcells { min-width: 0; }
+    .flabel { font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-light); font-weight: 600; }
+    .flabel .hint { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--text-muted); display: block; margin-top: 1px; font-size: 0.68rem; }
+
+    /* Extends the shared .chip with a count, a disabled state and per-theme
+       colour. `.active` and the base look stay in styles.css. */
+    .ftable .chip { display: inline-flex; gap: 6px; align-items: baseline; font-family: inherit; }
+    .ftable .chip .n { font-size: 0.68rem; color: var(--text-light); font-variant-numeric: tabular-nums; }
+    .ftable .chip.active .n { color: var(--blue-mid); }
+    .ftable .chip:disabled { opacity: 0.42; cursor: not-allowed; }
+    .ftable .chip:disabled:hover { border-color: var(--border); color: var(--text-muted); background: var(--white); }
+    /* Dotted = not in people.yaml, so the name has no profile to link to. */
+    .ftable .chip.ext { border-style: dotted; }
+    .ftable .chip.themed { color: var(--c); border-color: color-mix(in srgb, var(--c) 32%, white); }
+    .ftable .chip.themed:hover:not(:disabled) { background: color-mix(in srgb, var(--c) 9%, white); border-color: var(--c); color: var(--c); }
+    .ftable .chip.themed.active { background: color-mix(in srgb, var(--c) 13%, white); border-color: var(--c); color: var(--c); }
+    .ftable .chip.themed .n { color: color-mix(in srgb, var(--c) 55%, white); }
+    .ftable .chip.themed.active .n { color: var(--c); }
+
+    .tally { font-size: 0.82rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .tally b { color: var(--slate); font-weight: 600; }
+    .linkbtn {
+      font-size: 0.78rem; color: var(--blue-mid); background: none; border: none;
+      cursor: pointer; padding: 4px 2px; font-family: inherit;
+      text-decoration: underline; text-underline-offset: 2px;
+    }
+
+    /* Year: a box for one year, a two-handle range for a span. Both write to
+       the same closed range, so they cannot disagree. */
+    .yearctl { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .yr-box {
+      width: 92px; padding: 6px 10px; border-radius: 7px; border: 1.5px solid var(--border);
+      font-family: inherit; font-size: 0.82rem; color: var(--text);
+      background: var(--white); font-variant-numeric: tabular-nums;
+    }
+    .yr-box:focus { outline: none; border-color: var(--blue); }
+    .yr-box.bad { border-color: #a1526c; }
+    /* Two range inputs stacked on one track. Each is transparent to the
+       pointer except its own thumb, so whichever handle you press moves. */
+    .range { position: relative; width: min(230px, 100%); height: 28px; flex: none; }
+    .range .track, .range .fill { position: absolute; top: 12px; height: 4px; border-radius: 2px; }
+    .range .track { left: 0; right: 0; background: var(--border-mid); }
+    .range .fill { background: var(--blue); }
+    .range input[type=range] {
+      position: absolute; inset: 0; width: 100%; height: 28px; margin: 0;
+      background: none; pointer-events: none; -webkit-appearance: none; appearance: none;
+    }
+    .range input[type=range]:focus { outline: none; }
+    .range input[type=range]::-webkit-slider-runnable-track { height: 28px; background: none; }
+    .range input[type=range]::-moz-range-track { height: 28px; background: none; }
+    .range input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; pointer-events: auto;
+      width: 16px; height: 16px; margin-top: 6px; border-radius: 50%;
+      background: var(--white); border: 2px solid var(--blue);
+      box-shadow: 0 1px 3px rgba(30,45,61,0.25); cursor: grab;
+    }
+    .range input[type=range]::-moz-range-thumb {
+      pointer-events: auto; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--white); border: 2px solid var(--blue);
+      box-shadow: 0 1px 3px rgba(30,45,61,0.25); cursor: grab;
+    }
+    .yspan { font-size: 0.82rem; color: var(--slate); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+    /* ── Result cards ── */
+    .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); gap: 18px; }
+    .work-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 17px 18px 15px; box-shadow: var(--card-shadow);
+      display: flex; flex-direction: column; gap: 9px;
+      transition: all var(--transition); min-width: 0;
+    }
+    .work-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+    .work-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .work-year { font-size: 0.76rem; color: var(--text-light); font-variant-numeric: tabular-nums; font-weight: 500; }
+    .work-title { font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.35; color: var(--slate); font-weight: 600; }
+    .work-who { font-size: 0.86rem; color: var(--text); font-weight: 500; }
+    .work-meta { font-size: 0.79rem; color: var(--text-muted); line-height: 1.55; }
+    /* The role label carries the supervisor/examiner distinction, so it is
+       set in the slate rather than left to fade into the rest of the line. */
+    .work-meta .role { color: var(--slate-mid); font-weight: 600; }
+    .work-meta strong, .work-meta strong a { color: var(--slate); font-weight: 700; }
+    .work-foot {
+      margin-top: auto; padding-top: 9px; border-top: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+    }
+    .theme-tag {
+      font-size: 0.7rem; padding: 3px 9px; border-radius: 5px;
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--c); background: color-mix(in srgb, var(--c) 10%, white);
+      border: 1px solid color-mix(in srgb, var(--c) 26%, white);
+    }
+    .theme-tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--c); flex: none; }
+    /* The site's base rule is `a { color: inherit; text-decoration: none }`,
+       so a profile link inside a card is indistinguishable from plain text
+       without this. The rule doubles as the signal for which supervisors
+       have a profile, matching the dotted chips for those who do not. */
+    .work-who a, .work-meta a { border-bottom: 1px solid var(--border-mid); }
+    .work-who a:hover, .work-meta a:hover { color: var(--blue-mid); border-bottom-color: var(--blue); }
+    .work-title a:hover { color: var(--blue-mid); }
+    .work-doi { font-size: 0.68rem; font-family: ui-monospace, monospace; color: var(--text-light); margin-left: auto; }
+    .work-doi:hover { color: var(--blue-mid); text-decoration: underline; text-underline-offset: 2px; }
+    .work-empty {
+      border: 1.5px dashed var(--border-mid); border-radius: var(--radius-lg);
+      padding: 34px 24px; text-align: center; background: var(--bg-alt);
+    }
+    .work-empty h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    .work-empty p { color: var(--text-muted); font-size: 0.88rem; max-width: 54ch; margin: 0 auto; }
+
     .phil-row { display:flex; gap:24px; align-items:flex-start; padding:22px 0; border-bottom:1px solid var(--border); }
     .phil-icon { width:46px; height:46px; border-radius:10px; flex-shrink:0; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
     .phil-row h4 { font-size:0.97rem; margin-bottom:6px; }
@@ -53,19 +183,18 @@
     .track-more { font-size:0.8rem; font-weight:600; color:var(--blue); }
 
     .track-sub { font-size:0.95rem; margin-bottom:10px; }
-    .thesis-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--card-shadow); transition:all var(--transition); margin-bottom:18px; }
-    .thesis-card:hover { box-shadow:var(--card-shadow-hover); transform:translateY(-2px); }
-    .thesis-title { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; color:var(--slate); margin-bottom:6px; }
-    .thesis-meta { font-size:0.8rem; color:var(--text-muted); margin-bottom:12px; }
-    .thesis-abstract { font-size:0.86rem; margin:10px 0 12px; }
-    .thesis-doi { font-size:0.74rem; color:var(--text-muted); font-family:monospace; }
     /* <details> gives open/closed, keyboard access and find-in-page for free. */
-    .thesis-details { margin-bottom:12px; }
-    .thesis-details > summary { cursor:pointer; font-size:0.8rem; font-weight:600; color:var(--blue); list-style:none; display:inline-flex; align-items:center; gap:6px; }
-    .thesis-details > summary::-webkit-details-marker { display:none; }
-    .thesis-details > summary::before { content:'▸'; font-size:0.7rem; transition:transform var(--transition); }
-    .thesis-details[open] > summary::before { transform:rotate(90deg); }
+    .work-details > summary { cursor:pointer; font-size:0.78rem; font-weight:600; color:var(--blue); list-style:none; display:inline-flex; align-items:center; gap:6px; }
+    .work-details > summary::-webkit-details-marker { display:none; }
+    .work-details > summary::before { content:'▸'; font-size:0.7rem; transition:transform var(--transition); }
+    .work-details[open] > summary::before { transform:rotate(90deg); }
+    .work-details .body { font-size:0.84rem; color:var(--text-muted); margin-top:8px; }
     .route-note { font-size:0.78rem; color:var(--text-muted); margin-top:10px; padding-left:10px; border-left:2px solid var(--border); }
+
+    @media (max-width: 640px) {
+      .ftable { grid-template-columns: 1fr; }
+      .frow > .flabel { border-bottom: none; padding: 10px 0 3px; }
+    }
   </style>
 </head>
 <body class="page-body">
@@ -82,7 +211,8 @@
 
 <nav class="sticky-subnav">
   <div class="sticky-subnav-inner">
-    <a href="#bachelor" class="active">Bachelor's</a>
+    <a href="#work" class="active">Projects &amp; theses</a>
+    <a href="#bachelor">Bachelor's</a>
     <a href="#master">Master's</a>
     <a href="#phd">PhD</a>
   </div>
@@ -91,8 +221,56 @@
 <div class="loading" id="loading" style="padding:80px 0"><div class="spinner"></div> Loading…</div>
 <div id="studentPage" class="hidden">
 
-<section id="tracksOverview" style="scroll-margin-top:120px">
+<section id="work" style="scroll-margin-top:120px">
   <div class="container">
+    <div class="section-header" style="margin-bottom:26px">
+      <span class="section-label">Find a project</span>
+      <h2>Projects and theses</h2>
+      <p>Every thesis the group has supervised, and the projects open now. Filter by what you want to do, at what level, in which research theme.</p>
+    </div>
+
+    <div class="filter-bar" style="margin-bottom:14px">
+      <input class="search-input" id="q" type="search" placeholder="Search titles, people, programmes…" autocomplete="off" aria-label="Search projects and theses" />
+      <span class="tally" id="tally"></span>
+      <button class="linkbtn" id="clearAll" hidden>Clear filters</button>
+    </div>
+
+    <div class="ftable">
+      <div class="frow"><div class="flabel">Kind</div><div class="fcells"><div class="filter-chips" id="f-kind"></div></div></div>
+      <div class="frow"><div class="flabel">Level</div><div class="fcells"><div class="filter-chips" id="f-level"></div></div></div>
+      <div class="frow"><div class="flabel">Research theme</div><div class="fcells"><div class="filter-chips" id="f-theme"></div></div></div>
+      <div class="frow">
+        <div class="flabel">Year<span class="hint">one year, or a span</span></div>
+        <div class="fcells">
+          <div class="yearctl">
+            <input class="yr-box" id="yrExact" type="number" inputmode="numeric" step="1" placeholder="Year" aria-label="Show one exact year" />
+            <div class="range">
+              <div class="track"></div><div class="fill" id="yFill"></div>
+              <input type="range" id="yFrom" step="1" aria-label="Earliest year included" />
+              <input type="range" id="yTo" step="1" aria-label="Latest year included" />
+            </div>
+            <span class="yspan" id="ySpan"></span>
+            <button class="linkbtn" id="yReset" hidden>All years</button>
+          </div>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="flabel">Supervisor<span class="hint">supervised + committee · dotted = outside the group</span></div>
+        <div class="fcells"><div class="filter-chips" id="f-sup"></div></div>
+      </div>
+    </div>
+
+    <div class="work-grid" id="workGrid"></div>
+    <div id="workEmpty"></div>
+  </div>
+</section>
+
+<section id="tracksOverview" class="alt">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:34px">
+      <span class="section-label">How to get onto one</span>
+      <h2>Join us at any level</h2>
+    </div>
     <div class="grid grid-3" id="trackCards"></div>
   </div>
 </section>
@@ -105,26 +283,29 @@
 (async () => {
   // Themes and supervisors are read from the files that already own them, so
   // this page cannot drift out of step with research.html and people.html.
-  // people.yaml is still needed: thesis cards resolve student and supervisor
-  // names to profile links. research.yaml is not, now that the themes
-  // section has gone.
-  const [data, people] = await Promise.all([
+  // research.yaml gives the theme filter its names and order; people.yaml
+  // resolves student and supervisor names to profile links.
+  const [data, people, research] = await Promise.all([
     CMS.load('content/students.yaml'),
     CMS.load('content/people.yaml'),
+    CMS.load('content/research.yaml'),
   ]);
   document.getElementById('loading').remove();
   document.getElementById('studentPage').classList.remove('hidden');
 
+  const $ = id => document.getElementById(id);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c =>
     ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
   const txt = s => esc(String(s || '').trim());
 
-  document.getElementById('heroLead').textContent = (data.intro || '').trim();
+  $('heroLead').textContent = (data.intro || '').trim();
 
   // Resolve a name against people.yaml so it links to that person's profile,
   // and leave it as plain text when it matches nobody -- better a plain name
-  // than a link to "not found". Used by the thesis cards.
+  // than a link to "not found". Supervisors outside the group, and students,
+  // render as plain text, which is correct.
   const byName = new Map((people || []).map(p => [String(p.name).trim(), p]));
+  const inGroup = n => byName.has(String(n).trim());
   const linkName = n => {
     const p = byName.get(String(n).trim());
     return p && p.slug
@@ -138,12 +319,275 @@
   // programme to a track and what CMS.levelClass styles on.
   const LEVEL_LABEL = { BSc: 'Bachelor', MSc: 'Masters', PhD: 'PhD' };
   const levelLabel = l => LEVEL_LABEL[l] || l;
+  // Mid-sentence the chip labels do not read: "phd theses" and "masters
+  // theses" both want an apostrophe or a capital that the chip does not.
+  const LEVEL_NOUN = { BSc: "bachelor's", MSc: "master's", PhD: 'PhD' };
+
+  /* ── Themes ───────────────────────────────────────────────────────────
+     Keyed by the research.yaml id. A theme with no entries yet keeps its
+     chip, dimmed, so the gap reads as waiting rather than missing. */
+  const THEMES = (research.themes || []).map(t => ({
+    id: t.id,
+    title: String(t.title || '').trim(),
+    short: String(t.short || t.title || '').trim(),
+  }));
+  const themeById = new Map(THEMES.map(t => [t.id, t]));
+  const hue = id => `var(--t-${id})`;
+
+  /* ── One flat list of everything the finder shows ─────────────────────
+     Completed theses come from `highlights`, open projects from
+     `project_listing.open`. They share a shape so one filter serves both.
+     `supervisors` and `committee` are kept apart: a doctoral record names
+     supervisors, a master's title page names a committee that includes
+     examiners, and calling both supervision would misattribute. */
+  const when = h => Date.parse(h.date || '') || Number(h.year) || 0;
+  const theses = (data.highlights || []).map(h => ({
+    kind: 'thesis',
+    level: h.level || '',
+    title: String(h.title || '').trim(),
+    name: h.name || '',
+    year: h.year ? Number(h.year) : null,
+    programme: h.programme || '',
+    sup: h.supervisors || [],
+    cttee: h.committee || [],
+    theme: h.theme || '',
+    doi: h.doi || '',
+    url: h.url || '',
+    body: String(h.abstract || '').trim(),
+    bodyLabel: h.abstract_label || 'Abstract',
+    sort: when(h),
+  })).sort((a, b) => b.sort - a.sort);
+
+  // Empty today: DACS publishes project descriptions in Canvas. The shape is
+  // here so adding entries to `project_listing.open` is all it takes.
+  const ideas = ((data.project_listing || {}).open || []).map(o => ({
+    kind: 'idea',
+    level: o.level || '',
+    title: String(o.title || '').trim(),
+    name: '',
+    year: null,
+    programme: o.programme || '',
+    sup: o.supervisor ? [o.supervisor] : (o.supervisors || []),
+    cttee: [],
+    theme: o.theme || '',
+    doi: '', url: o.url || '',
+    body: String(o.desc || '').trim(),
+    bodyLabel: 'About this project',
+    sort: 0,
+  }));
+
+  const ITEMS = [...ideas, ...theses];
+  ITEMS.forEach(d => {
+    d.people = [...d.sup, ...d.cttee];
+    d.hay = [d.title, d.name, d.programme, (themeById.get(d.theme) || {}).title,
+             d.people.join(' '), d.year, d.body].join(' ').toLowerCase();
+  });
+
+  const KINDS  = [['thesis', 'Completed theses'], ['idea', 'Project ideas']];
+  const LEVELS = [['BSc', 'Bachelor'], ['MSc', 'Masters'], ['PhD', 'PhD']];
+  const YEARS  = theses.map(d => d.year).filter(Boolean);
+  const Y0 = Math.min(...YEARS), Y1 = Math.max(...YEARS);
+
+  // Supervised and examined are counted separately per person: the two are
+  // different claims about the same name, and some people do both.
+  const ROLES = {};
+  ITEMS.forEach(d => {
+    d.sup.forEach(n => ((ROLES[n] = ROLES[n] || { s: 0, c: 0 }).s++));
+    d.cttee.forEach(n => ((ROLES[n] = ROLES[n] || { s: 0, c: 0 }).c++));
+  });
+  const PEOPLE = Object.keys(ROLES)
+    .sort((a, b) => (ROLES[b].s + ROLES[b].c) - (ROLES[a].s + ROLES[a].c) || a.localeCompare(b))
+    .map(n => [n, n, inGroup(n) ? '' : 'ext']);
+
+  /* ── Filter state ─────────────────────────────────────────────────────
+     Each chip group holds a Set; empty means no constraint. Within a group
+     the values are ORed, across groups ANDed, which is what multi-select has
+     to mean for the counts to stay honest: picking Bachelor as well as
+     Masters can only widen the result, never narrow it. Year is the
+     exception, a closed range. An item with no year, which is every open
+     project, is never excluded by it. */
+  const F = { kind: new Set(), level: new Set(), theme: new Set(), sup: new Set(), from: Y0, to: Y1 };
+  const DIMS = { kind: d => d.kind, level: d => d.level, theme: d => d.theme, sup: d => d.people };
+
+  function match(d, f) {
+    for (const dim in DIMS) {
+      const sel = f[dim];
+      if (!sel.size) continue;
+      const v = DIMS[dim](d);
+      const hit = Array.isArray(v) ? v.some(x => sel.has(x)) : sel.has(v);
+      if (!hit) return false;
+    }
+    if (d.year != null && (d.year < f.from || d.year > f.to)) return false;
+    const q = $('q').value.trim().toLowerCase();
+    return !q || d.hay.includes(q);
+  }
+
+  // A chip's count is how many items carrying that one value survive the
+  // OTHER groups' filters, so the number answers "what would this chip give
+  // me" rather than standing still at a lifetime total.
+  const rowsFor = (dim, val) => ITEMS.filter(d => match(d, { ...F, [dim]: new Set([val]) }));
+
+  // A supervisor chip splits the same way: 4+3 is four supervised, three on
+  // the committee, among whatever the other filters have left.
+  function splitFor(name) {
+    const r = rowsFor('sup', name).reduce((a, d) => {
+      if (d.sup.includes(name)) a.s++;
+      if (d.cttee.includes(name)) a.c++;
+      return a;
+    }, { s: 0, c: 0 });
+    return r.s && r.c ? `${r.s}+${r.c}` : String(r.s + r.c);
+  }
+
+  function chipRow(id, dim, pairs, keepAtZero) {
+    $(id).innerHTML = pairs.map(([val, label, cls]) => {
+      const n = rowsFor(dim, val).length;
+      const on = F[dim].has(val);
+      const themed = dim === 'theme';
+      const shown = dim === 'sup' ? splitFor(val) : String(n);
+      const title = dim === 'sup'
+        ? ` title="${ROLES[val].s} supervised, ${ROLES[val].c} on the committee, across all years"`
+        : themed ? ` title="${esc(themeById.get(val).title)}"` : '';
+      return `<button class="chip${on ? ' active' : ''}${themed ? ' themed' : ''}${cls ? ' ' + cls : ''}"
+        ${themed ? `style="--c:${hue(val)}"` : ''}${title}
+        data-dim="${dim}" data-val="${esc(val)}" aria-pressed="${on}"
+        ${n === 0 && !on && !keepAtZero ? 'disabled' : ''}>${esc(label)}<span class="n">${shown}</span></button>`;
+    }).join('');
+  }
+
+  function drawChips() {
+    // Kind stays clickable at zero: "no project ideas yet" is the point.
+    chipRow('f-kind', 'kind', KINDS, true);
+    chipRow('f-level', 'level', LEVELS);
+    chipRow('f-theme', 'theme', THEMES.map(t => [t.id, t.short]));
+    chipRow('f-sup', 'sup', PEOPLE);
+    document.querySelectorAll('.ftable .chip').forEach(b => {
+      b.onclick = () => {
+        const set = F[b.dataset.dim], v = b.dataset.val;
+        set.has(v) ? set.delete(v) : set.add(v);
+        render();
+      };
+    });
+  }
+
+  const pct = v => Y1 === Y0 ? 0 : (v - Y0) / (Y1 - Y0) * 100;
+
+  function drawYear() {
+    $('yFrom').value = F.from; $('yTo').value = F.to;
+    $('yFill').style.left = pct(F.from) + '%';
+    $('yFill').style.right = (100 - pct(F.to)) + '%';
+    $('ySpan').textContent = F.from === F.to ? F.from : `${F.from} – ${F.to}`;
+    $('yReset').hidden = F.from === Y0 && F.to === Y1;
+    if (document.activeElement !== $('yrExact'))
+      $('yrExact').value = F.from === F.to ? F.from : '';
+  }
+
+  function initYear() {
+    ['yFrom', 'yTo'].forEach(id => {
+      const r = $(id); r.min = Y0; r.max = Y1;
+      r.oninput = () => {
+        const v = Number(r.value);
+        // Clamp rather than swap: a dragged handle never jumps past its partner.
+        if (id === 'yFrom') F.from = Math.min(v, F.to); else F.to = Math.max(v, F.from);
+        render();
+      };
+    });
+    const box = $('yrExact');
+    box.min = Y0; box.max = Y1;
+    box.oninput = () => {
+      const v = box.value.trim();
+      box.classList.remove('bad');
+      if (v === '') { F.from = Y0; F.to = Y1; return render(); }
+      const y = Number(v);
+      if (!Number.isInteger(y) || y < Y0 || y > Y1) { box.classList.add('bad'); return; }
+      F.from = F.to = y;
+      render();
+    };
+    $('yReset').onclick = () => {
+      F.from = Y0; F.to = Y1;
+      box.value = ''; box.classList.remove('bad');
+      render();
+    };
+  }
+
+  // A name the filter is currently on goes bold, so you can see which role
+  // that person held on each card without reading the whole line.
+  const nameList = ns => ns.map(n =>
+    F.sup.has(n) ? `<strong>${linkName(n)}</strong>` : linkName(n)).join(', ');
+
+  function card(d) {
+    const th = themeById.get(d.theme);
+    // Prefer the DOI: it is the persistent identifier and resolves to the
+    // same CRIS page the portal URL points at, so linking both would be two
+    // links to one destination.
+    const href = d.doi ? 'https://doi.org/' + d.doi : d.url;
+    return `<article class="work-card">
+      <div class="work-top">
+        <span class="level-badge ${CMS.levelClass(d.level)}">${esc(levelLabel(d.level))}</span>
+        <span class="work-year">${d.year || (d.kind === 'idea' ? 'Open now' : '')}</span>
+      </div>
+      <h3 class="work-title">${href
+        ? `<a href="${esc(href)}" target="_blank" rel="noopener">${txt(d.title)}</a>`
+        : txt(d.title)}</h3>
+      ${/* `name` is present on doctoral and master's entries. Bachelor's
+           students are not named, so the element drops out rather than
+           rendering empty. See content/students.yaml. */''}
+      ${d.name ? `<div class="work-who">${linkName(d.name)}</div>` : ''}
+      <div class="work-meta">
+        ${d.programme ? txt(d.programme) + '<br>' : ''}
+        ${d.sup.length ? `<span class="role">Supervised by</span> ${nameList(d.sup)}` : ''}
+        ${d.sup.length && d.cttee.length ? '<br>' : ''}
+        ${d.cttee.length ? `<span class="role">Thesis committee</span> ${nameList(d.cttee)}` : ''}
+      </div>
+      ${d.body ? `<details class="work-details">
+          <summary>${esc(d.bodyLabel)}</summary>
+          <div class="body">${txt(d.body)}</div>
+        </details>` : ''}
+      <div class="work-foot">
+        ${th ? `<span class="theme-tag" style="--c:${hue(th.id)}" title="${esc(th.title)}">${esc(th.short)}</span>` : ''}
+        ${d.doi ? `<a class="work-doi" href="https://doi.org/${esc(d.doi)}" target="_blank" rel="noopener">${esc(d.doi)}</a>` : ''}
+      </div>
+    </article>`;
+  }
+
+  function render() {
+    drawChips();
+    drawYear();
+    const rows = ITEMS.filter(d => match(d, F));
+    $('workGrid').innerHTML = rows.map(card).join('');
+
+    const chosen = F.kind.size + F.level.size + F.theme.size + F.sup.size;
+    const any = chosen || F.from !== Y0 || F.to !== Y1 || $('q').value.trim();
+    $('clearAll').hidden = !any;
+    $('tally').innerHTML = `<b>${rows.length}</b> of ${ITEMS.length}` + (any ? ' shown' : '');
+
+    $('workEmpty').innerHTML = rows.length ? '' :
+      (F.kind.has('idea') && F.kind.size === 1)
+        ? `<div class="work-empty"><h3>No project ideas are listed here yet</h3>
+            <p>DACS posts bachelor's and master's project descriptions in Canvas, where only
+            enrolled students can see them. Until they are listed here as well, write to the
+            supervisor whose work interests you.</p></div>`
+        : `<div class="work-empty"><h3>Nothing matches those filters</h3>
+            <p>Try removing one. Research theme and year together are the pair most likely to
+            come up empty.</p></div>`;
+  }
+
+  $('q').oninput = render;
+  $('clearAll').onclick = () => {
+    ['kind', 'level', 'theme', 'sup'].forEach(k => F[k].clear());
+    F.from = Y0; F.to = Y1;
+    $('q').value = '';
+    $('yrExact').value = ''; $('yrExact').classList.remove('bad');
+    render();
+  };
+
+  initYear();
+  render();
 
   const tracks = data.tracks || [];
   const progs = data.programmes || [];
 
   /* Overview cards: one per level, linking down to its own section. */
-  document.getElementById('trackCards').innerHTML = tracks.map((t, i) => `
+  $('trackCards').innerHTML = tracks.map((t, i) => `
     <a class="track-card reveal" data-delay="${i * 55}" href="#${esc(t.id)}">
       <span class="level-badge ${CMS.levelClass(t.level)}">${esc(levelLabel(t.level))}</span>
       <h4>${txt(t.title)}</h4>
@@ -153,8 +597,10 @@
 
   /* One full section per level: the work, then the route, then the
      programmes that feed it. The PhD track has no programme_level, because
-     there is no enrolment route into a PhD -- it runs on funded positions. */
-  document.getElementById('trackSections').innerHTML = tracks.map((t, ti) => {
+     there is no enrolment route into a PhD -- it runs on funded positions.
+     Completed theses are not repeated here: the finder at the top of the
+     page holds all of them, and each section links up to it pre-filtered. */
+  $('trackSections').innerHTML = tracks.map((t, ti) => {
     const mine = progs.filter(p => t.programme_level && p.level === t.programme_level);
     const progHtml = mine.length ? `
       <h3 class="track-sub">Programmes that lead here</h3>
@@ -180,87 +626,27 @@
           </div>`).join('')}
       </div>` : '';
 
-    /* Project descriptions, on the taught tracks only: a PhD is advertised as
-       a funded vacancy, not listed as a project. `open` is empty today, so
-       this renders the "where to look" note rather than a bare heading. Once
-       real descriptions are added they appear here instead. */
+    /* Where project descriptions live, on the taught tracks only: a PhD is
+       advertised as a funded vacancy, not listed as a project. */
     const PL = data.project_listing || {};
-    const openList = (PL.open || []).filter(o => !o.level || o.level === t.level);
     const projHtml = t.programme_level ? `
           <h3 class="track-sub">Project descriptions</h3>
           <p style="font-size:0.88rem;margin-bottom:14px">${txt(PL.intro)}</p>
-          ${openList.length ? `
-            <div class="grid grid-2" style="margin-bottom:8px">
-              ${openList.map(o => `
-                <div class="prog-card">
-                  <h4>${txt(o.title)}</h4>
-                  <p>${txt(o.desc)}</p>
-                  <div class="prog-meta"><span>${linkName(o.supervisor)}</span></div>
-                </div>`).join('')}
-            </div>`
-          : `<div style="margin-bottom:8px">
-              ${(PL.sources || []).map(src => `
-                <div class="req-item"><div><strong>${txt(src.name)}</strong> — ${txt(src.text)}</div></div>`).join('')}
-             </div>`}
-    ` : '';
-
-    /* Completed work at this level. Rendered only when there is some, so a
-       level with nothing yet shows no empty heading. The student's name and
-       any supervisor who is in people.yaml link to their profile; supervisors
-       outside the group stay as plain text. */
-    // Newest first, so adding an entry does not mean reordering the file.
-    // Sorts on `date` where present, falling back to `year`.
-    const when = h => Date.parse(h.date || '') || Number(h.year) || 0;
-    const hl = (data.highlights || [])
-      .filter(h => h.level === t.level)
-      .slice()
-      .sort((a, b) => when(b) - when(a));
-    const hlHtml = hl.length ? `
-          <h3 class="track-sub">Completed theses</h3>
-          <div style="margin-bottom:28px">
-            ${hl.map(h => `
-              <div class="thesis-card">
-                <div class="thesis-title">
-                  ${/* Prefer the DOI: it is the persistent identifier, and it
-                       resolves to the same CRIS page the portal URL points at,
-                       so linking both would be two links to one destination. */''}
-                  ${(h.doi || h.url)
-                    ? `<a href="${esc(h.doi ? 'https://doi.org/' + h.doi : h.url)}" target="_blank" rel="noopener">${txt(h.title)}</a>`
-                    : txt(h.title)}
-                </div>
-                <div class="thesis-meta">
-                  ${/* Year only. `date` is kept in the YAML because it orders
-                       entries within a year, but it is deliberately not shown:
-                       a defence month adds nothing to a reader and invites a
-                       precision the bachelor's dates do not actually have. */''}
-                  ${/* `name` is present on doctoral entries only. Master's and
-                       bachelor's students are not named, pending consent, so the
-                       name and its separator both have to drop out rather than
-                       render "undefined · 2025". See content/students.yaml. */''}
-                  ${[h.name ? linkName(h.name) : '', h.year ? txt(h.year) : '']
-                      .filter(Boolean).join(' · ')}
-                  ${h.programme ? `<br>${txt(h.programme)}` : ''}
-                  ${/* Doctoral records say "Supervisor"; a master's title page
-                       names a thesis committee, which includes examiners as
-                       well as supervisors. Labelling both as supervision
-                       would misattribute, so each entry says which it is. */''}
-                  ${(h.supervisors || []).length
-                    ? `<br>Supervised by ${h.supervisors.map(linkName).join(', ')}` : ''}
-                  ${(h.committee || []).length
-                    ? `<br>Thesis committee: ${h.committee.map(linkName).join(', ')}` : ''}
-                </div>
-                ${(h.abstract || '').trim()
-                  ? `<details class="thesis-details">
-                       <summary>${esc(h.abstract_label || 'Abstract')}</summary>
-                       <div class="thesis-abstract">${txt(h.abstract)}</div>
-                     </details>`
-                  : ''}
-                ${h.doi ? `<div class="thesis-doi">${esc(h.doi)}</div>` : ''}
-              </div>`).join('')}
+          <div style="margin-bottom:8px">
+            ${(PL.sources || []).map(src => `
+              <div class="req-item"><div><strong>${txt(src.name)}</strong> — ${txt(src.text)}</div></div>`).join('')}
           </div>` : '';
 
-    const isPhd = t.id === 'phd';
-    const phdExtra = isPhd ? `
+    /* Link up to the finder rather than repeating the cards. */
+    const n = theses.filter(d => d.level === t.level).length;
+    const seeHtml = n ? `
+      <p style="margin-bottom:26px">
+        <button class="btn btn-secondary btn-sm" data-jump="${esc(t.level)}">
+          See the ${n} completed ${esc(LEVEL_NOUN[t.level] || levelLabel(t.level))} ${n === 1 ? 'thesis' : 'theses'} →
+        </button>
+      </p>` : '';
+
+    const phdExtra = t.id === 'phd' ? `
       <h3 class="track-sub">What we look for</h3>
       <div style="margin-bottom:26px">
         ${(data.phd_requirements || []).map(r => `<div class="req-item">${esc(r)}</div>`).join('')}
@@ -273,7 +659,7 @@
       </div>` : '';
 
     return `
-      <section id="${esc(t.id)}" class="${ti % 2 === 0 ? 'alt' : ''}" style="scroll-margin-top:120px">
+      <section id="${esc(t.id)}" class="${ti % 2 === 0 ? '' : 'alt'}" style="scroll-margin-top:120px">
         <div class="container" style="max-width:900px">
           <div class="section-header">
             <span class="section-label">${esc(levelLabel(t.level))}</span>
@@ -285,8 +671,7 @@
           <div style="margin-bottom:28px">
             ${(t.work || []).map(w => `<div class="req-item">${esc(w)}</div>`).join('')}
           </div>
-
-          ${hlHtml}
+          ${seeHtml}
 
           <h3 class="track-sub">How to get onto it</h3>
           <p style="font-size:0.88rem;margin-bottom:20px">${txt(t.route_intro)}</p>
@@ -305,9 +690,20 @@
       </section>`;
   }).join('');
 
-  CMS.revealNew(document.getElementById('studentPage'));
+  // "See the N theses" replaces whatever is set rather than adding to it, so
+  // the finder shows exactly the level the reader asked for.
+  document.querySelectorAll('[data-jump]').forEach(b => {
+    b.onclick = () => {
+      $('clearAll').onclick();
+      F.level.add(b.dataset.jump);
+      render();
+      $('work').scrollIntoView({ behavior: 'smooth' });
+    };
+  });
 
-  const sects = ['bachelor', 'master', 'phd'];
+  CMS.revealNew($('studentPage'));
+
+  const sects = ['work', 'bachelor', 'master', 'phd'];
   const navAs = document.querySelectorAll('.sticky-subnav a');
   window.addEventListener('scroll', () => {
     let cur = sects[0];
