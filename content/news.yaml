@@ -86,6 +86,24 @@ blog:
   img: ''
   source: feed
 talks:
+- event: AI in Precision Medicine Symposium, University of Alabama at Birmingham
+  date: 28 Oct 2026
+  title: 'Credible, Verifiable, Trustworthy Health AI: from hypothesis generation
+    to clinical validation'
+  speaker: Michel Dumontier
+  type: Keynote
+  url: https://doi.org/10.5281/zenodo.23736346
+  slides_url: https://zenodo.org/records/23736489/files/UAB-2026-dumontier-Keynote.pptx
+  description: 'AI increasingly helps us generate predictions, propose explanations,
+    and decide what to investigate next. The talk connects those capabilities to a
+    question that matters for precision medicine: what would justify relying on an
+    AI system for a particular patient? It follows that question through scientific
+    discovery, experimental testing and clinical evaluation, by way of mathematical
+    proof checking, graph-based mechanistic hypotheses in TESSERA, AI co-scientists
+    and cognitive robotics, and the clinical evidence work of the REALM project. It
+    closes on the shared CHARM and PCX agenda between UAB and Maastricht, and on the
+    recurring distinction between generating an interesting possibility and establishing
+    what that possibility can support.'
 - event: TAI-DISC at BNAIC 2026
   date: 21 Oct 2026
   title: 'Justifying trust in AI: a medical AI perspective'
