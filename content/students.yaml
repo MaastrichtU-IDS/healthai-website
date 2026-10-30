@@ -13,12 +13,14 @@
 # supervisors. See PR #15.
 #
 # Two rules for anything added:
-#   1. No named person without their knowledge, and no claim about a person
-#      they have not confirmed.
-#   1a. BACHELOR'S STUDENTS ARE NOT NAMED. Doctoral and master's theses are
-#      public documents and their authors are named. The bachelor's entries
-#      below carry title, year, programme and supervision, and no student
-#      name. See the note above the bachelor's entries.
+#   1. No claim about a person they have not confirmed. Naming someone as the
+#      author of their own thesis is the exception, covered by 1a: that is a
+#      matter of public record and does not rest on their agreement.
+#   1a. STUDENTS ARE NAMED AT ALL THREE LEVELS. Michel established on
+#      2026-10-30 that bachelor's students fall under the same regulations on
+#      public notice as master's students, so a bachelor's thesis and its
+#      author are a matter of public record the way a master's one is. No
+#      student numbers, addresses or grades, at any level, ever.
 #   2. No number nobody will maintain. Salary scales, ECTS and cohort sizes go
 #      stale silently and are better linked than copied.
 #
@@ -472,16 +474,11 @@ highlights:
   # BACHELOR'S THESES. Same source as the master's entries: titles read off
   # each thesis title page, student numbers left out.
   #
-  # NOT NAMED, unlike the master's and doctoral entries above. A bachelor's
-  # thesis is not published, and none of these fifteen students was asked
-  # whether they wanted their name on a research group's website. Michel is
-  # seeking informed consent. A name goes in only once that student has
-  # agreed, with the consent date in a comment beside it.
-  #
-  # Dropping the name reduces the exposure rather than ending it: title,
-  # programme and year still identify a student to anyone in the faculty.
-  # The page says nothing about the names being held back, because saying so
-  # would read as consent refused, which is not what happened.
+  # NAMED, NO STUDENT NUMBERS, as at the other two levels. The names came off
+  # on 2026-10-25 and went back on 2026-10-30, when Michel established that
+  # bachelor's students are treated the same as master's students under the
+  # regulations on public notice. The master's half of that removal was
+  # reversed on 2026-10-26 for the same reason.
   #
   # YEARS ARE INFERRED from the file date in Michel's records, except the
   # UCM Capstone, which states 4 June 2025 on the document itself.
@@ -502,13 +499,13 @@ highlights:
   # Five had no usable email record: two have none at all, and for three the
   # supervision section was not reached. Michel confirmed on 2026-10-23 that
   # he supervised all five himself, so those are recorded on his word rather
-  # than from a document. Each is marked inline below, since the students are
-  # no longer named and cannot be listed here.
+  # than from a document. Each is marked inline below.
   #
   # Do not mine these emails further without care: they carry student ID
   # numbers and addresses, and at least one has a full grade transcript
   # attached.
   - level: BSc
+    name: Ana-Maria Martinescu
     title: Justification-Based Benchmark for Evaluating LLM Reasoning Under Noise
     year: "2026"
     theme: fair
@@ -517,6 +514,7 @@ highlights:
     supervisors: [Michel Dumontier]
 
   - level: BSc
+    name: Denisa-Elena Nastasa
     title: >
       An Interpretable Multi-Modal Transformer Framework for Parkinson's
       Disease Drug Repositioning Using Embeddings
@@ -529,6 +527,7 @@ highlights:
       - Remzi Celebi
 
   - level: BSc
+    name: Eve Michaux
     title: Automated Deep Phenotyping of Clinical Notes Using NLP and HPO Mapping
     year: "2026"
     theme: precision
@@ -538,6 +537,7 @@ highlights:
       - Chang Sun
 
   - level: BSc
+    name: Mikhail Belov
     title: Evaluating Saliency Methods in Medical Vision-Language Models
     year: "2026"
     theme: nlp
@@ -548,6 +548,7 @@ highlights:
       - Chang Sun
 
   - level: BSc
+    name: Taha Ismet Koc
     title: >
       Structured Reasoning on Drug Efficacy: a neuro-symbolic approach
       combining LLMs and computational argumentation frameworks
@@ -560,6 +561,7 @@ highlights:
       - Michel Dumontier
 
   - level: BSc
+    name: Tunç Sabah
     title: >
       Distributional and Predictive Metrics Poorly Detect Causal Degradation:
       a reference-calibrated benchmark on Alzheimer's disease data
@@ -571,6 +573,7 @@ highlights:
       - Michel Dumontier
 
   - level: BSc
+    name: Daan Schar
     title: >
       Building a Foundation for Interoperable Hydrological Data: a SULO-based
       DAMO ontology for asset management
@@ -583,6 +586,7 @@ highlights:
       - Remzi Celebi
 
   - level: BSc
+    name: Sebastian Schmülling
     title: >
       Evaluating Prompting Methodologies for Generating Federated SPARQL
       Queries over Biomedical Knowledge Graphs
@@ -595,6 +599,7 @@ highlights:
       - Chang Sun
 
   - level: BSc
+    name: Alexandru Valah
     title: "Integrating KG-LLMs for Fitness Guidance: addressing mobility-related limitations"
     year: "2025"
     theme: precision
@@ -605,6 +610,7 @@ highlights:
       - Chang Sun
 
   - level: BSc
+    name: Charlotte Donnelly
     title: Evaluating AI-Generated Explanations in Dynamic Domains
     year: "2025"
     theme: nlp
@@ -616,6 +622,7 @@ highlights:
       - Michel Dumontier
 
   - level: BSc
+    name: Simonas Bubnys
     title: >
       Drug-Target Interaction Prediction using Transformer Models and
       ATC Code-Based Stratification
@@ -629,6 +636,7 @@ highlights:
       - Michel Dumontier
 
   - level: BSc
+    name: Alina Gavrish
     title: >
       Forecasting Banned Substances: leveraging GNN and explainable AI for
       sports anti-doping
@@ -642,6 +650,7 @@ highlights:
       - Michel Dumontier
 
   - level: BSc
+    name: Simon Garland
     title: >
       ReAgents: uncertainty reasoning of large language model multi-agents
       within the field of drug repurposing
@@ -654,6 +663,7 @@ highlights:
       - Remzi Celebi
 
   - level: BSc
+    name: Ilian Ariesen
     title: >
       Large Language Models as Reasoner of Drug Efficacy: an investigation
       into justificatory capabilities
@@ -667,6 +677,7 @@ highlights:
       - Michel Dumontier
 
   - level: BSc
+    name: Loris Podevyn
     title: Fine-tuning and Applying a Diffusion Model for Therapeutic Protein Design
     year: "2024"
     theme: bioinfo

@@ -531,8 +531,8 @@
       <h3 class="work-title">${href
         ? `<a href="${esc(href)}" target="_blank" rel="noopener">${txt(d.title)}</a>`
         : txt(d.title)}</h3>
-      ${/* `name` is present on doctoral and master's entries. Bachelor's
-           students are not named, so the element drops out rather than
+      ${/* Every entry carries a `name` as of 2026-10-30. The guard stays so a
+           new entry added without one drops the element rather than
            rendering empty. See content/students.yaml. */''}
       ${d.name ? `<div class="work-who">${linkName(d.name)}</div>` : ''}
       <div class="work-meta">
