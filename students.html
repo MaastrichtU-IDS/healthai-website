@@ -116,11 +116,36 @@
     .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); gap: 18px; }
     .work-card {
       background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
-      padding: 17px 18px 15px; box-shadow: var(--card-shadow);
+      padding: 17px 18px 15px; box-shadow: var(--card-shadow); position: relative;
       display: flex; flex-direction: column; gap: 9px;
       transition: all var(--transition); min-width: 0;
     }
     .work-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+    /* A thesis that reached a venue is highlighted without being filtered
+       for: gold, which nothing else on this page uses, so it reads as a
+       distinction rather than as another theme colour. */
+    .work-card.published { border-color: color-mix(in srgb, var(--gold) 38%, var(--border)); }
+    .work-card.published::before {
+      content: ''; position: absolute; inset: 0 auto 0 0; width: 3px;
+      background: var(--gold); border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    }
+    .pub-badge {
+      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--gold); background: var(--gold-light); border: 1px solid
+      color-mix(in srgb, var(--gold) 30%, var(--white));
+      border-radius: 999px; padding: 2px 8px; white-space: nowrap;
+    }
+    /* The paper, not the thesis: its own title, venue and year, which is why
+       it sits apart from .work-meta rather than inside it. */
+    .work-pub {
+      font-size: 0.78rem; line-height: 1.5; color: var(--slate-mid);
+      background: var(--gold-light); border-radius: var(--radius);
+      padding: 8px 10px; margin-top: 1px;
+    }
+    .work-pub .lead { color: var(--gold); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; font-size: 0.64rem; display: block; margin-bottom: 2px; }
+    .work-pub a { color: var(--slate); font-weight: 600; }
+    .work-pub .where { color: var(--text-muted); display: block; margin-top: 2px; }
     .work-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
     .work-year { font-size: 0.76rem; color: var(--text-light); font-variant-numeric: tabular-nums; font-weight: 500; }
     .work-title { font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.35; color: var(--slate); font-weight: 600; }
@@ -241,6 +266,7 @@
     <div class="ftable">
       <div class="frow"><div class="flabel">Kind</div><div class="fcells"><div class="filter-chips" id="f-kind"></div></div></div>
       <div class="frow"><div class="flabel">Level</div><div class="fcells"><div class="filter-chips" id="f-level"></div></div></div>
+      <div class="frow"><div class="flabel">Outcome</div><div class="fcells"><div class="filter-chips" id="f-pub"></div></div></div>
       <div class="frow"><div class="flabel">Research theme</div><div class="fcells"><div class="filter-chips" id="f-theme"></div></div></div>
       <div class="frow">
         <div class="flabel">Year<span class="hint">one year, or a span</span></div>
@@ -356,6 +382,7 @@
     theme: h.theme || '',
     doi: h.doi || '',
     url: h.url || '',
+    pub: h.published_as || null,
     body: String(h.abstract || '').trim(),
     bodyLabel: h.abstract_label || 'Abstract',
     sort: when(h),
@@ -374,6 +401,7 @@
     cttee: [],
     theme: o.theme || '',
     doi: '', url: o.url || '',
+    pub: null,
     body: String(o.desc || '').trim(),
     bodyLabel: 'About this project',
     sort: 0,
@@ -383,7 +411,8 @@
   ITEMS.forEach(d => {
     d.people = [...d.sup, ...d.cttee];
     d.hay = [d.title, d.name, d.programme, (themeById.get(d.theme) || {}).title,
-             d.people.join(' '), d.year, d.body].join(' ').toLowerCase();
+             d.people.join(' '), d.year, d.body,
+             d.pub ? [d.pub.title, d.pub.venue].join(' ') : ''].join(' ').toLowerCase();
   });
 
   const KINDS  = [['thesis', 'Completed theses'], ['idea', 'Project ideas']];
@@ -409,8 +438,12 @@
      Masters can only widen the result, never narrow it. Year is the
      exception, a closed range. An item with no year, which is every open
      project, is never excluded by it. */
-  const F = { kind: new Set(), level: new Set(), theme: new Set(), sup: new Set(), from: Y0, to: Y1 };
-  const DIMS = { kind: d => d.kind, level: d => d.level, theme: d => d.theme, sup: d => d.people };
+  const F = { kind: new Set(), level: new Set(), theme: new Set(), pub: new Set(), sup: new Set(), from: Y0, to: Y1 };
+  // `pub` is one chip, not a yes/no pair: "not published" is not a category
+  // anyone would filter for, and a thesis with no paper yet may still get one.
+  const DIMS = { kind: d => d.kind, level: d => d.level, theme: d => d.theme,
+                 pub: d => (d.pub ? 'yes' : 'no'), sup: d => d.people };
+  const PUBLISHED = [['yes', 'Published']];
 
   function match(d, f) {
     for (const dim in DIMS) {
@@ -461,6 +494,7 @@
     // Kind stays clickable at zero: "no project ideas yet" is the point.
     chipRow('f-kind', 'kind', KINDS, true);
     chipRow('f-level', 'level', LEVELS);
+    chipRow('f-pub', 'pub', PUBLISHED, true);
     chipRow('f-theme', 'theme', THEMES.map(t => [t.id, t.short]));
     chipRow('f-sup', 'sup', PEOPLE);
     document.querySelectorAll('.ftable .chip').forEach(b => {
@@ -523,9 +557,12 @@
     // same CRIS page the portal URL points at, so linking both would be two
     // links to one destination.
     const href = d.doi ? 'https://doi.org/' + d.doi : d.url;
-    return `<article class="work-card">
+    const p = d.pub;
+    const pHref = p ? (p.doi ? 'https://doi.org/' + p.doi : p.url) : '';
+    return `<article class="work-card${p ? ' published' : ''}">
       <div class="work-top">
         <span class="level-badge ${CMS.levelClass(d.level)}">${esc(levelLabel(d.level))}</span>
+        ${p ? `<span class="pub-badge">Published</span>` : ''}
         <span class="work-year">${d.year || (d.kind === 'idea' ? 'Open now' : '')}</span>
       </div>
       <h3 class="work-title">${href
@@ -535,6 +572,14 @@
            new entry added without one drops the element rather than
            rendering empty. See content/students.yaml. */''}
       ${d.name ? `<div class="work-who">${linkName(d.name)}</div>` : ''}
+      ${p ? `<div class="work-pub">
+        <span class="lead">Published as${p.presentation === 'oral' ? ', oral presentation' : ''}</span>
+        ${pHref
+          ? `<a href="${esc(pHref)}" target="_blank" rel="noopener">${txt(p.title)}</a>`
+          : txt(p.title)}
+        <span class="where">${esc(String(p.venue).includes(String(p.year))
+          ? p.venue : [p.venue, p.year].filter(Boolean).join(', '))}</span>
+      </div>` : ''}
       <div class="work-meta">
         ${d.programme ? txt(d.programme) + '<br>' : ''}
         ${d.sup.length ? `<span class="role">Supervised by</span> ${nameList(d.sup)}` : ''}
@@ -558,7 +603,7 @@
     const rows = ITEMS.filter(d => match(d, F));
     $('workGrid').innerHTML = rows.map(card).join('');
 
-    const chosen = F.kind.size + F.level.size + F.theme.size + F.sup.size;
+    const chosen = F.kind.size + F.level.size + F.theme.size + F.pub.size + F.sup.size;
     const any = chosen || F.from !== Y0 || F.to !== Y1 || $('q').value.trim();
     $('clearAll').hidden = !any;
     $('tally').innerHTML = `<b>${rows.length}</b> of ${ITEMS.length}` + (any ? ' shown' : '');
@@ -576,7 +621,7 @@
 
   $('q').oninput = render;
   $('clearAll').onclick = () => {
-    ['kind', 'level', 'theme', 'sup'].forEach(k => F[k].clear());
+    ['kind', 'level', 'theme', 'pub', 'sup'].forEach(k => F[k].clear());
     F.from = Y0; F.to = Y1;
     $('q').value = '';
     $('yrExact').value = ''; $('yrExact').classList.remove('bad');
