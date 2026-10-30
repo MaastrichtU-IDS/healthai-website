@@ -392,6 +392,17 @@ highlights:
       DiffPool assignment matrix, demonstrated at scale on three public
       datasets.
 
+  # PUBLISHED WORK. `published_as` marks a thesis that went on to a venue. It
+  # carries the paper's own title, which is usually not the thesis title, the
+  # venue, the year, and a `doi` or, where the venue issues none, a `url`.
+  # Five of the twenty carry one as of 2026-10-30.
+  #
+  # Found by searching Pure, Crossref, OpenAlex and OpenReview for each of the
+  # twenty students. Three of the five are OpenReview-hosted (NeSy and
+  # BNAIC/BeNeLearn), which issue no DOI and appear in no index and in no Pure
+  # record, so they would be invisible to any DOI-driven refresh. They are
+  # entered here by hand and verified against the publisher's own page.
+  #
   # MASTER'S THESES. Not from Pure: Pure records no master's theses at all
   # (6 theses across 459 records in the group's feeds, all doctoral). These
   # come from Michel's own records of completed supervisions, with names,
@@ -423,6 +434,13 @@ highlights:
 
   - level: MSc
     name: Sara Falahatkar
+    published_as:
+      title: >
+        CORE-LLM-Bench: A Benchmark Dataset for Evaluating Complex Ontological
+        Reasoning Capabilities of Large Language Models
+      venue: NeSy 2026, 20th International Conference on Neurosymbolic Learning and Reasoning, Lisbon
+      year: "2026"
+      url: https://openreview.net/forum?id=fPsNxm31yG
     title: >
       Benchmarking the Reasoning Capabilities of Large Language Models: a
       comprehensive framework for ontology-based evaluation
@@ -448,6 +466,13 @@ highlights:
 
   - level: MSc
     name: Xingru Xu
+    published_as:
+      title: >
+        Using Clinical Guidelines, Domain Ontology, and LLMs for Personalized
+        Leukemia Treatment Recommendations
+      venue: SeWeBMeDA 2025, 8th Semantic Web Solutions for Large-Scale Biomedical Data Analytics, at ESWC
+      year: "2025"
+      url: https://ceur-ws.org/Vol-4001/paper3.pdf
     title: >
       Incorporating Clinical Practice Guidelines into Large Language Models
       for Leukaemia Treatment Recommendation
@@ -528,6 +553,14 @@ highlights:
 
   - level: BSc
     name: Eve Michaux
+    published_as:
+      title: >
+        PhenoBridge: Automated Deep Phenotyping of Clinical Notes Using NLP and
+        HPO Mapping
+      venue: BNAIC/BeNeLearn 2026, Maastricht
+      presentation: oral
+      year: "2026"
+      url: https://openreview.net/forum?id=sn4nXMuidK
     title: Automated Deep Phenotyping of Clinical Notes Using NLP and HPO Mapping
     year: "2026"
     theme: precision
@@ -538,6 +571,14 @@ highlights:
 
   - level: BSc
     name: Mikhail Belov
+    published_as:
+      title: >
+        Measuring Image Sensitivity in Medical Vision-Language Models: A
+        Token-Level, Semantically Stratified Occlusion Analysis
+      venue: BNAIC/BeNeLearn 2026, Maastricht
+      presentation: oral
+      year: "2026"
+      url: https://openreview.net/forum?id=T15uXrDZf1
     title: Evaluating Saliency Methods in Medical Vision-Language Models
     year: "2026"
     theme: nlp
@@ -637,6 +678,13 @@ highlights:
 
   - level: BSc
     name: Alina Gavrish
+    published_as:
+      title: >
+        Forecasting Banned Substances: Leveraging GNN and Explainable AI for
+        Sports Anti-Doping
+      venue: MIE 2025, 35th Medical Informatics Europe Conference, Glasgow
+      year: "2025"
+      doi: 10.3233/shti250287
     title: >
       Forecasting Banned Substances: leveraging GNN and explainable AI for
       sports anti-doping
