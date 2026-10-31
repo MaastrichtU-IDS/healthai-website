@@ -113,6 +113,38 @@ python3 scripts/fetch_blog_posts.py [--dry-run]
 
 Reads `blog_feed` URLs from `content/people.yaml` and syncs posts into the `blog` section of `content/news.yaml`. Manual entries (no `source: feed` field) are always preserved.
 
+### Sync LinkedIn posts
+
+```bash
+python3 scripts/fetch_linkedin_posts.py [--dry-run] [--scan 150] [--keep 35]
+```
+
+Writes `content/linkedin.generated.yaml` and mirrors post images into
+`assets/linkedin/`. The news page shows them under their own **LinkedIn** tab,
+not in **All**: nobody signs them off, so they stay out of the edited list.
+
+The source is the DACS page (`urn:li:organization:27209119`), which carries
+departmental news. A post is kept only when it names someone in
+`content/people.yaml`, by LinkedIn mention or in plain text. Of 150 posts
+scanned in October 2026, 55 named a member; 20 of those were reposts of an
+announcement already kept, leaving 35.
+
+**Reposts.** A call for papers goes out five or six times with a new deadline
+each time. Two posts count as the same announcement when their content words
+overlap by 45% of the shorter one, and only the most recent survives, with a
+`reposts` count.
+
+**Privacy.** Person URNs from mentions, likes and comments stay in memory and
+never reach the YAML; only counts and the display names of people already on
+this site are written. Email addresses in post text are dropped unless
+`people.yaml` already publishes that exact address.
+
+**Auth.** Needs `.linkedin_token.json` from `scripts/linkedin_auth.py` (scope
+`r_organization_social`). `LinkedIn-Version: 202610` is the oldest version the
+API still accepts. `/rest/images` has a daily cap, so images already mirrored
+are never re-fetched. Run with `python3 -u`: the script prints progress to
+stderr and Python block-buffers it otherwise.
+
 ### Enrich existing people entries
 
 ```bash

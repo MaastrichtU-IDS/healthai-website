@@ -33,6 +33,10 @@
     .type-filter:hover { border-color:var(--slate); color:var(--slate); }
     .type-filter.active { background:var(--slate); color:white; border-color:var(--slate); }
 
+    .social-note { font-size:0.78rem; color:var(--text-muted); margin:-14px 0 20px; display:none; }
+    .social-note a { color:inherit; }
+    .social-note.show { display:block; }
+
 
   </style>
 </head>
@@ -63,7 +67,9 @@
         <button class="type-filter"        data-type="talk"    onclick="setFilter(this)">Presentations</button>
         <button class="type-filter"        data-type="blog"    onclick="setFilter(this)">Blog posts</button>
         <button class="type-filter"        data-type="podcast" onclick="setFilter(this)">Podcasts</button>
+        <button class="type-filter"        data-type="social"  onclick="setFilter(this)">LinkedIn</button>
       </div>
+      <div id="socialNote" class="social-note"></div>
       <div id="itemsList"></div>
     </div>
   </div>
@@ -75,10 +81,19 @@ let _activeFilter = 'all';
 
 (async () => {
   const data = await CMS.load('content/news.yaml');
+  // Generated hourly from the DACS LinkedIn page; absent on a fresh checkout
+  // that has not run scripts/fetch_linkedin_posts.py yet.
+  let social = {};
+  try { social = await CMS.load('content/linkedin.generated.yaml') || {}; } catch (e) {}
+
   document.getElementById('loading').remove();
   document.getElementById('mediaPage').classList.remove('hidden');
 
-  _items = CMS.normalizeNewsItems(data);
+  _items = CMS.normalizeNewsItems({ ...data, social: social.social || [] });
+  if (social.source) {
+    const n = document.getElementById('socialNote');
+    n.innerHTML = `LinkedIn items are posts from the <a href="${social.source.url}" target="_blank" rel="noopener">${social.source.name}</a> page that name someone on this site. Collected automatically, last on ${social.source.fetched}.`;
+  }
 
   renderItems();
   CMS.revealNew(document.getElementById('mediaPage'));
@@ -89,7 +104,10 @@ function renderItems() {
   document.getElementById('searchClear').style.display = q ? 'block' : 'none';
 
   const hits = _items.filter(item => {
-    const typeOk = _activeFilter === 'all' || item.type === _activeFilter;
+    // LinkedIn posts are collected automatically and nobody signs off on
+    // them, so they stay behind their own tab rather than mixing into the
+    // edited news list.
+    const typeOk = _activeFilter === 'all' ? item.type !== 'social' : item.type === _activeFilter;
     const textOk = !q || item.search.toLowerCase().includes(q);
     return typeOk && textOk;
   });
@@ -100,6 +118,7 @@ function renderItems() {
     return;
   }
   list.innerHTML = hits.map(h => CMS.renderNewsItem(h)).join('');
+  CMS.trimMore(list);
 }
 
 
@@ -107,6 +126,8 @@ function setFilter(btn) {
   _activeFilter = btn.dataset.type;
   document.querySelectorAll('.type-filter').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  const note = document.getElementById('socialNote');
+  note.classList.toggle('show', _activeFilter === 'social' && !!note.innerHTML);
   renderItems();
 }
 
