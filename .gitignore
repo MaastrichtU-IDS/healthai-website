@@ -8,3 +8,4 @@ scripts/__pycache__/
 .env
 .env.*
 !.env.example
+.linkedin_token.json
