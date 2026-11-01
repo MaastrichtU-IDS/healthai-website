@@ -139,11 +139,33 @@ never reach the YAML; only counts and the display names of people already on
 this site are written. Email addresses in post text are dropped unless
 `people.yaml` already publishes that exact address.
 
-**Auth.** Needs `.linkedin_token.json` from `scripts/linkedin_auth.py` (scope
-`r_organization_social`). `LinkedIn-Version: 202610` is the oldest version the
-API still accepts. `/rest/images` has a daily cap, so images already mirrored
-are never re-fetched. Run with `python3 -u`: the script prints progress to
-stderr and Python block-buffers it otherwise.
+**Auth.** Three routes, in order: `LINKEDIN_ACCESS_TOKEN`;
+`LINKEDIN_REFRESH_TOKEN` with `LINKEDIN_CLIENT_ID` and `LINKEDIN_CLIENT_SECRET`,
+exchanged for a fresh access token on every run; or `.linkedin_token.json` from
+`scripts/linkedin_auth.py` (scope `r_organization_social`). `LinkedIn-Version:
+202610` is the oldest version the API still accepts. `/rest/images` has a daily
+cap, so images already mirrored are never re-fetched.
+
+**Weekly in the cluster.**
+
+```bash
+PUSH_MODE=push ./scripts/refresh_linkedin.sh
+```
+
+Runs Sundays at 05:00 UTC from `ids3/projects/healthai-website/dev` in
+MaastrichtU-IDS/services, on its own clock beside the publication job so that
+an expired LinkedIn token cannot stop publications refreshing. It clones main,
+fetches, and commits only `content/linkedin.generated.yaml` and
+`assets/linkedin/`. It aborts without pushing if no post survives the filter,
+or if the count falls below `MIN_RATIO` (0.80) of the previous run. When
+nothing but the fetch date moved it restores the file and commits nothing, so
+a quiet week leaves no commit.
+
+The cluster uses the refresh-token route, because an access token lasts 60
+days and a stored one would have the job stop two months later with nothing
+visible to say so. The refresh token lasts a year and LinkedIn does not rotate
+it, so re-run `scripts/linkedin_auth.py` and update Vault before it lapses;
+the fetcher warns on every run once fewer than 30 days remain.
 
 ### Enrich existing people entries
 
