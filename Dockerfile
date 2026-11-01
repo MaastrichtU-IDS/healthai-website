@@ -1,9 +1,10 @@
-# The image the cluster runs for the weekly publication refresh
+# The image the cluster runs for the weekly refresh jobs
 # (MaastrichtU-IDS/services, ids3/projects/healthai-website/dev).
 #
 # Nothing here serves the website. The site is a static tree on GitHub Pages
-# built from main; this image only regenerates content/publications.generated.yaml
-# and pushes it back.
+# built from main; this image only regenerates
+# content/publications.generated.yaml and content/linkedin.generated.yaml and
+# pushes them back. Two CronJobs, one image, different commands.
 #
 # Why each of these is present:
 #   git, openssh-client  the job commits the result and pushes to main
@@ -15,8 +16,9 @@
 #   bash                 refresh_publications.sh is bash, not sh
 #   ca-certificates      TLS to crisapi, ORCID, Crossref and GitHub
 #
-# PyYAML is the only third-party Python dependency; everything else the scripts
-# use is stdlib.
+# PyYAML and Pillow are the only third-party Python dependencies; everything
+# else the scripts use is stdlib. Pillow downscales the LinkedIn post images
+# the feed job mirrors, so the cluster and a laptop commit the same bytes.
 FROM python:3.12-slim
 
 RUN apt-get update \
@@ -34,6 +36,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY scripts/ ./scripts/
 COPY content/ ./content/
+# No assets/: .dockerignore excludes them and the LinkedIn job gets the
+# already-mirrored images from the clone it works in, not from the image.
 
 # The job writes cache/ and content/, and runs as a non-root user that does not
 # own the image layers by default.

@@ -1,3 +1,8 @@
-# The only third-party dependency the publication pipeline has. Everything
-# else it uses is in the standard library.
+# Two third-party dependencies. Everything else the scripts use is stdlib.
+#
+# PyYAML   every content file.
+# Pillow   downscales the LinkedIn post images the fetcher mirrors. Without
+#          it the cluster would commit 1280px originals while a Mac committed
+#          900px ones, because the Mac falls back to sips.
 PyYAML>=6.0
+Pillow>=10.0

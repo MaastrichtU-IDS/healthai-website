@@ -26,6 +26,7 @@ Usage:
 import argparse
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -73,10 +74,68 @@ def die(msg: str) -> None:
     sys.exit(1)
 
 
+TOKEN_URL = "https://www.linkedin.com/oauth/v2/accessToken"
+
+
 def token() -> str:
+    """An access token, from the environment or from the local token file.
+
+    Three routes, in order:
+
+      LINKEDIN_ACCESS_TOKEN   used as is.
+      LINKEDIN_REFRESH_TOKEN  exchanged for a fresh access token, with
+          LINKEDIN_CLIENT_ID and LINKEDIN_CLIENT_SECRET. This is the cluster's
+          route: access tokens last 60 days and a weekly job that stored one
+          would stop working two months in, silently from the outside. The
+          refresh token lasts a year, so the exchange happens every run and
+          nothing in Vault expires between re-authorisations.
+      .linkedin_token.json    written by scripts/linkedin_auth.py, for a laptop.
+    """
+    if os.environ.get("LINKEDIN_ACCESS_TOKEN"):
+        return os.environ["LINKEDIN_ACCESS_TOKEN"].strip()
+
+    refresh = os.environ.get("LINKEDIN_REFRESH_TOKEN", "").strip()
+    if refresh:
+        cid = os.environ.get("LINKEDIN_CLIENT_ID", "").strip()
+        secret = os.environ.get("LINKEDIN_CLIENT_SECRET", "").strip()
+        if not (cid and secret):
+            die("LINKEDIN_REFRESH_TOKEN needs LINKEDIN_CLIENT_ID and _SECRET too")
+        return refreshed(refresh, cid, secret)
+
     if not TOKEN_FILE.exists():
         die(f"no token at {TOKEN_FILE}; run scripts/linkedin_auth.py first")
     return json.loads(TOKEN_FILE.read_text())["access_token"]
+
+
+def refreshed(refresh: str, client_id: str, client_secret: str) -> str:
+    """Trade the refresh token for an access token."""
+    data = urllib.parse.urlencode(
+        {
+            "grant_type": "refresh_token",
+            "refresh_token": refresh,
+            "client_id": client_id,
+            "client_secret": client_secret,
+        }
+    ).encode()
+    try:
+        req = urllib.request.Request(TOKEN_URL, data)
+        with urllib.request.urlopen(req, timeout=30) as r:
+            tok = json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        die(f"refresh rejected ({e.code}): {e.read().decode('utf-8', 'replace')[:200]}")
+    # LinkedIn does not rotate the refresh token, it keeps the original
+    # expiry. So this one dies on a date no job can move, and the warning has
+    # to be loud enough to act on before it does.
+    left = int(tok.get("refresh_token_expires_in", 0)) // 86400
+    if left and left < 30:
+        print(
+            f"WARNING: the refresh token expires in {left} days. Re-run "
+            "scripts/linkedin_auth.py and update Vault, or this job stops.",
+            file=sys.stderr,
+        )
+    print(f"access token refreshed (refresh token good for {left} more days)",
+          file=sys.stderr)
+    return tok["access_token"]
 
 
 def api_get(path: str, tok: str, tries: int = 3):
@@ -255,19 +314,33 @@ def mirror_image(urn: str, tok: str, dry_run: bool) -> str | None:
     return rel
 
 
-def shrink(path: Path, width: int = 900, quality: int = 65) -> None:
+def shrink(path: Path, width: int = 900, quality: int = 55) -> None:
     """Downscale a mirrored image so the repo does not carry 1280px originals.
 
-    Uses sips, which ships with macOS. Elsewhere the full-size image is kept:
-    the page still works, the checkout is just larger.
+    Pillow first, so the cluster job and a laptop produce the same bytes; sips
+    second, for a Mac without Pillow. With neither, the full-size image is
+    kept and the page still works, the checkout is just larger.
     """
-    if not shutil.which("sips"):
+    try:
+        from PIL import Image
+    except ImportError:
+        if shutil.which("sips"):
+            subprocess.run(
+                ["sips", "-Z", str(width), "-s", "format", "jpeg",
+                 "-s", "formatOptions", str(quality), str(path)],
+                capture_output=True,
+                check=False,
+            )
         return
-    subprocess.run(
-        ["sips", "-Z", str(width), "-s", "formatOptions", str(quality), str(path)],
-        capture_output=True,
-        check=False,
-    )
+    try:
+        with Image.open(path) as im:
+            im = im.convert("RGB")
+            if im.width > width:
+                im = im.resize(
+                    (width, round(im.height * width / im.width)), Image.LANCZOS)
+            im.save(path, "JPEG", quality=quality, optimize=True)
+    except Exception as e:
+        print(f"  resize {path.name}: {type(e).__name__}", file=sys.stderr)
 
 
 def engagement(urns: list[str], tok: str) -> dict[str, dict]:
@@ -374,6 +447,9 @@ def main() -> None:
         "source": {
             "name": ORG_NAME,
             "url": ORG_URL,
+            # The refresh job puts this file back when nothing but this line
+            # moved, so what it actually dates is the last change, not the
+            # last run. news.html says so.
             "fetched": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
             "note": (
                 "Posts from the DACS page that name someone on this site. "

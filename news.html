@@ -92,7 +92,7 @@ let _activeFilter = 'all';
   _items = CMS.normalizeNewsItems({ ...data, social: social.social || [] });
   if (social.source) {
     const n = document.getElementById('socialNote');
-    n.innerHTML = `LinkedIn items are posts from the <a href="${social.source.url}" target="_blank" rel="noopener">${social.source.name}</a> page that name someone on this site. Collected automatically, last on ${social.source.fetched}.`;
+    n.innerHTML = `LinkedIn items are posts from the <a href="${social.source.url}" target="_blank" rel="noopener">${social.source.name}</a> page that name someone on this site. Collected automatically, last change ${social.source.fetched}.`;
   }
 
   renderItems();
