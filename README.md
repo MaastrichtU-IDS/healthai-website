@@ -164,8 +164,17 @@ a quiet week leaves no commit.
 The cluster uses the refresh-token route, because an access token lasts 60
 days and a stored one would have the job stop two months later with nothing
 visible to say so. The refresh token lasts a year and LinkedIn does not rotate
-it, so re-run `scripts/linkedin_auth.py` and update Vault before it lapses;
-the fetcher warns on every run once fewer than 30 days remain.
+it, so re-run `scripts/linkedin_auth.py` and update Vault before it lapses.
+
+**It says when it breaks.** `scripts/notify.py` opens a GitHub issue and posts
+to the in-cluster Slack relay when a run fails, and again when fewer than 30
+days remain on the refresh token. The issue is deduplicated on a key, so a
+weekly failure does not open 52 issues — which also means an open issue
+suppresses the next notification, so close it once the problem is fixed. Both
+channels are optional (`GITHUB_TOKEN`, `SLACK_RELAY_URL`) and neither can
+change the job's exit status. A SigNoz rule on `kube_job_failed` is the
+backstop for a job that dies before it can report for itself; see the
+namespace README in MaastrichtU-IDS/services.
 
 ### Enrich existing people entries
 
