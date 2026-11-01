@@ -84,13 +84,16 @@ def main() -> int:
         "state": state,
         "scope": SCOPE,
     })
-    print("Opening LinkedIn to authorise. Sign in as a Page admin.\n")
-    print(url + "\n")
+    # Flushed explicitly: Python block-buffers stdout when it is redirected
+    # or read by a harness, so without this the authorisation URL does not
+    # appear and the script looks like it did nothing.
+    print("Opening LinkedIn to authorise. Sign in as a Page admin.\n", flush=True)
+    print(url + "\n", flush=True)
     webbrowser.open(url)
 
     # handle_request() in the thread above serves exactly one request, so
     # this just waits for the redirect to land.
-    print("Waiting for the redirect on " + REDIRECT + " ...")
+    print("Waiting for the redirect on " + REDIRECT + " ...", flush=True)
     while not Catcher.result:
         threading.Event().wait(0.3)
     res = Catcher.result

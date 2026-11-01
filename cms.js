@@ -98,6 +98,33 @@ window.CMS = (function () {
 
   /* ── News / activity shared helpers ── */
 
+  const esc = s => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+
+  // Posts arrive as one block of text with no title. The opening line is the
+  // headline often enough to serve as one.
+  function splitPost(text) {
+    const lines = (text || '').trim().split('\n');
+    // Posts often open with a bare lnkd.in link; the headline is the first
+    // line that says something.
+    let i = lines.findIndex(l => l.trim() && !/^https?:\/\/\S+$/.test(l.trim()));
+    if (i === -1) i = 0;
+    let head = (lines[i] || '').trim();
+    const body = lines.slice(0, i).concat(lines.slice(i + 1));
+    // A line that is only a link is the post's destination, not prose. It
+    // moves to the footer rather than sitting in the middle of a sentence.
+    const links = [...new Set(body.filter(l => /^https?:\/\/\S+$/.test(l.trim())).map(l => l.trim()))];
+    let rest = body.filter(l => !/^https?:\/\/\S+$/.test(l.trim())).join('\n').trim();
+    rest = rest.replace(/\n{3,}/g, '\n\n');
+    if (head.length > 110) {
+      const cut = head.lastIndexOf(' ', 110);
+      rest = (head.slice(cut > 60 ? cut : 110).trim() + '\n\n' + rest).trim();
+      head = head.slice(0, cut > 60 ? cut : 110).trim() + '…';
+    }
+    return { head, rest, links };
+  }
+
   function normalizeNewsItems(data) {
     const toDate = s => s ? new Date(s) : new Date(0);
     const dp = s => { const p = (s || '').split(' '); return { day: p[0] || '', mon: p[1] || '' }; };
@@ -128,6 +155,19 @@ window.CMS = (function () {
         sortDate: toDate(t.date), ...dp(t.date),
         search: [t.title, t.speaker, t.event, t.type, t.description].join(' '),
       })),
+      ...(data.social || []).map(p => {
+        const { head, rest, links } = splitPost(p.text);
+        return {
+          type: 'social', label: 'LinkedIn',
+          title: head, url: p.url || null,
+          audio_url: null, slides_url: null,
+          meta: [(p.people || []).join(', '), p.date].filter(Boolean).join(' · '),
+          excerpt: rest, image: p.image || null, links,
+          likes: p.likes || 0, comments: p.comments || 0,
+          sortDate: toDate(p.date), ...dp(p.date),
+          search: [p.text, (p.people || []).join(' ')].join(' '),
+        };
+      }),
       ...(data.podcasts || []).map(p => ({
         type: 'podcast', label: 'Podcast',
         title: p.title, url: p.url || null,
@@ -143,6 +183,7 @@ window.CMS = (function () {
   let _niCtr = 0;
   function renderNewsItem(item) {
     const sid = 'ni-slides-' + (_niCtr++);
+    if (item.type === 'social') return renderSocialItem(item, sid);
     return `<div class="ni-row">
       <span class="ni-badge nitype-${item.type}">${item.label}</span>
       <div class="ni-body">
@@ -153,6 +194,55 @@ window.CMS = (function () {
         ${item.slides_url ? `<button class="ni-slides-btn" onclick="CMS.toggleSlides(this,'${encodeURIComponent(item.slides_url)}','${sid}')">▶ View slides</button><div id="${sid}" class="ni-slides-panel"><iframe src="" class="ni-slides-frame" allowfullscreen></iframe></div>` : ''}
       </div>
     </div>`;
+  }
+
+  // Called on already-escaped text, so the match can only be a plain URL.
+  const linkify = s => s.replace(
+    /https?:\/\/[^\s<]+[^\s<.,;:)\]]/g,
+    u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+
+  // LinkedIn text is not ours, so every part of it is escaped on the way in.
+  function renderSocialItem(item, sid) {
+    const body = linkify(esc(item.excerpt)).replace(/\n/g, '<br>');
+    const long = item.excerpt.length > 320;
+    const engage = [];
+    if (item.likes) engage.push(`${item.likes} reaction${item.likes === 1 ? '' : 's'}`);
+    if (item.comments) engage.push(`${item.comments} comment${item.comments === 1 ? '' : 's'}`);
+    (item.links || []).slice(0, 2).forEach(u =>
+      engage.push(`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\//, ''))} ↗</a>`));
+    if (item.url) engage.push(`<a href="${esc(item.url)}" target="_blank" rel="noopener">View on LinkedIn ↗</a>`);
+    return `<div class="ni-row">
+      <span class="ni-badge nitype-social">${item.label}</span>
+      <div class="ni-body">
+        <div class="ni-title">${item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a>` : esc(item.title)}</div>
+        <div class="ni-meta">${esc(item.meta)}</div>
+        ${item.excerpt ? `<div class="ni-excerpt" id="${sid}" style="${long ? 'max-height:7.5em;overflow:hidden' : ''}">${body}</div>` : ''}
+        ${long ? `<button class="ni-more" data-target="${sid}" onclick="CMS.toggleMore(this,'${sid}')">Show more</button>` : ''}
+        ${item.image ? `<img class="ni-image" src="${esc(item.image)}" alt="" loading="lazy">` : ''}
+        ${engage.length ? `<div class="ni-engage">${engage.map(e => `<span>${e}</span>`).join('')}</div>` : ''}
+      </div>
+    </div>`;
+  }
+
+  // The clamp is a guess from text length; only measurement knows whether a
+  // post is actually cut off, so buttons on posts that fit are removed.
+  function trimMore(root) {
+    (root || document).querySelectorAll('.ni-more').forEach(btn => {
+      const el = document.getElementById(btn.dataset.target);
+      if (el && el.scrollHeight <= el.clientHeight + 2) {
+        el.style.maxHeight = '';
+        el.style.overflow = '';
+        btn.remove();
+      }
+    });
+  }
+
+  function toggleMore(btn, id) {
+    const el = document.getElementById(id);
+    const open = !el.style.maxHeight;
+    el.style.maxHeight = open ? '7.5em' : '';
+    el.style.overflow = open ? 'hidden' : '';
+    btn.textContent = open ? 'Show more' : 'Show less';
   }
 
   function toggleSlides(btn, encodedUrl, id) {
@@ -487,5 +577,5 @@ window.CMS = (function () {
   })();
 
   return { load, loadAll, icon, ICONS, personLinks, initials, tag, levelClass, revealNew,
-           normalizeNewsItems, renderNewsItem, toggleSlides, PubBrowser };
+           normalizeNewsItems, renderNewsItem, toggleSlides, toggleMore, trimMore, PubBrowser };
 })();
