@@ -127,6 +127,14 @@ def refreshed(refresh: str, client_id: str, client_secret: str) -> str:
     # expiry. So this one dies on a date no job can move, and the warning has
     # to be loud enough to act on before it does.
     left = int(tok.get("refresh_token_expires_in", 0)) // 86400
+    # The wrapper turns this into a notification; a warning in a pod log that
+    # nobody opens is the same as no warning at all.
+    days_file = os.environ.get("LINKEDIN_TOKEN_DAYS_FILE", "").strip()
+    if days_file:
+        try:
+            Path(days_file).write_text(str(left))
+        except OSError as e:
+            print(f"  could not write {days_file}: {e}", file=sys.stderr)
     if left and left < 30:
         print(
             f"WARNING: the refresh token expires in {left} days. Re-run "
