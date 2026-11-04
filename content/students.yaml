@@ -419,6 +419,148 @@ highlights:
   #
   # No abstracts yet. They are in the theses and can be added; they were left
   # out rather than published truncated.
+  # MASTER'S THESES SUPERVISED BY CHANG SUN. Added 2026-11-03 from Chang's
+  # own records: name, title, programme and defence date are read off the
+  # DACS master thesis assessment form for each thesis, and co-supervisors
+  # and committee off the thesis title page. Student numbers were never copied.
+  # Names outside the group render as plain text.
+  - level: MSc
+    name: Sebastian Franz
+    title: XAI-Guided Retraining for Improving GAN-Based Synthetic Tabular Healthcare Data
+    year: "2026"
+    theme: federated
+    date: 5 October 2026
+    programme: MSc Artificial Intelligence
+    supervisors:
+      - Chang Sun
+    committee:
+      - Konstantia Zarkogianni
+
+  - level: MSc
+    name: Alexandra Panghe
+    title: "Patient Representation Learning with Knowledge Graphs: Interpretability and Clinical Meaning"
+    year: "2026"
+    theme: precision
+    date: 17 July 2026
+    programme: MSc Artificial Intelligence
+    supervisors:
+      - Chang Sun
+
+  - level: MSc
+    name: Chrysanthos Papadakis
+    title: >
+      Chain-of-Thought Representations in Finance and Healthcare Domains Using
+      Counterfactuals for Augmentation and Evaluation
+    year: "2026"
+    theme: fair
+    date: 16 July 2026
+    programme: MSc Artificial Intelligence
+    supervisors:
+      - Chang Sun
+      - Spriha Joshi
+    committee:
+      - Enrique Hortal Quesada
+
+  - level: MSc
+    name: María Diez Pérez
+    title: SHAP-Guided Synthetic Data Generation Using GANs for Imbalanced Clinical Data
+    year: "2026"
+    theme: federated
+    date: 28 May 2026
+    programme: MSc Artificial Intelligence
+    supervisors:
+      - Chang Sun
+      - Konstantia Zarkogianni
+
+  - level: MSc
+    name: Maria Aurora Bota
+    title: >
+      CoroSplat: Gaussian Splatting Based 3D Reconstruction of Coronary
+      Arteries from Ultra-Sparse Projection Views
+    year: "2025"
+    theme: precision
+    date: 18 December 2025
+    programme: MSc Artificial Intelligence
+    supervisors:
+      - Chang Sun
+    committee:
+      - Enrique Hortal Quesada
+      - Dori Peleg
+
+  - level: MSc
+    name: Noah Scharrenberg
+    published_as:
+      title: >
+        Probing Stylistic Appropriation using Large Language Models: An
+        Evaluation Framework for Copyright Infringement under EU Law
+      venue: arXiv preprint 2606.31250
+      year: "2026"
+      url: https://arxiv.org/abs/2606.31250
+    title: >
+      Probing Stylistic Appropriation in Large Language Models: An
+      LLM-as-a-Judge Framework for Evaluating Copyright Infringement under
+      EU Law
+    year: "2025"
+    theme: nlp
+    date: 24 November 2025
+    programme: MSc Artificial Intelligence
+    supervisors:
+      - Chang Sun
+    committee:
+      - Rohan Nanda
+
+  - level: MSc
+    name: Ashkan Karimi Saber
+    title: >
+      Evaluating Multi-modal Generative Models for Medical AI: Enhancing
+      Evaluation Using Text–Image Synthetic Data
+    year: "2025"
+    theme: federated
+    date: 27 October 2025
+    programme: MSc Data Science for Decision Making
+    supervisors:
+      - Chang Sun
+    committee:
+      - Mahmoud Ibrahim
+      - Enrique Hortal Quesada
+
+  - level: MSc
+    name: Georgios Fakas
+    title: Identifying and Measuring Bias Amplification in Medical Large Language Models
+    year: "2025"
+    theme: nlp
+    date: 27 October 2025
+    programme: MSc Data Science for Decision Making
+    supervisors:
+      - Chang Sun
+    committee:
+      - Rohan Nanda
+
+  - level: MSc
+    name: Sijia Wang
+    title: Optimizing Multi-modal Document Processing Pipeline for Retrieval Tasks in RAG Systems
+    year: "2025"
+    theme: fair
+    date: 24 July 2025
+    programme: MSc Data Science for Decision Making
+    supervisors:
+      - Chang Sun
+    committee:
+      - Aki Härmä
+
+  - level: MSc
+    name: Dan Parii
+    title: >
+      Towards Practical and Reliable Unlearning of Personally Identifiable
+      Information in Large Language Models
+    year: "2025"
+    theme: federated
+    date: 22 July 2025
+    programme: MSc Data Science for Decision Making
+    supervisors:
+      - Chang Sun
+      - Thomas van Osch
+
   - level: MSc
     name: Timo Anthonijsz
     title: >
@@ -478,7 +620,7 @@ highlights:
       for Leukaemia Treatment Recommendation
     year: "2025"
     theme: precision
-    date: July 2025
+    date: 22 July 2025
     programme: MSc Data Science for Decision Making
     committee:
       - Chang Sun
@@ -529,6 +671,70 @@ highlights:
   # Do not mine these emails further without care: they carry student ID
   # numbers and addresses, and at least one has a full grade transcript
   # attached.
+  # BACHELOR'S THESES SUPERVISED BY CHANG SUN. Added 2026-11-03 from Chang's
+  # own records: name, title and conference date from the DACS bachelor
+  # thesis assessment form, programme from the form or the student's
+  # progress record, FHML entry from the thesis title page. Student numbers
+  # were never copied.
+  - level: BSc
+    name: Luuk Janssens
+    title: Evaluating Accuracy vs. Cost Trade-Offs in AI-Assisted Code
+    year: "2026"
+    date: 24 August 2026
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Chang Sun
+
+  - level: BSc
+    name: Vanille Claessen
+    title: Making Artificial Intelligence Explainable for the Prediction of Non-Small Cell Lung Cancer Stage
+    year: "2026"
+    theme: precision
+    date: 3 July 2026
+    programme: BSc Biomedical Sciences (FHML)
+    supervisors:
+      - Chang Sun
+
+  - level: BSc
+    name: Sebastien Moore
+    title: Assessing Algorithmic Fairness in Machine Learning Models for Parkinson's Disease Detection
+    year: "2026"
+    theme: precision
+    date: 3 July 2026
+    programme: BSc Biomedical Sciences (FHML)
+    supervisors:
+      - Chang Sun
+
+  - level: BSc
+    name: Melina Makri
+    title: Generating and Evaluating Synthetic Tabular Data with Preserved Outliers
+    year: "2026"
+    theme: federated
+    date: 9 June 2026
+    programme: BSc Computer Science
+    supervisors:
+      - Chang Sun
+
+  - level: BSc
+    name: Mika Hagenbeek
+    title: Knowledge-Based Lab-Test Recommendation for Rare-Disease Diagnosis
+    year: "2026"
+    theme: precision
+    date: 9 June 2026
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Chang Sun
+
+  - level: BSc
+    name: Selim Elkaffas
+    title: A Lightweight Algorithm for Explaining Empty SPARQL Queries
+    year: "2026"
+    theme: fair
+    date: 9 June 2026
+    programme: BSc Computer Science
+    supervisors:
+      - Chang Sun
+
   - level: BSc
     name: Ana-Maria Martinescu
     title: Justification-Based Benchmark for Evaluating LLM Reasoning Under Noise
@@ -564,7 +770,7 @@ highlights:
     title: Automated Deep Phenotyping of Clinical Notes Using NLP and HPO Mapping
     year: "2026"
     theme: precision
-    date: 9 June 2026
+    date: 8 June 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
       - Chang Sun
@@ -582,7 +788,7 @@ highlights:
     title: Evaluating Saliency Methods in Medical Vision-Language Models
     year: "2026"
     theme: nlp
-    date: 9 June 2026
+    date: 8 June 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
       - Michel Dumontier
@@ -735,6 +941,28 @@ highlights:
     # email was found for this one.
     supervisors:
       - Michel Dumontier
+
+  - level: BSc
+    name: Noah Scharrenberg
+    title: >
+      Ontology-Based Conditional Generative Adversarial Networks for the
+      Generation of Personal Health Data
+    year: "2023"
+    theme: federated
+    date: 27 June 2023
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Chang Sun
+
+  - level: BSc
+    name: Rashid Behbudlu
+    title: Improving ciTIzen-centric DAta pLatform (TIDAL) by Incorporating Blockchain
+    year: "2023"
+    theme: federated
+    date: 27 June 2023
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Chang Sun
 
 # WHERE PROJECT DESCRIPTIONS LIVE.
 #

@@ -77,21 +77,28 @@
   role: Assistant Professor
   group: Faculty
   image_url: "assets/people/chang-sun.jpg"
-  themes: [Regulatory AI, Federated & Privacy-Preserving AI]
+  themes: [Precision Medicine & Digital Health, Neurosymbolic AI, Federated & Privacy-Preserving AI, Regulatory AI]
   bio: >
-    Chang Sun is an Assistant Professor at the Institute of Data Science at Maastricht
-    University. Her research interests cover privacy-preserving distributed data mining,
-    federated/distributed machine learning, synthetic data generation, decentralized
-    personal health data management, health data sharing, management and analysis,
-    personal knowledge graphs, and linked data. She used data science technologies (e.g.,
-    deep learning models, federated machine learning models, GANS) to solve research
-    challenges in health domains such as diabetes, rare diseases (Leukemia),
-    cardiovascular diseases, and sleeping disorders, and also in social sciences.
-  keywords: [Clinical NLP, Large Language Models, Text Mining, ICD Coding, Dutch EHR]
+    Chang Sun is an Assistant Professor in Health AI at the Institute of Data Science,
+    Department of Advanced Computing Sciences, Maastricht University. Her research looks
+    for ways to balance responsible data practices with the scientific value of personal
+    health data. She has built privacy-preserving federated learning infrastructures that
+    run at several Dutch institutions, so that researchers can analyse data that cannot be
+    shared; generative models that produce realistic, privacy-preserving synthetic health
+    data for rare diseases and predictive healthcare; and a citizen-centric data platform
+    that lets individuals control how their personal data are used. Her current work
+    extends synthetic data to causal analysis of treatment toxicity in rare blood cancers
+    (NWO Veni), builds trustworthy conversational and agentic AI on FAIR data and services
+    (ICAI GENIUS lab), and evaluates medical AI with real-world and synthetic data for
+    regulatory decision-making (REALM). She leads or coordinates projects funded by
+    Horizon Europe, COST, NWO and ODISSEI, and teaches Responsible Generative AI and
+    Privacy-Preserving Techniques in the MSc Responsible Data Science. She is programme
+    chair of BNAIC/BeNeLearn 2026 and of the Women in Data Science Maastricht conference.
+  keywords: [Synthetic Data, Federated Learning, Generative AI, Privacy-Preserving AI, Large Language Models, Agentic AI, Differential Privacy, Personal Data Vaults, Knowledge Graphs]
   orcid: "0000-0001-8325-8848"
   github: "sunchang0124"
   google_scholar: "JfU0PB8AAAAJ"
-  linkedin: ""
+  linkedin: "chang-sun-maastricht"
   personal_page: ""
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/chang-sun/"
   work_url: "https://www.maastrichtuniversity.nl/c-sun"

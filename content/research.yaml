@@ -13,7 +13,7 @@ themes:
       by data. We integrate IoT sensor streams, EHR data and knowledge graphs to
       deliver closed-loop AI systems that adapt recommendations to individual
       patients in real time.
-    projects: [CHARM, iCARE4CVD, DACIL]
+    projects: [CHARM, iCARE4CVD, DACIL, Veni, CMyGuideline]
     featured_pubs: []
 
   - id: agriculture
@@ -68,7 +68,7 @@ themes:
       architectures that allow AI models to learn from distributed patient data across
       hospitals and countries — without the data ever leaving its source. Our work
       covers algorithm design, privacy guarantees and real-world deployment.
-    projects: [REALM]
+    projects: [REALM, TDCC-SSH, TIDAL, DP-CGANS]
     featured_pubs: []
 
   - id: nlp
@@ -82,7 +82,6 @@ themes:
       It emphasizes a feedback loop where AI enhances evidence generation and oversight, while regulatory frameworks shape trustworthy, human-centered AI deployment.
     projects: [REALM]
     featured_pubs: []
-
 
 # AMOUNTS ARE TOTAL PROJECT COST: the whole consortium's budget, not this
 # group's share and not the funder's contribution where those differ. For
@@ -135,7 +134,7 @@ projects:
     team: [Visara Urovi, Chang Sun, Michel Dumontier, Ensar Erol, Anas Elghafari]
     funder: European Commission (Horizon Europe)
     amount: "€6.7M"
-    period: "2023–2026"
+    period: "2023–2027"
     status: Active
     featured: true
     url: https://www.realm-project.eu/
@@ -243,3 +242,79 @@ projects:
     amount: "€2.56M"
     period: "2023–2029"
     status: Active
+
+  - acronym: Veni
+    title: Generative AI for Causal Treatment–Toxicity Analysis in Rare Blood Cancers
+    theme: Precision Medicine & Digital Health
+    desc: >
+      Patients with rare blood cancers such as lymphoma, multiple myeloma and chronic myeloid leukaemia face
+      serious treatment toxicities, including cardiotoxicity, yet trials are infeasible and observational data
+      are too scarce for causal analysis. The project treats synthetic data as a scientific instrument for causal
+      learning beyond observed data: clinically grounded, ontology-informed longitudinal generative models for
+      rare and unseen treatment trajectories; synthetic augmentation to stabilise causal estimation of
+      treatment–toxicity effects; and an evaluation, co-developed with clinicians, of the clinical validity,
+      trustworthiness and acceptance of synthetic data.
+    team: [Chang Sun]
+    funder: NWO (Dutch Research Council) – Veni
+    amount: "€320K"
+    period: "2027–2029"
+    status: Awarded
+
+  - acronym: TDCC-SSH
+    title: "Synthetic Data: Leveraging the Potential of Sensitive Data in SSH Research"
+    theme: Federated & Privacy-Preserving AI
+    desc: >
+      A Thematic Digital Competence Centre challenge led by Utrecht University with Maastricht University, SURF
+      and DANS. The project makes sensitive social-science datasets, including datasets archived at DANS, faster
+      and easier to access by producing synthetic versions with the same statistical properties but without
+      privacy-sensitive information, using two synthetic data generation tools, and by developing guidance and
+      infrastructure for synthetic data in social sciences and humanities research. Chang Sun leads the
+      Maastricht work package.
+    team: [Chang Sun]
+    funder: NWO (Dutch Research Council) – TDCC-SSH
+    period: "2025–2027"
+    status: Active
+    url: https://zenodo.org/communities/tdcc-ssh-syntheticdata
+
+  - acronym: CMyGuideline
+    title: A living chronic myeloid leukaemia guideline
+    theme: Precision Medicine & Digital Health
+    desc: >
+      Explainable machine-learning models that predict cardiovascular disease risk for leukaemia patients,
+      integrated into an application used by patients, physicians and nurses, together with a dynamic digital
+      consent platform that connects researchers who request data access with patients who decide whether
+      their health data may be used in research.
+    team: [Chang Sun]
+    funder: ZonMw
+    period: "2022–2025"
+    status: Completed
+    url: https://www.cmylife.nl/projecten/cmyguideline
+
+  - acronym: TIDAL
+    title: "Citizen-Centric Personal Data Platform: Empowering Citizens in Responsible Use of Personal Data"
+    theme: Federated & Privacy-Preserving AI
+    desc: >
+      A platform for requesting subsets of data stored in personal data vaults and analysing them in a
+      privacy-preserving manner, combining Solid data pods, Personal Health Train technology and FAIR data and
+      service standards, so that individuals can trust how their personal data are processed. Released as the
+      open-source ciTIzen-centric DAta pLatform (TIDAL).
+    team: [Chang Sun, Michel Dumontier]
+    funder: NWO (Dutch Research Council)
+    period: "2020–2023"
+    status: Completed
+    url: https://github.com/sunchang0124/TIDAL
+
+  - acronym: DP-CGANS
+    title: Generating Realistic and Privacy-Preserving Personal Data
+    theme: Federated & Privacy-Preserving AI
+    desc: >
+      A generative model that produces realistic and privacy-preserving personal data by combining a
+      conditional generative adversarial network with differential privacy, designed for the particular
+      characteristics of personal health data and outperforming comparable models in capturing dependencies
+      between variables. Released as the open-source DP-CGANS package.
+    team: [Chang Sun, Michel Dumontier]
+    funder: ODISSEI (Open Data Infrastructure for Social Science and Economic Innovations)
+    period: "2021–2024"
+    status: Completed
+    url: https://github.com/sunchang0124/dp_cgans
+
