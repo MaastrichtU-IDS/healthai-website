@@ -2,7 +2,7 @@
 source:
   name: Department of Advanced Computing Sciences, Maastricht University
   url: https://www.linkedin.com/company/27209119/
-  fetched: '2026-10-31'
+  fetched: '2026-11-04'
   note: Posts from the DACS page that name someone on this site. Repeats of the same announcement
     are collapsed.
 social:
@@ -26,7 +26,7 @@ social:
     \ #InterdisciplinaryResearch #MaastrichtUniversity"
   people:
   - Rachel Cavill
-  likes: 24
+  likes: 27
   comments: 0
   image: assets/linkedin/3c5c09215f44e614.jpg
 - date: 26 Oct 2026
@@ -933,7 +933,6 @@ social:
   likes: 46
   comments: 1
   image: assets/linkedin/55a239f74c02ac7c.jpg
-  reposts: 2
 - date: 10 Sep 2025
   url: https://www.linkedin.com/feed/update/urn:li:ugcPost:7371503066141069312/
   text: "We’re pleased to announce that this week, our team from the Department of Advanced\
