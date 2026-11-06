@@ -80,6 +80,50 @@ window.CMS = (function () {
     return l === 'bsc' ? 'level-bsc' : l === 'msc' ? 'level-msc' : l === 'phd' ? 'level-phd' : 'level-muted';
   }
 
+  /* A person's completed doctoral thesis, out of students.yaml.
+     Joined by NAME, which works because the PhD entries there deliberately
+     carry the person's people.yaml name rather than the legal name on the
+     title page: Gijs Wijngaard appears on his thesis as Gijsbert Willem
+     Adriaan Wijngaard. See the note at the top of content/students.yaml.
+     Only PhD entries: master's and bachelor's authors are not listed in
+     people.yaml, so there is nothing to join them to. */
+  function thesisFor(name, students) {
+    if (!name || !students) return null;
+    const hl = students.highlights || [];
+    return hl.find(e => e.level === 'PhD' && e.name === name) || null;
+  }
+
+  /* One markup for the modal and the full profile, so the two cannot drift.
+     Mirrors the work-card on the students page: badge and year, linked
+     title, supervisors, the abstract behind a disclosure, then the DOI. */
+  function thesisCard(t) {
+    if (!t) return '';
+    // Prefer the DOI: it is the persistent identifier and resolves to the
+    // same CRIS page the portal URL points at.
+    const href = t.doi ? 'https://doi.org/' + t.doi : t.url;
+    const title = esc(String(t.title || '').trim());
+    const sup = (t.supervisors || []).map(esc).join(', ');
+    const body = String(t.abstract || '').trim();
+    return `<article class="thesis-card">
+      <div class="thesis-top">
+        <span class="level-badge level-phd">PhD</span>
+        <span class="thesis-year">${esc(t.year || '')}</span>
+      </div>
+      <h3 class="thesis-title">${href
+        ? `<a href="${esc(href)}" target="_blank" rel="noopener">${title}</a>`
+        : title}</h3>
+      ${t.date ? `<div class="thesis-meta"><span class="role">Defended</span> ${esc(t.date)}</div>` : ''}
+      ${sup ? `<div class="thesis-meta"><span class="role">Supervised by</span> ${sup}</div>` : ''}
+      ${body ? `<details class="thesis-details">
+          <summary>${esc(t.abstract_label || 'Abstract')}</summary>
+          <div class="body">${esc(body)}</div>
+        </details>` : ''}
+      ${t.doi ? `<div class="thesis-foot">
+        <a class="thesis-doi" href="https://doi.org/${esc(t.doi)}" target="_blank" rel="noopener">${esc(t.doi)}</a>
+      </div>` : ''}
+    </article>`;
+  }
+
   /* Trigger scroll-reveal on newly added elements */
   function revealNew(container) {
     const els = (container || document).querySelectorAll('.reveal:not(.visible)');
@@ -577,5 +621,6 @@ window.CMS = (function () {
   })();
 
   return { load, loadAll, icon, ICONS, personLinks, initials, tag, levelClass, revealNew,
+           esc, thesisFor, thesisCard,
            normalizeNewsItems, renderNewsItem, toggleSlides, toggleMore, trimMore, PubBrowser };
 })();
