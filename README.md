@@ -105,6 +105,24 @@ which returns `503` for crisapi.
   result**, never an error. Always check the count actually changed.
 - The service occasionally returns non-JSON; the fetcher retries once.
 
+### Find supervised doctoral theses
+
+```bash
+python3 scripts/fetch_supervised_theses.py [--all] [--yaml]
+```
+
+Reports doctoral theses supervised by someone in `content/people.yaml` that
+`content/students.yaml` does not list yet, read off the public CRIS portal.
+`--yaml` prints paste-ready entries with the two fields it cannot know,
+`theme` and `abstract`, left as TODOs.
+
+It writes nothing. Every entry on the students page has to be checkable, and
+a theme is an editorial judgement, so the last step stays manual by design.
+
+Doctoral only: Pure records no master's or bachelor's theses for this group,
+so those entries come from Michel's own supervision records and this script
+is silent about them.
+
 ### Sync blog feeds
 
 ```bash

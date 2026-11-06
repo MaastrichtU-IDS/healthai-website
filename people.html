@@ -124,6 +124,11 @@ const THEMES_ALL = ['All','Precision Medicine & Digital Health','Precision Agric
 // relying on group alone, so someone who leaves is listed once and only once
 // even if their group was not changed at the same time.
 const current = p => !p.alumni;
+
+// `external: true` marks a PhD candidate whose funding comes from outside
+// Maastricht. They are still Maastricht PhD candidates, so the role and the
+// department line stay exactly as everyone else's; the fact is shown as its
+// own line in the detailed views only, not on the grid card.
 const SECTIONS = [
   { label: 'Faculty',
     match: p => current(p) && p.group === 'Faculty' },
@@ -201,6 +206,10 @@ function renderPeople() {
 }
 
 function openModal(p) {
+  // Same rule the profile page already applies: a bio that is still a TODO is
+  // a note to ourselves, not content, and an empty Keywords heading with
+  // nothing under it reads as a broken page. Show neither.
+  const hasBio = p.bio && p.bio.trim() && !p.bio.includes('TODO');
   const themes = (p.themes||[]).map(t=>`<span class="tag">${t}</span>`).join('');
   const kws = (p.keywords||[]).map(k=>`<span class="tag tag-muted">${k}</span>`).join('');
   const links = CMS.personLinks(p);
@@ -214,15 +223,14 @@ function openModal(p) {
         <h3>${p.name}</h3>
         <div class="role">${p.role}</div>
         <div class="dept">Dept. of Advanced Computing Sciences · Maastricht University</div>
+        ${p.external ? '<div class="dept">Externally funded</div>' : ''}
       </div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="modal-section-label">About</div>
-      <p class="modal-bio">${p.bio}</p>
+      ${hasBio ? `<div class="modal-section-label">About</div><p class="modal-bio">${p.bio.trim()}</p>` : ''}
       ${themes ? `<div class="modal-section-label">Research themes</div><div class="tag-row">${themes}</div>` : ''}
-      <div class="modal-section-label">Keywords</div>
-      <div class="tag-row">${kws}</div>
+      ${kws ? `<div class="modal-section-label">Keywords</div><div class="tag-row">${kws}</div>` : ''}
       <div class="modal-section-label">Links</div>
       <div class="person-links">${links.join('')}</div>
       <div class="modal-divider">

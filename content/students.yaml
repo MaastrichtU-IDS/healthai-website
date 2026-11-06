@@ -283,6 +283,12 @@ programmes:
 # record by its own uuid returns an unrelated one. These were therefore read
 # off the public CRIS portal pages, which do carry the detail.
 #
+# `scripts/fetch_supervised_theses.py` now does that reading. It lists the
+# doctoral theses supervised by anyone in people.yaml, via each profile's
+# `supervised` tab, and reports the ones missing from here. It fills every
+# field below except `theme` and `abstract`, and it writes nothing: run it
+# to find what is missing, then add the entry yourself. See issue #23.
+#
 # Every field in the three doctoral entries is on the cited page. Their
 # `name` is how the person is listed in people.yaml rather than the full
 # legal name on the thesis, so it resolves to their profile; Gijs appears on
@@ -323,7 +329,7 @@ highlights:
     name: Gijs Wijngaard
     title: Data and semantic reasoning in audio-language learning
     year: "2026"
-    theme: fair
+    theme: neurosymbolic
     date: 7 September 2026
     supervisors:
       - Elia Formisano
@@ -360,7 +366,7 @@ highlights:
     name: Weiwei Wang
     title: Category data embedding
     year: "2025"
-    theme: fair
+    theme: neurosymbolic
     date: 22 May 2025
     supervisors:
       - Michel Dumontier
@@ -391,6 +397,73 @@ highlights:
       values and learns embeddings with a graph neural network using the
       DiffPool assignment matrix, demonstrated at scale on three public
       datasets.
+
+  # Added 2026-11-06 from the `supervised` tab of Michel's CRIS profile, via
+  # scripts/fetch_supervised_theses.py. Michel was co-promoter on both. The
+  # abstracts are the records' own, quoted verbatim, so they carry no
+  # `abstract_label` and need none.
+  - level: PhD
+    name: Massimiliano Grassi
+    title: "Supervised machine learning in psychiatry: towards application in clinical practice"
+    year: "2022"
+    theme: precision
+    date: 19 September 2022
+    supervisors:
+      - Koen Schruers
+      - Michel Dumontier
+      - G. Perna
+    doi: 10.26481/dis.20220919mg
+    url: https://cris.maastrichtuniversity.nl/en/publications/supervised-machine-learning-in-psychiatry-towards-application-in-/
+    abstract: >
+      In recent years, the field of machine learning (often named with the more
+      general term artificial intelligence) has literally exploded and its
+      application has been proposed in basically all fields, including
+      psychiatry and mental health. This has been motivated by the promise of
+      using machine learning to develop new clinical tools that could help
+      perform personalized predictions and recommendations, ultimately
+      improving the results achievable in the psychiatric clinical practice
+      that still faces only a limited success in the fight against mental
+      diseases. However, despite this huge interest, there is still a
+      substantial lack of tools in psychiatry that are based on machine
+      learning algorithms. Massimiliano Grassi, in his Ph.D. thesis,
+      investigates the challenges of translating machine learning algorithms
+      into clinical practice and proposes innovative solutions to these
+      challenges. The thesis presents the development and validation of new
+      algorithms for the prediction of the onset of Alzheimer’s disease, the
+      remission of obsessive-compulsive disorder, and the automatization of
+      sleep staging in polysomnography, a method to diagnose sleep disorders.
+      The results from these studies demonstrate that the use of machine
+      learning in psychiatric clinical practice is not just a promise, and it
+      is possible to develop machine learning algorithms that achieve
+      clinically relevant performance even if based solely on information that
+      can be easily accessible in the daily clinical routine.
+
+  - level: PhD
+    name: Ahmed Hassan
+    title: FAIR and bias-free network modules for mechanism-based disease redefinitions
+    year: "2021"
+    theme: bioinfo
+    date: 7 July 2021
+    supervisors:
+      - Harald Schmidt
+      - Michel Dumontier
+    doi: 10.26481/dis.20210707ah
+    url: https://cris.maastrichtuniversity.nl/en/publications/fair-and-bias-free-network-modules-for-mechanism-based-disease-re/
+    abstract: >
+      Even though chronic diseases are the cause of 60% of all deaths around
+      the world, the underlying causes for most of them are not fully
+      understood. Hence, diseases are defined based on organs and symptoms,
+      and therapies largely focus on mitigating symptoms rather than cure.
+      This is also reflected in the most commonly used disease
+      classifications. The complex nature of diseases, however, can be better
+      defined in terms of networks of molecular interactions. This research
+      applies the approaches of network medicine, a field that uses network
+      science for identifying and treating diseases, to multiple diseases with
+      highly unmet medical need such as stroke and hypertension. The results
+      show the success of this approach to analyse complex disease networks
+      and predict drug targets for different conditions, which are validated
+      through preclinical experiments and are currently in human clinical
+      trials.
 
   # PUBLISHED WORK. `published_as` marks a thesis that went on to a venue. It
   # carries the paper's own title, which is usually not the thesis title, the
@@ -452,7 +525,7 @@ highlights:
       Chain-of-Thought Representations in Finance and Healthcare Domains Using
       Counterfactuals for Augmentation and Evaluation
     year: "2026"
-    theme: fair
+    theme: neurosymbolic
     date: 16 July 2026
     programme: MSc Artificial Intelligence
     supervisors:
@@ -501,7 +574,7 @@ highlights:
       LLM-as-a-Judge Framework for Evaluating Copyright Infringement under
       EU Law
     year: "2025"
-    theme: nlp
+    theme: regulatory
     date: 24 November 2025
     programme: MSc Artificial Intelligence
     supervisors:
@@ -528,7 +601,7 @@ highlights:
     name: Georgios Fakas
     title: Identifying and Measuring Bias Amplification in Medical Large Language Models
     year: "2025"
-    theme: nlp
+    theme: regulatory
     date: 27 October 2025
     programme: MSc Data Science for Decision Making
     supervisors:
@@ -540,7 +613,7 @@ highlights:
     name: Sijia Wang
     title: Optimizing Multi-modal Document Processing Pipeline for Retrieval Tasks in RAG Systems
     year: "2025"
-    theme: fair
+    theme: neurosymbolic
     date: 24 July 2025
     programme: MSc Data Science for Decision Making
     supervisors:
@@ -567,7 +640,7 @@ highlights:
       Synthetic Data and Hybrid Embeddings for Entity Deduplication in
       Healthcare Organizational Knowledge Graphs
     year: "2025"
-    theme: fair
+    theme: neurosymbolic
     date: 28 August 2025
     programme: MSc Artificial Intelligence
     committee:
@@ -587,7 +660,7 @@ highlights:
       Benchmarking the Reasoning Capabilities of Large Language Models: a
       comprehensive framework for ontology-based evaluation
     year: "2025"
-    theme: fair
+    theme: neurosymbolic
     date: 24 August 2025
     programme: MSc Artificial Intelligence
     supervisors:
@@ -729,7 +802,7 @@ highlights:
     name: Selim Elkaffas
     title: A Lightweight Algorithm for Explaining Empty SPARQL Queries
     year: "2026"
-    theme: fair
+    theme: neurosymbolic
     date: 9 June 2026
     programme: BSc Computer Science
     supervisors:
@@ -739,7 +812,7 @@ highlights:
     name: Ana-Maria Martinescu
     title: Justification-Based Benchmark for Evaluating LLM Reasoning Under Noise
     year: "2026"
-    theme: fair
+    theme: neurosymbolic
     date: 14 June 2026
     programme: Maastricht Science Programme
     supervisors: [Michel Dumontier]
@@ -787,7 +860,7 @@ highlights:
       url: https://openreview.net/forum?id=T15uXrDZf1
     title: Evaluating Saliency Methods in Medical Vision-Language Models
     year: "2026"
-    theme: nlp
+    theme: regulatory
     date: 8 June 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -800,7 +873,7 @@ highlights:
       Structured Reasoning on Drug Efficacy: a neuro-symbolic approach
       combining LLMs and computational argumentation frameworks
     year: "2026"
-    theme: fair
+    theme: neurosymbolic
     date: 9 June 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -813,7 +886,7 @@ highlights:
       Distributional and Predictive Metrics Poorly Detect Causal Degradation:
       a reference-calibrated benchmark on Alzheimer's disease data
     year: "2026"
-    theme: nlp
+    theme: regulatory
     date: 21 August 2026
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -825,7 +898,7 @@ highlights:
       Building a Foundation for Interoperable Hydrological Data: a SULO-based
       DAMO ontology for asset management
     year: "2025"
-    theme: fair
+    theme: neurosymbolic
     date: 25 August 2025
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -838,7 +911,7 @@ highlights:
       Evaluating Prompting Methodologies for Generating Federated SPARQL
       Queries over Biomedical Knowledge Graphs
     year: "2025"
-    theme: fair
+    theme: neurosymbolic
     date: 30 June 2025
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
@@ -860,7 +933,7 @@ highlights:
     name: Charlotte Donnelly
     title: Evaluating AI-Generated Explanations in Dynamic Domains
     year: "2025"
-    theme: nlp
+    theme: regulatory
     date: 4 June 2025
     programme: University College Maastricht (Capstone)
     # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan
@@ -922,7 +995,7 @@ highlights:
       Large Language Models as Reasoner of Drug Efficacy: an investigation
       into justificatory capabilities
     year: "2024"
-    theme: fair
+    theme: neurosymbolic
     date: 26 January 2024
     programme: BSc Data Science and Artificial Intelligence
     # Supervision is on Michel's word (confirmed 2026-10-23): no thesis-plan

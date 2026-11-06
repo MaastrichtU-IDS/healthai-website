@@ -42,7 +42,7 @@ themes:
     projects: []
     featured_pubs: []
 
-  - id: fair
+  - id: neurosymbolic
     number: "04"
     title: Neurosymbolic AI
     short: Neurosymbolic AI
@@ -71,7 +71,7 @@ themes:
     projects: [REALM, TDCC-SSH, TIDAL, DP-CGANS]
     featured_pubs: []
 
-  - id: nlp
+  - id: regulatory
     number: "05"
     title: Regulatory AI
     short: Regulatory AI

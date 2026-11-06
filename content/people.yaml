@@ -156,7 +156,9 @@
   slug: aikaterina-kasimati
   role: Assistant Professor
   group: Faculty
-  image_url: "https://www.maastrichtuniversity.nl/sites/default/files/styles/960x1440/theme/um_base/src/images/placeholder_profile.png"
+  # Was pointing at UM's generic placeholder_profile.png, so this card
+  # showed a grey silhouette rather than falling back to initials.
+  image_url: "assets/people/aikaterina-kasimati.jpg"
   themes: ["Precision Agriculture, Food & Health"]
   bio: >
     Katerina's research combines IoT, wearable sensing and AI to create smart personalised
@@ -272,7 +274,8 @@
   slug: shervin-mehryar
   role: PhD Researcher
   group: Researchers
-  image_url: "https://winslab.lids.mit.edu/wp-content/uploads/2018/03/SMehryar-600x600.jpg"
+  # Was hotlinked from winslab.lids.mit.edu, a lab site we do not control.
+  image_url: "assets/people/shervin-mehryar.jpg"
   themes: [Neurosymbolic AI]
   bio: >
     Shervin's PhD research focuses on semantic annotation of tabular data for
@@ -375,16 +378,19 @@
 - name: Gijs Wijngaard
   slug: gijs-wijngaard
   role: PhD Researcher
-  group: Researchers
+  group: Alumni
+  alumni: true
+  alumni_until: "2026"
   image_url: "assets/people/gijs-wijngaard.jpg"
   themes: ["Precision Medicine & Digital Health"]
+  # Previous bio was written on arrival in 2021 ("I am a new PhD researcher
+  # ... I will be working on Aud2Sem") and was still in the future tense four
+  # years after the fact. Replaced on defence, following the Weiwei Wang entry.
   bio: >
-    I am a new PhD researcher at the Institute of Data Science, started 6th December 2021.
-    I will be working on Aud2Sem, a new NWO project with advisors Michel Dumontier and
-    Elia Formisano. The project is about recognising, classifying audio using
-    computational models and building up taxonomies of auditory features. My background is
-    in Machine Learning and Data Science, but I also have knowledge in a variety of topics
-    in Computer Science.
+    Completed a PhD on data and semantic reasoning in audio-language learning,
+    supervised by Elia Formisano and Michel Dumontier, in September 2026. The
+    work came out of Aud2Sem, an NWO project on recognising and describing
+    audio with computational models.
   keywords: [Audio Captioning, Audio Processing, Machine Learning, Evaluation Metrics, Audio-Language Datasets]
   orcid: "0009-0002-3875-1232"
   github: "GLJS"
@@ -393,6 +399,60 @@
   personal_page: ""
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/gijs-wijngaard/"
   work_url: "https://www.maastrichtuniversity.nl/gwa-wijngaard"
+  email: ""
+
+# Added 2026-11-06. Both completed their doctorates with Michel as
+# co-promoter and were never listed here; see content/students.yaml. Every
+# claim below is from the thesis record on the CRIS portal. No ORCID, photo
+# or contact details: those are theirs to give, not ours to guess.
+- name: Massimiliano Grassi
+  slug: massimiliano-grassi
+  role: PhD Researcher
+  group: Alumni
+  alumni: true
+  alumni_until: "2022"
+  image_url: ""
+  themes: []
+  bio: >
+    Completed a PhD on supervised machine learning in psychiatry, supervised
+    by Koen Schruers, Michel Dumontier and G. Perna, in September 2022. The
+    thesis developed and validated algorithms for predicting the onset of
+    Alzheimer's disease, remission of obsessive-compulsive disorder, and
+    automated sleep staging in polysomnography.
+  keywords: [Machine Learning, Psychiatry, Clinical Prediction, Sleep Staging]
+  orcid: ""
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  cris_url: ""
+  work_url: ""
+  personal_page: ""
+  email: ""
+
+# Listed on the thesis as Ahmed Adel Ahmed Mohamed Hassan. The short form
+# here is the one the university's own CRIS profile uses, /en/persons/ahmed-hassan.
+- name: Ahmed Hassan
+  slug: ahmed-hassan
+  role: PhD Researcher
+  group: Alumni
+  alumni: true
+  alumni_until: "2021"
+  image_url: ""
+  themes: []
+  bio: >
+    Completed a PhD on FAIR and bias-free network modules for mechanism-based
+    disease redefinitions, supervised by Harald Schmidt and Michel Dumontier,
+    in July 2021. The work applied network medicine to conditions with high
+    unmet need, including stroke and hypertension, predicting drug targets
+    that went on to preclinical validation and human trials.
+  keywords: [Network Medicine, Disease Redefinition, Drug Target Prediction, FAIR Data]
+  orcid: ""
+  github: ""
+  google_scholar: ""
+  linkedin: ""
+  cris_url: "https://cris.maastrichtuniversity.nl/en/persons/ahmed-hassan/"
+  work_url: ""
+  personal_page: ""
   email: ""
 
 - name: Kun Li
@@ -483,7 +543,9 @@
   slug: yaru-zhang
   role: PhD Researcher
   group: Researchers
-  image_url: "https://www.maastrichtuniversity.nl/sites/default/files/styles/1488x1488/public/2024-01/Yaru.jpg?h=d803a6d2&itok=tkQYHZar"
+  # Was hotlinked from maastrichtuniversity.nl, whose URL carries a cache
+  # token (itok) that changes when the file is reprocessed.
+  image_url: "assets/people/yaru-zhang.jpg"
   themes: [Neurosymbolic AI]
   bio: >
     Yaru Zhang is an alumna from DACS : In 2023, she obtained her Master's Degree in Data
@@ -558,7 +620,7 @@
     particularly in the context of Knowledge Graphs. I am also responsible for defining
     system requirements and ensuring scalable architectures that support research in data
     science and artificial intelligence.
-  keywords: []
+  keywords: [Knowledge Graphs, Backend Development, Software Architecture, Health Data Systems]
   orcid: ""
   github: "ensaremirerol"
   google_scholar: "J4KABjQAAAAJ"
@@ -574,9 +636,30 @@
   group: Researchers
   image_url: "assets/people/louis-powell.jpg"
   themes: []
+  # Written 2026-11-06 from Louis's own LinkedIn profile, supplied by Michel,
+  # and the university staff page at maastrichtuniversity.nl/l-powell.
+  # Direct fetching of LinkedIn is not possible: it answers automated
+  # requests with HTTP 999 behind an auth wall.
+  #
+  # TITLE: three sources, three answers. LinkedIn, which is his own and
+  # current, says "Senior Software Engineer, Maastricht University Institute
+  # of Data Science, since September 2022". The UM staff page says
+  # "Engineering and Application Manager, DACS - Emergent Technologies".
+  # The role field above says "Research Software Engineer", which matches
+  # neither. The bio follows LinkedIn; the role field awaits Michel's call.
+  #
+  # His profile claims 19 years of experience. Deliberately not repeated: a
+  # number like that goes stale silently, so the joining year carries it.
   bio: >
-    TODO: add bio
-  keywords: []
+    Senior software engineer at the Institute of Data Science since 2022.
+    Builds software and data systems in Python, with API development, Docker
+    and microservices, and works across SQL and NoSQL databases. Came to the
+    university after a career in data engineering and business intelligence
+    consultancy in the Netherlands and the UK, in analyst, developer,
+    consultant and management roles. Holds degrees in mathematics and
+    physics from the Open University and in business and managerial
+    economics from Cardiff University.
+  keywords: [Python, API Development, Docker, SQL, Business Intelligence]
   orcid: ""
   github: "letp1985"
   google_scholar: ""
@@ -599,7 +682,7 @@
     accessibility for all. My expertise lies in machine learning (ML), deep learning (DL),
     OpenSearch, natural language processing (NLP), and semantic search , with a strong
     focus on building scalable and efficient architectures for real-world applications.
-  keywords: []
+  keywords: [Information Retrieval, Machine Learning, Deep Learning, Agricultural Knowledge Platforms]
   orcid: "0009-0006-9294-7462"
   github: "pranavnbapat"
   google_scholar: ""
@@ -625,7 +708,7 @@
     engineer in multiple companies worldwide, participating in projects ranging from
     online solutions for oil and gas exploration to large-scale distributed online
     marketplace systems over the Cloud.
-  keywords: []
+  keywords: [Edge Computing, Stream Processing, Uncertainty-Aware Systems, Computer Vision, Sustainable Computing]
   orcid: "0000-0002-9062-7653"
   github: "arruda"
   google_scholar: "c1ZyZVAAAAAJ"
@@ -650,7 +733,7 @@
     Sema4/GeneDx in Connecticut where I worked on developing novel visualization
     approaches for complex patient data, and developing and deploying ML models to aid in
     genetic research review.
-  keywords: []
+  keywords: [Natural Language Processing, Ontology Engineering, Clinical Data Standards, Common Data Elements, Machine Learning]
   orcid: "0000-0001-5335-9998"
   github: "anas-elghafari"
   google_scholar: ""
@@ -674,7 +757,7 @@
     strategies in cardiovascular disease. She obtained her Bachelor’s degree in Clinical
     Medicine in China, a Master of Public Health (MPH) in the United States, and a Master
     of Science in Medical Informatics in the Netherlands.
-  keywords: []
+  keywords: [Clinical Study Metadata, Ontology Engineering, Multi-Agent Systems, Clinical Decision Support]
   orcid: "0009-0005-1737-1910"
   github: ""
   google_scholar: ""
@@ -690,9 +773,17 @@
   group: Researchers
   image_url: "assets/people/nam-doan.jpg"
   themes: []
+  # Bio written 2026-11-06 from this person's own publication record, not
+  # from anything they said. Every work named below is theirs. Replace it
+  # with their own words when they supply them.
   bio: >
-    TODO: add bio
-  keywords: []
+    Works on information retrieval and recommender systems, and on applying
+    them in clinical settings. Published on hybrid similarity in
+    neighbourhood-based recommendation, on using autoencoders to initialise
+    user and item vectors, on a hybrid retrieval approach for
+    retrieval-augmented generation, and on proactive information support
+    during clinical consultations.
+  keywords: [Recommender Systems, Retrieval-Augmented Generation, Information Retrieval, Clinical Decision Support]
   orcid: "0000-0002-6166-4826"
   github: ""
   google_scholar: ""
@@ -706,11 +797,25 @@
   slug: julie-loesch
   role: PhD Researcher
   group: Researchers
+  # EXTERNALLY FUNDED PhD candidate: pursuing the PhD with Maastricht
+  # University, but not employed by it, and generally employed
+  # elsewhere. Confirmed by Michel on 2026-11-06. The Maastricht
+  # affiliation is correct and stays; the flag only adds an
+  # "Externally funded" line to the detailed profile and the modal.
+  external: true
   image_url: "assets/people/julie-loesch.jpg"
   themes: []
+  # Bio written 2026-11-06 from this person's own publication record, not
+  # from anything they said. Every work named below is theirs. Replace it
+  # with their own words when they supply them.
   bio: >
-    TODO: add bio
-  keywords: []
+    Works on graph neural networks and ontology reasoning for biomedical and
+    food questions. Published on biomedical ontology matching with relational
+    graph neural networks, on explaining graph neural network predictions for
+    drug repurposing, on automated identification of healthier food
+    substitutions, and on a benchmark dataset for neurosymbolic ontology
+    reasoning with noise.
+  keywords: [Graph Neural Networks, Biomedical Ontologies, Explainable AI, Drug Repurposing, Neurosymbolic Reasoning]
   orcid: "0009-0009-0736-8389"
   github: "jloe2911"
   google_scholar: "LdzpPdoAAAAJ"
@@ -724,11 +829,28 @@
   slug: joao-vissoci
   role: PhD Researcher
   group: Researchers
+  # EXTERNALLY FUNDED PhD candidate: pursuing the PhD with Maastricht
+  # University, but not employed by it, and generally employed
+  # elsewhere. Confirmed by Michel on 2026-11-06. The Maastricht
+  # affiliation is correct and stays; the flag only adds an
+  # "Externally funded" line to the detailed profile and the modal.
+  external: true
   image_url: "assets/people/joao-vissoci.jpg"
   themes: []
+  # Written 2026-11-06 from the public Scholars@Duke profile, which carries
+  # the research statement this paraphrases. The employer is deliberately
+  # not named here: Michel's instruction on 2026-11-06 was that the
+  # Maastricht affiliation is the correct one to show for a Maastricht PhD
+  # candidate. Neither ORCID nor Pure lists any work, so unlike the other
+  # derived bios this one rests on a profile page rather than a publication
+  # record. Replace it with his own words when he supplies them.
   bio: >
-    TODO: add bio
-  keywords: []
+    Works on using data science and mixed-methods research to close gaps in
+    access to and equity of care in low-resource settings, and on turning
+    evidence into practice and policy. Background in social psychology and
+    in data science, with research spanning global health, emergency
+    medicine and biostatistics.
+  keywords: [Data Science, Global Health, Health Equity, Mixed-Methods Research, Implementation Science]
   orcid: "0000-0001-7276-0402"
   github: "joaovissoci"
   google_scholar: ""
@@ -742,11 +864,24 @@
   slug: hercules-panoutsopoulos
   role: PhD Researcher
   group: Researchers
+  # EXTERNALLY FUNDED PhD candidate: pursuing the PhD with Maastricht
+  # University, but not employed by it, and generally employed
+  # elsewhere. Confirmed by Michel on 2026-11-06. The Maastricht
+  # affiliation is correct and stays; the flag only adds an
+  # "Externally funded" line to the detailed profile and the modal.
+  external: true
   image_url: "assets/people/hercules-panoutsopoulos.jpg"
   themes: []
+  # Bio written 2026-11-06 from this person's own publication record, not
+  # from anything they said. Every work named below is theirs. Replace it
+  # with their own words when they supply them.
   bio: >
-    TODO: add bio
-  keywords: []
+    Works on natural language processing for agriculture. Published on automated
+    identification and extraction of agricultural terms, on how fine-tuning
+    configurations affect agricultural term embeddings, on FAIR data
+    compliance in Horizon 2020 agri-food and rural development projects, and
+    on the technologies and challenges of Agriculture 5.0.
+  keywords: [Agricultural Informatics, Natural Language Processing, Word Embeddings, FAIR Data]
   orcid: "0000-0002-8060-9750"
   github: "herculespan"
   google_scholar: ""
@@ -771,7 +906,7 @@
     EU-funded projects, including REALM, where he develops a blockchain-based framework
     for AI model transparency, and iCARE4CVD, where he is designing a smart consent
     mechanism for secure and GDPR-compliant medical data sharing.
-  keywords: []
+  keywords: [Blockchain, Applied Cryptography, Formal Methods, Health Data Sharing, Regulatory Compliance]
   orcid: "0000-0002-5291-7860"
   github: "AnkurLohachab"
   google_scholar: "YE0ewKUAAAAJ"
@@ -794,7 +929,7 @@
     representational learning techniques for authorship identification tasks, to link and
     connect illegal vendors by analyzing patterns in writing and photmetric styles on
     online market advertisements.
-  keywords: []
+  keywords: [Authorship Attribution, Natural Language Processing, Multimodal Learning, Human Trafficking Detection]
   orcid: "0009-0001-3282-7737"
   github: "vageeshSaxena"
   google_scholar: "fVLj_hsAAAAJ"
@@ -818,7 +953,7 @@
     (UM6P), I focused on closing yield and precipitation gaps in Africa using AI, machine
     learning, and computer vision to develop predictive models for agriculture, water
     management, and climate resilience.
-  keywords: []
+  keywords: [Machine Learning, Climate Modelling, Ensemble Methods, Knowledge Graphs, Crop Yield Prediction]
   orcid: "0000-0001-8257-1664"
   github: ""
   google_scholar: "8mgE-BYAAAAJ"
