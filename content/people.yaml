@@ -632,7 +632,7 @@
 
 - name: Louis Powell
   slug: louis-powell
-  role: Research Software Engineer
+  role: Engineering and Application Manager
   group: Researchers
   image_url: "assets/people/louis-powell.jpg"
   themes: []
@@ -641,17 +641,16 @@
   # Direct fetching of LinkedIn is not possible: it answers automated
   # requests with HTTP 999 behind an auth wall.
   #
-  # TITLE: three sources, three answers. LinkedIn, which is his own and
-  # current, says "Senior Software Engineer, Maastricht University Institute
-  # of Data Science, since September 2022". The UM staff page says
-  # "Engineering and Application Manager, DACS - Emergent Technologies".
-  # The role field above says "Research Software Engineer", which matches
-  # neither. The bio follows LinkedIn; the role field awaits Michel's call.
+  # TITLE: confirmed by Michel 2026-11-06 as "Engineering and Application
+  # Manager", matching the UM staff page. LinkedIn still says "Senior
+  # Software Engineer" and people.yaml previously said "Research Software
+  # Engineer"; both are superseded.
   #
   # His profile claims 19 years of experience. Deliberately not repeated: a
   # number like that goes stale silently, so the joining year carries it.
   bio: >
-    Senior software engineer at the Institute of Data Science since 2022.
+    Engineering and application manager at the Institute of Data Science,
+    where he has worked since 2022.
     Builds software and data systems in Python, with API development, Docker
     and microservices, and works across SQL and NoSQL databases. Came to the
     university after a career in data engineering and business intelligence
