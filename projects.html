@@ -20,10 +20,20 @@
     .proj-stat-val { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: var(--slate); line-height: 1; }
     .proj-stat-lbl { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
     .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    /* One labelled row per facet. The label keeps a fixed width so the
+       chips of all three rows start on the same vertical line. */
+    .chip-row { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .chip-row-label {
+      flex: 0 0 auto; width: 58px;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
     @media (max-width: 640px) {
       .proj-stats { flex-wrap: wrap; }
       .proj-stat { flex: 1 1 45%; }
       .proj-grid { grid-template-columns: 1fr; }
+      /* Too narrow to hold a gutter: the label sits on its own line. */
+      .chip-row-label { width: 100%; }
     }
   </style>
 </head>
@@ -50,10 +60,18 @@
         <input class="search-input" id="projSearch" type="text"
                placeholder="Search projects by title, description, team or funder…"
                oninput="filterProjects()" />
-        <div style="flex-basis:100%;height:0"></div>
-        <div class="filter-chips" id="statusChips"></div>
-        <div style="flex-basis:100%;height:0"></div>
-        <div class="filter-chips" id="themeChips"></div>
+        <div class="chip-row">
+          <span class="chip-row-label">Status</span>
+          <div class="filter-chips" id="statusChips"></div>
+        </div>
+        <div class="chip-row">
+          <span class="chip-row-label">Theme</span>
+          <div class="filter-chips" id="themeChips"></div>
+        </div>
+        <div class="chip-row">
+          <span class="chip-row-label">Funder</span>
+          <div class="filter-chips" id="funderChips"></div>
+        </div>
       </div>
 
       <div class="proj-grid" id="projGrid"></div>
@@ -64,7 +82,7 @@
 
 <script>
 let _projects = [], _nameToSlug = {}, _themeToId = {};
-let activeStatus = 'All', activeTheme = 'All';
+let activeStatus = 'All', activeTheme = 'All', activeFunder = 'All';
 
 (async () => {
   const [data, people] = await CMS.loadAll('content/research.yaml', 'content/people.yaml');
@@ -98,8 +116,26 @@ let activeStatus = 'All', activeTheme = 'All';
     `<button class="chip${t === 'All' ? ' active' : ''}" onclick="setTheme('${encodeURIComponent(t)}')">${t}</button>`
   ).join('');
 
+  /* Funder chips. The YAML names the same body more than one way
+     (European Commission / European Union, NWO twice), so chips are built
+     from funderKey() and not from the raw string. */
+  const funders = ['All', ...new Set(_projects.map(funderKey).filter(Boolean))];
+  document.getElementById('funderChips').innerHTML = funders.map(f =>
+    `<button class="chip${f === 'All' ? ' active' : ''}" onclick="setFunder('${encodeURIComponent(f)}')">${f}</button>`
+  ).join('');
+
   filterProjects();
 })();
+
+/* Short, groupable label for a project's funding source: everything before
+   the first parenthesis or dash, except Horizon Europe, which arrives under
+   two different names for the one funder. */
+function funderKey(p) {
+  const f = (p.funder || '').trim();
+  if (!f) return '';
+  if (/horizon europe/i.test(f)) return 'EU (Horizon Europe)';
+  return f.split(/\s*[(\u2013\u2014]/)[0].trim();
+}
 
 function setStatus(s) {
   activeStatus = s;
@@ -113,11 +149,19 @@ function setTheme(encoded) {
   filterProjects();
 }
 
+function setFunder(encoded) {
+  const f = decodeURIComponent(encoded);
+  activeFunder = f;
+  document.querySelectorAll('#funderChips .chip').forEach(c => c.classList.toggle('active', c.textContent === f));
+  filterProjects();
+}
+
 function filterProjects() {
   const q = document.getElementById('projSearch').value.toLowerCase();
   const filtered = _projects.filter(p => {
     if (activeStatus !== 'All' && p.status !== activeStatus) return false;
     if (activeTheme !== 'All' && p.theme !== activeTheme) return false;
+    if (activeFunder !== 'All' && funderKey(p) !== activeFunder) return false;
     if (!q) return true;
     return [p.acronym, p.title, p.desc, p.funder, (p.team||[]).join(' ')].join(' ').toLowerCase().includes(q);
   });
