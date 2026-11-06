@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="icon" href="assets/brand/favicon-16.png" sizes="16x16" type="image/png" />
   <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <style>
     /* ── Hero ── */
@@ -57,8 +57,8 @@
   </style>
 </head>
 <body class="page-body">
-<script src="nav.js?v=3"></script>
-<script src="cms.js?v=3"></script>
+<script src="nav.js?v=4"></script>
+<script src="cms.js?v=4"></script>
 
 <div class="loading" id="loading"><div class="spinner"></div> Loading…</div>
 
@@ -94,6 +94,7 @@
     <div class="container profile-content">
       <div class="profile-section" id="secBio"></div>
       <div class="profile-section" id="secThemes"></div>
+      <div class="profile-section" id="secThesis"></div>
       <div class="profile-section" id="secLinks"></div>
       <div class="profile-section" id="secActivity"></div>
       <div class="profile-section" id="secPubs"></div>
@@ -116,10 +117,13 @@ const fmt = n => Number(n).toLocaleString();
     return;
   }
 
-  const [people, news, pubData] = await Promise.all([
+  const [people, news, pubData, students] = await Promise.all([
     CMS.load('content/people.yaml'),
     CMS.load('content/news.yaml'),
     CMS.load('content/publications.generated.yaml').catch(() => ({ publications: [] })),
+    // Only for the thesis block below. A profile is still worth showing if
+    // this one file fails, so it degrades to no thesis rather than no page.
+    CMS.load('content/students.yaml').catch(() => ({ highlights: [] })),
   ]);
 
   document.getElementById('loading').remove();
@@ -175,6 +179,14 @@ const fmt = n => Number(n).toLocaleString();
     if (themes.length) html += `<div class="tag-row${kws.length ? ' mb-8' : ''}">${themes.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
     if (kws.length) html += `<div class="tag-row">${kws.map(k => `<span class="tag tag-muted">${k}</span>`).join('')}</div>`;
     document.getElementById('secThemes').innerHTML = html;
+  }
+
+  // Their own doctoral thesis, if the group supervised it. Same card as the
+  // students page uses, from CMS.thesisCard.
+  const thesis = CMS.thesisFor(person.name, students);
+  if (thesis) {
+    document.getElementById('secThesis').innerHTML =
+      '<div class="profile-section-title">Doctoral thesis</div>' + CMS.thesisCard(thesis);
   }
 
   // Links

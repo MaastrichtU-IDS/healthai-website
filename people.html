@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="icon" href="assets/brand/favicon-16.png" sizes="16x16" type="image/png" />
   <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <style>
     .people-grid {
@@ -88,8 +88,8 @@
   </style>
 </head>
 <body class="page-body">
-<script src="nav.js?v=3"></script>
-<script src="cms.js?v=3"></script>
+<script src="nav.js?v=4"></script>
+<script src="cms.js?v=4"></script>
 
 <div class="page-hero">
   <div class="container">
@@ -142,10 +142,15 @@ const SECTIONS = [
     match: p => !!p.alumni },
 ];
 const { icon: ICON, ICONS } = CMS;
-let people = [], activeTheme = 'All';
+let people = [], activeTheme = 'All', students = { highlights: [] };
 
 (async () => {
-  people = await CMS.load('content/people.yaml');
+  // students.yaml only supplies the thesis block and the year on the card,
+  // so a failure there degrades those away rather than taking the page down.
+  [people, students] = await Promise.all([
+    CMS.load('content/people.yaml'),
+    CMS.load('content/students.yaml').catch(() => ({ highlights: [] })),
+  ]);
   document.getElementById('loading').remove();
 
   document.getElementById('themeChips').innerHTML = THEMES_ALL.map(t =>
@@ -189,11 +194,13 @@ function renderPeople() {
       const photo = p.image_url
         ? `<img src="${p.image_url}" alt="${p.name}" loading="lazy">`
         : `<span class="person-initials">${CMS.initials(p.name)}</span>`;
+      const th = CMS.thesisFor(p.name, students);
       card.innerHTML = `
         <div class="person-photo">${photo}</div>
         <div class="person-info">
           <div class="person-name">${p.name}</div>
           <div class="person-role">${p.role}</div>
+          ${th && th.year ? `<div class="person-thesis-year">PhD completed ${CMS.esc(th.year)}</div>` : ''}
           <div class="person-kws">${(p.keywords||[]).slice(0,3).map(k=>`<span class="tag tag-muted">${k}</span>`).join('')}</div>
         </div>`;
       card.onclick = () => openModal(p);
@@ -210,6 +217,7 @@ function openModal(p) {
   // a note to ourselves, not content, and an empty Keywords heading with
   // nothing under it reads as a broken page. Show neither.
   const hasBio = p.bio && p.bio.trim() && !p.bio.includes('TODO');
+  const thesis = CMS.thesisFor(p.name, students);
   const themes = (p.themes||[]).map(t=>`<span class="tag">${t}</span>`).join('');
   const kws = (p.keywords||[]).map(k=>`<span class="tag tag-muted">${k}</span>`).join('');
   const links = CMS.personLinks(p);
@@ -230,6 +238,7 @@ function openModal(p) {
     <div class="modal-body">
       ${hasBio ? `<div class="modal-section-label">About</div><p class="modal-bio">${p.bio.trim()}</p>` : ''}
       ${themes ? `<div class="modal-section-label">Research themes</div><div class="tag-row">${themes}</div>` : ''}
+      ${thesis ? `<div class="modal-section-label">Doctoral thesis</div>${CMS.thesisCard(thesis)}` : ''}
       ${kws ? `<div class="modal-section-label">Keywords</div><div class="tag-row">${kws}</div>` : ''}
       <div class="modal-section-label">Links</div>
       <div class="person-links">${links.join('')}</div>

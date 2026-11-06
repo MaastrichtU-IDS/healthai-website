@@ -240,6 +240,43 @@ section.dark p  { color: rgba(255,255,255,0.68); }
 .chip:hover, .chip.active { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
 .chip.active { font-weight: 600; }
 
+/* ── Thesis card ──────────────────────────────────────────────────────────
+   A person's own doctoral thesis, shown on their profile and in the people
+   modal. Deliberately the same shape as .work-card on the students page,
+   where these theses are also listed: one thesis should not look like two
+   different things depending on which page you reached it from. The styles
+   live here rather than in either page because both render it. */
+.thesis-card {
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px 18px 14px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.thesis-top { display: flex; align-items: center; gap: 8px; }
+.thesis-year { font-size: 0.78rem; color: var(--text-muted); margin-left: auto; }
+.thesis-title { font-size: 0.95rem; line-height: 1.4; margin: 0; color: var(--slate); }
+.thesis-title a:hover { color: var(--blue-mid); }
+.thesis-meta { font-size: 0.79rem; color: var(--text-muted); line-height: 1.55; }
+.thesis-meta .role { color: var(--slate-mid); font-weight: 600; }
+.thesis-details summary {
+  cursor: pointer; font-size: 0.78rem; font-weight: 600; color: var(--slate-mid);
+  padding: 2px 0; list-style: none;
+}
+.thesis-details summary::-webkit-details-marker { display: none; }
+.thesis-details summary::before { content: '▸ '; color: var(--text-light); }
+.thesis-details[open] summary::before { content: '▾ '; }
+.thesis-details .body {
+  font-size: 0.82rem; line-height: 1.75; color: var(--text-muted);
+  margin-top: 6px; white-space: pre-wrap;
+}
+.thesis-foot { margin-top: 2px; }
+.thesis-doi {
+  font-size: 0.68rem; font-family: ui-monospace, monospace; color: var(--text-light);
+}
+.thesis-doi:hover { color: var(--blue-mid); text-decoration: underline; text-underline-offset: 2px; }
+
+/* Year of completion on the people grid card. */
+.person-thesis-year { font-size: 0.72rem; color: var(--text-light); margin-top: 2px; }
+
 /* ── Modal ── */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 1000;
