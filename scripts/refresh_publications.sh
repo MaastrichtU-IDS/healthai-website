@@ -17,6 +17,38 @@ PUSH_MODE="${PUSH_MODE:-none}"       # none | pr | push
 MIN_RATIO="${MIN_RATIO:-0.90}"       # refuse to publish a sharp shrink
 OUT=content/publications.generated.yaml
 
+# TELL A HUMAN WHEN THIS BREAKS. Identical mechanism to refresh_linkedin.sh,
+# and for the same reason: a CronJob that fails in Kubernetes notifies nobody,
+# so the first visible symptom is a publication list that quietly stopped
+# growing. tee rather than a plain redirect, so the pod log still gets
+# everything as it happens; fds 3 and 4 hold the real stdout and stderr so the
+# exit handler can restore them and let tee drain before reading $LOG.
+LOG=$(mktemp)
+exec 3>&1 4>&2
+exec > >(tee -a "$LOG") 2>&1
+
+notify() {  # notify <level> <key> <title> <body>
+  "$PY" "$WORKDIR_SCRIPTS/notify.py" --level "$1" --key "$2" --title "$3" --body "$4" || true
+}
+
+on_exit() {
+  rc=$?
+  exec 1>&3 2>&4   # close the pipe to tee
+  wait             # and let it finish writing $LOG
+  if [ "$rc" -ne 0 ]; then
+    notify fail publications-refresh-failed \
+      "Publication refresh failed (exit $rc)" \
+      "$(tail -40 "$LOG")"
+  fi
+  rm -f "$LOG"
+  exit "$rc"
+}
+trap on_exit EXIT
+
+# notify.py comes from the image, not the clone: the clone is cded into below
+# and the trap has to keep working from there.
+WORKDIR_SCRIPTS="$PWD/scripts"
+
 # WORK INSIDE A FRESH CLONE when we have somewhere to push to.
 #
 # The container image deliberately carries no .git -- .dockerignore excludes
