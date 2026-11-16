@@ -167,18 +167,18 @@
   image_url: "assets/people/aikaterina-kasimati.jpg"
   themes: ["Precision Agriculture, Food & Health"]
   bio: >
-    Katerina is an Assistant Professor in AI for Digital Agriculture and Sustainability.
-    Her research applies AI, remote and proximal sensing, and drones to agricultural
-    decision-making, spanning precision viticulture, crop yield prediction from satellite
-    imagery, drone spraying and spray drift, and the economic and environmental impact of
-    digital farming technologies. She holds a PhD in Precision Agriculture from the
-    Agricultural University of Athens and an MS in Agricultural and Biological Engineering
-    from the University of Illinois at Urbana-Champaign. Before joining Maastricht, she
-    spent nearly a decade managing EU research projects in agriculture and rural
-    development, including the coordination of ICAERUS (Horizon Europe) on drone-enabled
-    rural services. She is a licensed EASA remote pilot and contributes to policy-facing
-    work on the adoption and regulation of digital and drone technologies in Europe.
-  keywords: [Digital Agriculture, Precision Agriculture, AI in Agrifood Systems, Drones, Remote Sensing, Precision Viticulture, Rural Development]
+    Katerina is an Assistant Professor in AI for Digital Agriculture and Sustainability, with a
+    background in agricultural engineering. Her research focuses on AI-driven decision support
+    systems, precision and digital agriculture, agricultural data science and remote sensing,
+    with particular attention to FAIR data management and responsible data science for
+    sustainable agri-food systems. She holds a PhD in Precision Agriculture and Big Data
+    Analytics from the Agricultural University of Athens and an MS in Agricultural and
+    Biological Engineering from the University of Illinois at Urbana-Champaign. She has
+    extensive experience leading European research and innovation projects from proposal to
+    implementation, including as Project Manager of ICAERUS (Horizon Europe) on drone-enabled
+    agricultural and rural services. Her work bridges research, technology and collaboration
+    to accelerate sustainable innovation across agriculture, food systems and the environment.
+  keywords: [Digital Agriculture, Precision Agriculture, AI in Agrifood Systems, Decision Support Systems, Remote Sensing, FAIR Data, Sustainable Agri-food Systems]
   orcid: "0000-0002-7620-3782"
   github: ""
   google_scholar: "ZF9MRaIAAAAJ"
