@@ -58,12 +58,42 @@
     .grant-title { font-size: 0.92rem; line-height: 1.5; color: var(--text); }
     .grant-title a { color: inherit; text-decoration: underline; text-decoration-color: var(--border-mid); }
     .grant-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+    /* ── Open science: filter chips over a two-column card grid ── */
+    .open-chips { margin-bottom: 16px; }
+    .open-chip-n { font-weight: 400; opacity: 0.65; margin-left: 2px; }
+    .open-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .open-card {
+      display: flex; flex-direction: column; gap: 6px; padding: 16px 18px;
+      border: 1px solid var(--border); border-radius: var(--radius); background: var(--white);
+      text-decoration: none; color: inherit; box-shadow: var(--card-shadow);
+      transition: all var(--transition);
+    }
+    .open-card:hover { border-color: var(--blue); box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+    .open-card-top { display: flex; justify-content: space-between; align-items: center; }
+    .open-card-year { font-size: 0.76rem; color: var(--text-light); }
+    .open-card-title { font-size: 0.95rem; font-weight: 600; line-height: 1.4; color: var(--slate); overflow-wrap: anywhere; }
+    .open-card-note { font-size: 0.82rem; line-height: 1.55; color: var(--text-muted); }
+    .open-card-foot {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+      margin-top: auto; padding-top: 6px; font-size: 0.78rem; color: var(--text-muted);
+    }
+    .open-card-host { flex: none; color: var(--blue-mid); font-weight: 600; }
+    .open-tag-thesis_software { background: var(--gold-light); color: #9a6010; }
+    .open-tag-model, .open-tag-dataset { background: var(--slate-light); color: var(--slate-mid); }
+    .open-tag-material { background: var(--bg-alt); color: var(--text-muted); }
+    .open-more {
+      display: block; margin: 16px auto 0; padding: 7px 18px; border-radius: 20px; cursor: pointer;
+      font: inherit; font-size: 0.8rem; font-weight: 600; color: var(--blue-mid);
+      background: var(--white); border: 1.5px solid var(--border); transition: all var(--transition);
+    }
+    .open-more:hover { border-color: var(--blue); background: var(--blue-light); }
 
     @media (max-width: 600px) {
       .person-hero-inner { flex-direction: column; gap: 18px; }
       .person-avatar-lg { width: 90px; height: 90px; font-size: 2rem; }
       .grant-row { flex-direction: column; gap: 2px; }
       .grant-year { flex-basis: auto; }
+      .open-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -107,6 +137,7 @@
       <div class="profile-section" id="secThemes"></div>
       <div class="profile-section" id="secThesis"></div>
       <div class="profile-section" id="secGrants"></div>
+      <div class="profile-section" id="secOpen"></div>
       <div class="profile-section" id="secLinks"></div>
       <div class="profile-section" id="secActivity"></div>
       <div class="profile-section" id="secPubs"></div>
@@ -221,6 +252,64 @@ const fmt = n => Number(n).toLocaleString();
           </div>
         </li>`;
       }).join('')}</ul>`;
+  }
+
+  // Open science: software, models, datasets and materials, from the optional
+  // `open_science` list. Shown as a card grid with a filter per kind; each
+  // filter shows its first OPEN_LIMIT cards and a button for the rest. File
+  // order is kept within a kind. The host label is read off the URL.
+  const openItems = (person.open_science || []).filter(o => o && o.title && o.url);
+  if (openItems.length) {
+    const OPEN_LIMIT = 6;
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const kinds = [
+      { id: 'software', label: 'Software', tag: 'Software', types: ['software'] },
+      { id: 'theses',   label: 'Student theses', tag: 'Thesis code', types: ['thesis_software'] },
+      { id: 'data',     label: 'Models & datasets', types: ['model', 'dataset'] },
+      { id: 'material', label: 'Talks & materials', tag: 'Material', types: ['material'] },
+    ];
+    const tagFor = o => o.type === 'model' ? 'Model' : o.type === 'dataset' ? 'Dataset'
+      : (kinds.find(k => k.types.includes(o.type)) || {}).tag || 'Other';
+    const host = u => /github\.(com|io)/.test(u) ? 'GitHub' : /gitlab\.com/.test(u) ? 'GitLab'
+      : /huggingface\.co/.test(u) ? 'Hugging Face' : /zenodo/.test(u) ? 'Zenodo' : 'Link';
+    // Sorted by kind so "All" reads in the same order as the filters.
+    const rank = o => { const i = kinds.findIndex(k => k.types.includes(o.type)); return i < 0 ? kinds.length : i; };
+    const sorted = openItems.map((o, i) => [o, i]).sort((a, b) => rank(a[0]) - rank(b[0]) || a[1] - b[1]).map(x => x[0]);
+    const card = o => `
+      <a class="open-card" href="${esc(o.url)}" target="_blank" rel="noopener">
+        <div class="open-card-top">
+          <span class="tag open-tag-${esc(o.type)}">${tagFor(o)}</span>
+          <span class="open-card-year">${esc(o.year || '')}</span>
+        </div>
+        <div class="open-card-title">${esc(o.title)}</div>
+        ${o.note ? `<div class="open-card-note">${esc(o.note)}</div>` : ''}
+        <div class="open-card-foot">
+          <span>${o.by ? esc(o.by) : ''}</span>
+          <span class="open-card-host">${host(o.url)} ↗</span>
+        </div>
+      </a>`;
+    let active = 'all', expanded = false;
+    const sec = document.getElementById('secOpen');
+    const render = () => {
+      const kind = kinds.find(k => k.id === active);
+      const list = kind ? sorted.filter(o => kind.types.includes(o.type)) : sorted;
+      const shown = expanded ? list : list.slice(0, OPEN_LIMIT);
+      const chips = [{ id: 'all', label: 'All', n: sorted.length }]
+        .concat(kinds.map(k => ({ id: k.id, label: k.label, n: sorted.filter(o => k.types.includes(o.type)).length })))
+        .filter(c => c.n);
+      sec.innerHTML = `
+        <div class="profile-section-title">Open Science</div>
+        <div class="filter-chips open-chips">${chips.map(c =>
+          `<button class="chip${c.id === active ? ' active' : ''}" data-kind="${c.id}">${c.label} <span class="open-chip-n">${c.n}</span></button>`).join('')}</div>
+        <div class="open-grid">${shown.map(card).join('')}</div>
+        ${list.length > OPEN_LIMIT ? `<button class="open-more" data-more>${expanded ? 'Show fewer' : `Show all ${list.length}`}</button>` : ''}`;
+    };
+    sec.addEventListener('click', e => {
+      const chip = e.target.closest('[data-kind]');
+      if (chip) { active = chip.dataset.kind; expanded = false; render(); return; }
+      if (e.target.closest('[data-more]')) { expanded = !expanded; render(); }
+    });
+    render();
   }
 
   // Links

@@ -35,6 +35,8 @@ Each entry has: `name`, `role`, `group`, `image_url`, `themes`, `bio`, `keywords
 
 Optional: `grants`, a list of awarded grants and prizes shown on the person's profile page under "Grants & Awards", newest first. Each item has `title` and may have `year`, `funder` (the funder or awarding body), `role` and `url`.
 
+Optional: `open_science`, a list of public software, models, datasets and materials shown on the profile page under "Open Science" as filterable cards. Each item has `type` (`software`, `thesis_software`, `model`, `dataset` or `material`), `title` and `url`, and may have `year`, `by` (authors, when not only the profile's owner) and `note`. Only link things that are publicly accessible.
+
 - `group` is either `Faculty` or `Researchers`
 - On `people.html`, the Researchers group is split by `role`: entries with `role: PhD Researcher` appear under "PhD Researchers"; all others appear under "Postdocs, Researchers, and Research Software Engineers"
 - `github`, `google_scholar`, `linkedin` store bare handles/IDs (not full URLs)
