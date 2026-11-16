@@ -80,7 +80,7 @@ themes:
     desc: >
       Regulatory AI captures the dual role of AI in modern governance: using AI to improve regulatory processes, and designing regulation to ensure AI systems are safe, transparent, and accountable.
       It emphasizes a feedback loop where AI enhances evidence generation and oversight, while regulatory frameworks shape trustworthy, human-centered AI deployment.
-    projects: [REALM]
+    projects: [REALM, BlueLab]
     featured_pubs: []
 
 # AMOUNTS ARE TOTAL PROJECT COST: the whole consortium's budget, not this
@@ -317,4 +317,23 @@ projects:
     period: "2021–2024"
     status: Completed
     url: https://github.com/sunchang0124/dp_cgans
+
+  - acronym: BlueLab
+    title: AI Due Diligence Lab for the Blue Economy
+    theme: Regulatory AI
+    desc: >
+      BlueLab is a Comenius Teaching Fellows project that will be embedded in the Legal Analytics course.
+      Students take on the role of compliance officers and work through realistic cases from fragmented
+      regulatory texts in a problem-based learning setting. The project addresses a gap between education
+      and professional practice, where AI tools are already used for document analysis but graduates are
+      not trained to use them responsibly. The project is building a dashboard that integrates document
+      retrieval, LLM-based norm classification, and retrieval-augmented generation over structured legal
+      provisions. Built-in guardrails flag unverified AI outputs for human-in-the-loop verification, and
+      all steps are logged to maintain a full provenance trail.
+    team: [Rohan Nanda]
+    funder: NKO (Nationaal Kennisinstituut Onderwijs) – Comenius Teaching Fellows
+    amount: "€49.8K"
+    period: "2026–2027"
+    status: Active
+    url: https://maastrichtu-biss.github.io/bluelab/
 
