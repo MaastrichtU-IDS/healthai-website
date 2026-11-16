@@ -13,7 +13,7 @@ themes:
       by data. We integrate IoT sensor streams, EHR data and knowledge graphs to
       deliver closed-loop AI systems that adapt recommendations to individual
       patients in real time.
-    projects: [CHARM, PCX-CHARMeleon, iCARE4CVD, DACIL, Veni, CMyGuideline]
+    projects: [CHARM, iCARE4CVD, DACIL, Veni, CMyGuideline]
     featured_pubs: []
 
   - id: agriculture
@@ -141,34 +141,23 @@ projects:
     logo: https://vito.be/sites/vito/files/styles/logo/public/logo/realm-logo.png?itok=BNkUKxCi
 
   - acronym: CHARM
-    title: CHARM
+    title: "CHARM: An End-to-End Toolchain for Collecting, Harmonizing, Analyzing, Reasoning About and Manipulating Biomedical Data"
     theme: Precision Medicine & Digital Health
     desc: >
-      The CHARM project is an Advanced Research Projects Agency for Health–funded initiative developing a complete, 
+      The CHARM project is an Advanced Research Projects Agency for Health–funded initiative developing a complete,
       AI-enabled biomedical data pipeline that spans data collection through to clinical decision support.
+      It runs under ARPA-H's Pediatric Care eXpansion (PCX) programme, led from the University of Alabama at
+      Birmingham. A September 2026 continuation adds the Maastricht contribution to the TwinSight platform:
+      patient trajectory modelling, synthetic paediatric data for rare and undiagnosed diseases,
+      and causal reasoning for treatment effects in paediatric cancer.
     team: [Chang Sun, Michel Dumontier, Anas Elghafari]
     funder: ARPA-H
     amount: "€8.7M"
-    period: "2024–2027"
-    status: Active
-    featured: true
-    logo: https://avatars.githubusercontent.com/u/197785359?s=200&v=4
-
-  - acronym: PCX-CHARMeleon
-    title: Pediatric and Undiagnosed Disease Modeling for the TwinSight Platform
-    theme: Precision Medicine & Digital Health
-    desc: >
-      CHARMeleon is the Maastricht contribution to the TwinSight API within the PCX consortium, with
-      collaborators including Harvard Medical School and Stanford. Version 1.0 delivers patient trajectory
-      modelling and similarity search (longitudinal-event representations, trajectory embeddings and similarity
-      metrics) and synthetic paediatric patient data for rare and undiagnosed diseases. Version 2.0 adds
-      trajectory-based causal reasoning for treatment-effect analysis in paediatric cancer and undiagnosed
-      diseases, and explores patient-controlled data vault architectures. Chang Sun leads the Maastricht
-      contribution.
-    team: [Chang Sun]
-    funder: ARPA-H
     period: "2024–2028"
     status: Active
+    featured: true
+    url: https://arpa-h.gov/explore-funding/awards/3411
+    logo: https://avatars.githubusercontent.com/u/197785359?s=200&v=4
 
   - acronym: BDT
     title: Biomedical Data Translator

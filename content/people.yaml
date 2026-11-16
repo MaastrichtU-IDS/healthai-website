@@ -113,10 +113,6 @@
     - year: "2026"
       title: OpenUp Education Grant
       funder: Maastricht University
-    - year: "2026"
-      title: "PCX-CHARMeleon: Pediatric and Undiagnosed Disease Modeling for the TwinSight Platform"
-      funder: ARPA-H
-      role: Lead of the Maastricht contribution
     - year: "2025"
       title: "TDCC-SSH Challenge: Synthetic Data for Social Sciences"
       funder: NWO (Dutch Research Council)
@@ -142,12 +138,12 @@
     - year: "2022"
       title: Research Visit Grant
       funder: Danish Data Science Academy
-    - year: "2020–2022"
-      title: ODISSEI Grant
-      funder: ODISSEI (Open Data Infrastructure for Social Science and Economic Innovations)
     - year: "2021"
       title: Diversity and Inclusivity Grant
       funder: Maastricht University
+    - year: "2020–2022"
+      title: ODISSEI Grant
+      funder: ODISSEI (Open Data Infrastructure for Social Science and Economic Innovations)
     - year: "2020"
       title: Best Poster Award
       funder: ICT.OPEN 2020 Conference
