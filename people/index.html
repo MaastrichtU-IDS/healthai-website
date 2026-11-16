@@ -50,9 +50,20 @@
     }
     .profile-bio { font-size: 0.92rem; line-height: 1.85; color: var(--text-muted); }
 
+    /* ── Grants: one row per grant, year in a fixed left column ── */
+    .grant-list { list-style: none; margin: 0; padding: 0; }
+    .grant-row { display: flex; gap: 18px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .grant-row:last-child { border-bottom: 0; }
+    .grant-year { flex: 0 0 84px; font-size: 0.8rem; font-weight: 600; color: var(--blue-mid); padding-top: 2px; }
+    .grant-title { font-size: 0.92rem; line-height: 1.5; color: var(--text); }
+    .grant-title a { color: inherit; text-decoration: underline; text-decoration-color: var(--border-mid); }
+    .grant-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
     @media (max-width: 600px) {
       .person-hero-inner { flex-direction: column; gap: 18px; }
       .person-avatar-lg { width: 90px; height: 90px; font-size: 2rem; }
+      .grant-row { flex-direction: column; gap: 2px; }
+      .grant-year { flex-basis: auto; }
     }
   </style>
 </head>
@@ -95,6 +106,7 @@
       <div class="profile-section" id="secBio"></div>
       <div class="profile-section" id="secThemes"></div>
       <div class="profile-section" id="secThesis"></div>
+      <div class="profile-section" id="secGrants"></div>
       <div class="profile-section" id="secLinks"></div>
       <div class="profile-section" id="secActivity"></div>
       <div class="profile-section" id="secPubs"></div>
@@ -187,6 +199,28 @@ const fmt = n => Number(n).toLocaleString();
   if (thesis) {
     document.getElementById('secThesis').innerHTML =
       '<div class="profile-section-title">Doctoral thesis</div>' + CMS.thesisCard(thesis);
+  }
+
+  // Grants and prizes awarded to this person, from the optional `grants` list
+  // on their people.yaml entry. Shown in file order, which is newest first.
+  const grants = (person.grants || []).filter(g => g && g.title);
+  if (grants.length) {
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    document.getElementById('secGrants').innerHTML = `
+      <div class="profile-section-title">Grants &amp; Awards</div>
+      <ul class="grant-list">${grants.map(g => {
+        const title = g.url
+          ? `<a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.title)}</a>`
+          : esc(g.title);
+        const meta = [g.funder, g.role].filter(Boolean).map(esc).join(' · ');
+        return `<li class="grant-row">
+          <div class="grant-year">${esc(g.year || '')}</div>
+          <div>
+            <div class="grant-title">${title}</div>
+            ${meta ? `<div class="grant-meta">${meta}</div>` : ''}
+          </div>
+        </li>`;
+      }).join('')}</ul>`;
   }
 
   // Links

@@ -103,6 +103,68 @@
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/chang-sun/"
   work_url: "https://www.maastrichtuniversity.nl/c-sun"
   email: chang.sun@maastrichtuniversity.nl
+  # Awarded grants and prizes, newest first. Submissions still under review
+  # stay off this list until they are awarded.
+  grants:
+    - year: "2026"
+      title: "Veni: Generative AI for Causal Treatment–Toxicity Analysis in Rare Blood Cancers"
+      funder: NWO (Dutch Research Council)
+      role: Project lead
+    - year: "2026"
+      title: OpenUp Education Grant
+      funder: Maastricht University
+    - year: "2026"
+      title: "PCX-CHARMeleon: Pediatric and Undiagnosed Disease Modeling for the TwinSight Platform"
+      funder: ARPA-H
+      role: Lead of the Maastricht contribution
+    - year: "2025"
+      title: "TDCC-SSH Challenge: Synthetic Data for Social Sciences"
+      funder: NWO (Dutch Research Council)
+      role: Work package lead
+      url: https://zenodo.org/communities/tdcc-ssh-syntheticdata
+    - year: "2024"
+      title: High-impact Women in Data Science Ambassador
+      funder: Worldwide Women in Data Science (WiDS) Community
+    - year: "2024"
+      title: Rising Talent Grant
+      funder: Faculty of Science and Engineering, Maastricht University
+    - year: "2023"
+      title: Maastricht Young Academy Interdisciplinary Research Grant
+      funder: Maastricht Young Academy
+    - year: "2023"
+      title: Short Term Scientific Mission Research Visit Grant
+      funder: COST Action
+    - year: "2022"
+      title: "REALM: Real-world-data Enabled Assessment for heaLth regulatory decision-Making"
+      funder: European Commission (Horizon Europe)
+      role: Work package contributor and leader
+      url: https://realm-ai.eu/
+    - year: "2022"
+      title: Research Visit Grant
+      funder: Danish Data Science Academy
+    - year: "2020–2022"
+      title: ODISSEI Grant
+      funder: ODISSEI (Open Data Infrastructure for Social Science and Economic Innovations)
+    - year: "2021"
+      title: Diversity and Inclusivity Grant
+      funder: Maastricht University
+    - year: "2020"
+      title: Best Poster Award
+      funder: ICT.OPEN 2020 Conference
+    - year: "2020"
+      title: "Dutch National Research Agenda Route 2020 Grant: Big Data Route"
+      funder: Dutch National Research Agenda (NWA)
+    - year: "2019–2020"
+      title: Research Mobility Award
+      funder: Young European Research Universities Network (YERUN)
+    - year: "2019–2020"
+      title: University Fund Limburg (SWOL) Grant
+      funder: University Fund Limburg (SWOL)
+    - year: "2019"
+      title: Best Student Paper Award
+      funder: 17th World Congress of Medical and Health Informatics
+    - year: "2019"
+      title: International Semantic Web Summer School Scholarship
 
 - name: Remzi Celebi
   slug: remzi-celebi

@@ -33,6 +33,8 @@ Static site — no build step, no framework. Pages are plain HTML files that loa
 
 Each entry has: `name`, `role`, `group`, `image_url`, `themes`, `bio`, `keywords`, `orcid`, `github`, `google_scholar`, `linkedin`, `personal_page`, `cris_url`, `work_url`, `email`.
 
+Optional: `grants`, a list of awarded grants and prizes shown on the person's profile page under "Grants & Awards", newest first. Each item has `title` and may have `year`, `funder` (the funder or awarding body), `role` and `url`.
+
 - `group` is either `Faculty` or `Researchers`
 - On `people.html`, the Researchers group is split by `role`: entries with `role: PhD Researcher` appear under "PhD Researchers"; all others appear under "Postdocs, Researchers, and Research Software Engineers"
 - `github`, `google_scholar`, `linkedin` store bare handles/IDs (not full URLs)
