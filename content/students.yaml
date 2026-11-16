@@ -711,6 +711,29 @@ highlights:
       - Mahmoud Ibrahim
       - Chang Sun
 
+  # MASTER'S THESES SUPERVISED BY ROHAN NANDA. Added 2026-11-16 from Rohan's
+  # own supervision records. Student numbers were never copied.
+  # Names outside the group render as plain text.
+  - level: MSc
+    name: James Herity
+    title: A comparative study of large language models for legal clause extraction
+    year: "2024"
+    theme: regulatory
+    programme: MSc Data Science for Decision Making
+    supervisors:
+      - Rohan Nanda
+      - Jan Scholtes
+
+  - level: MSc
+    name: Jonas Bei
+    title: Uncovering research data management through topic modelling
+    year: "2025"
+    theme: regulatory
+    programme: MSc Data Science for Decision Making
+    supervisors:
+      - Remzi Celebi
+      - Rohan Nanda
+
   # BACHELOR'S THESES. Same source as the master's entries: titles read off
   # each thesis title page, student numbers left out.
   #
@@ -1035,6 +1058,38 @@ highlights:
     date: 27 June 2023
     programme: BSc Data Science and Artificial Intelligence
     supervisors:
+      - Chang Sun
+
+  # BACHELOR'S THESES SUPERVISED BY ROHAN NANDA. Added 2026-11-16 from
+  # Rohan's own supervision records. Student numbers were never copied.
+  - level: BSc
+    name: Valentin Cauwe Goeres
+    title: "Lexical vs. Semantic Information Retrieval for EU Directive Mapping: A Comparative Study on Multi-Model Search and Legal RAG Performance"
+    year: "2026"
+    theme: regulatory
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Rohan Nanda
+      - Chang Sun
+
+  - level: BSc
+    name: Nina Zorawska
+    title: Semantic Role Labeling of Hohfeldian Normative Relations in International Treaty Texts
+    year: "2026"
+    theme: regulatory
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Rohan Nanda
+      - Remzi Celebi
+
+  - level: BSc
+    name: Wenjie Liao
+    title: "From Unstructured to Structured: A Modular NLP Pipeline versus LLM Approach for Word2DITA Migration"
+    year: "2026"
+    theme: regulatory
+    programme: BSc Data Science and Artificial Intelligence
+    supervisors:
+      - Rohan Nanda
       - Chang Sun
 
 # WHERE PROJECT DESCRIPTIONS LIVE.
