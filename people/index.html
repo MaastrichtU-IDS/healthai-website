@@ -86,6 +86,10 @@
       font: inherit; font-size: 0.8rem; font-weight: 600; color: var(--blue-mid);
       background: var(--white); border: 1.5px solid var(--border); transition: all var(--transition);
     }
+    .tl-body { flex: 1; min-width: 0; }
+    .tl-tag { flex: none; align-self: flex-start; margin-top: 2px; }
+    .tl-tag-media, .tl-tag-phd { background: var(--gold-light); color: #9a6010; }
+    .tl-tag-organisation, .tl-tag-conference { background: var(--slate-light); color: var(--slate-mid); }
     .open-more:hover { border-color: var(--blue); background: var(--blue-light); }
 
     @media (max-width: 600px) {
@@ -94,6 +98,7 @@
       .grant-row { flex-direction: column; gap: 2px; }
       .grant-year { flex-basis: auto; }
       .open-grid { grid-template-columns: 1fr; }
+      .tl-tag { margin-top: 4px; }
     }
   </style>
 </head>
@@ -138,6 +143,8 @@
       <div class="profile-section" id="secThesis"></div>
       <div class="profile-section" id="secGrants"></div>
       <div class="profile-section" id="secOpen"></div>
+      <div class="profile-section" id="secImpact"></div>
+      <div class="profile-section" id="secCommittees"></div>
       <div class="profile-section" id="secLinks"></div>
       <div class="profile-section" id="secActivity"></div>
       <div class="profile-section" id="secPubs"></div>
@@ -311,6 +318,59 @@ const fmt = n => Number(n).toLocaleString();
     });
     render();
   }
+
+  // Impact and Committees: optional `impact` and `committees` lists, shown as
+  // year-led rows with a filter per kind. "All" keeps file order, which is
+  // grouped by kind and newest first within it; a small tag names the kind.
+  const escT = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const renderTimeline = (secId, heading, items, kinds, limit = 6) => {
+    const list0 = (items || []).filter(o => o && o.title);
+    if (!list0.length) return;
+    const sec = document.getElementById(secId);
+    const labelOf = t => (kinds.find(k => k.id === t) || {}).tag || '';
+    let active = 'all', expanded = false;
+    const render = () => {
+      const list = active === 'all' ? list0 : list0.filter(o => o.type === active);
+      const shown = expanded ? list : list.slice(0, limit);
+      const chips = [{ id: 'all', label: 'All', n: list0.length }]
+        .concat(kinds.map(k => ({ id: k.id, label: k.label, n: list0.filter(o => o.type === k.id).length })))
+        .filter(c => c.n);
+      sec.innerHTML = `
+        <div class="profile-section-title">${heading}</div>
+        ${chips.length > 2 ? `<div class="filter-chips open-chips">${chips.map(c =>
+          `<button class="chip${c.id === active ? ' active' : ''}" data-kind="${c.id}">${c.label} <span class="open-chip-n">${c.n}</span></button>`).join('')}</div>` : ''}
+        <ul class="grant-list">${shown.map(o => {
+          const title = o.url
+            ? `<a href="${escT(o.url)}" target="_blank" rel="noopener">${escT(o.title)}</a>` : escT(o.title);
+          const tag = active === 'all' && labelOf(o.type)
+            ? `<span class="tag tl-tag tl-tag-${escT(o.type)}">${labelOf(o.type)}</span>` : '';
+          return `<li class="grant-row">
+            <div class="grant-year">${escT(o.year || '')}</div>
+            <div class="tl-body">
+              <div class="grant-title">${title}</div>
+              ${o.note ? `<div class="grant-meta">${escT(o.note)}</div>` : ''}
+            </div>
+            ${tag}
+          </li>`;
+        }).join('')}</ul>
+        ${list.length > limit ? `<button class="open-more" data-more>${expanded ? 'Show fewer' : `Show all ${list.length}`}</button>` : ''}`;
+    };
+    sec.addEventListener('click', e => {
+      const chip = e.target.closest('[data-kind]');
+      if (chip) { active = chip.dataset.kind; expanded = false; render(); return; }
+      if (e.target.closest('[data-more]')) { expanded = !expanded; render(); }
+    });
+    render();
+  };
+  renderTimeline('secImpact', 'Impact', person.impact, [
+    { id: 'talk', label: 'Talks', tag: 'Talk' },
+    { id: 'media', label: 'Media & outreach', tag: 'Outreach' },
+    { id: 'organisation', label: 'Conference organisation', tag: 'Organisation' },
+  ]);
+  renderTimeline('secCommittees', 'Committees', person.committees, [
+    { id: 'phd', label: 'PhD committees', tag: 'PhD' },
+    { id: 'conference', label: 'Conference committees', tag: 'Conference' },
+  ]);
 
   // Links
   const links = CMS.personLinks(person);
