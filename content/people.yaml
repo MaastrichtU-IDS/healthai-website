@@ -52,22 +52,28 @@
   role: Associate Professor
   group: Faculty
   image_url: "assets/people/visara-urovi.jpg"
-  themes: [Federated & Privacy-Preserving AI]
+  themes: [Federated & Privacy-Preserving AI, Precision Medicine & Digital Health, Regulatory AI]
   bio: >
-    Visara Urovi is an Associate Professor at the Institute of Data Science in Maastricht
-    University. Visara has a PhD in Computer Science from the Royal Holloway University of
-    London on distributed system interaction protocols. She also has an MSc and a BSc
-    Degree in Computer Engineering from the University of Bologna in Italy. She was a
-    Research Assistant at the Royal Holloway University of London from 2007 until 2010.
-    Her research focussed on multi-agent systems and time-based interaction protocols.
-    From 2011 until 2016 she worked as a Post-doc Researcher at the University of Applied
-    Sciences of western Switzerland.
-  keywords: [Federated Learning, Privacy-Preserving AI, GDPR, Distributed ML, Health Data]
+    Visara Urovi is an Associate Professor at the Institute of Data Science, Maastricht
+    University, where she leads research work on Federated & Privacy-Preserving AI. Her
+    research focuses on trustworthy infrastructure for sharing and analysing health
+    data: blockchain-based platforms for consent management, licence accountability and
+    identity-private data sharing (such as LUCE), privacy-preserving distributed learning,
+    and auditable documentation for clinical AI. She also develops speech- and sensor-based
+    digital biomarkers for monitoring chronic respiratory diseases, leading the NWO-funded
+    DACIL project on a digital companion for people with COPD, and contributes to the
+    Horizon Europe projects REALM and iCARE4CVD. Visara holds a PhD in Computer Science
+    from Royal Holloway, University of London, and an MSc and BSc in Computer Engineering
+    from the University of Bologna. Before joining Maastricht she was a postdoctoral
+    researcher at the University of Applied Sciences of Western Switzerland, working on
+    multi-agent systems and computer-interpretable clinical guidelines. She is also a
+    co-organiser of Women in Data Science (WiDS) Maastricht.
+  keywords: [Federated Learning, Privacy-Preserving AI, Blockchain, Health Data Sharing, Consent Management, Vocal Biomarkers, Digital Health, Responsible AI]
   orcid: "0000-0003-2817-3950"
-  github: ""
+  github: "LUCE-Blockchain"
   google_scholar: "3H19g2AAAAAJ"
-  linkedin: ""
-  personal_page: ""
+  linkedin: "visara-urovi-b3b1998"
+  personal_page: "https://www.maastrichtuniversity.nl/v-urovi"
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/visara-urovi/"
   work_url: "https://www.maastrichtuniversity.nl/nl/v-urovi"
   email: v.urovi@maastrichtuniversity.nl
