@@ -158,8 +158,8 @@
   work_url: "https://www.maastrichtuniversity.nl/r-nanda"
   email: r.nanda@maastrichtuniversity.nl
 
-- name: Aikaterina Kasimati
-  slug: aikaterina-kasimati
+- name: Aikaterini Kasimati
+  slug: aikaterini-kasimati
   role: Assistant Professor
   group: Faculty
   # Was pointing at UM's generic placeholder_profile.png, so this card
