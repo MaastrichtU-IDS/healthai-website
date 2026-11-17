@@ -154,7 +154,7 @@
 </div>
 
 <script>
-const { icon: ICON, ICONS } = CMS;
+const { icon: ICON, ICONS, esc } = CMS;
 
 function imgSrc(url) { return url || ''; }
 
@@ -244,7 +244,6 @@ const fmt = n => Number(n).toLocaleString();
   // on their people.yaml entry. Shown in file order, which is newest first.
   const grants = (person.grants || []).filter(g => g && g.title);
   if (grants.length) {
-    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     document.getElementById('secGrants').innerHTML = `
       <div class="profile-section-title">Grants &amp; Awards</div>
       <ul class="grant-list">${grants.map(g => {
@@ -269,7 +268,6 @@ const fmt = n => Number(n).toLocaleString();
   const openItems = (person.open_science || []).filter(o => o && o.title && o.url);
   if (openItems.length) {
     const OPEN_LIMIT = 6;
-    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const kinds = [
       { id: 'software', label: 'Software', tag: 'Software', types: ['software'] },
       { id: 'theses',   label: 'Student theses', tag: 'Thesis code', types: ['thesis_software'] },
@@ -323,17 +321,16 @@ const fmt = n => Number(n).toLocaleString();
   // Impact and Committees: optional `impact` and `committees` lists, shown as
   // year-led rows with a filter per kind. "All" keeps file order, which is
   // grouped by kind and newest first within it; a small tag names the kind.
-  const escT = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   // `person` is the slug of someone with a profile on this site. The note
   // opens with their name, so link that first segment to their page.
   const noteHtml = o => {
     if (!o.note) return '';
-    if (!o.person) return escT(o.note);
+    if (!o.person) return esc(o.note);
     const [who, ...rest] = String(o.note).split(' · ');
     // The page sets <base href="../">, so the link is written from the site
     // root, the same way every other page links a profile.
-    const link = `<a href="people/?id=${encodeURIComponent(o.person)}">${escT(who)}</a>`;
-    return rest.length ? `${link} · ${escT(rest.join(' · '))}` : link;
+    const link = `<a href="people/?id=${encodeURIComponent(o.person)}">${esc(who)}</a>`;
+    return rest.length ? `${link} · ${esc(rest.join(' · '))}` : link;
   };
   const renderTimeline = (secId, heading, items, kinds, limit = 6) => {
     const list0 = (items || []).filter(o => o && o.title);
@@ -353,11 +350,11 @@ const fmt = n => Number(n).toLocaleString();
           `<button class="chip${c.id === active ? ' active' : ''}" data-kind="${c.id}">${c.label} <span class="open-chip-n">${c.n}</span></button>`).join('')}</div>` : ''}
         <ul class="grant-list">${shown.map(o => {
           const title = o.url
-            ? `<a href="${escT(o.url)}" target="_blank" rel="noopener">${escT(o.title)}</a>` : escT(o.title);
+            ? `<a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.title)}</a>` : esc(o.title);
           const tag = active === 'all' && labelOf(o.type)
-            ? `<span class="tag tl-tag tl-tag-${escT(o.type)}">${labelOf(o.type)}</span>` : '';
+            ? `<span class="tag tl-tag tl-tag-${esc(o.type)}">${labelOf(o.type)}</span>` : '';
           return `<li class="grant-row">
-            <div class="grant-year">${escT(o.year || '')}</div>
+            <div class="grant-year">${esc(o.year || '')}</div>
             <div class="tl-body">
               <div class="grant-title">${title}</div>
               ${o.note ? `<div class="grant-meta">${noteHtml(o)}</div>` : ''}
