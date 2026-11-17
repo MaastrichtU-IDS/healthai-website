@@ -125,6 +125,14 @@ let activeStatus = 'All', activeTheme = 'All', activeFunder = 'All';
   ).join('');
 
   filterProjects();
+
+  // The cards exist only once the YAML has arrived, so a #ACRONYM in the URL
+  // was resolved against an empty page and scrolled nowhere. A profile links
+  // here that way, so do the jump now that the card exists.
+  if (location.hash) {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) requestAnimationFrame(() => target.scrollIntoView());
+  }
 })();
 
 /* Short, groupable label for a project's funding source: everything before
@@ -200,7 +208,7 @@ function renderCard(p) {
   const featuredBadge = p.featured ? `<span class="tag tag-gold" style="font-size:0.68rem">Featured</span>` : '';
 
   return `
-    <div class="proj-card${p.featured ? ' is-featured' : ''} reveal">
+    <div class="proj-card${p.featured ? ' is-featured' : ''} reveal" id="${encodeURIComponent(p.acronym)}" style="scroll-margin-top:140px">
       ${logo}
       <div class="proj-body">
         <div class="proj-top">
