@@ -401,6 +401,135 @@
       url: https://github.com/MaastrichtU-IDS/PhDThesis
       note: Shared resources for PhD candidates
 
+  # Impact: talks, media and outreach, and events organised. `type` is one of
+  # talk, media, organisation. `title` is the talk title where there is one,
+  # otherwise the event; `note` carries the role and the venue.
+  impact:
+    - type: talk
+      year: "2026"
+      title: Critical Thinking in the Age of AI
+      note: Keynote · UM School of Business and Economics Seminar
+    - type: talk
+      year: "2026"
+      title: Workshop on Synthetic Data
+      note: National Open Science Festival
+      url: https://doi.org/10.5281/zenodo.23556724
+    - type: talk
+      year: "2026"
+      title: Synthetic Data Generation for Open Science
+      note: Keynote · DANS Open Day
+
+    - type: media
+      year: "2021–2022"
+      title: Data Scientist MINDSETS Podcast
+      note: Project investigator · interviews with data scientists of diverse backgrounds
+    - type: media
+      year: "2020–Now"
+      title: Ambassador of Global Women in Data Science
+      note: Building the WiDS community in Maastricht
+    - type: media
+      year: "2020"
+      title: Chang Sun tells us about her experience with making research FAIR
+      note: Video interview · Maastricht University on YouTube
+      url: https://www.youtube.com/watch?v=DAU_WV9vyQk
+    - type: media
+      year: "2020"
+      title: "FAIR examples at Maastricht University: FAIRHealth"
+      note: Written interview · Maastricht University Library
+      url: https://library.maastrichtuniversity.nl/research/rdm/research-data-management/preserving-and-publishing-data/fair-examples-at-maastricht-university/#fairhealth
+
+    - type: organisation
+      year: "2026"
+      title: BNAIC/BeNeLearn 2026
+      note: Program Chair · 38th Benelux Conference on AI and 35th Belgian/Dutch Conference on Machine Learning
+    - type: organisation
+      year: "2019–Now"
+      title: Women in Data Science Maastricht Conference
+      note: Program Chair · organiser of five editions of the conference and datathon
+    - type: organisation
+      year: "2024"
+      title: Solid Symposium, Privacy Session
+      note: Organizer · Leuven
+    - type: organisation
+      year: "2023–2024"
+      title: Federated Query for Distributed Knowledge Graph Hackathon, 1st and 2nd editions
+      note: Organizer · COST Action · Izmir 2023 and Malaga 2024
+      url: https://github.com/MaastrichtU-IDS/federatedQueryKG
+    - type: organisation
+      year: "2023"
+      title: Bio-Hackathon MENA
+      note: Co-organizer and project leader, Synthetic Data for Rare Diseases · KAUST, Jeddah
+    - type: organisation
+      year: "2022"
+      title: Privacy in Personal Knowledge Graph workshop
+      note: Organizer · COST Action · Luxembourg
+    - type: organisation
+      year: "2022"
+      title: Metadata for Distributed Knowledge Graph Workshop
+      note: Organizer · COST Action · Lyon
+    - type: organisation
+      year: "2021"
+      title: Share Without Sharing Workshop
+      note: Organizer · BioDataWorld Congress, Basel
+
+  # Committees. `type` is phd (thesis examination) or conference. For phd,
+  # `title` is the thesis title and `note` the candidate: initials and
+  # surname, following Dutch practice, except for someone who has a profile
+  # on this site. They are named in full and `person` carries their slug, so
+  # the name links to that profile.
+  committees:
+    - type: phd
+      year: "2026"
+      title: "Detecting LLM-driven Social Media Bots: Intent, Multi-Modal Learning, and Fairness-aware Debiasing"
+      note: J. Duan · Auckland University of Technology
+    - type: phd
+      year: "2026"
+      title: Data and Semantic Reasoning in Audio-Language Learning
+      note: Gijs Wijngaard · Maastricht University
+      person: gijs-wijngaard
+    - type: phd
+      year: "2026"
+      title: Unlocking the Value of Data with Vertical Federated Learning
+      note: A. Khan · Maastricht University
+    - type: phd
+      year: "2025"
+      title: "Artificial Intelligence for End-to-End Radiotherapy Optimization: Radiomics, Synthetic Data, Deep Learning, and Large Language Models"
+      note: M. Li · Maastricht University
+    - type: phd
+      year: "2025"
+      title: AI in Medical Imaging and Novel Cancer User Support
+      note: C. Zhang · Maastricht University
+    - type: phd
+      year: "2025"
+      title: Categorical Data Embedding
+      note: Weiwei Wang · Maastricht University
+      person: weiwei-wang
+
+    - type: conference
+      year: "2026"
+      title: Solid Symposium 2026
+      note: Poster and Proceedings Chair
+    - type: conference
+      year: "2023–2026"
+      title: International Semantic Web Conference (ISWC)
+      note: Program Committee, Research Track
+    - type: conference
+      year: "2024–2026"
+      title: European Semantic Web Conference (ESWC)
+      note: Program Committee, Research Track
+    - type: conference
+      year: "2024–2026"
+      title: Joint Conference on Rules and Reasoning (RuleML+RR)
+      note: Program Committee, Research Track
+    - type: conference
+      year: "2025"
+      title: National Open Science Festival
+      note: Program Committee
+    - type: conference
+      year: "2024–2025"
+      title: Solid Symposium
+      note: Program Committee
+
 - name: Remzi Celebi
   slug: remzi-celebi
   role: Assistant Professor
