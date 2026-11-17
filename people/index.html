@@ -182,17 +182,11 @@
 </div>
 
 <script>
-const { icon: ICON, ICONS } = CMS;
+const { icon: ICON, ICONS, esc } = CMS;
 
 function imgSrc(url) { return url || ''; }
 
 const fmt = n => Number(n).toLocaleString();
-
-// Everything rendered below goes through this. cms.js exports the same
-// function as CMS.esc; this page predates that and keeps its own copy only
-// because it is used before cms.js loads nothing of its own here.
-const esc = s => String(s == null ? '' : s)
-  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 (async () => {
   const slug = new URLSearchParams(location.search).get('id');
