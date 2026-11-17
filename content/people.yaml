@@ -164,7 +164,7 @@
   group: Faculty
   # Was pointing at UM's generic placeholder_profile.png, so this card
   # showed a grey silhouette rather than falling back to initials.
-  image_url: "assets/people/aikaterina-kasimati.jpg"
+  image_url: "assets/people/aikaterini-kasimati.jpg"
   themes: ["Precision Agriculture, Food & Health"]
   bio: >
     Katerina's research combines IoT, wearable sensing and AI to create smart personalised
