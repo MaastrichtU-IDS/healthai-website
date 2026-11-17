@@ -471,8 +471,10 @@
       note: Organizer · BioDataWorld Congress, Basel
 
   # Committees. `type` is phd (thesis examination) or conference. For phd,
-  # `title` is the thesis title and `note` the candidate, as initials and
-  # surname.
+  # `title` is the thesis title and `note` the candidate: initials and
+  # surname, following Dutch practice, except for someone who has a profile
+  # on this site. They are named in full and `person` carries their slug, so
+  # the name links to that profile.
   committees:
     - type: phd
       year: "2026"
@@ -481,7 +483,8 @@
     - type: phd
       year: "2026"
       title: Data and Semantic Reasoning in Audio-Language Learning
-      note: G. Wijngaard · Maastricht University
+      note: Gijs Wijngaard · Maastricht University
+      person: gijs-wijngaard
     - type: phd
       year: "2026"
       title: Unlocking the Value of Data with Vertical Federated Learning
@@ -497,7 +500,8 @@
     - type: phd
       year: "2025"
       title: Categorical Data Embedding
-      note: W. Wang · Maastricht University
+      note: Weiwei Wang · Maastricht University
+      person: weiwei-wang
 
     - type: conference
       year: "2026"

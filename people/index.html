@@ -90,6 +90,7 @@
     .tl-tag { flex: none; align-self: flex-start; margin-top: 2px; }
     .tl-tag-media, .tl-tag-phd { background: var(--gold-light); color: #9a6010; }
     .tl-tag-organisation, .tl-tag-conference { background: var(--slate-light); color: var(--slate-mid); }
+    .grant-meta a { color: inherit; text-decoration: underline; text-decoration-color: var(--border-mid); }
     .open-more:hover { border-color: var(--blue); background: var(--blue-light); }
 
     @media (max-width: 600px) {
@@ -323,6 +324,17 @@ const fmt = n => Number(n).toLocaleString();
   // year-led rows with a filter per kind. "All" keeps file order, which is
   // grouped by kind and newest first within it; a small tag names the kind.
   const escT = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // `person` is the slug of someone with a profile on this site. The note
+  // opens with their name, so link that first segment to their page.
+  const noteHtml = o => {
+    if (!o.note) return '';
+    if (!o.person) return escT(o.note);
+    const [who, ...rest] = String(o.note).split(' · ');
+    // The page sets <base href="../">, so the link is written from the site
+    // root, the same way every other page links a profile.
+    const link = `<a href="people/?id=${encodeURIComponent(o.person)}">${escT(who)}</a>`;
+    return rest.length ? `${link} · ${escT(rest.join(' · '))}` : link;
+  };
   const renderTimeline = (secId, heading, items, kinds, limit = 6) => {
     const list0 = (items || []).filter(o => o && o.title);
     if (!list0.length) return;
@@ -348,7 +360,7 @@ const fmt = n => Number(n).toLocaleString();
             <div class="grant-year">${escT(o.year || '')}</div>
             <div class="tl-body">
               <div class="grant-title">${title}</div>
-              ${o.note ? `<div class="grant-meta">${escT(o.note)}</div>` : ''}
+              ${o.note ? `<div class="grant-meta">${noteHtml(o)}</div>` : ''}
             </div>
             ${tag}
           </li>`;

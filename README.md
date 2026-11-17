@@ -37,7 +37,7 @@ Optional: `grants`, a list of awarded grants and prizes shown on the person's pr
 
 Optional: `open_science`, a list of public software, models, datasets and materials shown on the profile page under "Open Science" as filterable cards. Each item has `type` (`software`, `thesis_software`, `model`, `dataset` or `material`), `title` and `url`, and may have `year`, `by` (authors, when not only the profile's owner) and `note`. Only link things that are publicly accessible.
 
-Optional: `impact` (talks, media and outreach, events organised; `type` is `talk`, `media` or `organisation`) and `committees` (`type` is `phd` or `conference`), shown on the profile page as filterable lists. Each item has `type` and `title`, and may have `year`, `note` and `url`.
+Optional: `impact` (talks, media and outreach, events organised; `type` is `talk`, `media` or `organisation`) and `committees` (`type` is `phd` or `conference`), shown on the profile page as filterable lists. Each item has `type` and `title`, and may have `year`, `note`, `url` and `person`. A PhD candidate is written as initials and surname, except where they have a profile on this site: then write the full name and set `person` to their slug, which links the name in the note to that profile.
 
 - `group` is either `Faculty` or `Researchers`
 - On `people.html`, the Researchers group is split by `role`: entries with `role: PhD Researcher` appear under "PhD Researchers"; all others appear under "Postdocs, Researchers, and Research Software Engineers"
