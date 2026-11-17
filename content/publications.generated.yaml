@@ -244,7 +244,7 @@ publications:
   type: Journal
   title: 'Mapping the meaning of human dignity at the European Court of Human Rights: An unsupervised learning approach'
   authors: Arosemena G., Tzavellos F. I., Nanda R.
-  venue: Computer Law &amp; Security Review
+  venue: Computer Law & Security Review
   doi: 10.1016/j.clsr.2025.106253
   citations: 0
   orcids:
@@ -594,7 +594,7 @@ publications:
   type: Journal
   title: Epigenomic subtyping of late‐onset Alzheimer's disease reveals distinct microglial signatures and molecular inflammatory phenotypes
   authors: Pishva E., Laroche V., Cavill R., Kouhsar M. P., Reijnders R. A., Harvey J., Smith A. R., Imm J., Weymouth L., MacBean L. F., Pegoraro G., Eijssen L. M., Koetsier J., Creese B., Kofler J. K., Kenis G., van den Hove D. L., Lunnon K.
-  venue: Alzheimer's &amp; Dementia
+  venue: Alzheimer's & Dementia
   doi: 10.1002/alz70855_099625
   citations: 0
   orcids:
@@ -678,7 +678,7 @@ publications:
   type: Book Chapter
   title: 'Harnessing Emerging Disruptive Technologies for Society 5.0 in Africa: Advancements in Precision Agriculture, Machine Learning, and IoT'
   authors: Bassine F. Z., Ongoma V., Eddamiri S., Kambiet P. L. K., Chehbouni A.
-  venue: Advances in Science, Technology &amp; Innovation
+  venue: Advances in Science, Technology & Innovation
   doi: 10.1007/978-3-031-63701-8_2
   citations: 0
   orcids:
@@ -698,7 +698,7 @@ publications:
   type: Conference
   title: Identity-Private Healthcare Data Sharing on Blockchain via Zero-Knowledge Proofs and Account Abstraction
   authors: Li K., Lohachab A., Urovi V.
-  venue: 2025 7th Conference on Blockchain Research &amp;amp; Applications for Innovative Networks and Services (BRAINS)
+  venue: 2025 7th Conference on Blockchain Research & Applications for Innovative Networks and Services (BRAINS)
   doi: 10.1109/brains67003.2025.11302943
   citations: 0
   orcids:
@@ -991,7 +991,7 @@ publications:
   type: Journal
   title: Blood‐based multivariate methylation risk score for cognitive impairment and dementia
   authors: Koetsier J., Cavill R., Reijnders R., Harvey J., Homann J., Kouhsar M., Deckers K., Köhler S., Eijssen L. M. T., van den Hove D. L. A., Demuth I., Düzel S., Smith R. G., Smith A. R., Burrage J., Walker E. M., Shireby G., Hannon E., Dempster E., Frayling T., Mill J., Dobricic V., Johannsen P., Wittig M., Franke A., Vandenberghe R., Schaeverbeke J., Freund‐Levi Y., Frölich L., Scheltens P., Teunissen C. E., Frisoni G., Blin O., Richardson J. C., Bordet R., Engelborghs S., de Roeck E., Martinez‐Lage P., Tainta M., Lleó A., Sala I., Popp J., Peyratout G., Verhey F., Tsolaki M., Andreasson U., Blennow K., Zetterberg H., Streffer J., Vos S. J. B., Lovestone S., Visser P., Lill C. M., Bertram L., Lunnon K., Pishva E.
-  venue: Alzheimer's &amp; Dementia
+  venue: Alzheimer's & Dementia
   doi: 10.1002/alz.14061
   citations: 18
   orcids:
@@ -1213,7 +1213,7 @@ publications:
   type: Journal
   title: 'Introduction for computer law and security review: special issue “knowledge management for law”'
   authors: Sulis E., Caro L. D., Nanda R.
-  venue: Computer Law &amp; Security Review
+  venue: Computer Law & Security Review
   doi: 10.1016/j.clsr.2024.105949
   citations: 0
   orcids:
@@ -1832,7 +1832,7 @@ publications:
   tags: []
 - year: 2023
   type: Conference
-  title: 'VendorLink: An NLP approach for Identifying &amp; Linking Vendor Migrants &amp; Potential Aliases on Darknet Markets'
+  title: 'VendorLink: An NLP approach for Identifying & Linking Vendor Migrants & Potential Aliases on Darknet Markets'
   authors: Saxena V., Rethmeier N., van Dijck G., Spanakis G.
   venue: 'Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)'
   doi: 10.18653/v1/2023.acl-long.481
@@ -1884,7 +1884,7 @@ publications:
   type: Journal
   title: A machine learning approach to detecting fraudulent job types
   authors: Naudé M., Adebayo K. J., Nanda R.
-  venue: AI &amp; SOCIETY
+  venue: AI & SOCIETY
   doi: 10.1007/s00146-022-01469-0
   citations: 34
   orcids:
@@ -1894,7 +1894,7 @@ publications:
   type: Journal
   title: A machine learning approach to recognize bias and discrimination in job advertisements
   authors: Frissen R., Adebayo K. J., Nanda R.
-  venue: AI &amp; SOCIETY
+  venue: AI & SOCIETY
   doi: 10.1007/s00146-022-01574-0
   citations: 40
   orcids:
@@ -1985,7 +1985,7 @@ publications:
   type: Conference
   title: 'DePhi: Decentralizing Philanthropy via Blockchain for Traceable Micro-transactions'
   authors: Jaiman V., Yohannis A., Piccini P., Mikelarena E. B., Covrig B., Goanta C., Urovi V.
-  venue: 2022 4th Conference on Blockchain Research &amp; Applications for Innovative Networks and Services (BRAINS)
+  venue: 2022 4th Conference on Blockchain Research & Applications for Innovative Networks and Services (BRAINS)
   doi: 10.1109/brains55737.2022.9909272
   citations: 3
   orcids:
@@ -1995,7 +1995,7 @@ publications:
   type: Conference
   title: Developing a Model for the Automated Identification and Extraction of Agricultural Terms from Unstructured Text
   authors: Panoutsopoulos H., Brewster C., Espejo-Garcia B.
-  venue: The 1st International Online Conference on Agriculture&amp;mdash;Advances in Agricultural Science and Technology
+  venue: The 1st International Online Conference on Agriculture—Advances in Agricultural Science and Technology
   doi: 10.3390/iocag2022-12264
   citations: 5
   orcids:
@@ -2815,7 +2815,7 @@ publications:
   type: Conference
   title: State Space Embedding of Atrial Electrograms to Detect Repetitive Conduction Patterns During Atrial Fibrillation
   authors: Ozgul O., Maesen B., Schotten U., Bonizzi P., Zeemering S.
-  venue: 2021 43rd Annual International Conference of the IEEE Engineering in Medicine &amp; Biology Society (EMBC)
+  venue: 2021 43rd Annual International Conference of the IEEE Engineering in Medicine & Biology Society (EMBC)
   doi: 10.1109/embc46164.2021.9630766
   citations: 0
   orcids:
@@ -2886,7 +2886,7 @@ publications:
   type: Journal
   title: A novel framework for noninvasive analysis of short-term atrial activity dynamics during persistent atrial fibrillation
   authors: Bonizzi P., Meste O., Zeemering S., Karel J., Lankveld T., Crijns H., Schotten U., Peeters R.
-  venue: Medical &amp; Biological Engineering &amp; Computing
+  venue: Medical & Biological Engineering & Computing
   doi: 10.1007/s11517-020-02190-0
   citations: 8
   orcids:
@@ -2906,7 +2906,7 @@ publications:
   type: Conference
   title: A Survey on Blockchain-based Identity Management and Decentralized Privacy for Personal Data
   authors: Gilani K., Bertin E., Hatin J., Crespi N.
-  venue: 2020 2nd Conference on Blockchain Research &amp; Applications for Innovative Networks and Services (BRAINS)
+  venue: 2020 2nd Conference on Blockchain Research & Applications for Innovative Networks and Services (BRAINS)
   doi: 10.1109/brains49436.2020.9223312
   citations: 73
   orcids:
@@ -2916,7 +2916,7 @@ publications:
   type: Conference
   title: Accelerating Discovery Science with an Internet of FAIR Data and Services
   authors: Dumontier M.
-  venue: Proceedings of the 29th ACM International Conference on Information &amp; Knowledge Management
+  venue: Proceedings of the 29th ACM International Conference on Information & Knowledge Management
   doi: 10.1145/3340531.3417407
   citations: 1
   orcids:
@@ -3752,7 +3752,7 @@ publications:
   type: Journal
   title: 'Decision-making and operations in disasters: challenges and opportunities'
   authors: Rodríguez-Espíndola O., Albores P., Brewster C.
-  venue: International Journal of Operations &amp; Production Management
+  venue: International Journal of Operations & Production Management
   doi: 10.1108/ijopm-03-2017-0151
   citations: 38
   orcids:
@@ -3822,7 +3822,7 @@ publications:
   type: Conference
   title: Graph Embeddings for Linked Data Clustering
   authors: Eddamiri S., Zemmouri E., Benghabrit A.
-  venue: Proceedings of the 20th International Conference on Information Integration and Web-based Applications &amp; Services
+  venue: Proceedings of the 20th International Conference on Information Integration and Web-based Applications & Services
   doi: 10.1145/3282373.3282401
   citations: 2
   orcids:
@@ -4003,7 +4003,7 @@ publications:
   type: Journal
   title: Wavelet-promoted sparsity for non-invasive reconstruction of electrical activity of the heart
   authors: Cluitmans M., Karel J., Bonizzi P., Volders P., Westra R., Peeters R.
-  venue: Medical &amp; Biological Engineering &amp; Computing
+  venue: Medical & Biological Engineering & Computing
   doi: 10.1007/s11517-018-1831-2
   citations: 13
   orcids:
@@ -5934,7 +5934,7 @@ publications:
   type: Journal
   title: 'MoSuMo: A Semantic Web service to generate electrostatic potentials across solvent excluded protein surfaces and binding pockets'
   authors: Gawronski A., Dumontier M.
-  venue: Computers &amp; Graphics
+  venue: Computers & Graphics
   doi: 10.1016/j.cag.2011.03.039
   citations: 3
   orcids:

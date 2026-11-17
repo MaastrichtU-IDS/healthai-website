@@ -11,6 +11,7 @@ is preserved until you're satisfied with the result.
 from __future__ import annotations
 
 import datetime
+import html
 import json
 import re
 import unicodedata
@@ -81,6 +82,25 @@ def issued_year(message: dict) -> int | None:
     return None
 
 
+def unescape(text: str) -> str:
+    """Crossref returns HTML entities inside plain-text fields: a venue comes
+    back as "Computer Law &amp; Security Review". Written through unchanged,
+    the renderer escapes the ampersand a second time and the page shows
+    "&amp;" to the reader. Decode here, where the metadata enters, so every
+    consumer of the YAML gets the text and not the markup.
+
+    Two records arrive escaped twice ("&amp;amp;"), so decode until it
+    settles rather than once. The cap is there so a string that somehow
+    decodes to itself cannot spin."""
+    out = text or ""
+    for _ in range(5):
+        decoded = html.unescape(out)
+        if decoded == out:
+            break
+        out = decoded
+    return out
+
+
 def author_str(authors: list | None) -> str:
     parts = []
     for a in authors or []:
@@ -89,13 +109,13 @@ def author_str(authors: list | None) -> str:
         if not family:
             continue
         initials = " ".join(p[0] + "." for p in given.split() if p and p[0].isalpha())
-        parts.append(f"{family} {initials}".strip() if initials else family)
+        parts.append(unescape(f"{family} {initials}".strip() if initials else family))
     return ", ".join(parts)
 
 
 def venue(message: dict) -> str:
     titles = message.get("container-title") or []
-    return titles[0] if titles else ""
+    return unescape(titles[0]) if titles else ""
 
 
 def doi_to_orcids() -> dict[str, set[str]]:
@@ -209,7 +229,7 @@ def main() -> int:
         msg = (json.loads(cf.read_text()).get("message") or {})
         year = issued_year(msg)
         title_arr = msg.get("title") or []
-        title = title_arr[0].strip() if title_arr else ""
+        title = unescape(title_arr[0]).strip() if title_arr else ""
         if not year or not title:
             continue
         cites = int(msg.get("is-referenced-by-count") or 0)
