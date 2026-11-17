@@ -109,6 +109,297 @@
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/chang-sun/"
   work_url: "https://www.maastrichtuniversity.nl/c-sun"
   email: chang.sun@maastrichtuniversity.nl
+  # Awarded grants and prizes, newest first. Submissions still under review
+  # stay off this list until they are awarded.
+  grants:
+    - year: "2026"
+      title: "Veni: Generative AI for Causal Treatment–Toxicity Analysis in Rare Blood Cancers"
+      funder: NWO (Dutch Research Council)
+      role: Project lead
+    - year: "2026"
+      title: OpenUp Education Grant
+      funder: Maastricht University
+    - year: "2025"
+      title: "TDCC-SSH Challenge: Synthetic Data for Social Sciences"
+      funder: NWO (Dutch Research Council)
+      role: Work package lead
+      url: https://zenodo.org/communities/tdcc-ssh-syntheticdata
+    - year: "2024"
+      title: High-impact Women in Data Science Ambassador
+      funder: Worldwide Women in Data Science (WiDS) Community
+    - year: "2024"
+      title: Rising Talent Grant
+      funder: Faculty of Science and Engineering, Maastricht University
+    - year: "2023"
+      title: Maastricht Young Academy Interdisciplinary Research Grant
+      funder: Maastricht Young Academy
+    - year: "2023"
+      title: Short Term Scientific Mission Research Visit Grant
+      funder: COST Action
+    - year: "2022"
+      title: "REALM: Real-world-data Enabled Assessment for heaLth regulatory decision-Making"
+      funder: European Commission (Horizon Europe)
+      role: Work package contributor and leader
+      url: https://realm-ai.eu/
+    - year: "2022"
+      title: Research Visit Grant
+      funder: Danish Data Science Academy
+    - year: "2021"
+      title: Diversity and Inclusivity Grant
+      funder: Maastricht University
+    - year: "2020–2022"
+      title: ODISSEI Grant
+      funder: ODISSEI (Open Data Infrastructure for Social Science and Economic Innovations)
+    - year: "2020"
+      title: Best Poster Award
+      funder: ICT.OPEN 2020 Conference
+    - year: "2020"
+      title: "Dutch National Research Agenda Route 2020 Grant: Big Data Route"
+      funder: Dutch National Research Agenda (NWA)
+    - year: "2019–2020"
+      title: Research Mobility Award
+      funder: Young European Research Universities Network (YERUN)
+    - year: "2019–2020"
+      title: University Fund Limburg (SWOL) Grant
+      funder: University Fund Limburg (SWOL)
+    - year: "2019"
+      title: Best Student Paper Award
+      funder: 17th World Congress of Medical and Health Informatics
+    - year: "2019"
+      title: International Semantic Web Summer School Scholarship
+  # Open science: software, models, datasets and materials released by Chang Sun
+  # and by students whose thesis she supervised. EVERY LINK MUST BE PUBLIC, and
+  # a student item is listed only when the thesis itself (or the repository's
+  # own description) names that link. `type` is one of software,
+  # thesis_software, model, dataset, material and decides the group; within a group the file
+  # order is kept, newest first.
+  open_science:
+    - type: software
+      year: "2026"
+      title: syneva
+      url: https://github.com/sunchang0124/syn_eva
+      note: Scorecard for evaluating tabular synthetic data against real data, following the 7 Cs framework
+    - type: software
+      year: "2026"
+      title: SynFinder
+      url: https://github.com/sunchang0124/SynFinder
+      note: Browser-based app, runs without installation or account
+    - type: software
+      year: "2026"
+      title: Synthetic Data Generator UI
+      url: https://github.com/sunchang0124/syn_data_UI
+      note: Browser dashboard for generating synthetic data from pre-trained generative models
+    - type: software
+      year: "2026"
+      title: RareDiseaseSelection
+      url: https://github.com/sunchang0124/RareDiseaseSelection
+      note: Pipeline to select unseen rare diseases and build MIMIC-IV cohorts for Onto-CGAN
+    - type: software
+      year: "2025"
+      title: SSH synthetic data evaluation
+      url: https://github.com/sunchang0124/SSH_synthetic_data_evaluation
+      note: Comparison of synthetic data generators on social sciences data (TDCC-SSH)
+    - type: software
+      year: "2024"
+      title: Onto-CGAN
+      url: https://github.com/sunchang0124/onto-cgan
+      note: Conditional GAN that uses disease ontologies to generate data for diseases unseen in training
+    - type: software
+      year: "2024"
+      title: MedM
+      url: https://github.com/adishourya/MedM
+      by: Aditya Shourya
+      note: Adapting lightweight multimodal language models for radiological visual question answering
+    - type: software
+      year: "2023"
+      title: CVDPrediction
+      url: https://github.com/MaastrichtU-IDS/CVDPrediction
+      note: Cardiovascular risk prediction for chronic myeloid leukaemia patients, with a digital consent tool (CMyGuideline)
+    - type: software
+      year: "2021"
+      title: DP-CGANS
+      url: https://github.com/sunchang0124/dp_cgans
+      note: Library for synthetic tabular data using conditional GANs with differential privacy; on PyPI as dp-cgans
+    - type: software
+      year: "2021"
+      title: TIDAL
+      url: https://github.com/sunchang0124/TIDAL
+      note: Web application of the ciTIzen-centric DAta pLatform, built on Solid data pods
+    - type: software
+      year: "2021"
+      title: TIDAL trusted party
+      url: https://github.com/sunchang0124/TIDAL-trustedParty
+      note: Data retrieval and analysis server of the TIDAL platform
+    - type: software
+      year: "2020"
+      title: KG-CBSMicrodata
+      url: https://github.com/sunchang0124/KG-CBSMicrodata
+      note: Knowledge graph of the metadata of CBS microdata sets
+    # Student thesis code.
+    - type: thesis_software
+      year: "2026"
+      title: XAI-guided retraining for GAN-based synthetic tabular healthcare data
+      url: https://github.com/Sebi74321/Thesis
+      by: Sebastian Franz
+      note: MSc thesis code
+    - type: thesis_software
+      year: "2026"
+      title: Chain-of-thought representations in finance and healthcare using counterfactuals
+      url: https://github.com/chris-ppd/CoT-Representations-in-Finance-and-Healthcare-using-Counterfactuals-for-Augmentation-and-Evaluation
+      by: Chrysanthos Papadakis
+      note: MSc thesis code
+    - type: thesis_software
+      year: "2026"
+      title: SHAP-guided synthetic health data generation
+      url: https://github.com/mdiezp28/xai-synthetic-health
+      by: María Diez Pérez
+      note: MSc thesis code
+    - type: thesis_software
+      year: "2026"
+      title: Saliency methods in medical vision-language models
+      url: https://github.com/Bel0vskiy/Thesis
+      by: Mikhail Belov
+      note: BSc thesis code
+    - type: thesis_software
+      year: "2026"
+      title: Explainable AI for non-small cell lung cancer stage prediction
+      url: https://github.com/saphaluli/xAI-in-NSCLC
+      by: Vanille Claessen
+      note: BSc thesis code
+    - type: thesis_software
+      year: "2025"
+      title: "PSALM: evaluating stylistic appropriation by large language models"
+      url: https://github.com/nscharrenberg/psalm
+      by: Noah Scharrenberg
+      note: MSc thesis code
+    - type: thesis_software
+      year: "2025"
+      title: Toward practical PII unlearning in large language models
+      url: https://github.com/pariidanDKE/Toward-Practical-PII-Unlearning
+      by: Dan Parii
+      note: MSc thesis code, with the UnlearnPII benchmark
+    - type: thesis_software
+      year: "2025"
+      title: Bias amplification in medical large language models
+      url: https://github.com/kafasg/bias-amplification-medical-llms
+      by: Georgios Fakas
+      note: MSc thesis code and datasets
+    - type: thesis_software
+      year: "2023"
+      title: OntoZSL-DPCGAN
+      url: https://github.com/nscharrenberg/OntoZSL-DPCGAN
+      by: Noah Scharrenberg
+      note: BSc thesis code, ontology-based conditional GAN built on DP-CGANS
+
+    - type: model
+      year: "2025"
+      title: LLaMA 3.2 1B fine-tuned on DBNL public-domain literature
+      url: https://huggingface.co/nscharrenberg/LLaMA-3.2-1B-DBNL-Public-Domain-Finetuned
+      by: Noah Scharrenberg
+      note: MSc thesis model
+    - type: model
+      year: "2025"
+      title: LLaMA 3.2 1B, unlearned variant of the DBNL fine-tuned model
+      url: https://huggingface.co/nscharrenberg/LLaMA-3.2-1B-DBNL-Public-Domain-Unlearned
+      by: Noah Scharrenberg
+      note: MSc thesis model
+
+    - type: dataset
+      year: "2025"
+      title: DBNL public-domain collection
+      url: https://huggingface.co/datasets/nscharrenberg/DBNL-public
+      by: Noah Scharrenberg
+      note: MSc thesis dataset
+    - type: dataset
+      year: "2025"
+      title: DBNL public-domain QA, English translation
+      url: https://huggingface.co/datasets/nscharrenberg/DBNL-public-qa-english-translation
+      by: Noah Scharrenberg
+      note: MSc thesis dataset
+    - type: dataset
+      year: "2024"
+      title: MEDPIX-ShortQA
+      url: https://huggingface.co/datasets/adishourya/MEDPIX-ShortQA
+      by: Aditya Shourya
+      note: Radiological visual question answering dataset
+    - type: dataset
+      year: "2024"
+      title: ROCO-QA-Train
+      url: https://huggingface.co/datasets/adishourya/ROCO-QA-Train
+      by: Aditya Shourya
+      note: Synthetic question-answer pairs for ROCO v2.0, train split
+    - type: dataset
+      year: "2024"
+      title: ROCO-QA
+      url: https://huggingface.co/datasets/adishourya/ROCO-QA
+      by: Aditya Shourya
+      note: Synthetic question-answer pairs for ROCO v2.0, validation and test splits
+
+    - type: material
+      year: "2026"
+      title: Maastricht University FSE PhD Defense Training workshop slides
+      url: https://doi.org/10.5281/zenodo.24199322
+      note: Slides, version 2.0
+    - type: material
+      year: "2026"
+      title: Synthetic Data Workshop, National Open Science Festival 2026
+      url: https://doi.org/10.5281/zenodo.23556724
+      by: Chang Sun, Raoul Schram
+      note: Workshop materials
+    - type: material
+      year: "2026"
+      title: DP-CGANS hands-on for the TDCC-SSH workshop Unlock Your Sensitive Data
+      url: https://github.com/sunchang0124/syndata-workshop
+      note: Workshop materials
+    - type: material
+      year: "2026"
+      title: "PSALM: Automatische evaluatie van stijlistische appropriatie door taalmodellen"
+      url: https://doi.org/10.5281/zenodo.21452069
+      by: Noah Scharrenberg, Chang Sun
+      note: Presentation
+    - type: material
+      year: "2025"
+      title: Generative AI (synthetic data generation) hackathon series
+      url: https://github.com/MaastrichtU-IDS/GenAI_hackathon_series
+      note: Hackathon materials
+    - type: material
+      year: "2025"
+      title: Bachelor and Master Thesis Report Instruction / Checklist
+      url: https://doi.org/10.5281/zenodo.15783363
+      note: Guideline for students
+    - type: material
+      year: "2025"
+      title: "Project proposal: Synthetic data, leveraging the potential of sensitive data in SSH research"
+      url: https://doi.org/10.5281/zenodo.15697035
+      by: Erik-Jan van Kesteren, Tim Kok, Giuseppe Giaquinto, Freek Dijkstra, Chang Sun
+      note: Proposal
+    - type: material
+      year: "2024"
+      title: Empirical Privacy Evaluations of Generative and Predictive Machine Learning Models
+      url: https://doi.org/10.5281/zenodo.14439435
+      by: Flavio Hafner, Chang Sun
+      note: Presentation
+    - type: material
+      year: "2024"
+      title: "Empirically testing privacy in machine learning: a review and some challenges"
+      url: https://doi.org/10.5281/zenodo.11058059
+      by: Flavio Hafner, Chang Sun
+      note: Poster
+    - type: material
+      year: "2023"
+      title: Utility and Privacy in Generating Synthetic Social Science Data
+      url: https://doi.org/10.5281/zenodo.10069802
+      note: Presentation
+    - type: material
+      year: "2023"
+      title: Federated Query over Knowledge Graphs hackathon
+      url: https://github.com/MaastrichtU-IDS/federatedQueryKG
+      note: COST Action hackathon workspace
+    - type: material
+      year: "2023"
+      title: PhD thesis managing and writing
+      url: https://github.com/MaastrichtU-IDS/PhDThesis
+      note: Shared resources for PhD candidates
 
 - name: Remzi Celebi
   slug: remzi-celebi
@@ -188,7 +479,6 @@
   work_url: "https://www.maastrichtuniversity.nl/kasimati"
   email: a.kasimati@maastrichtuniversity.nl
 
-
 - name: Denise Slenter
   slug: denise-slenter
   role: Assistant Professor
@@ -214,7 +504,6 @@
   cris_url: "https://cris.maastrichtuniversity.nl/en/persons/denise-slenter/"
   work_url: "https://www.maastrichtuniversity.nl/d-slenter"
   email: ""
-
 
 - name: Pietro Bonizzi
   slug: pietro-bonizzi
