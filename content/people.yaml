@@ -158,8 +158,8 @@
   work_url: "https://www.maastrichtuniversity.nl/r-nanda"
   email: r.nanda@maastrichtuniversity.nl
 
-- name: Aikaterina Kasimati
-  slug: aikaterina-kasimati
+- name: Aikaterini Kasimati
+  slug: aikaterini-kasimati
   role: Assistant Professor
   group: Faculty
   # Was pointing at UM's generic placeholder_profile.png, so this card
@@ -167,10 +167,18 @@
   image_url: "assets/people/aikaterini-kasimati.jpg"
   themes: ["Precision Agriculture, Food & Health"]
   bio: >
-    Katerina's research combines IoT, wearable sensing and AI to create smart personalised
-    health systems. She focuses on precision nutrition and digital interventions for chronic
-    disease management, integrating physiological and lifestyle data streams.
-  keywords: [IoT, Wearables, Precision Nutrition, Digital Health, Chronic Disease]
+    Katerina is an Assistant Professor in AI for Digital Agriculture and Sustainability, with a
+    background in agricultural engineering. Her research focuses on AI-driven decision support
+    systems, precision and digital agriculture, agricultural data science and remote sensing,
+    with particular attention to FAIR data management and responsible data science for
+    sustainable agri-food systems. She holds a PhD in Precision Agriculture and Big Data
+    Analytics from the Agricultural University of Athens and an MS in Agricultural and
+    Biological Engineering from the University of Illinois at Urbana-Champaign. She has
+    extensive experience leading European research and innovation projects from proposal to
+    implementation, including as Project Manager of ICAERUS (Horizon Europe) on drone-enabled
+    agricultural and rural services. Her work bridges research, technology and collaboration
+    to accelerate sustainable innovation across agriculture, food systems and the environment.
+  keywords: [Digital Agriculture, Precision Agriculture, AI in Agrifood Systems, Decision Support Systems, Remote Sensing, FAIR Data, Sustainable Agri-food Systems]
   orcid: "0000-0002-7620-3782"
   github: ""
   google_scholar: "ZF9MRaIAAAAJ"
