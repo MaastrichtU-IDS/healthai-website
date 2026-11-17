@@ -42,6 +42,33 @@
 
     /* ── Profile sections ── */
     .profile-content { max-width: 900px; padding-top: 12px; padding-bottom: 80px; }
+
+    /* ── Contents row: the same sticky sub-nav research.html and students.html
+       use, narrowed to the profile column. It sits under the bio, so it lists
+       the sections below it and nothing above. ── */
+    .profile-contents {
+      position: sticky; top: var(--nav-h); z-index: 9;
+      display: flex; gap: 0 4px; overflow-x: auto;
+      background: var(--white);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+    .profile-contents a {
+      padding: 11px 12px; font-size: 0.84rem; font-weight: 500;
+      color: var(--text-muted); border-bottom: 2px solid transparent;
+      margin-bottom: -1px; white-space: nowrap;
+      text-decoration: none; transition: all var(--transition);
+    }
+    .profile-contents a:hover { color: var(--slate); }
+    .profile-contents a.active { color: var(--slate); border-bottom-color: var(--slate); font-weight: 600; }
+    .profile-contents .pc-n { font-weight: 400; opacity: 0.6; margin-left: 5px; }
+    /* Clears the site nav plus this row when a jump lands. */
+    .profile-section { scroll-margin-top: 120px; }
+    .profile-tags { margin-top: 14px; }
+    .profile-lead-line { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; }
+    .profile-lead-line a { color: inherit; text-decoration: underline; text-decoration-color: var(--border-mid); }
+    .grant-year a { color: inherit; text-decoration: none; }
+    .grant-year a:hover { text-decoration: underline; }
     .profile-section { margin-bottom: 52px; }
     .profile-section-title {
       font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
@@ -139,16 +166,17 @@
 
   <section>
     <div class="container profile-content">
-      <div class="profile-section" id="secBio"></div>
-      <div class="profile-section" id="secThemes"></div>
-      <div class="profile-section" id="secThesis"></div>
-      <div class="profile-section" id="secGrants"></div>
-      <div class="profile-section" id="secOpen"></div>
-      <div class="profile-section" id="secImpact"></div>
-      <div class="profile-section" id="secCommittees"></div>
-      <div class="profile-section" id="secLinks"></div>
-      <div class="profile-section" id="secActivity"></div>
-      <div class="profile-section" id="secPubs"></div>
+      <div class="profile-section" id="about"></div>
+      <div class="profile-contents" id="profileContents" hidden></div>
+      <div class="profile-section" id="projects"></div>
+      <div class="profile-section" id="thesis"></div>
+      <div class="profile-section" id="grants"></div>
+      <div class="profile-section" id="open-science"></div>
+      <div class="profile-section" id="impact"></div>
+      <div class="profile-section" id="committees"></div>
+      <div class="profile-section" id="links"></div>
+      <div class="profile-section" id="activity"></div>
+      <div class="profile-section" id="publications"></div>
     </div>
   </section>
 </div>
@@ -160,6 +188,12 @@ function imgSrc(url) { return url || ''; }
 
 const fmt = n => Number(n).toLocaleString();
 
+// Everything rendered below goes through this. cms.js exports the same
+// function as CMS.esc; this page predates that and keeps its own copy only
+// because it is used before cms.js loads nothing of its own here.
+const esc = s => String(s == null ? '' : s)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
 (async () => {
   const slug = new URLSearchParams(location.search).get('id');
   if (!slug) {
@@ -168,13 +202,16 @@ const fmt = n => Number(n).toLocaleString();
     return;
   }
 
-  const [people, news, pubData, students] = await Promise.all([
+  const [people, news, pubData, students, research] = await Promise.all([
     CMS.load('content/people.yaml'),
     CMS.load('content/news.yaml'),
     CMS.load('content/publications.generated.yaml').catch(() => ({ publications: [] })),
     // Only for the thesis block below. A profile is still worth showing if
     // this one file fails, so it degrades to no thesis rather than no page.
     CMS.load('content/students.yaml').catch(() => ({ highlights: [] })),
+    // Projects and themes, same treatment: a profile without its projects
+    // beats no profile at all.
+    CMS.load('content/research.yaml').catch(() => ({ themes: [], projects: [] })),
   ]);
 
   document.getElementById('loading').remove();
@@ -217,26 +254,58 @@ const fmt = n => Number(n).toLocaleString();
 
   // Bio
   if (person.bio && person.bio.trim() && !person.bio.includes('TODO')) {
-    document.getElementById('secBio').innerHTML = `
+    document.getElementById('about').innerHTML = `
       <div class="profile-section-title">About</div>
       <p class="profile-bio">${person.bio.trim()}</p>`;
   }
 
-  // Themes & Keywords
+  // Themes and keywords are context for the bio rather than a section of
+  // their own, so they sit under it. As a section they were a heading over
+  // two rows of chips, which is what the Projects section below now uses the
+  // space for. Each theme links to its section on the research page.
   const themes = (person.themes || []).filter(Boolean);
   const kws = (person.keywords || []).filter(Boolean);
-  if (themes.length || kws.length) {
-    let html = '<div class="profile-section-title">Research</div>';
-    if (themes.length) html += `<div class="tag-row${kws.length ? ' mb-8' : ''}">${themes.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
-    if (kws.length) html += `<div class="tag-row">${kws.map(k => `<span class="tag tag-muted">${k}</span>`).join('')}</div>`;
-    document.getElementById('secThemes').innerHTML = html;
+  const themeId = Object.fromEntries((research.themes || []).map(t => [t.title, t.id]));
+  const ledThemes = (research.themes || []).filter(t => (t.leads || []).map(x => x.trim()).includes(person.name));
+  if (themes.length || kws.length || ledThemes.length) {
+    let html = '';
+    if (themes.length) html += `<div class="tag-row${kws.length ? ' mb-8' : ''} profile-tags">${themes.map(t =>
+      themeId[t]
+        ? `<a class="tag" href="research.html#theme-${esc(themeId[t])}">${esc(t)}</a>`
+        : `<span class="tag">${esc(t)}</span>`).join('')}</div>`;
+    if (kws.length) html += `<div class="tag-row">${kws.map(k => `<span class="tag tag-muted">${esc(k)}</span>`).join('')}</div>`;
+    if (ledThemes.length) html += `<div class="profile-lead-line">Theme lead · ${ledThemes.map(t =>
+      `<a href="research.html#theme-${esc(t.id)}">${esc(t.title)}</a>`).join(' · ')}</div>`;
+    document.getElementById('about').innerHTML += html;
+  }
+
+  // The projects this person is on, read from research.yaml by team
+  // membership. projects.html has always linked to profiles; nothing linked
+  // back, so the funded work someone does was the one thing a profile left
+  // out. Theme leadership rides along, since it comes from the same file.
+  const myProjects = (research.projects || []).filter(p => (p.team || []).includes(person.name));
+  if (myProjects.length) {
+    const rows = myProjects.map(p => {
+      const meta = [p.funder, p.period, p.amount].filter(Boolean).map(esc).join(' · ');
+      const name = p.title && p.title.trim() && p.title.trim() !== p.acronym ? p.title.trim() : p.acronym;
+      return `<li class="grant-row">
+        <div class="grant-year"><a href="projects.html#${encodeURIComponent(p.acronym)}">${esc(p.acronym)}</a></div>
+        <div class="tl-body">
+          <div class="grant-title">${esc(name)}</div>
+          ${meta ? `<div class="grant-meta">${meta}</div>` : ''}
+        </div>
+        ${p.status ? `<span class="tag tl-tag ${p.status === 'Active' ? 'tag-active' : 'tag-muted'}">${esc(p.status)}</span>` : ''}
+      </li>`;
+    }).join('');
+    document.getElementById('projects').innerHTML =
+      `<div class="profile-section-title">Projects</div><ul class="grant-list">${rows}</ul>`;
   }
 
   // Their own doctoral thesis, if the group supervised it. Same card as the
   // students page uses, from CMS.thesisCard.
   const thesis = CMS.thesisFor(person.name, students);
   if (thesis) {
-    document.getElementById('secThesis').innerHTML =
+    document.getElementById('thesis').innerHTML =
       '<div class="profile-section-title">Doctoral thesis</div>' + CMS.thesisCard(thesis);
   }
 
@@ -244,8 +313,7 @@ const fmt = n => Number(n).toLocaleString();
   // on their people.yaml entry. Shown in file order, which is newest first.
   const grants = (person.grants || []).filter(g => g && g.title);
   if (grants.length) {
-    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-    document.getElementById('secGrants').innerHTML = `
+    document.getElementById('grants').innerHTML = `
       <div class="profile-section-title">Grants &amp; Awards</div>
       <ul class="grant-list">${grants.map(g => {
         const title = g.url
@@ -269,7 +337,6 @@ const fmt = n => Number(n).toLocaleString();
   const openItems = (person.open_science || []).filter(o => o && o.title && o.url);
   if (openItems.length) {
     const OPEN_LIMIT = 6;
-    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const kinds = [
       { id: 'software', label: 'Software', tag: 'Software', types: ['software'] },
       { id: 'theses',   label: 'Student theses', tag: 'Thesis code', types: ['thesis_software'] },
@@ -297,7 +364,7 @@ const fmt = n => Number(n).toLocaleString();
         </div>
       </a>`;
     let active = 'all', expanded = false;
-    const sec = document.getElementById('secOpen');
+    const sec = document.getElementById('open-science');
     const render = () => {
       const kind = kinds.find(k => k.id === active);
       const list = kind ? sorted.filter(o => kind.types.includes(o.type)) : sorted;
@@ -323,17 +390,16 @@ const fmt = n => Number(n).toLocaleString();
   // Impact and Committees: optional `impact` and `committees` lists, shown as
   // year-led rows with a filter per kind. "All" keeps file order, which is
   // grouped by kind and newest first within it; a small tag names the kind.
-  const escT = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   // `person` is the slug of someone with a profile on this site. The note
   // opens with their name, so link that first segment to their page.
   const noteHtml = o => {
     if (!o.note) return '';
-    if (!o.person) return escT(o.note);
+    if (!o.person) return esc(o.note);
     const [who, ...rest] = String(o.note).split(' · ');
     // The page sets <base href="../">, so the link is written from the site
     // root, the same way every other page links a profile.
-    const link = `<a href="people/?id=${encodeURIComponent(o.person)}">${escT(who)}</a>`;
-    return rest.length ? `${link} · ${escT(rest.join(' · '))}` : link;
+    const link = `<a href="people/?id=${encodeURIComponent(o.person)}">${esc(who)}</a>`;
+    return rest.length ? `${link} · ${esc(rest.join(' · '))}` : link;
   };
   const renderTimeline = (secId, heading, items, kinds, limit = 6) => {
     const list0 = (items || []).filter(o => o && o.title);
@@ -353,11 +419,11 @@ const fmt = n => Number(n).toLocaleString();
           `<button class="chip${c.id === active ? ' active' : ''}" data-kind="${c.id}">${c.label} <span class="open-chip-n">${c.n}</span></button>`).join('')}</div>` : ''}
         <ul class="grant-list">${shown.map(o => {
           const title = o.url
-            ? `<a href="${escT(o.url)}" target="_blank" rel="noopener">${escT(o.title)}</a>` : escT(o.title);
+            ? `<a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.title)}</a>` : esc(o.title);
           const tag = active === 'all' && labelOf(o.type)
-            ? `<span class="tag tl-tag tl-tag-${escT(o.type)}">${labelOf(o.type)}</span>` : '';
+            ? `<span class="tag tl-tag tl-tag-${esc(o.type)}">${labelOf(o.type)}</span>` : '';
           return `<li class="grant-row">
-            <div class="grant-year">${escT(o.year || '')}</div>
+            <div class="grant-year">${esc(o.year || '')}</div>
             <div class="tl-body">
               <div class="grant-title">${title}</div>
               ${o.note ? `<div class="grant-meta">${noteHtml(o)}</div>` : ''}
@@ -374,12 +440,12 @@ const fmt = n => Number(n).toLocaleString();
     });
     render();
   };
-  renderTimeline('secImpact', 'Impact', person.impact, [
+  renderTimeline('impact', 'Impact', person.impact, [
     { id: 'talk', label: 'Talks', tag: 'Talk' },
     { id: 'media', label: 'Media & outreach', tag: 'Outreach' },
     { id: 'organisation', label: 'Conference organisation', tag: 'Organisation' },
   ]);
-  renderTimeline('secCommittees', 'Committees', person.committees, [
+  renderTimeline('committees', 'Committees', person.committees, [
     { id: 'phd', label: 'PhD committees', tag: 'PhD' },
     { id: 'conference', label: 'Conference committees', tag: 'Conference' },
   ]);
@@ -387,17 +453,17 @@ const fmt = n => Number(n).toLocaleString();
   // Links
   const links = CMS.personLinks(person);
   if (links.length) {
-    document.getElementById('secLinks').innerHTML = `
+    document.getElementById('links').innerHTML = `
       <div class="profile-section-title">Links</div>
       <div class="person-links">${links.join('')}</div>`;
   }
 
   // Publications browser
   if (myPubs.length) {
-    CMS.PubBrowser.init(document.getElementById('secPubs'), myPubs, {
+    CMS.PubBrowser.init(document.getElementById('publications'), myPubs, {
       highlightName: person.name.split(' ').pop(),
       pageSize: 20,
-      scrollTarget: 'secPubs',
+      scrollTarget: 'publications',
       sectionTitle: 'Publications',
       onFilter: filtered => {
         const cites = filtered.reduce((s, p) => s + (p.citations || 0), 0);
@@ -420,13 +486,61 @@ const fmt = n => Number(n).toLocaleString();
   const activity = CMS.normalizeNewsItems(news)
     .filter(item => item.search.toLowerCase().includes(personName));
   if (activity.length) {
-    document.getElementById('secActivity').innerHTML = `
+    document.getElementById('activity').innerHTML = `
       <div class="profile-section-title">News & Activity</div>
       ${activity.map(item => CMS.renderNewsItem(item)).join('')}`;
   }
 
+  // ── Contents row ──
+  // Built from the sections that actually rendered, because most profiles
+  // fill three or four and a fixed list would advertise empty ones. The row
+  // sits under the bio, so it lists only what follows it.
+  const CONTENTS = [
+    { id: 'projects',     label: 'Projects',     n: () => myProjects.length },
+    { id: 'thesis',       label: 'Thesis' },
+    { id: 'grants',       label: 'Grants',       n: () => grants.length },
+    { id: 'open-science', label: 'Open Science', n: () => openItems.length },
+    { id: 'impact',       label: 'Impact',       n: () => (person.impact || []).length },
+    { id: 'committees',   label: 'Committees',   n: () => (person.committees || []).length },
+    { id: 'links',        label: 'Links' },
+    { id: 'activity',     label: 'News' },
+    { id: 'publications', label: 'Publications', n: () => myPubs.length },
+  ];
+  const filled = CONTENTS.filter(s => {
+    const el = document.getElementById(s.id);
+    return el && el.innerHTML.trim();
+  });
+  // Two entries are not worth a row, and on a profile that thin it only
+  // names how little is there. Three is the useful floor: a faculty page is
+  // Projects, Links and a publication list hundreds of rows long.
+  if (filled.length >= 3) {
+    const row = document.getElementById('profileContents');
+    const base = `people/?id=${encodeURIComponent(person.slug)}`;
+    row.innerHTML = filled.map(s =>
+      `<a href="${base}#${s.id}">${s.label}${s.n && s.n() ? ` <span class="pc-n">${s.n()}</span>` : ''}</a>`).join('');
+    row.hidden = false;
+
+    const els = filled.map(s => document.getElementById(s.id));
+    const links = [...row.querySelectorAll('a')];
+    const mark = () => {
+      let cur = 0;
+      els.forEach((el, i) => { if (el.getBoundingClientRect().top <= 150) cur = i; });
+      links.forEach((a, i) => a.classList.toggle('active', i === cur));
+    };
+    window.addEventListener('scroll', mark, { passive: true });
+    mark();
+  }
+
   document.getElementById('personPage').classList.remove('hidden');
   CMS.revealNew(document.getElementById('personPage'));
+
+  // The page renders only once its YAML has arrived, so the browser resolved
+  // any #section in the URL while the page was still the loading spinner and
+  // scrolled nowhere. Do it again now that the sections exist.
+  if (location.hash) {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) requestAnimationFrame(() => target.scrollIntoView());
+  }
 })();
 </script>
 </body>
