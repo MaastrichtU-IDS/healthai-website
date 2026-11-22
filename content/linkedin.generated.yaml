@@ -2,7 +2,7 @@
 source:
   name: Department of Advanced Computing Sciences, Maastricht University
   url: https://www.linkedin.com/company/27209119/
-  fetched: '2026-11-15'
+  fetched: '2026-11-22'
   note: Posts from the DACS page that name someone on this site. Repeats of the same announcement
     are collapsed.
 social:
@@ -26,7 +26,7 @@ social:
     \ #InterdisciplinaryResearch #MaastrichtUniversity"
   people:
   - Rachel Cavill
-  likes: 31
+  likes: 32
   comments: 0
   image: assets/linkedin/3c5c09215f44e614.jpg
 - date: 26 Oct 2026
@@ -181,7 +181,7 @@ social:
     #MaastrichtUniversity #DACS #ComputerScience #HigherEducation #AcademicLeadership'
   people:
   - Pietro Bonizzi
-  likes: 226
+  likes: 228
   comments: 5
   image: assets/linkedin/c82a3899220439d6.jpg
 - date: 17 Sep 2026
@@ -230,7 +230,7 @@ social:
   people:
   - Gijs Wijngaard
   - Michel Dumontier
-  likes: 41
+  likes: 42
   comments: 0
   image: assets/linkedin/37f41368fac5d82f.jpg
 - date: 17 Aug 2026
@@ -281,7 +281,7 @@ social:
     \ #innovation #DACS #FSE #UM"
   people:
   - Chang Sun
-  likes: 203
+  likes: 204
   comments: 12
   image: assets/linkedin/65d60e8d531886e9.jpg
 - date: 9 Jul 2026
@@ -933,25 +933,3 @@ social:
   likes: 46
   comments: 1
   image: assets/linkedin/55a239f74c02ac7c.jpg
-- date: 10 Sep 2025
-  url: https://www.linkedin.com/feed/update/urn:li:ugcPost:7371503066141069312/
-  text: "We’re pleased to announce that this week, our team from the Department of Advanced\
-    \ Computing Sciences (DACS) at Maastricht University - Faculty of Science and Engineering,\
-    \ has returned to Burundi. Our team (Kurt Driessens, Otti d'Huys, Bas Lemmens, Heinz Greijn,\
-    \ and Pietro Bonizzi) has been visiting the Institut de Technologies Numériques (ITN)\
-    \ des Technologies Numériques (ITN) at the University of Burundi to, inter alia, train\
-    \ tutors in project-centered learning (PCL) and finalize preparations for the new Bachelor’s\
-    \ in Computer Science starting this October.\n\nTogether, with support from The World\
-    \ Bank, we’re helping ITN build not just a programme, but an ecosystem—linking education,\
-    \ research, and industry for lasting impact. \n\nThe UM press release on the project can\
-    \ be found here: https://lnkd.in/ezT\\_Fzav\n\nPicture credits: Bas Lemmens\n\nThe World\
-    \ Bank Maastricht University Maastricht University - Faculty of Science and Engineering\
-    \ Maastricht University Institute of Data Science Maastricht School of Management Inter-University\
-    \ Council for East Africa\n#ProjectCenteredLearning #PCL #DigitalEducation #Innovation\
-    \ #ITN  #UniversityOfBurundi #MaastrichtUniversity #Collaboration #UB #HigherEducation\
-    \ #ComputerScience #Collaboration #PCL"
-  people:
-  - Pietro Bonizzi
-  likes: 97
-  comments: 0
-  image: assets/linkedin/f628e86fa6a3c9b3.jpg
