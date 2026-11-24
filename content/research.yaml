@@ -342,3 +342,18 @@ projects:
     status: Active
     url: https://maastrichtu-biss.github.io/bluelab/
 
+  - acronym: BioFIN
+    title: Protecting and restoring biodiversity using mainstream finance
+    theme: Biodiversity and Finance
+    desc: >
+      BioFIN introduces a new framework and technology to standardise nature-positive investment processes and 
+      accelerate the green transition required to accomplish biodiversity goals set out by the EU. 
+      By streamlining decision-making, the project will create the enabling conditions for large-scale finance. 
+      Through real-life case studies, BIOFIN’s approach is expected to provide evidence-based recommendations and 
+      propel a green and digital transition essential for achieving the EU’s biodiversity goals.
+    team: [Christopher Brewster]
+    funder: European Commission (Horizon Europe)
+    amount: "€4.3M"
+    period: "2024–2026"
+    status: Active
+    url: https://biofin-project.eu/

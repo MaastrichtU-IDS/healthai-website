@@ -1068,33 +1068,23 @@
   group: Researchers
   image_url: "assets/people/louis-powell.jpg"
   themes: []
-  # Written 2026-11-06 from Louis's own LinkedIn profile, supplied by Michel,
-  # and the university staff page at maastrichtuniversity.nl/l-powell.
-  # Direct fetching of LinkedIn is not possible: it answers automated
-  # requests with HTTP 999 behind an auth wall.
-  #
-  # TITLE: confirmed by Michel 2026-11-06 as "Engineering and Application
-  # Manager", matching the UM staff page. LinkedIn still says "Senior
-  # Software Engineer" and people.yaml previously said "Research Software
-  # Engineer"; both are superseded.
-  #
-  # His profile claims 19 years of experience. Deliberately not repeated: a
-  # number like that goes stale silently, so the joining year carries it.
   bio: >
-    Engineering and application manager at the Institute of Data Science,
-    where he has worked since 2022.
-    Builds software and data systems in Python, with API development, Docker
-    and microservices, and works across SQL and NoSQL databases. Came to the
-    university after a career in data engineering and business intelligence
-    consultancy in the Netherlands and the UK, in analyst, developer,
-    consultant and management roles. Holds degrees in mathematics and
-    physics from the Open University and in business and managerial
-    economics from Cardiff University.
-  keywords: [Python, API Development, Docker, SQL, Business Intelligence]
+    I am an Engineering and Application Manager at Maastricht University’s Institute
+    of Data Science, where I have worked since 2022. I collaborate with public and
+    private partners across Europe on EU-funded Horizon projects in agriculture and
+    biodiversity. We develop software and data systems to support research and reach
+    practitioners in both fields. My technical work includes building databases, APIs 
+    and User Interfaces, and deploying mostly python based microservices with Docker.
+
+    I previously worked in the private sector in the Netherlands and the UK,
+    focusing on data engineering and business intelligence. My roles spanned
+    technical analysis, software development, consulting and management.
+
+  keywords: [Python, API Development, Docker, Databases, Business Intelligence]
   orcid: ""
   github: "letp1985"
   google_scholar: ""
-  linkedin: "lopowell"
+  linkedin: ""
   personal_page: ""
   cris_url: ""
   work_url: "https://www.maastrichtuniversity.nl/l-powell"
