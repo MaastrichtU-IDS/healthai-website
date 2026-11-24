@@ -357,3 +357,20 @@ projects:
     period: "2024–2026"
     status: Active
     url: https://biofin-project.eu/
+
+  - acronym: OpenAgri
+    title: Democratising digital farming through tailored open source and open hardware solutions
+    theme: Digital Agriculture
+    desc: >
+      Coordinated by Maastricht University, OpenAgri brings farmers, advisers, researchers
+      and technology providers together to develop affordable digital farming tools using
+      open-source software and open hardware. Across 14 European pilots, they test tools
+      that can process data on the farm, in the cloud or both, including in areas with
+      limited internet access. The project also helps farmers and advisers choose the
+      approach that best suits their farm.
+    team: [Christopher Brewster]
+    funder: European Commission (Horizon Europe)
+    amount: "€5.0M"
+    period: "2024–2026"
+    status: Active
+    url: https://horizon-openagri.eu/
